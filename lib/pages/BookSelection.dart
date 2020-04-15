@@ -25,8 +25,8 @@ class MyTabbedPage extends StatefulWidget {
 
 class _MyTabbedPageState extends State<MyTabbedPage> with SingleTickerProviderStateMixin {
   final List<Tab> myTabs = <Tab>[
-    Tab(child: Text('Libro', style: TextStyle(color: Colors.black))),
-    Tab(child: Text('Capitulo', style: TextStyle(color: Colors.black))),
+    Tab(child: Text('LIBRO', style: TextStyle(color: Colors.black))),
+    Tab(child: Text('CAPÍTULO', style: TextStyle(color: Colors.black))),
   ];
 
   TabController _tabController;
@@ -76,6 +76,7 @@ class _MyTabbedPageState extends State<MyTabbedPage> with SingleTickerProviderSt
   {
     return GridView.builder
     (
+      padding: EdgeInsets.only(bottom: 150.0),
       itemCount: appData.chaptersCount,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount
       (

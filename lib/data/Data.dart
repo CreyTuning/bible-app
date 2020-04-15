@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:bbnew/data/Define.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 Data appData = Data();
@@ -67,7 +68,7 @@ class Data
 
   Future<Map> getBookMap() async
   {
-    Map map = json.decode(await rootBundle.loadString('lib/bible/1.json'));
+    Map map = json.decode(await rootBundle.loadString(intToBookPath[book]));
 
     for(int x = 0; x < map['chapters'].length; x++)
     {

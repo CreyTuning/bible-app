@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar
       (
         backgroundColor: Colors.white,
-        title: Text('YHWH', style: TextStyle(color: Colors.black)),
+        title: Text('YHWH', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         
         actions: <Widget>
         [
@@ -88,9 +88,36 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>
                   [
-                    Icon(Icons.book),
+                    RichText
+                    (
+                      text: TextSpan
+                      (
+                        children:
+                        [
+                          TextSpan
+                          (
+                            text: '${intToBook[appData.book]}',
+                            style: TextStyle
+                            (
+                              color: Colors.black,
+                              // fontWeight: FontWeight.bold
+                            )
+                          ),
+
+                          TextSpan
+                          (
+                            text: ' ${appData.chapter}',
+                            style: TextStyle
+                            (
+                              color: Colors.pink,
+                              fontWeight: FontWeight.bold
+                            )
+                          )
+                        ]
+                      ),
+                    ),
                     Container(width: 5, height: 41), // Separador
-                    Text('${intToBook[appData.book]} ${appData.chapter}'),
+                    Icon(Icons.menu),
                   ],
                 ),
               

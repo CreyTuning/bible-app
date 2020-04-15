@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:bbnew/data/Data.dart';
 import 'package:bbnew/data/Styles.dart' as styles;
 import 'package:flutter/material.dart';
@@ -29,17 +31,33 @@ class _BookViewerState extends State<BookViewer>
             {
               return Column
               (
-
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>
                 [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Text
+                    child: RichText
                     (
-                      "${item + 1} ${snapshot.data['chapters'][appData.chapter - 1]['verses'][item]['text']}",
-                      style: styles.verseText,
-                      textAlign: TextAlign.justify,
+                      text: TextSpan
+                      (
+                        style: styles.verseText,
+                        children: <InlineSpan>
+                        [
+                          TextSpan
+                          (
+                            text: "${item + 1} ",
+                            style: TextStyle(color: Colors.pink, fontWeight: FontWeight.bold)
+                          ),
+
+                          TextSpan
+                          (
+                            text: "${snapshot.data['chapters'][appData.chapter - 1]['verses'][item]['text']}",
+                            style: TextStyle(height: 1.5, letterSpacing: 0.6)
+                          )
+                        ]
+                      ),
+                      // textAlign: TextAlign.justify,
+
                     ),
                   ),
 
