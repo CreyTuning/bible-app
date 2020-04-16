@@ -1,7 +1,7 @@
-import 'package:bbnew/data/Define.dart';
-import 'package:bbnew/pages/BookViewer.dart';
+import 'package:yhwh/data/Define.dart';
+import 'package:yhwh/pages/BookViewer.dart';
 import 'package:flutter/material.dart';
-import 'package:bbnew/data/Data.dart';
+import 'package:yhwh/data/Data.dart';
 
 class HomePage extends StatefulWidget
 {

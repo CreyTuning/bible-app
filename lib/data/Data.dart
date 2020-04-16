@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:bbnew/data/Define.dart';
+import 'package:yhwh/data/Define.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 Data appData = Data();

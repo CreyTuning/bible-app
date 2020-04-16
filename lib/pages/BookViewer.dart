@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:bbnew/data/Data.dart';
-import 'package:bbnew/data/Styles.dart' as styles;
+import 'package:yhwh/data/Data.dart';
+import 'package:yhwh/data/Styles.dart' as styles;
 import 'package:flutter/material.dart';
 
 class BookViewer extends StatefulWidget
