@@ -1,4 +1,5 @@
 import 'package:yhwh/data/Define.dart';
+import 'package:yhwh/pages/BookSelection.dart';
 import 'package:yhwh/pages/BookViewer.dart';
 import 'package:flutter/material.dart';
 import 'package:yhwh/data/Data.dart';
@@ -16,49 +17,19 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context)
   {
-    return Scaffold
-    (
-      appBar: AppBar
-      (
-        backgroundColor: Colors.white,
-        title: Text('YHWH', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-        
-        actions: <Widget>
-        [
-          Container(
-            width: 60.0,
-            height: 60.0,
-            child: RaisedButton
-            (
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-              color: Colors.white,
-              elevation: 0,
-              child: Icon(Icons.text_fields),
-              onPressed: (){},
-            ),
-          ),
-
-          // Container(width: 10), //Separador
-
-        ],
-      ),
-      
+    return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       
       floatingActionButton: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Row
-        (
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
-          children: <Widget>
-          [
-            Container
-            (
+          children: <Widget>[
+            Container(
               width: 41.0,
               height: 41.0,
-              child: new RawMaterialButton
-              (
+              child: new RawMaterialButton(
                 shape: new CircleBorder(),
                 fillColor: Colors.white,
                 child: Icon(Icons.keyboard_arrow_left),
@@ -73,59 +44,60 @@ class _HomePageState extends State<HomePage> {
 
             Spacer(),
 
-            RaisedButton
-            (
-              color: Colors.white,
-              
-              shape: RoundedRectangleBorder
-              (
-                borderRadius: BorderRadius.circular(20)
-              ),
-              
-              child: Row
-                (
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>
-                  [
-                    RichText
-                    (
-                      text: TextSpan
-                      (
-                        children:
-                        [
-                          TextSpan
-                          (
-                            text: '${intToBook[appData.book]}',
-                            style: TextStyle
-                            (
-                              color: Colors.black,
-                              // fontWeight: FontWeight.bold
-                            )
-                          ),
-
-                          TextSpan
-                          (
-                            text: ' ${appData.chapter}',
-                            style: TextStyle
-                            (
-                              color: Colors.pink,
-                              fontWeight: FontWeight.bold
-                            )
-                          )
-                        ]
-                      ),
-                    ),
-                    Container(width: 5, height: 41), // Separador
-                    Icon(Icons.menu),
-                  ],
-                ),
-              
-              onPressed: ()
-              {
-                Navigator.pushNamed(context, 'books');
-              }
-            ),
+//            RaisedButton
+//            (
+//              color: Colors.white,
+//
+//              shape: RoundedRectangleBorder
+//              (
+//                borderRadius: BorderRadius.circular(20)
+//              ),
+//
+//              child: Row
+//                (
+//                  mainAxisSize: MainAxisSize.min,
+//                  mainAxisAlignment: MainAxisAlignment.center,
+//                  children: <Widget>
+//                  [
+//                    RichText
+//                    (
+//                      text: TextSpan
+//                      (
+//                        children:
+//                        [
+//                          TextSpan
+//                          (
+//                            text: '${intToBook[appData.book]}',
+//                            style: TextStyle
+//                            (
+//                              color: Colors.black,
+//                              // fontWeight: FontWeight.bold
+//                            )
+//                          ),
+//
+//                          TextSpan
+//                          (
+//                            text: ' ${appData.chapter}',
+//                            style: TextStyle
+//                            (
+//                              color: Colors.black,
+////                              fontWeight: FontWeight.bold
+//                            )
+//                          )
+//                        ]
+//                      ),
+//                    ),
+////                    Container(width: 5, height: 41), // Separador
+////                    Icon(Icons.menu),
+//                  ],
+//                ),
+//
+//              onPressed: ()
+//              {
+//                Navigator.pushNamed(context, 'books');
+//              }
+//            ),
+            Expanded(child: SizedBox.fromSize(),),
 
             Spacer(),
 
@@ -151,7 +123,52 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
 
-      body: BookViewer()
+      body: Scrollbar(
+        child: CustomScrollView(
+          physics: BouncingScrollPhysics(),
+          slivers: <Widget>[
+            SliverAppBar(
+              forceElevated: true,
+              floating: true,
+//            elevation: 8,
+              backgroundColor: Colors.white,
+
+              title: Container(
+                child: Row(
+                  children: <Widget>[
+                    GestureDetector(
+                        onTap: (){Navigator.pushNamed(context, 'books');},
+//                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                        child: Row(
+                          children: <Widget>[
+                            Text('${intToBook[appData.book]} ${appData.chapter}', style: TextStyle(fontSize: 18, fontFamily: 'Roboto', color: Color(0xff263238)),),
+                            Icon(Icons.arrow_drop_down, color: Color(0xff263238),)
+                          ],
+                        )
+                    ),
+                  ],
+                ),
+              ),
+
+              actions: <Widget>[
+                Container(
+                  width: 60.0,
+                  height: 60.0,
+                  child: RaisedButton
+                    (
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+                    color: Colors.white,
+                    elevation: 0,
+                    child: Icon(Icons.text_fields, color: Color(0xff37474F)),
+                    onPressed: (){},
+                  ),
+                ),
+              ],
+            ),
+            BookViewer()
+          ],
+        ),
+      )
     );
   }
 }

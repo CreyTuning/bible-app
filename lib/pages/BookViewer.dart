@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/rendering.dart';
 import 'package:yhwh/data/Data.dart';
 import 'package:yhwh/data/Styles.dart' as styles;
 import 'package:flutter/material.dart';
@@ -17,60 +18,56 @@ class _BookViewerState extends State<BookViewer>
   @override
   Widget build(BuildContext context)
   {
-    return FutureBuilder
-    (
+    return FutureBuilder(
       future: appData.getBookMap(),
       builder: (BuildContext context, AsyncSnapshot snapshot)
       {
-        if(snapshot.hasData)
-          return ListView.builder
-          (
-            padding: EdgeInsets.fromLTRB(0, 10, 0, 300.0),
-            itemCount: appData.versesCountList[appData.chapter - 1],
-            itemBuilder: (BuildContext context, int item)
-            {
-              return Column
-              (
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>
-                [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: RichText
-                    (
-                      text: TextSpan
-                      (
-                        style: styles.verseText,
-                        children: <InlineSpan>
-                        [
-                          TextSpan
-                          (
-                            text: "${item + 1} ",
-                            style: TextStyle(color: Colors.pink, fontWeight: FontWeight.bold)
-                          ),
+        if(snapshot.hasData) {
+          return SliverList(
+//              padding: EdgeInsets.fromLTRB(0, 10, 0, 300.0),
+//              itemCount: appData.versesCountList[appData.chapter - 1],
+              delegate: SliverChildBuilderDelegate((context, item) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: RichText(
+                        softWrap: true,
+                        overflow: TextOverflow.visible,
+                        textAlign: TextAlign.start,
+                        text: TextSpan(
+                            style: TextStyle(fontSize: 20, color: Color(0xff263238), fontFamily: 'Roboto', height: 1.8),
+                            children: <InlineSpan>[
+                              TextSpan(
+                                  text: "${item + 1} ",
+                                  style: TextStyle(
+                                      color: Color(0xaf37474F), fontSize: 13.0)
+                              ),
 
-                          TextSpan
-                          (
-                            text: "${snapshot.data['chapters'][appData.chapter - 1]['verses'][item]['text']}",
-                            style: TextStyle(height: 1.5, letterSpacing: 0.6)
-                          )
-                        ]
+                              TextSpan(
+                                  text: "${snapshot.data['chapters'][appData.chapter - 1]['verses'][item]['text']}"
+                              )
+                            ]
+                        ),
                       ),
-                      // textAlign: TextAlign.justify,
-
                     ),
-                  ),
 
-                  Divider(color: Color(0x00), height: 20.0,)
-                ],
-              );
-            }
+                    Divider(color: Color(0x00), height: 5.0,)
+                  ],
+                );
+              },
+                  childCount: appData.versesCountList[appData.chapter - 1],
+              )
           );
-        else
-          return Center
-          (
-            child: CircularProgressIndicator(),
+        }
+        else {
+          return SliverList(
+            delegate: SliverChildBuilderDelegate((context, index) => Center(child: CircularProgressIndicator()),
+              childCount: 1,
+            ),
           );
+        }
       }
     );
   }
