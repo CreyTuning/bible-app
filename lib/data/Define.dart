@@ -2,7 +2,7 @@ Map<int, String> intToBookPath =
 {
   1: "lib/bible/1_Gn.json",
   2: "lib/bible/2_Ex.json",
-  3: "lib/bible/3_Le.json",
+  3: "lib/bible/3_Lv.json",
   4: "lib/bible/4_Nm.json",
   5: "lib/bible/5_Dt.json",
   6: "lib/bible/6_Jos.json",
