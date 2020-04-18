@@ -30,7 +30,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-   - lib/data/books.json
    - lib/bible/
 
   fonts:
@@ -53,3 +52,7 @@ flutter:
     - family: Roboto
       fonts:
         - asset: lib/fonts/Roboto-Regular.ttf
+
+    - family: Baloo
+      fonts:
+        - asset: lib/fonts/BalooPaaji2-Regular.ttf

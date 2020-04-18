@@ -1,6 +1,7 @@
 import 'package:yhwh/data/Data.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class BookSelection extends StatelessWidget {
   AsyncSnapshot snapshot;
 
@@ -14,6 +15,7 @@ class BookSelection extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class MyTabbedPage extends StatefulWidget {
   AsyncSnapshot snapshot;
 
@@ -29,8 +31,8 @@ class _MyTabbedPageState extends State<MyTabbedPage> with SingleTickerProviderSt
   _MyTabbedPageState({this.snapshot});
 
   final List<Tab> myTabs = <Tab>[
-    Tab(child: Text('LIBRO', style: TextStyle(color: Colors.black))),
-    Tab(child: Text('CAPÍTULO', style: TextStyle(color: Colors.black))),
+    Tab(child: Text('Libro', style: TextStyle(fontSize: 16,fontFamily: 'Roboto', color: Color(0xff263238), fontWeight: FontWeight.bold))),
+    Tab(child: Text('Capítulo', style: TextStyle(fontSize: 16,fontFamily: 'Roboto', color: Color(0xff263238), fontWeight: FontWeight.bold))),
   ];
 
   TabController _tabController;
@@ -53,7 +55,7 @@ class _MyTabbedPageState extends State<MyTabbedPage> with SingleTickerProviderSt
       appBar:  AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.white,
-        title:  Text("Seleccione un libro", style: TextStyle(color: Colors.black)),
+        title:  Text("Seleccione un libro", style: TextStyle(fontSize: 20,fontFamily: 'Roboto', color: Color(0xff263238), fontWeight: FontWeight.bold)),
         bottom:  TabBar(
           controller: _tabController,
           tabs: myTabs,
@@ -89,7 +91,7 @@ class _MyTabbedPageState extends State<MyTabbedPage> with SingleTickerProviderSt
         return GridTile(
           child: FlatButton(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-            child: Text('${item + 1}', style: TextStyle(color: Colors.black, fontSize: 15)),
+            child: Text('${item + 1}', style: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff263238))),
             onPressed: () {
               appData.setChapter(item + 1);
               Navigator.pop(context);
@@ -108,7 +110,7 @@ class _MyTabbedPageState extends State<MyTabbedPage> with SingleTickerProviderSt
       itemBuilder: (context, item)
       {
         return ListTile(
-          title: Text(appData.namesAndChapters[item][0]),
+          title: Text(appData.namesAndChapters[item][0], style: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff263238)),),
           onTap: ()
           {
             setState(() {
