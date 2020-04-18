@@ -10,7 +10,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int versesCount = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +32,9 @@ class _HomePageState extends State<HomePage> {
                           shape: new CircleBorder(),
                           fillColor: Colors.white,
                           child: Icon(Icons.keyboard_arrow_left),
-                          onPressed: () {
-                            setState(() {
-                              appData.previousChapter().then((data){});
-                            });
+                          onPressed: () async {
+                            await appData.previousChapter();
+                            setState(() {});
                           },
                         )),
                     Expanded(child: SizedBox.fromSize()),
@@ -47,10 +45,9 @@ class _HomePageState extends State<HomePage> {
                           shape: new CircleBorder(),
                           fillColor: Colors.white,
                           child: Icon(Icons.keyboard_arrow_right),
-                          onPressed: () {
-                            setState(() {
-                              appData.nextChapter();
-                            });
+                          onPressed: () async {
+                            await appData.nextChapter();
+                            setState(() {});
                           },
                         )),
                   ],
@@ -105,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ],
                     ),
-                    BookViewer(snapshot: snapshot,)
+                    BookViewer(snapshot: snapshot)
                   ],
                 ),
               )

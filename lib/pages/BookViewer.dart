@@ -6,18 +6,22 @@ import 'package:yhwh/data/Styles.dart' as styles;
 import 'package:flutter/material.dart';
 import 'package:yhwh/ui_widgets/ui_verse.dart';
 
-class BookViewer extends StatelessWidget {
-  AsyncSnapshot snapshot;
-
+class BookViewer extends StatefulWidget {
+  final AsyncSnapshot snapshot;
   BookViewer({this.snapshot});
+
+  _BookViewerState createState() => _BookViewerState();
+}
+
+class _BookViewerState extends State<BookViewer> {
 
   @override
   Widget build(BuildContext context)
   {
     return SliverList(
         delegate: SliverChildBuilderDelegate((context, item)
-        => snapshot.data.chapters[appData.getChapterNumber - 1].versos[item],
-          childCount: snapshot.data.chapters[appData.getChapterNumber - 1].versos.length,
+        => widget.snapshot.data.chapters[appData.getChapterNumber - 1].versos[item],
+          childCount: widget.snapshot.data.chapters[appData.getChapterNumber - 1].versos.length,
         )
     );
   }

@@ -8,7 +8,6 @@ import 'package:yhwh/ui_widgets/ui_verse.dart';
 Data appData = Data();
 
 class Data {
-  bool _isReady = false;
   int _bookNumber = 1;
   int _chapterNumber = 1;
   Book _book = Book();
@@ -85,12 +84,10 @@ class Data {
 
   Future<void> loadBook(int number) async
   {
-    _isReady = false;
     _bookMap = await json.decode(await rootBundle.loadString(intToBookPath[number]));
     await _book.fromMap(_bookMap);
 
     _bookNumber = number;
-    _isReady = true;
   }
 
   Future<void> init() async
@@ -98,8 +95,6 @@ class Data {
     _bookMap =
     await json.decode(await rootBundle.loadString(intToBookPath[_bookNumber]));
     await _book.fromMap(_bookMap);
-
-    _isReady = true;
   }
 
   Data() {
@@ -108,7 +103,8 @@ class Data {
 
 
   Future<Book> get getBook async {
-      return _book;
+    await init();
+    return _book;
   }
 
   String get getTitle => _book.title;
@@ -125,9 +121,8 @@ class Data {
 
     else if (_chapterNumber == _book.chapters.length) {
       if (_bookNumber < 66) {
-        _chapterNumber = 1;
-
         await loadBook(_bookNumber + 1);
+        _chapterNumber = 1;
       }
     }
   }
