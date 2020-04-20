@@ -1,5 +1,7 @@
 import 'package:yhwh/data/Data.dart';
 import 'package:flutter/material.dart';
+import 'package:diacritic/diacritic.dart';
+
 
 // ignore: must_be_immutable
 class BookSelection extends StatelessWidget {
@@ -15,6 +17,8 @@ class BookSelection extends StatelessWidget {
   }
 }
 
+
+
 // ignore: must_be_immutable
 class MyTabbedPage extends StatefulWidget {
   AsyncSnapshot snapshot;
@@ -25,14 +29,15 @@ class MyTabbedPage extends StatefulWidget {
   _MyTabbedPageState createState() =>  _MyTabbedPageState(snapshot: snapshot);
 }
 
+
 class _MyTabbedPageState extends State<MyTabbedPage> with SingleTickerProviderStateMixin {
   AsyncSnapshot snapshot;
 
   _MyTabbedPageState({this.snapshot});
 
   final List<Tab> myTabs = <Tab>[
-    Tab(child: Text('Libro', style: TextStyle(fontSize: 16,fontFamily: 'Roboto', color: Color(0xff263238), fontWeight: FontWeight.bold))),
-    Tab(child: Text('Capítulo', style: TextStyle(fontSize: 16,fontFamily: 'Roboto', color: Color(0xff263238), fontWeight: FontWeight.bold))),
+    Tab(child: Text('Libro', style: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium', color: Color(0xff263238)))),
+    Tab(child: Text('Capítulo', style: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium', color: Color(0xff263238)))),
   ];
 
   TabController _tabController;
@@ -66,62 +71,149 @@ class _MyTabbedPageState extends State<MyTabbedPage> with SingleTickerProviderSt
         controller: _tabController,
         children:
         [
-          selecionarLibro(),
-          seleccionarCapitulo(snapshot)
+          SelecionarLibro(tabController: _tabController,),
+          SeleccionarCapitulo(asyncSnapshot: snapshot, tabController: _tabController)
         ],
-      ),
-
-      floatingActionButton:  FloatingActionButton(
-        onPressed: () => _tabController.animateTo((_tabController.index + 1) % 2), // Switch tabs
-        child:  Icon(Icons.swap_horiz),
       ),
     );
   }
+}
 
-  GridView seleccionarCapitulo(AsyncSnapshot snapshot)
-  {
+
+
+class SelecionarLibro extends StatefulWidget
+{
+  TabController tabController;
+  SelecionarLibro({this.tabController});
+
+  _SelecionarLibroState createState() => _SelecionarLibroState();
+}
+
+class _SelecionarLibroState extends State<SelecionarLibro>
+{
+  TextEditingController editingController = TextEditingController();
+
+  List<List> duplicateItems = List.generate(appData.namesAndChapters.length, (item) {
+      return [item + 1, appData.namesAndChapters[item][0], appData.namesAndChapters[item][1]];
+  });
+
+  var items = List<List>();
+
+  @override
+  void initState() {
+    items.addAll(duplicateItems);
+    super.initState();
+  }
+
+  void filterSearchResults(String query) {
+    List<List> dummySearchList = List<List>();
+    dummySearchList.addAll(duplicateItems);
+
+    if(query.isNotEmpty) {
+      List<List> dummyListData = List<List>();
+      dummySearchList.forEach((item) {
+        if(removeDiacritics(item[1]).toLowerCase().contains(removeDiacritics(query).toLowerCase())) { // ***********************
+          dummyListData.add(item);
+        }
+      });
+
+      setState(() {
+        items.clear();
+        items.addAll(dummyListData);
+      });
+      return;
+    }
+
+    else {
+      setState(() {
+        items.clear();
+        items.addAll(duplicateItems);
+      });
+    }
+
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              onChanged: (value) {
+                filterSearchResults(value);
+              },
+
+              controller: editingController,
+              decoration: InputDecoration(
+                  hintText: "Buscar",
+                  prefixIcon: Icon(Icons.search),
+              ),
+            ),
+          ),
+
+          Expanded(
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: items.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  leading: Icon(Icons.bookmark_border, color: Color(0xaf263238)),
+                  title: Text(items[index][1], style: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff263238)),),
+                  onTap: () async
+                  {
+                    await appData.loadBook(items[index][0]);
+                    await appData.setChapter(1);
+
+                    setState(() {
+                      widget.tabController.animateTo((widget.tabController.index + 1) % 2);
+                    });
+                  },
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+class SeleccionarCapitulo extends StatefulWidget
+{
+  AsyncSnapshot asyncSnapshot;
+  TabController tabController;
+  SeleccionarCapitulo({this.asyncSnapshot, this.tabController});
+
+  _SeleccionarCapituloState createState() => _SeleccionarCapituloState();
+}
+
+class _SeleccionarCapituloState extends State<SeleccionarCapitulo>
+{
+  @override
+  Widget build(BuildContext context) {
     return GridView.builder(
-      padding: EdgeInsets.only(bottom: 150.0),
-      itemCount: snapshot.data.chapters.length,
+      padding: EdgeInsets.fromLTRB(10, 5, 10, 150.0),
+      itemCount: widget.asyncSnapshot.data.chapters.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 5
+          crossAxisCount: 4,
+        childAspectRatio: 1.15
       ),
 
       itemBuilder: (context, item) {
         return GridTile(
-          child: FlatButton(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-            child: Text('${item + 1}', style: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff263238))),
-            onPressed: () {
-              appData.setChapter(item + 1);
-              Navigator.pop(context);
-            },
-          )
-        );
-      }
-    );
-  }
-
-  ListView selecionarLibro()
-  {
-    return ListView.builder
-    (
-      itemCount: 66,
-      itemBuilder: (context, item)
-      {
-        return ListTile(
-          title: Text(appData.namesAndChapters[item][0], style: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff263238)),),
-          onTap: ()
-          {
-            setState(() {
-              _tabController.animateTo((_tabController.index + 1) % 2);
-              appData.loadBook(item + 1);
-              appData.setChapter(1);
-            });
-          },
+            child: FlatButton(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+              child: Text('${item + 1}', style: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff263238))),
+              onPressed: () {
+                appData.setChapter(item + 1);
+                Navigator.pop(context);
+              },
+            )
         );
       }
     );
   }
 }
-

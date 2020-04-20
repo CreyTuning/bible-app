@@ -2,8 +2,6 @@ import 'dart:convert';
 import 'package:yhwh/data/Define.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:yhwh/objects/book.dart';
-import 'package:yhwh/objects/chapter.dart';
-import 'package:yhwh/ui_widgets/ui_verse.dart';
 
 Data appData = Data();
 

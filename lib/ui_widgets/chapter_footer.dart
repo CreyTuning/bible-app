@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yhwh/ui_widgets/ui_verse.dart';
 
 class ChapterFooter extends StatelessWidget
 {
@@ -7,7 +6,7 @@ class ChapterFooter extends StatelessWidget
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Divider(height: 50, color: Color(0x00)),
+        Divider(height: 40, color: Color(0x00)),
         Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: RichText(
@@ -15,9 +14,9 @@ class ChapterFooter extends StatelessWidget
                   style: TextStyle(
                       fontSize: 15,
                       fontFamily: 'Baloo',
-                      letterSpacing: 1,
+//                      letterSpacing: 0.6,
                       color: Colors.black54,
-                      height: 1
+                      height: 1.2
                   )
               ),
               textAlign: TextAlign.center,
@@ -26,12 +25,12 @@ class ChapterFooter extends StatelessWidget
 
         FlatButton(
           splashColor: Colors.white,
-            child: Text('Quiero saber más',
+            child: Text('Más información',
               style: TextStyle(
                 fontSize: 14,
                 fontFamily: 'Baloo',
                 fontWeight: FontWeight.bold,
-                letterSpacing: 1,
+//                letterSpacing: 1,
                 color: Colors.green,
               )),
           onPressed: (){Navigator.pushNamed(context, 'bible_information');},

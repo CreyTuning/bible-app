@@ -24,8 +24,7 @@ class _HomePageState extends State<HomePage> {
             color: Colors.white,
             child: SafeArea(
               child: Scaffold(
-                  floatingActionButtonLocation:
-                  FloatingActionButtonLocation.centerFloat,
+                  floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
                   floatingActionButton: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Row(
@@ -87,7 +86,9 @@ class _HomePageState extends State<HomePage> {
                                             style: TextStyle(
                                               fontSize: 18,
                                               fontFamily: 'Roboto',
+//                                              fontWeight: FontWeight.w600,
                                               color: Color(0xff263238),
+//                                              fontWeight: FontWeight.bold
                                             ),
                                           ),
 

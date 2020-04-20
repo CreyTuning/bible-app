@@ -21,6 +21,7 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^0.1.2
+  diacritic: ^0.1.1
 
 dev_dependencies:
   flutter_test:
@@ -47,11 +48,15 @@ flutter:
 
     - family: Bookerly
       fonts:
-      - asset: lib/fonts/Bookerly-Regular.ttf
+        - asset: lib/fonts/Bookerly-Regular.ttf
 
     - family: Roboto
       fonts:
-        - asset: lib/fonts/Roboto-Regular.ttf
+        - asset: lib/fonts/Roboto/Roboto-Regular.ttf
+
+    - family: Roboto-Medium
+      fonts:
+        - asset: lib/fonts/Roboto/Roboto-Medium.ttf
 
     - family: Baloo
       fonts:

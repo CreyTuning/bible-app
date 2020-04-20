@@ -1,10 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
-import 'package:yhwh/data/Define.dart';
 import 'package:flutter/material.dart';
-import 'package:yhwh/data/Data.dart';
-
-import 'BookViewer.dart';
 
 class BibleInformation extends StatefulWidget {
   @override
