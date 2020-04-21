@@ -1,6 +1,7 @@
 import 'package:yhwh/data/Data.dart';
 import 'package:flutter/material.dart';
 import 'package:diacritic/diacritic.dart';
+import 'package:yhwh/pages/StylePage.dart';
 
 
 // ignore: must_be_immutable
@@ -36,8 +37,8 @@ class _MyTabbedPageState extends State<MyTabbedPage> with SingleTickerProviderSt
   _MyTabbedPageState({this.snapshot});
 
   final List<Tab> myTabs = <Tab>[
-    Tab(child: Text('Libro', style: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium', color: Color(0xff263238)))),
-    Tab(child: Text('Capítulo', style: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium', color: Color(0xff263238)))),
+    Tab(child: Text('Libro')),
+    Tab(child: Text('Capítulo')),
   ];
 
   TabController _tabController;
@@ -58,9 +59,7 @@ class _MyTabbedPageState extends State<MyTabbedPage> with SingleTickerProviderSt
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:  AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
-        backgroundColor: Colors.white,
-        title:  Text("Seleccione un libro", style: TextStyle(fontSize: 20,fontFamily: 'Roboto', color: Color(0xff263238), fontWeight: FontWeight.bold)),
+        title:  Text("Seleccione un libro"),
         bottom:  TabBar(
           controller: _tabController,
           tabs: myTabs,
@@ -159,8 +158,8 @@ class _SelecionarLibroState extends State<SelecionarLibro>
               itemCount: items.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  leading: Icon(Icons.bookmark_border, color: Color(0xaf263238)),
-                  title: Text(items[index][1], style: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff263238)),),
+                  leading: Icon(Icons.bookmark_border, color: Theme.of(context).iconTheme.color,),
+                  title: Text(items[index][1], style: Theme.of(context).textTheme.button,),
                   onTap: () async
                   {
                     await appData.loadBook(items[index][0]);
@@ -206,7 +205,7 @@ class _SeleccionarCapituloState extends State<SeleccionarCapitulo>
         return GridTile(
             child: FlatButton(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-              child: Text('${item + 1}', style: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff263238))),
+              child: Text('${item + 1}', style: Theme.of(context).textTheme.button),
               onPressed: () {
                 appData.setChapter(item + 1);
                 Navigator.pop(context);

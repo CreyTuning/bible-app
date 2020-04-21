@@ -15,7 +15,7 @@ class ChapterFooter extends StatelessWidget
                       fontSize: 15,
                       fontFamily: 'Baloo',
 //                      letterSpacing: 0.6,
-                      color: Colors.black54,
+                      color: Theme.of(context).textTheme.body1.color,
                       height: 1.2
                   )
               ),
@@ -31,7 +31,7 @@ class ChapterFooter extends StatelessWidget
                 fontFamily: 'Baloo',
                 fontWeight: FontWeight.bold,
 //                letterSpacing: 1,
-                color: Colors.green,
+                color: Theme.of(context).accentColor,
               )),
           onPressed: (){Navigator.pushNamed(context, 'bible_information');},
         ),

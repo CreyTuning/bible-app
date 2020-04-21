@@ -1,13 +1,22 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:yhwh/data/Define.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:yhwh/objects/book.dart';
+import 'package:flutter/material.dart';
 
 Data appData = Data();
 
 class Data {
+  bool darkMode = false;
   int _bookNumber = 1;
   int _chapterNumber = 1;
+
+  String fontFamily = 'Roboto';
+  double fontSize = 20.0;
+  double fontHeight  = 1.8;
+  double fontLetterSpacing = 0;
+
   Book _book = Book();
   Map _bookMap = Map();
   List namesAndChapters = const [
@@ -144,4 +153,146 @@ class Data {
   {
     _chapterNumber = chapter;
   }
+
+  get darkModeEnabled{
+    return darkMode;
+  }
+
+  set setDarkMode(bool state){
+    this.darkMode = state;
+  }
+
+
+  void fontIncrement()
+  {
+    fontSize += 1;
+  }
+
+  void fontDecrement()
+  {
+    if(fontSize > 16)
+      fontSize -= 1;
+  }
+
+  void fontLineSpaceIncrement()
+  {
+    if(fontHeight < 2.6)
+      fontHeight += 0.2;
+  }
+
+  void fontLineSpaceDecrement()
+  {
+    if(fontHeight > 1.4)
+      fontHeight -= 0.2;
+  }
+
+  void fontLetterSpaceIncrement()
+  {
+    if(fontLetterSpacing < 3)
+      fontLetterSpacing += 0.25;
+  }
+
+  void fontLetterSpaceDecrement()
+  {
+    if(fontLetterSpacing > -1)
+      fontLetterSpacing -= 0.25;
+  }
+
+}
+
+
+
+
+
+class appTheme
+{
+  final theme_light = ThemeData(
+      fontFamily: 'Roboto',
+      accentColor: Colors.green,
+      accentColorBrightness: Brightness.light,
+      buttonColor: Color(0xffffffff),
+      backgroundColor: Color(0xffffffff),
+      canvasColor: Colors.white,
+      brightness: Brightness.light,
+
+      iconTheme: IconThemeData(
+          color: Color(0xff263238),
+          opacity: 20.0
+      ),
+
+      buttonTheme: ButtonThemeData(
+        buttonColor: Colors.white,
+
+
+      ),
+
+      tabBarTheme: TabBarTheme(
+        labelColor: Color(0xff263238),
+        labelStyle: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium'),
+        unselectedLabelStyle: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium'),
+      ),
+
+      textTheme: TextTheme(
+          button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff263238)),
+          body2: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff263238)),
+          body1: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xaf37474F))
+
+      ),
+
+      appBarTheme: AppBarTheme(
+          color: Colors.white,
+          brightness: Brightness.light,
+          iconTheme: IconThemeData(color: Color(0xff263238)),
+
+          textTheme: TextTheme(
+              title: TextStyle(fontSize: 20,fontFamily: 'Roboto', color: Color(0xff263238), fontWeight: FontWeight.bold),
+              button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff263238))
+          )
+      )
+  );
+
+
+  final theme_dark = ThemeData(
+      accentColorBrightness: Brightness.dark,
+      fontFamily: 'Roboto',
+      accentColor: Colors.green,
+      buttonColor: Color(0xff21242b),
+      backgroundColor: Color(0xff21242b),
+      canvasColor: Color(0xff21242b),
+      brightness: Brightness.dark,
+
+
+
+      iconTheme: IconThemeData(
+          color: Color(0xffb0b6c2)
+      ),
+
+      buttonTheme: ButtonThemeData(
+        buttonColor: Color(0xff21242b),
+      ),
+
+      tabBarTheme: TabBarTheme(
+        labelColor: Color(0xffb0b6c2),
+        labelStyle: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium'),
+        unselectedLabelStyle: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium'),
+      ),
+
+      textTheme: TextTheme(
+          button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xffb0b6c2)),
+          body2: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xffb0b6c2)),
+          body1: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff636b76))
+
+      ),
+
+      appBarTheme: AppBarTheme(
+          color: Color(0xff21242b),
+          brightness: Brightness.dark,
+          iconTheme: IconThemeData(color: Color(0xffb0b6c2)),
+
+          textTheme: TextTheme(
+              title: TextStyle(fontSize: 20,fontFamily: 'Roboto', color: Color(0xffb0b6c2), fontWeight: FontWeight.bold),
+              button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xffb0b6c2))
+          )
+      )
+  );
 }

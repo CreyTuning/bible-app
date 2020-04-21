@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
-class UiVerse extends StatelessWidget{
+class UiVerse extends StatefulWidget{
   final int number;
   final String text;
 
   final String fontFamily;
   final double fontSize;
   final double height;
+  final double letterSeparation;
 
-  final Color color;
-  final Color colorOfNumber;
+  Color color;
+  Color colorOfNumber;
 
   final double separation;
 
@@ -21,13 +22,23 @@ class UiVerse extends StatelessWidget{
     this.fontFamily = 'Roboto',
     this.fontSize = 20.0,
     this.height  = 1.8,
+    this.letterSeparation = 0,
 
     this.color = const Color(0xff263238),
     this.colorOfNumber = const Color(0xaf37474F),
 
-    this.separation = 5.0
+    this.separation = 5.0,
   });
 
+  _UiVerseState createState() => _UiVerseState();
+
+  void setColor(Color colorVerse, Color colorNumber){
+    this.color = color;
+    this.colorOfNumber = color;
+  }
+}
+
+class _UiVerseState extends State<UiVerse>{
   @override
   Widget build(BuildContext context)
   {
@@ -43,31 +54,32 @@ class UiVerse extends StatelessWidget{
 
             text: TextSpan(
                 style: TextStyle(
-                    fontSize: this.fontSize,
-                    color: this.color,
-                    fontFamily: this.fontFamily,
-                    height: this.height
+                    fontSize: this.widget.fontSize,
+                    color: this.widget.color,
+                    fontFamily: this.widget.fontFamily,
+                    height: this.widget.height,
+                    letterSpacing: this.widget.letterSeparation
                 ),
 
                 children: <InlineSpan>[
                   TextSpan( // Numero de versiculo
-                      text: this.number.toString(),
+                      text: this.widget.number.toString(),
                       style: TextStyle(
-                          color: this.colorOfNumber,
-                          fontSize: this.fontSize - 7.0
+                          color: this.widget.colorOfNumber,
+                          fontSize: this.widget.fontSize - 7.0
                       )
                   ),
 
 
                   TextSpan( // Texto del versiculo
-                      text: " ${this.text}"
+                      text: " ${this.widget.text}"
                   )
                 ]
             ),
           ),
         ),
 
-        Divider(color: Color(0x00), height: separation,)
+        Divider(color: Color(0x00), height: widget.separation,)
       ],
     );
   }

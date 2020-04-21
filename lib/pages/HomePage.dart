@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:yhwh/data/Define.dart';
 import 'package:flutter/material.dart';
 import 'package:yhwh/data/Data.dart';
+import 'package:yhwh/ui_widgets/chapter_footer.dart';
 
 import 'BookViewer.dart';
 
@@ -13,6 +15,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+  ScrollController _scrollController;
+
+  @override
+  void initState() {
+    _scrollController = ScrollController();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -21,7 +31,7 @@ class _HomePageState extends State<HomePage> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Container(
-            color: Colors.white,
+            color: Theme.of(context).appBarTheme.color,
             child: SafeArea(
               child: Scaffold(
                   floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -33,26 +43,29 @@ class _HomePageState extends State<HomePage> {
                         Container(
                             width: 41.0,
                             height: 41.0,
-                            child: new RawMaterialButton(
-                              shape: new CircleBorder(),
-                              fillColor: Colors.white,
-                              child: Icon(Icons.keyboard_arrow_left),
+                            child: RawMaterialButton(
+                              shape: CircleBorder(),
+                              fillColor: Theme.of(context).buttonColor,
+                              child: Icon(Icons.keyboard_arrow_left, color: Theme.of(context).iconTheme.color,),
                               onPressed: () async {
                                 await appData.previousChapter();
-                                setState(() {});
+                                setState(() {
+                                  _scrollController.animateTo(0, duration: Duration(milliseconds: 300), curve: Curves.easeOut);
+                                });
                               },
                             )),
                         Expanded(child: SizedBox.fromSize()),
                         Container(
                             width: 41.0,
                             height: 41.0,
-                            child: new RawMaterialButton(
-                              shape: new CircleBorder(),
-                              fillColor: Colors.white,
-                              child: Icon(Icons.keyboard_arrow_right),
+                            child: RawMaterialButton(
+                              shape: CircleBorder(),
+                              fillColor: Theme.of(context).buttonColor,
+                              child: Icon(Icons.keyboard_arrow_right, color: Theme.of(context).iconTheme.color,),
                               onPressed: () async {
                                 await appData.nextChapter();
                                 setState(() {
+                                  _scrollController.animateTo(0, duration: Duration(milliseconds: 300), curve: Curves.easeOut);
                                 });
                               },
                             )),
@@ -61,18 +74,17 @@ class _HomePageState extends State<HomePage> {
                   ),
                   body: Scrollbar(
                     child: CustomScrollView(
+                      controller: _scrollController,
                       slivers: <Widget>[
                         SliverAppBar(
                           forceElevated: true,
                           floating: true,
-                          backgroundColor: Colors.white,
 
                           actions: <Widget>[
                             Container(
                               child: Row(
                                 children: <Widget>[
                                   RaisedButton(
-                                      color: Colors.white,
                                       elevation: 0.0,
                                       onPressed: () {
                                         Navigator.pushNamed(context, 'books', arguments: snapshot);
@@ -83,19 +95,10 @@ class _HomePageState extends State<HomePage> {
                                         children: <Widget>[
                                           Text(
                                             '${intToBook[appData.getBookNumber]} ${appData.getChapterNumber}',
-                                            style: TextStyle(
-                                              fontSize: 18,
-                                              fontFamily: 'Roboto',
-//                                              fontWeight: FontWeight.w600,
-                                              color: Color(0xff263238),
-//                                              fontWeight: FontWeight.bold
-                                            ),
+                                            style: Theme.of(context).textTheme.button
                                           ),
 
-                                          Icon(
-                                            Icons.arrow_drop_down,
-                                            color: Color(0xff263238),
-                                          ),
+                                          Icon(Icons.arrow_drop_down, color: Theme.of(context).iconTheme.color),
                                         ],
                                       )
                                   ),
@@ -111,16 +114,20 @@ class _HomePageState extends State<HomePage> {
                               child: RaisedButton(
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(100)),
-                                color: Colors.white,
                                 elevation: 0,
-                                child: Icon(Icons.text_fields,
-                                    color: Color(0xff37474F)),
-                                onPressed: () {},
+                                child: Icon(Icons.color_lens, color: Theme.of(context).iconTheme.color),
+                                onPressed: () {
+                                  Navigator.pushNamed(context, 'styles');
+                                },
                               ),
                             ),
                           ],
                         ),
-                        BookViewer(snapshot: snapshot)
+                        BookViewer(snapshot: snapshot),
+
+                        SliverToBoxAdapter(
+                          child: ChapterFooter(),
+                        )
                       ],
                     ),
                   )
@@ -129,7 +136,19 @@ class _HomePageState extends State<HomePage> {
           );
         }
 
-        return Center(child: CircularProgressIndicator());
+        return Center(
+          child: Scaffold(
+            backgroundColor: Theme.of(context).backgroundColor,
+            appBar: AppBar(
+              elevation: 0,
+              backgroundColor: Theme.of(context).appBarTheme.color,
+            ),
+
+            body: Center(
+                child: CircularProgressIndicator()
+            ),
+          )
+        );
       },
     );
   }
