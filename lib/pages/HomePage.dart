@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                       controller: _scrollController,
                       slivers: <Widget>[
                         SliverAppBar(
-                          forceElevated: true,
+                          forceElevated: false,
                           floating: true,
 
                           actions: <Widget>[
