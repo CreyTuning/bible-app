@@ -255,42 +255,42 @@ class appTheme
       accentColorBrightness: Brightness.dark,
       fontFamily: 'Roboto',
       accentColor: Colors.green,
-      buttonColor: Color(0xff21242b),
-      backgroundColor: Color(0xff21242b),
-      canvasColor: Color(0xff21242b),
+      buttonColor: Color(0xff202124),
+      backgroundColor: Color(0xff202124),
+      canvasColor: Color(0xff202124),
       brightness: Brightness.dark,
 
 
 
       iconTheme: IconThemeData(
-          color: Color(0xffb0b6c2)
+          color: Color(0xfff0f2f3)
       ),
 
       buttonTheme: ButtonThemeData(
-        buttonColor: Color(0xff21242b),
+        buttonColor: Color(0xff202124),
       ),
 
       tabBarTheme: TabBarTheme(
-        labelColor: Color(0xffb0b6c2),
+        labelColor: Color(0xfff0f2f3),
         labelStyle: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium'),
         unselectedLabelStyle: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium'),
       ),
 
       textTheme: TextTheme(
-          button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xffb0b6c2)),
-          body2: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xffb0b6c2)),
-          body1: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff636b76))
+          button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xfff0f2f3)),
+          body2: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xfff0f2f3)),
+          body1: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff9aa0a6))
 
       ),
 
       appBarTheme: AppBarTheme(
-          color: Color(0xff21242b),
+          color: Color(0xff202124),
           brightness: Brightness.dark,
-          iconTheme: IconThemeData(color: Color(0xffb0b6c2)),
+          iconTheme: IconThemeData(color: Color(0xfff0f2f3)),
 
           textTheme: TextTheme(
-              title: TextStyle(fontSize: 20,fontFamily: 'Roboto', color: Color(0xffb0b6c2), fontWeight: FontWeight.bold),
-              button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xffb0b6c2))
+              title: TextStyle(fontSize: 20,fontFamily: 'Roboto', color: Color(0xfff0f2f3), fontWeight: FontWeight.bold),
+              button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xfff0f2f3))
           )
       )
   );
