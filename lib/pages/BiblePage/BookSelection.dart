@@ -2,20 +2,28 @@ import 'package:flutter/widgets.dart';
 import 'package:yhwh/data/Data.dart';
 import 'package:flutter/material.dart';
 import 'package:diacritic/diacritic.dart';
-import 'package:yhwh/pages/StylePage.dart';
+import 'package:yhwh/pages/BiblePage/StylePage.dart';
 
 
 // ignore: must_be_immutable
 class BookSelection extends StatelessWidget {
   AsyncSnapshot snapshot;
+  ScrollController scrollController;
 
-  BookSelection({Key key, this.snapshot}) : super(key: key);
+  BookSelection({Key key, this.snapshot, this.scrollController}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    snapshot = ModalRoute.of(context).settings.arguments;
+//    snapshot = ModalRoute.of(context).settings.arguments;
 
-    return MyTabbedPage(snapshot: snapshot,);
+
+    Map args = ModalRoute.of(context).settings.arguments;
+
+    snapshot = args['snapshot'];
+    scrollController = args['scrollController'];
+
+
+    return MyTabbedPage(snapshot: snapshot, scrollController: scrollController,);
   }
 }
 
@@ -24,11 +32,13 @@ class BookSelection extends StatelessWidget {
 // ignore: must_be_immutable
 class MyTabbedPage extends StatefulWidget {
   AsyncSnapshot snapshot;
+  ScrollController scrollController;
 
-  MyTabbedPage({Key key, this.snapshot}) : super(key: key);
+
+  MyTabbedPage({Key key, this.snapshot, this.scrollController}) : super(key: key);
 
   @override
-  _MyTabbedPageState createState() =>  _MyTabbedPageState(snapshot: snapshot);
+  _MyTabbedPageState createState() =>  _MyTabbedPageState(snapshot: snapshot, scrollController: scrollController);
 }
 
 
@@ -36,8 +46,9 @@ class MyTabbedPage extends StatefulWidget {
 
 class _MyTabbedPageState extends State<MyTabbedPage> with SingleTickerProviderStateMixin {
   AsyncSnapshot snapshot;
+  ScrollController scrollController;
 
-  _MyTabbedPageState({this.snapshot});
+  _MyTabbedPageState({this.snapshot, this.scrollController});
 
   final List<Tab> myTabs = <Tab>[
     Tab(child: Text('Libro')),
@@ -74,8 +85,8 @@ class _MyTabbedPageState extends State<MyTabbedPage> with SingleTickerProviderSt
         controller: _tabController,
         children:
         [
-          SelecionarLibro(tabController: _tabController, snapshot: snapshot,),
-          SeleccionarCapitulo(asyncSnapshot: snapshot, tabController: _tabController)
+          SelecionarLibro(tabController: _tabController, snapshot: snapshot, readViewScrollController: scrollController),
+          SeleccionarCapitulo(asyncSnapshot: snapshot, tabController: _tabController, readViewScrollController: scrollController)
         ],
       )
     );
@@ -89,8 +100,9 @@ class SelecionarLibro extends StatefulWidget
   TabController tabController;
   AsyncSnapshot snapshot;
   ScrollController scrollController;
+  ScrollController readViewScrollController;
 
-  SelecionarLibro({this.tabController, this.scrollController, this.snapshot});
+  SelecionarLibro({this.tabController, this.readViewScrollController, this.snapshot});
   _SelecionarLibroState createState() => _SelecionarLibroState();
 }
 
@@ -188,12 +200,14 @@ class _SelecionarLibroState extends State<SelecionarLibro>
 
                   onTap: () async
                   {
+                    appData.scrollOffset = 0;
                     await appData.loadBook(items[index][0]);
                     await appData.setChapter(1);
                     await appData.saveData();
 
                     setState(() {
                       widget.tabController.animateTo((widget.tabController.index + 1) % 2);
+                      widget.readViewScrollController.jumpTo(0);
                     });
                   },
                 );
@@ -211,7 +225,8 @@ class SeleccionarCapitulo extends StatefulWidget
 {
   AsyncSnapshot asyncSnapshot;
   TabController tabController;
-  SeleccionarCapitulo({this.asyncSnapshot, this.tabController});
+  ScrollController readViewScrollController;
+  SeleccionarCapitulo({this.asyncSnapshot, this.tabController, this.readViewScrollController});
 
   _SeleccionarCapituloState createState() => _SeleccionarCapituloState();
 }
@@ -234,9 +249,14 @@ class _SeleccionarCapituloState extends State<SeleccionarCapitulo>
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
               child: Text('${item + 1}', style: Theme.of(context).textTheme.button),
               onPressed: () async{
+                appData.scrollOffset = 0;
                 await appData.setChapter(item + 1);
                 await appData.saveData();
                 Navigator.pop(context);
+
+                setState(() {
+                  widget.readViewScrollController.jumpTo(0);
+                });
               },
             )
         );

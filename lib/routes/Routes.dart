@@ -1,12 +1,12 @@
-import 'package:yhwh/pages/BibleInformation.dart';
-import 'package:yhwh/pages/BookSelection.dart';
-import 'package:yhwh/pages/HomePage.dart';
+import 'package:yhwh/pages/BiblePage/BibleInformation.dart';
+import 'package:yhwh/pages/BiblePage/BookSelection.dart';
+import 'package:yhwh/pages/BiblePage/BiblePage.dart';
 import 'package:flutter/material.dart';
-import 'package:yhwh/pages/StylePage.dart';
+import 'package:yhwh/pages/BiblePage/StylePage.dart';
 
 
 final routes = {
-  'home': (BuildContext buildContext) => HomePage(),
+  'bible_page': (BuildContext buildContext) => BiblePage(),
   'books' : (BuildContext buildContext) => BookSelection(),
   'bible_information' : (BuildContext buildContext) => BibleInformation(),
   'styles' : (BuildContext buildContext) => StylePage(),

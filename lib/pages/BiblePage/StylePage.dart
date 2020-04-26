@@ -34,7 +34,7 @@ class _StylePageState extends State<StylePage>{
                 appData.fontSize = 20.0;
                 appData.fontHeight = 1.8;
                 appData.fontLetterSpacing = 0;
-
+                appData.saveData();
                 setState(() {
                 });
               },

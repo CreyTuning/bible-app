@@ -19,6 +19,9 @@ class Data {
   double fontHeight  = 1.8;
   double fontLetterSpacing = 0;
 
+  double scrollOffset = 0;
+  int bottomNavigationBarIndex = 0;
+
   Book _book = Book();
   Map _bookMap = Map();
   List namesAndChapters = const [
@@ -104,6 +107,8 @@ class Data {
       'fontSize' : fontSize,
       'fontHeight'  : fontHeight,
       'fontLetterSpacing' : fontLetterSpacing,
+      "scrollOffset" : scrollOffset,
+      'bottomNavigationBarIndex' : bottomNavigationBarIndex
     };
 
     file.writeAsStringSync(jsonEncode(data));
@@ -124,6 +129,8 @@ class Data {
       fontSize = data['fontSize'];
       fontHeight = data['fontHeight'];
       fontLetterSpacing = data['fontLetterSpacing'];
+      scrollOffset = data['scrollOffset'];
+      bottomNavigationBarIndex = data['bottomNavigationBarIndex'];
     }
 
     else{
@@ -270,102 +277,101 @@ class Data {
 class appTheme
 {
   final theme_light = ThemeData(
-      fontFamily: 'Roboto',
-      accentColor: Colors.green,
-      accentColorBrightness: Brightness.light,
-      buttonColor: Color(0xffffffff),
-      backgroundColor: Color(0xffffffff),
-      canvasColor: Colors.white,
-      brightness: Brightness.light,
+    primaryColor: Colors.green,
+    fontFamily: 'Roboto',
+    accentColor: Colors.green,
+    buttonColor: Color(0xffffffff),
+    backgroundColor: Color(0xffffffff),
+    canvasColor: Colors.white,
+    brightness: Brightness.light,
 
 
-      iconTheme: IconThemeData(
-          color: Color(0xff263238),
-          opacity: 20.0
-      ),
+    iconTheme: IconThemeData(
+        color: Color(0xff263238),
+    ),
 
-      buttonTheme: ButtonThemeData(
-        buttonColor: Colors.white,
-      ),
+    buttonTheme: ButtonThemeData(
+      buttonColor: Colors.white,
+    ),
 
-      inputDecorationTheme: InputDecorationTheme(
-        fillColor: Colors.green,
-        focusColor: Colors.green,
-        border: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.green
-          )
+    inputDecorationTheme: InputDecorationTheme(
+      fillColor: Colors.green,
+      focusColor: Colors.green,
+      border: UnderlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.green
         )
-
-      ),
-
-      tabBarTheme: TabBarTheme(
-        labelColor: Color(0xff263238),
-        labelStyle: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium'),
-        unselectedLabelStyle: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium'),
-      ),
-
-      textTheme: TextTheme(
-          button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff263238)),
-          body2: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff263238)),
-          body1: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xaf37474F))
-
-      ),
-
-      appBarTheme: AppBarTheme(
-          color: Colors.white,
-          brightness: Brightness.light,
-          iconTheme: IconThemeData(color: Color(0xff263238)),
-
-          textTheme: TextTheme(
-              title: TextStyle(fontSize: 20,fontFamily: 'Roboto', color: Color(0xff263238), fontWeight: FontWeight.bold),
-              button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff263238))
-          )
       )
+
+    ),
+
+    tabBarTheme: TabBarTheme(
+      labelColor: Color(0xff263238),
+      labelStyle: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium'),
+      unselectedLabelStyle: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium'),
+    ),
+
+    textTheme: TextTheme(
+        button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff263238)),
+        body2: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff263238)),
+        body1: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xaf37474F))
+
+    ),
+
+    appBarTheme: AppBarTheme(
+        color: Colors.white,
+        brightness: Brightness.light,
+        iconTheme: IconThemeData(color: Color(0xff263238)),
+
+        textTheme: TextTheme(
+            title: TextStyle(fontSize: 20,fontFamily: 'Roboto', color: Color(0xff263238), fontWeight: FontWeight.bold),
+            button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff263238))
+        )
+    )
   );
 
 
   final theme_dark = ThemeData(
-      accentColorBrightness: Brightness.dark,
-      fontFamily: 'Roboto',
-      accentColor: Colors.green,
+    primaryColor: Colors.green,
+    accentColorBrightness: Brightness.dark,
+    fontFamily: 'Roboto',
+    accentColor: Colors.green,
+    buttonColor: Color(0xff202124),
+    backgroundColor: Color(0xff202124),
+    canvasColor: Color(0xff202124),
+    brightness: Brightness.dark,
+
+
+    iconTheme: IconThemeData(
+        color: Color(0xfff0f2f3)
+    ),
+
+    buttonTheme: ButtonThemeData(
       buttonColor: Color(0xff202124),
-      backgroundColor: Color(0xff202124),
-      canvasColor: Color(0xff202124),
-      brightness: Brightness.dark,
+    ),
 
+    tabBarTheme: TabBarTheme(
+      labelColor: Color(0xfff0f2f3),
+      labelStyle: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium'),
+      unselectedLabelStyle: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium'),
+    ),
 
+    textTheme: TextTheme(
+        button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xfff0f2f3)),
+        body2: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xfff0f2f3)),
+        body1: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff9aa0a6))
 
-      iconTheme: IconThemeData(
-          color: Color(0xfff0f2f3)
-      ),
+    ),
 
-      buttonTheme: ButtonThemeData(
-        buttonColor: Color(0xff202124),
-      ),
+    appBarTheme: AppBarTheme(
+        color: Color(0xff202124),
+        brightness: Brightness.dark,
+        iconTheme: IconThemeData(color: Color(0xfff0f2f3)),
 
-      tabBarTheme: TabBarTheme(
-        labelColor: Color(0xfff0f2f3),
-        labelStyle: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium'),
-        unselectedLabelStyle: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium'),
-      ),
-
-      textTheme: TextTheme(
-          button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xfff0f2f3)),
-          body2: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xfff0f2f3)),
-          body1: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff9aa0a6))
-
-      ),
-
-      appBarTheme: AppBarTheme(
-          color: Color(0xff202124),
-          brightness: Brightness.dark,
-          iconTheme: IconThemeData(color: Color(0xfff0f2f3)),
-
-          textTheme: TextTheme(
-              title: TextStyle(fontSize: 20,fontFamily: 'Roboto', color: Color(0xfff0f2f3), fontWeight: FontWeight.bold),
-              button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xfff0f2f3))
-          )
-      )
+        textTheme: TextTheme(
+            title: TextStyle(fontSize: 20,fontFamily: 'Roboto', color: Color(0xfff0f2f3), fontWeight: FontWeight.bold),
+            button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xfff0f2f3))
+        )
+    )
   );
 }
