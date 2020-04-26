@@ -4,6 +4,8 @@ import 'package:yhwh/data/Define.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:yhwh/objects/book.dart';
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 
 Data appData = Data();
 
@@ -89,6 +91,47 @@ class Data {
   ];
 
 
+  Future<void> saveData() async
+  {
+    Directory dir = await getApplicationDocumentsDirectory();
+    File file = File('${dir.path}/savedata.json');
+
+    Map data = {
+      'darkMode' : darkMode,
+      '_bookNumber' : _bookNumber,
+      '_chapterNumber' : _chapterNumber,
+      'fontFamily' : fontFamily,
+      'fontSize' : fontSize,
+      'fontHeight'  : fontHeight,
+      'fontLetterSpacing' : fontLetterSpacing,
+    };
+
+    file.writeAsStringSync(jsonEncode(data));
+  }
+
+  Future<void> loadSaveData() async
+  {
+    Directory dir = await getApplicationDocumentsDirectory();
+    File file = File('${dir.path}/savedata.json');
+
+    if(await file.exists()){
+      Map data = await json.decode(file.readAsStringSync());
+
+      darkMode = data['darkMode'];
+      _bookNumber = data['_bookNumber'];
+      _chapterNumber = data['_chapterNumber'];
+      fontFamily = data['fontFamily'];
+      fontSize = data['fontSize'];
+      fontHeight = data['fontHeight'];
+      fontLetterSpacing = data['fontLetterSpacing'];
+    }
+
+    else{
+      await saveData();
+      print('file not exist');
+    }
+  }
+
   Future<void> loadBook(int number) async
   {
     _bookMap = await json.decode(await rootBundle.loadString(intToBookPath[number]));
@@ -99,8 +142,8 @@ class Data {
 
   Future<void> init() async
   {
-    _bookMap =
-    await json.decode(await rootBundle.loadString(intToBookPath[_bookNumber]));
+    await loadSaveData();
+    _bookMap = await json.decode(await rootBundle.loadString(intToBookPath[_bookNumber]));
     await _book.fromMap(_bookMap);
   }
 
@@ -132,6 +175,8 @@ class Data {
         _chapterNumber = 1;
       }
     }
+
+    saveData();
   }
 
   Future<void> previousChapter() async{
@@ -147,11 +192,14 @@ class Data {
         _chapterNumber = _book.chapters.length;
       }
     }
+
+    saveData();
   }
 
   Future<void> setChapter(int chapter) async
   {
     _chapterNumber = chapter;
+    await saveData();
   }
 
   get darkModeEnabled{
@@ -160,42 +208,56 @@ class Data {
 
   set setDarkMode(bool state){
     this.darkMode = state;
+    saveData();
   }
 
 
   void fontIncrement()
   {
-    fontSize += 1;
+    if(fontSize < 50)
+      fontSize += 1;
+
+    saveData();
   }
 
   void fontDecrement()
   {
     if(fontSize > 16)
       fontSize -= 1;
+
+    saveData();
   }
 
   void fontLineSpaceIncrement()
   {
-    if(fontHeight < 2.6)
+    if(fontHeight < 3)
       fontHeight += 0.2;
+
+    saveData();
   }
 
   void fontLineSpaceDecrement()
   {
-    if(fontHeight > 1.4)
+    if(fontHeight > 1.2)
       fontHeight -= 0.2;
+
+    saveData();
   }
 
   void fontLetterSpaceIncrement()
   {
-    if(fontLetterSpacing < 3)
+    if(fontLetterSpacing < 10)
       fontLetterSpacing += 0.25;
+
+    saveData();
   }
 
   void fontLetterSpaceDecrement()
   {
     if(fontLetterSpacing > -1)
       fontLetterSpacing -= 0.25;
+
+    saveData();
   }
 
 }
@@ -214,6 +276,7 @@ class appTheme
       canvasColor: Colors.white,
       brightness: Brightness.light,
 
+
       iconTheme: IconThemeData(
           color: Color(0xff263238),
           opacity: 20.0
@@ -221,7 +284,16 @@ class appTheme
 
       buttonTheme: ButtonThemeData(
         buttonColor: Colors.white,
+      ),
 
+      inputDecorationTheme: InputDecorationTheme(
+        fillColor: Colors.green,
+        focusColor: Colors.green,
+        border: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.green
+          )
+        )
 
       ),
 

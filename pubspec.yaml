@@ -23,6 +23,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   diacritic: ^0.1.1
   flutter_phoenix: ^0.1.0
+  path_provider: ^1.6.7
 
 dev_dependencies:
   flutter_test:
@@ -35,6 +36,10 @@ flutter:
    - lib/bible/
 
   fonts:
+    - family:  CustomIcons
+      fonts:
+        - asset: lib/icons/CustomIcons.ttf
+
     - family: Londrina
       fonts:
         - asset: lib/fonts/LondrinaSolid-Regular.ttf

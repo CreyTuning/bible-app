@@ -17,8 +17,8 @@ class Book {
     chapters = List<Chapter>();
 
     this.title = map['title'];
-    this.title = map['description'];
-    this.title = map['abbreviation'];
+    this.description = map['description'];
+    this.abbreviation = map['abbreviation'];
 
     for (int i = 0; i < map['chapters'].length; i++) {
       Chapter tempChapter = Chapter();

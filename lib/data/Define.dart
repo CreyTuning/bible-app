@@ -8,7 +8,19 @@ Map<int, String> intToBookPath =
   6: "lib/bible/6_Jos.json",
   7: "lib/bible/7_Jue.json",
   8: "lib/bible/8_Rt.json",
-  9: "lib/bible/9_1S.json"
+  9: "lib/bible/9_1S.json",
+  10: "lib/bible/10_2S.json",
+  13: "lib/bible/13_1C.json",
+  14: "lib/bible/14_2C.json",
+  15: "lib/bible/15_Esd.json",
+  16: "lib/bible/16_Neh.json",
+  17: "lib/bible/17_Est.json",
+  18: "lib/bible/18_Job.json",
+  19: "lib/bible/19_Sal.json",
+  20: "lib/bible/20_Pr.json",
+  21: "lib/bible/21_Ec.json",
+  22: "lib/bible/22_Pr.json",
+  23: "lib/bible/23_Is.json",
 };
 
 Map<String, int> bookToInt =

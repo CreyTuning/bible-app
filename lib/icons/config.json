@@ -1,0 +1,94 @@
+{
+  "name": "CustomIcons",
+  "css_prefix_text": "",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "c22e83b2205707d049fb32c01ee1fdf0",
+      "css": "arrow-collapse-vertical",
+      "code": 59393,
+      "src": "custom_icons",
+      "selected": true,
+      "svg": {
+        "path": "M166.7 500H833.3V583.3H166.7V500M166.7 375H833.3V458.3H166.7V375M666.7 166.7L500 333.3 333.3 166.7H458.3V41.7H541.7V166.7H666.7M333.3 791.7L500 625 666.7 791.7H541.7V916.7H458.3V791.7H333.3Z",
+        "width": 1000
+      },
+      "search": [
+        "arrow-collapse-vertical"
+      ]
+    },
+    {
+      "uid": "0572771cd91fa8009603204c3b0210d5",
+      "css": "arrow-expand-vertical",
+      "code": 59394,
+      "src": "custom_icons",
+      "selected": true,
+      "svg": {
+        "path": "M166.7 500H833.3V583.3H166.7V500M166.7 375H833.3V458.3H166.7V375M666.7 208.3L500 41.7 333.3 208.3H458.3V333.3H541.7V208.3H666.7M333.3 750L500 916.7 666.7 750H541.7V625H458.3V750Z",
+        "width": 1000
+      },
+      "search": [
+        "arrow-expand-vertical"
+      ]
+    },
+    {
+      "uid": "0c4961fe983734351d4eced9cedd2992",
+      "css": "format-font-size-decrease",
+      "code": 59395,
+      "src": "custom_icons",
+      "selected": true,
+      "svg": {
+        "path": "M213.3 583.3L312.5 319.6 411.2 583.3M270.8 208.3L41.7 791.7H135.4L182.1 666.7H442.5L489.6 791.7H583.3L354.2 208.3H270.8M750 708.3L958.3 497.1 899.6 437.5 791.7 545.8V291.7H708.3V545.8L600.4 437.5 541.7 497.1 750 708.3Z",
+        "width": 1000
+      },
+      "search": [
+        "format-font-size-decrease"
+      ]
+    },
+    {
+      "uid": "fef154057d372a998e93d1725e13e693",
+      "css": "format-font-size-increase",
+      "code": 59396,
+      "src": "custom_icons",
+      "selected": true,
+      "svg": {
+        "path": "M213.3 583.3L312.5 319.6 411.2 583.3M270.8 208.3L41.7 791.7H135.4L182.1 666.7H442.5L489.6 791.7H583.3L354.2 208.3H270.8M750 291.7L541.7 502.9 600.4 562.5 708.3 454.2V708.3H791.7V454.2L899.6 562.5 958.3 502.9 750 291.7Z",
+        "width": 1000
+      },
+      "search": [
+        "format-font-size-increase"
+      ]
+    },
+    {
+      "uid": "a4b61709ee5a4a19fe96a5518257b28d",
+      "css": "format-horizontal-align-center-expand",
+      "code": 59398,
+      "src": "custom_icons",
+      "selected": true,
+      "svg": {
+        "path": "M791.7 666.7V541.7H625V458.3H791.7V333.3L958.3 500 791.7 666.7M208.3 333.3V458.3H375V541.7H208.3V666.7L41.7 500 208.3 333.3M458.3 833.3H541.7V166.7H458.3Z",
+        "width": 1000
+      },
+      "search": [
+        "format-horizontal-align-center-expand"
+      ]
+    },
+    {
+      "uid": "cec948b8196ae888bd47973eb4e6d54e",
+      "css": "format-horizontal-align-center",
+      "code": 59397,
+      "src": "custom_icons",
+      "selected": true,
+      "svg": {
+        "path": "M791.7 666.7V541.7H958.3V458.3H791.7V333.3L625 500 791.7 666.7M208.3 333.3V458.3H41.7V541.7H208.3V666.7L375 500 208.3 333.3M458.3 833.3H541.7V166.7H458.3V833.3Z",
+        "width": 1000
+      },
+      "search": [
+        "format-horizontal-align-center"
+      ]
+    }
+  ]
+}

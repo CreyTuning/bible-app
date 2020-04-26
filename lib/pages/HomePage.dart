@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
                               onPressed: () async {
                                 await appData.previousChapter();
                                 setState(() {
-                                  _scrollController.animateTo(0, duration: Duration(milliseconds: 300), curve: Curves.easeOut);
+                                  _scrollController.animateTo(0, duration: Duration(seconds: 1), curve: Curves.ease);
                                 });
                               },
                             )),
@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                               onPressed: () async {
                                 await appData.nextChapter();
                                 setState(() {
-                                  _scrollController.animateTo(0, duration: Duration(milliseconds: 300), curve: Curves.easeOut);
+                                  _scrollController.animateTo(0, duration: Duration(seconds: 1), curve: Curves.ease);
                                 });
                               },
                             )),

@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:yhwh/data/Data.dart';
 import 'package:flutter/material.dart';
 import 'package:diacritic/diacritic.dart';
@@ -31,6 +32,8 @@ class MyTabbedPage extends StatefulWidget {
 }
 
 
+
+
 class _MyTabbedPageState extends State<MyTabbedPage> with SingleTickerProviderStateMixin {
   AsyncSnapshot snapshot;
 
@@ -59,6 +62,7 @@ class _MyTabbedPageState extends State<MyTabbedPage> with SingleTickerProviderSt
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:  AppBar(
+        elevation: 0,
         title:  Text("Seleccione un libro"),
         bottom:  TabBar(
           controller: _tabController,
@@ -66,14 +70,14 @@ class _MyTabbedPageState extends State<MyTabbedPage> with SingleTickerProviderSt
         ),
       ),
 
-      body:  TabBarView(
+      body: TabBarView(
         controller: _tabController,
         children:
         [
-          SelecionarLibro(tabController: _tabController,),
+          SelecionarLibro(tabController: _tabController, snapshot: snapshot,),
           SeleccionarCapitulo(asyncSnapshot: snapshot, tabController: _tabController)
         ],
-      ),
+      )
     );
   }
 }
@@ -83,8 +87,10 @@ class _MyTabbedPageState extends State<MyTabbedPage> with SingleTickerProviderSt
 class SelecionarLibro extends StatefulWidget
 {
   TabController tabController;
-  SelecionarLibro({this.tabController});
+  AsyncSnapshot snapshot;
+  ScrollController scrollController;
 
+  SelecionarLibro({this.tabController, this.scrollController, this.snapshot});
   _SelecionarLibroState createState() => _SelecionarLibroState();
 }
 
@@ -101,6 +107,7 @@ class _SelecionarLibroState extends State<SelecionarLibro>
   @override
   void initState() {
     items.addAll(duplicateItems);
+    widget.scrollController = ScrollController(initialScrollOffset: 56.0 * (appData.getBookNumber - 1));
     super.initState();
   }
 
@@ -140,30 +147,50 @@ class _SelecionarLibroState extends State<SelecionarLibro>
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
+              textInputAction: TextInputAction.done,
               onChanged: (value) {
                 filterSearchResults(value);
               },
 
+              cursorColor: Theme.of(context).accentColor,
               controller: editingController,
               decoration: InputDecoration(
-                  hintText: "Buscar",
-                  prefixIcon: Icon(Icons.search),
-              ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Theme.of(context).accentColor,
+                  )
+                ),
+
+                hintText: "Buscar",
+                prefixIcon: Icon(Icons.search, color: Theme.of(context).accentColor,),
+              )
             ),
           ),
 
           Expanded(
             child: ListView.builder(
+              controller: widget.scrollController,
               shrinkWrap: true,
               itemCount: items.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  leading: Icon(Icons.bookmark_border, color: Theme.of(context).iconTheme.color,),
-                  title: Text(items[index][1], style: Theme.of(context).textTheme.button,),
+                  leading: appData.getBookNumber == index + 1
+                    ? Icon(Icons.bookmark, color: Theme.of(context).iconTheme.color)
+                    : Icon(Icons.bookmark_border, color: Theme.of(context).iconTheme.color),
+
+                  title: appData.getBookNumber == index + 1
+                  ? Text(items[index][1], style: TextStyle(
+                    fontSize: Theme.of(context).textTheme.button.fontSize,
+                    color: Theme.of(context).textTheme.button.color,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: Theme.of(context).textTheme.button.fontFamily,))
+                  : Text(items[index][1], style: Theme.of(context).textTheme.button,),
+
                   onTap: () async
                   {
                     await appData.loadBook(items[index][0]);
                     await appData.setChapter(1);
+                    await appData.saveData();
 
                     setState(() {
                       widget.tabController.animateTo((widget.tabController.index + 1) % 2);
@@ -206,8 +233,9 @@ class _SeleccionarCapituloState extends State<SeleccionarCapitulo>
             child: FlatButton(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
               child: Text('${item + 1}', style: Theme.of(context).textTheme.button),
-              onPressed: () {
-                appData.setChapter(item + 1);
+              onPressed: () async{
+                await appData.setChapter(item + 1);
+                await appData.saveData();
                 Navigator.pop(context);
               },
             )

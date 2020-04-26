@@ -33,6 +33,4 @@ class _BookViewerState extends State<BookViewer> {
       ),
     );
   }
-
-
 }

@@ -26,8 +26,6 @@ class MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       home: HomePage(),
       routes: Routes.getRoutes(),
-
-//      initialRoute: 'styles',
       theme: appTheme().theme_light,
       darkTheme: appTheme().theme_dark,
       themeMode: (appData.darkModeEnabled) ? ThemeMode.dark : ThemeMode.light,

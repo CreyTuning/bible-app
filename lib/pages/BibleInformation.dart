@@ -41,7 +41,7 @@ class _BibleInformationState extends State<BibleInformation>
               child: CustomScrollView(
                 slivers: <Widget>[
                   SliverAppBar(
-                    forceElevated: true,
+                    forceElevated: false,
                     floating: true,
                      title: Text("Valera 1602 Purificada"),
                   ),
