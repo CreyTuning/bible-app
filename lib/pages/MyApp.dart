@@ -22,13 +22,18 @@ class MyAppState extends State<MyApp> {
         statusBarColor: Color(0x00),
     ));
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomePage(),
-      routes: Routes.getRoutes(),
-      theme: appTheme().theme_light,
-      darkTheme: appTheme().theme_dark,
-      themeMode: (appData.darkModeEnabled) ? ThemeMode.dark : ThemeMode.light,
+    return FutureBuilder(
+      future: appData.loadSaveData(),
+      builder: (context, snapshot){
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: HomePage(),
+          routes: Routes.getRoutes(),
+          theme: appTheme().theme_light,
+          darkTheme: appTheme().theme_dark,
+          themeMode: (appData.darkModeEnabled) ? ThemeMode.dark : ThemeMode.light,
+        );
+      },
     );
   }
 }

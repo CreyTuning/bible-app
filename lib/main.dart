@@ -5,6 +5,9 @@ import 'package:yhwh/data/Data.dart';
 import 'package:yhwh/pages/StylePage.dart';
 
 void main(){
+
+  appData = Data();
+
   runApp(Phoenix(
     child: MyApp(),
   ));

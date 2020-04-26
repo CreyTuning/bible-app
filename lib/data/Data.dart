@@ -109,7 +109,7 @@ class Data {
     file.writeAsStringSync(jsonEncode(data));
   }
 
-  Future<void> loadSaveData() async
+  Future<bool> loadSaveData() async
   {
     Directory dir = await getApplicationDocumentsDirectory();
     File file = File('${dir.path}/savedata.json');
@@ -130,6 +130,8 @@ class Data {
       await saveData();
       print('file not exist');
     }
+
+    return true;
   }
 
   Future<void> loadBook(int number) async
