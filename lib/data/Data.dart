@@ -309,6 +309,9 @@ class appTheme
       labelColor: Color(0xff263238),
       labelStyle: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium'),
       unselectedLabelStyle: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium'),
+      indicator: UnderlineTabIndicator(
+        borderSide: BorderSide(color: Colors.green, width: 3.0),
+      )
     ),
 
     textTheme: TextTheme(

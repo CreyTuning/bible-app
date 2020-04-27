@@ -92,34 +92,55 @@ class _BiblePageState extends State<BiblePage> {
                             floating: true,
 
                             actions: <Widget>[
-                              Container(
+//                              Container(
+//                                child: Row(
+//                                  children: <Widget>[
+//                                    RaisedButton(
+//                                        elevation: 0.0,
+//                                        onPressed: () {
+//                                          Navigator.pushNamed(context, 'books', arguments: {
+//                                            'snapshot' : snapshot,
+//                                            'scrollController' : _scrollController
+//                                          });
+//                                        },
+//                                        child: Row(
+//                                          mainAxisSize: MainAxisSize.min,
+//                                          crossAxisAlignment: CrossAxisAlignment.center,
+//                                          children: <Widget>[
+//                                            Text(
+//                                                '${intToBook[appData.getBookNumber]} ${appData.getChapterNumber}',
+//                                                style: Theme.of(context).textTheme.button
+//                                            ),
+//
+//                                            Icon(Icons.arrow_drop_down, color: Theme.of(context).iconTheme.color),
+//                                          ],
+//                                        )
+//                                    ),
+//                                  ],
+//                                ),
+//                              ),
+
+                              FlatButton(
                                 child: Row(
                                   children: <Widget>[
-                                    RaisedButton(
-                                        elevation: 0.0,
-                                        onPressed: () {
-                                          Navigator.pushNamed(context, 'books', arguments: {
-                                            'snapshot' : snapshot,
-                                            'scrollController' : _scrollController
-                                          });
-                                        },
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: <Widget>[
-                                            Text(
-                                                '${intToBook[appData.getBookNumber]} ${appData.getChapterNumber}',
-                                                style: Theme.of(context).textTheme.button
-                                            ),
-
-                                            Icon(Icons.arrow_drop_down, color: Theme.of(context).iconTheme.color),
-                                          ],
-                                        )
+                                    Text(
+                                        '${intToBook[appData.getBookNumber]} ${appData.getChapterNumber}',
+                                        style: Theme.of(context).textTheme.button
                                     ),
+
+                                    Icon(Icons.arrow_drop_down, color: Theme.of(context).iconTheme.color),
+
                                   ],
                                 ),
-                              ),
 
+
+                                onPressed: () {
+                                  Navigator.pushNamed(context, 'books', arguments: {
+                                    'snapshot' : snapshot,
+                                    'scrollController' : _scrollController
+                                  });
+                                },
+                              ),
                               Spacer(),
 
                               Container(
