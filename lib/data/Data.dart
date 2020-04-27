@@ -285,7 +285,6 @@ class appTheme
     canvasColor: Colors.white,
     brightness: Brightness.light,
 
-
     iconTheme: IconThemeData(
         color: Color(0xff263238),
     ),
@@ -304,6 +303,7 @@ class appTheme
       )
 
     ),
+
 
     tabBarTheme: TabBarTheme(
       labelColor: Color(0xff263238),

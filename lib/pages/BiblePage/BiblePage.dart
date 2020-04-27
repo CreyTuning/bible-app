@@ -17,6 +17,7 @@ class _BiblePageState extends State<BiblePage> {
 
   ScrollController _scrollController;
 
+
   @override
   void initState() {
     _scrollController = ScrollController(initialScrollOffset: appData.scrollOffset);
@@ -92,34 +93,6 @@ class _BiblePageState extends State<BiblePage> {
                             floating: true,
 
                             actions: <Widget>[
-//                              Container(
-//                                child: Row(
-//                                  children: <Widget>[
-//                                    RaisedButton(
-//                                        elevation: 0.0,
-//                                        onPressed: () {
-//                                          Navigator.pushNamed(context, 'books', arguments: {
-//                                            'snapshot' : snapshot,
-//                                            'scrollController' : _scrollController
-//                                          });
-//                                        },
-//                                        child: Row(
-//                                          mainAxisSize: MainAxisSize.min,
-//                                          crossAxisAlignment: CrossAxisAlignment.center,
-//                                          children: <Widget>[
-//                                            Text(
-//                                                '${intToBook[appData.getBookNumber]} ${appData.getChapterNumber}',
-//                                                style: Theme.of(context).textTheme.button
-//                                            ),
-//
-//                                            Icon(Icons.arrow_drop_down, color: Theme.of(context).iconTheme.color),
-//                                          ],
-//                                        )
-//                                    ),
-//                                  ],
-//                                ),
-//                              ),
-
                               FlatButton(
                                 child: Row(
                                   children: <Widget>[
@@ -150,12 +123,32 @@ class _BiblePageState extends State<BiblePage> {
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(100)),
                                   elevation: 0,
+                                  child: Icon(CupertinoIcons.folder_solid, color: Theme.of(context).iconTheme.color),
+                                  onPressed: () {
+                                    // Funcion que muestra lo resaltado
+                                  },
+                                ),
+                              ),
+
+                              Container(
+                                width: 60.0,
+                                height: 60.0,
+                                child: RaisedButton(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(100)),
+                                  elevation: 0,
                                   child: Icon(Icons.color_lens, color: Theme.of(context).iconTheme.color),
                                   onPressed: () {
                                     Navigator.pushNamed(context, 'styles');
                                   },
+
+                                  onLongPress: (){
+                                    appData.setDarkMode = appData.darkMode == true ? false : true;
+                                    Phoenix.rebirth(context);
+                                  },
                                 ),
                               ),
+
                             ],
                           ),
                           BookViewer(snapshot: snapshot),
