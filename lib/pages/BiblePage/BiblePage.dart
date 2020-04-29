@@ -20,7 +20,8 @@ class _BiblePageState extends State<BiblePage> {
 
   @override
   void initState() {
-    _scrollController = ScrollController(initialScrollOffset: appData.scrollOffset);
+    _scrollController = ScrollController(initialScrollOffset: appData.scrollOffset, keepScrollOffset: true);
+//    _scrollController.animateTo(appData.scrollOffset, duration: Duration(seconds: 1), curve: Curves.easeOut);
     super.initState();
   }
 
@@ -51,7 +52,7 @@ class _BiblePageState extends State<BiblePage> {
                               onPressed: () async {
                                 await appData.previousChapter();
                                 setState(() {
-                                  _scrollController.animateTo(0, duration: Duration(seconds: 1), curve: Curves.ease);
+                                  _scrollController.animateTo(0, duration: Duration(milliseconds: 500), curve: Curves.ease);
                                 });
                               },
                             )),
@@ -66,7 +67,7 @@ class _BiblePageState extends State<BiblePage> {
                               onPressed: () async {
                                 await appData.nextChapter();
                                 setState(() {
-                                  _scrollController.animateTo(0, duration: Duration(seconds: 1), curve: Curves.ease);
+                                  _scrollController.animateTo(0, duration: Duration(milliseconds: 500), curve: Curves.ease);
                                 });
                               },
                             )),
@@ -151,6 +152,7 @@ class _BiblePageState extends State<BiblePage> {
 
                             ],
                           ),
+
                           BookViewer(snapshot: snapshot),
 
                           SliverToBoxAdapter(
