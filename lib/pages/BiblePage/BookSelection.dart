@@ -180,39 +180,41 @@ class _SelecionarLibroState extends State<SelecionarLibro>
           ),
 
           Expanded(
-            child: ListView.builder(
-              controller: widget.scrollController,
-              shrinkWrap: true,
-              itemCount: items.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  leading: appData.getBookNumber == index + 1
-                    ? Icon(Icons.bookmark, color: Theme.of(context).iconTheme.color)
-                    : Icon(Icons.bookmark_border, color: Theme.of(context).iconTheme.color),
+            child: Scrollbar(
+              child: ListView.builder(
+                controller: widget.scrollController,
+                shrinkWrap: true,
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    leading: appData.getBookNumber == index + 1
+                        ? Icon(Icons.bookmark, color: Theme.of(context).iconTheme.color)
+                        : Icon(Icons.bookmark_border, color: Theme.of(context).iconTheme.color),
 
-                  title: appData.getBookNumber == index + 1
-                  ? Text(items[index][1], style: TextStyle(
-                    fontSize: Theme.of(context).textTheme.button.fontSize,
-                    color: Theme.of(context).textTheme.button.color,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: Theme.of(context).textTheme.button.fontFamily,))
-                  : Text(items[index][1], style: Theme.of(context).textTheme.button,),
+                    title: appData.getBookNumber == index + 1
+                        ? Text(items[index][1], style: TextStyle(
+                      fontSize: Theme.of(context).textTheme.button.fontSize,
+                      color: Theme.of(context).textTheme.button.color,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: Theme.of(context).textTheme.button.fontFamily,))
+                        : Text(items[index][1], style: Theme.of(context).textTheme.button,),
 
-                  onTap: () async
-                  {
-                    appData.scrollOffset = 0;
-                    await appData.loadBook(items[index][0]);
-                    await appData.setChapter(1);
-                    await appData.saveData();
+                    onTap: () async
+                    {
+                      appData.scrollOffset = 0;
+                      await appData.loadBook(items[index][0]);
+                      await appData.setChapter(1);
+                      await appData.saveData();
 
-                    setState(() {
-                      widget.tabController.animateTo((widget.tabController.index + 1) % 2);
-                      widget.readViewScrollController.jumpTo(0);
-                    });
-                  },
-                );
-              },
-            ),
+                      setState(() {
+                        widget.tabController.animateTo((widget.tabController.index + 1) % 2);
+                        widget.readViewScrollController.jumpTo(0);
+                      });
+                    },
+                  );
+                },
+              ),
+            )
           ),
         ],
       ),
@@ -235,32 +237,34 @@ class _SeleccionarCapituloState extends State<SeleccionarCapitulo>
 {
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      padding: EdgeInsets.fromLTRB(10, 5, 10, 150.0),
-      itemCount: widget.asyncSnapshot.data.chapters.length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 4,
-        childAspectRatio: 1.15
+    return Scrollbar(
+      child: GridView.builder(
+          padding: EdgeInsets.fromLTRB(10, 5, 10, 150.0),
+          itemCount: widget.asyncSnapshot.data.chapters.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 4,
+              childAspectRatio: 1.15
+          ),
+
+          itemBuilder: (context, item) {
+            return GridTile(
+                child: FlatButton(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+                  child: Text('${item + 1}', style: Theme.of(context).textTheme.button),
+                  onPressed: () async{
+                    appData.scrollOffset = 0;
+                    await appData.setChapter(item + 1);
+                    await appData.saveData();
+                    Navigator.pop(context);
+
+                    setState(() {
+                      widget.readViewScrollController.jumpTo(0);
+                    });
+                  },
+                )
+            );
+          }
       ),
-
-      itemBuilder: (context, item) {
-        return GridTile(
-            child: FlatButton(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-              child: Text('${item + 1}', style: Theme.of(context).textTheme.button),
-              onPressed: () async{
-                appData.scrollOffset = 0;
-                await appData.setChapter(item + 1);
-                await appData.saveData();
-                Navigator.pop(context);
-
-                setState(() {
-                  widget.readViewScrollController.jumpTo(0);
-                });
-              },
-            )
-        );
-      }
     );
   }
 }

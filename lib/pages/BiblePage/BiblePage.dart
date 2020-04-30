@@ -74,18 +74,18 @@ class _BiblePageState extends State<BiblePage> {
                       ],
                     ),
                   ),
-                  body: Scrollbar(
-                    child: NotificationListener<ScrollNotification>(
-                      onNotification: (scrollNotification) {
-                        if (scrollNotification is ScrollStartNotification) {
-                          _onStartScroll(scrollNotification.metrics);
-                        } else if (scrollNotification is ScrollUpdateNotification) {
-                          _onUpdateScroll(scrollNotification.metrics);
-                        } else if (scrollNotification is ScrollEndNotification) {
-                          _onEndScroll(scrollNotification.metrics);
-                        }
-                        return true;
-                      },
+                  body: NotificationListener<ScrollNotification>(
+                    onNotification: (scrollNotification) {
+                      if (scrollNotification is ScrollStartNotification) {
+                        _onStartScroll(scrollNotification.metrics);
+                      } else if (scrollNotification is ScrollUpdateNotification) {
+                        _onUpdateScroll(scrollNotification.metrics);
+                      } else if (scrollNotification is ScrollEndNotification) {
+                        _onEndScroll(scrollNotification.metrics);
+                      }
+                      return true;
+                    },
+                    child: Scrollbar(
                       child: CustomScrollView(
                         controller: _scrollController,
                         slivers: <Widget>[

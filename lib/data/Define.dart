@@ -30,7 +30,7 @@ Map<int, String> intToBookPath =
   28: "lib/bible/28_Os.json",
   29: "lib/bible/29_Jl.json",
   30: "lib/bible/30_Am.json",
-  31: "lib/bible/31_Abd_R.json",
+  31: "lib/bible/31_Abd.json",
   32: "lib/bible/32_Jon.json",
   33: "lib/bible/33_Mi.json",
   34: "lib/bible/34_Nah.json",
