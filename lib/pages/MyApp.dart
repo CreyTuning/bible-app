@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:yhwh/data/Data.dart';
+import 'package:yhwh/icons/custom_icons_icons.dart';
 import 'package:yhwh/pages/BiblePage/StylePage.dart';
 import 'package:yhwh/pages/PageSelector.dart';
 import 'package:yhwh/routes/Routes.dart' as Routes;
@@ -30,6 +31,16 @@ class MyAppState extends State<MyApp> {
         indexNavigation = appData.bottomNavigationBarIndex;
 
         return MaterialApp(
+
+
+          builder: (context, child) // remove the glow effect.
+          {
+            return ScrollConfiguration(
+              behavior: MyBehavior(),
+              child: child,
+            );
+          },
+
           debugShowCheckedModeBanner: false,
           routes: Routes.getRoutes(),
           theme: appTheme().theme_light,
@@ -39,7 +50,10 @@ class MyAppState extends State<MyApp> {
             body: PageSelector(index: indexNavigation),
 
             bottomNavigationBar: BottomNavigationBar(
+              backgroundColor: appData.darkMode ? Color(0xff1a1a1a) : Colors.white,
+              type: BottomNavigationBarType.fixed,
               currentIndex: indexNavigation,
+              elevation: 10,
               onTap: (_) async{
                 appData.bottomNavigationBarIndex = _;
                 await appData.saveData();
@@ -50,7 +64,7 @@ class MyAppState extends State<MyApp> {
               items: [
                 BottomNavigationBarItem(
                     icon: Icon(Icons.home),
-                    title: Text('Incio')
+                    title: Text('Inicio')
                 ),
 
                 BottomNavigationBarItem(
@@ -59,8 +73,18 @@ class MyAppState extends State<MyApp> {
                 ),
 
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.extension),
+                  icon: Icon(Icons.school),
                   title: Text('Aprender'),
+                ),
+
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.favorite),
+                  title: Text('Favoritos'),
+                ),
+
+                BottomNavigationBarItem(
+                  icon: Icon(CustomIcons.sheep),
+                  title: Text('Ovejas'),
                 ),
               ],
             )
@@ -68,5 +92,15 @@ class MyAppState extends State<MyApp> {
         );
       },
     );
+  }
+}
+
+
+class MyBehavior extends ScrollBehavior {
+  // remove the glow effect.
+  @override
+  Widget buildViewportChrome(
+      BuildContext context, Widget child, AxisDirection axisDirection) {
+    return child;
   }
 }

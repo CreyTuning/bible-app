@@ -120,24 +120,10 @@ class _BiblePageState extends State<BiblePage> {
                               Container(
                                 width: 60.0,
                                 height: 60.0,
-                                child: RaisedButton(
+                                child: FlatButton(
                                   shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(100)),
-                                  elevation: 0,
-                                  child: Icon(CupertinoIcons.folder_solid, color: Theme.of(context).iconTheme.color),
-                                  onPressed: () {
-                                    // Funcion que muestra lo resaltado
-                                  },
-                                ),
-                              ),
-
-                              Container(
-                                width: 60.0,
-                                height: 60.0,
-                                child: RaisedButton(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(100)),
-                                  elevation: 0,
+                                      borderRadius: BorderRadius.circular(100)
+                                  ),
                                   child: Icon(Icons.color_lens, color: Theme.of(context).iconTheme.color),
                                   onPressed: () {
                                     Navigator.pushNamed(context, 'styles');

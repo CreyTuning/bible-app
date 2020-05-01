@@ -16,22 +16,34 @@ class _PageSelectorState extends State<PageSelector>{
   @override
   Widget build(BuildContext context) {
     if(widget.index == 0)
-      return Center(child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Text('Inicio'),
-          Text('En desarrollo...', style: Theme.of(context).textTheme.body1)
-        ],
-      ));
+      return EnDesarrollo(title: 'Inicio');
     else if(widget.index == 1)
       return BiblePage();
     else if(widget.index == 2)
-      return Center(child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Text('Aprender'),
-          Text('En desarrollo...', style: Theme.of(context).textTheme.body1)
-        ],
-      ));
+      return EnDesarrollo(title: 'Aprender');
+    else if(widget.index == 3)
+      return EnDesarrollo(title: 'Favoritos');
+    else if(widget.index == 4)
+      return EnDesarrollo(title: 'Ovejas');
+  }
+}
+
+class EnDesarrollo extends StatelessWidget{
+  String title;
+  EnDesarrollo({this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Text(this.title),
+        Divider(color: Colors.transparent),
+        Text('En desarrollo', style: TextStyle(
+          color: Theme.of(context).textTheme.body1.color,
+          fontSize: 15
+        ))
+      ],
+    ));
   }
 }

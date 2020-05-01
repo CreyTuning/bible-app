@@ -32,5 +32,7 @@ class _BookViewerState extends State<BookViewer> {
           childCount: widget.snapshot.data.chapters[appData.getChapterNumber - 1].versos.length,
       ),
     );
+
+
   }
 }

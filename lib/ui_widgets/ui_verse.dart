@@ -61,7 +61,7 @@ class _UiVerseState extends State<UiVerse>{
                     letterSpacing: this.widget.letterSeparation
                 ),
 
-                children: <InlineSpan>[
+                children: [
                   TextSpan( // Numero de versiculo
                       text: this.widget.number.toString(),
                       style: TextStyle(

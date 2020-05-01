@@ -174,7 +174,7 @@ class _SelecionarLibroState extends State<SelecionarLibro>
                 ),
 
                 hintText: "Buscar",
-                prefixIcon: Icon(Icons.search, color: Theme.of(context).accentColor,),
+                prefixIcon: Icon(Icons.search, color: Theme.of(context).iconTheme.color),
               )
             ),
           ),

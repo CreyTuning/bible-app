@@ -339,9 +339,9 @@ class appTheme
     accentColorBrightness: Brightness.dark,
     fontFamily: 'Roboto',
     accentColor: Colors.green,
-    buttonColor: Color(0xff202124),
-    backgroundColor: Color(0xff202124),
-    canvasColor: Color(0xff202124),
+    buttonColor: Color(0xff1f1f1f),
+    backgroundColor: Color(0xff1f1f1f),
+    canvasColor: Color(0xff121212),
     brightness: Brightness.dark,
 
 
@@ -350,7 +350,7 @@ class appTheme
     ),
 
     buttonTheme: ButtonThemeData(
-      buttonColor: Color(0xff202124),
+      buttonColor: Color(0xff1f1f1f),
     ),
 
     tabBarTheme: TabBarTheme(
@@ -367,7 +367,7 @@ class appTheme
     ),
 
     appBarTheme: AppBarTheme(
-        color: Color(0xff202124),
+        color: Color(0xff1f1f1f),
         brightness: Brightness.dark,
         iconTheme: IconThemeData(color: Color(0xfff0f2f3)),
 

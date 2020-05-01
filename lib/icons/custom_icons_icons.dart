@@ -21,10 +21,12 @@ class CustomIcons {
   static const _kFontFam = 'CustomIcons';
   static const _kFontPkg = null;
 
+  static const IconData sheep = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData arrow_collapse_vertical = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData arrow_expand_vertical = IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData format_font_size_decrease = IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData format_font_size_increase = IconData(0xe804, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData format_horizontal_align_center = IconData(0xe805, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData format_horizontal_align_center_expand = IconData(0xe806, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData sheep_comic = IconData(0xe807, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
