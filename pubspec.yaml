@@ -26,6 +26,7 @@ dependencies:
   path_provider: ^1.6.7
   flutter_launcher_icons: "^0.7.3"
 
+# el comando es: "flutter pub run flutter_launcher_icons:main"
 flutter_icons:
   android: true
   ios: true
