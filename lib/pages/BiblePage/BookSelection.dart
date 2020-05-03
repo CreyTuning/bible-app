@@ -2,7 +2,9 @@ import 'package:flutter/widgets.dart';
 import 'package:yhwh/data/Data.dart';
 import 'package:flutter/material.dart';
 import 'package:diacritic/diacritic.dart';
+import 'package:yhwh/data/Define.dart';
 import 'package:yhwh/pages/BiblePage/StylePage.dart';
+import 'package:yhwh/ui_widgets/ui_bookListTile.dart';
 
 
 // ignore: must_be_immutable
@@ -186,12 +188,13 @@ class _SelecionarLibroState extends State<SelecionarLibro>
                 shrinkWrap: true,
                 itemCount: items.length,
                 itemBuilder: (context, index) {
+
                   return ListTile(
-                    leading: appData.getBookNumber == index + 1
+                    leading: intToBook[appData.getBookNumber] == items[index][1]
                         ? Icon(Icons.bookmark, color: Theme.of(context).iconTheme.color)
                         : Icon(Icons.bookmark_border, color: Theme.of(context).iconTheme.color),
 
-                    title: appData.getBookNumber == index + 1
+                    title: intToBook[appData.getBookNumber] == items[index][1]
                         ? Text(items[index][1], style: TextStyle(
                       fontSize: Theme.of(context).textTheme.button.fontSize,
                       color: Theme.of(context).textTheme.button.color,
@@ -212,6 +215,7 @@ class _SelecionarLibroState extends State<SelecionarLibro>
                       });
                     },
                   );
+
                 },
               ),
             )

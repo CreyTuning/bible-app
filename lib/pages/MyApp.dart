@@ -32,7 +32,6 @@ class MyAppState extends State<MyApp> {
 
         return MaterialApp(
 
-
           builder: (context, child) // remove the glow effect.
           {
             return ScrollConfiguration(
@@ -102,5 +101,29 @@ class MyBehavior extends ScrollBehavior {
   Widget buildViewportChrome(
       BuildContext context, Widget child, AxisDirection axisDirection) {
     return child;
+  }
+}
+
+
+
+
+
+class ThemeChanger extends StatefulWidget{
+
+  MaterialApp materialApp;
+  ThemeData theme = (appData.darkModeEnabled) ? appTheme().theme_dark : appTheme().theme_light;
+  ThemeChanger({this.materialApp});
+
+
+  @override
+  State<StatefulWidget> createState() {
+    return _ThemeChangerState();
+  }
+}
+
+class _ThemeChangerState extends State<ThemeChanger>{
+  @override
+  Widget build(BuildContext context) {
+    return widget.materialApp;
   }
 }

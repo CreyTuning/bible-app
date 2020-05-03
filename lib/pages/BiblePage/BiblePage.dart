@@ -5,6 +5,7 @@ import 'package:yhwh/data/Define.dart';
 import 'package:flutter/material.dart';
 import 'package:yhwh/data/Data.dart';
 import 'package:yhwh/ui_widgets/chapter_footer.dart';
+import 'package:yhwh/ui_widgets/ui_verse.dart';
 
 import 'BookViewer.dart';
 
@@ -21,7 +22,6 @@ class _BiblePageState extends State<BiblePage> {
   @override
   void initState() {
     _scrollController = ScrollController(initialScrollOffset: appData.scrollOffset, keepScrollOffset: true);
-//    _scrollController.animateTo(appData.scrollOffset, duration: Duration(seconds: 1), curve: Curves.easeOut);
     super.initState();
   }
 
@@ -90,7 +90,6 @@ class _BiblePageState extends State<BiblePage> {
                         controller: _scrollController,
                         slivers: <Widget>[
                           SliverAppBar(
-                            forceElevated: false,
                             floating: true,
 
                             actions: <Widget>[
@@ -139,7 +138,24 @@ class _BiblePageState extends State<BiblePage> {
                             ],
                           ),
 
-                          BookViewer(snapshot: snapshot),
+                          // DEBE SER REMPLAZADO POR READVIEWER
+                          SliverList(
+                            delegate: SliverChildBuilderDelegate((context, item)
+                            {
+                              print(snapshot.data.chapters.length);
+                              return UiVerse(
+                                number: snapshot.data.chapters[appData.getChapterNumber - 1].versos[item][0],
+                                text: snapshot.data.chapters[appData.getChapterNumber - 1].versos[item][1],
+                                color: Theme.of(context).textTheme.body2.color,
+                                colorOfNumber: Theme.of(context).textTheme.body1.color,
+                                fontSize: appData.fontSize,
+                                height: appData.fontHeight,
+                                letterSeparation: appData.fontLetterSpacing,
+                              );
+                            },
+                              childCount: snapshot.data.chapters[appData.getChapterNumber - 1].versos.length,
+                            ),
+                          ),
 
                           SliverToBoxAdapter(
                             child: ChapterFooter(),
