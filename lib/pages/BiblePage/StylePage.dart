@@ -1,17 +1,19 @@
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yhwh/data/Data.dart';
 import 'package:yhwh/icons/custom_icons_icons.dart';
 import 'package:yhwh/ui_widgets/ui_verse.dart';
 
 class StylePage extends StatefulWidget{
+  StylePage({this.setTextFormat});
+
+  final Function(double, double, double) setTextFormat;
+
   @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    return _StylePageState();
-  }
+  State<StatefulWidget> createState() => _StylePageState();
 }
 
 class _StylePageState extends State<StylePage>{
@@ -25,17 +27,13 @@ class _StylePageState extends State<StylePage>{
           Container(
             width: 60.0,
             height: 60.0,
-            child: RaisedButton(
+            child: FlatButton(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-              elevation: 0,
               child: Icon(Icons.refresh, color: Theme.of(context).iconTheme.color),
 
               onPressed: () {
-                appData.fontSize = 20.0;
-                appData.fontHeight = 1.8;
-                appData.fontLetterSpacing = 0;
-                appData.saveData();
                 setState(() {
+                  widget.setTextFormat(20.0, 1.8, 0);
                 });
               },
             ),
@@ -48,34 +46,11 @@ class _StylePageState extends State<StylePage>{
 
           SwitchListTile(
             activeColor: Theme.of(context).accentColor,
-            value: appData.darkModeEnabled,
+            value: DynamicTheme.of(context).brightness == Brightness.dark ? true : false,
             title: Text("Modo oscuro", style: Theme.of(context).textTheme.button),
-            subtitle: Text("Reinicio requerido", style: TextStyle(fontSize: 15)),
             onChanged: (value)
             {
-              showDialog(context: context, builder: (_) => AlertDialog(
-                title: Text('Modo oscuro', style: TextStyle(fontWeight: FontWeight.bold)),
-                content: Text('Para cambiar el modo de colores se debe reiniciar la aplicación. ¿Reinicar ahora?'),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text('Cancelar', style: TextStyle(color: Theme.of(context).textTheme.button.color),),
-                    onPressed: (){
-                      Navigator.pop(context);
-                    },
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
-                  ),
-
-                  RaisedButton(
-                    child: Text('Aceptar', style: TextStyle(color: Colors.white)),
-                    onPressed: (){
-                      appData.setDarkMode = value;
-                      Phoenix.rebirth(context);
-                    },
-                    color: Theme.of(context).accentColor,
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
-                  ),
-                ],
-              ));
+              DynamicTheme.of(context).setBrightness(Theme.of(context).brightness == Brightness.dark? Brightness.light: Brightness.dark);
             },
           ),
 
@@ -107,7 +82,15 @@ class _StylePageState extends State<StylePage>{
               ),
 
               InkWell(
-                onTap: (){appData.fontLetterSpaceDecrement();setState(() {});},
+                onTap: (){
+                  SharedPreferences.getInstance().then((preferences){
+                    if(preferences.getDouble('fontLetterSpacing') > -1){
+                      double temp = preferences.getDouble('fontLetterSpacing');
+                      preferences.setDouble('fontLetterSpacing', temp - 0.25);
+                    }
+                  });
+                },
+
                 child: Container(
                   child: Center(
                       child: Icon(CustomIcons.format_horizontal_align_center, size: 30.0,)
@@ -119,7 +102,14 @@ class _StylePageState extends State<StylePage>{
               ),
 
               InkWell(
-                onTap: (){appData.fontLetterSpaceIncrement();setState(() {});},
+                onTap: (){
+                  SharedPreferences.getInstance().then((preferences){
+                    if(preferences.getDouble('fontLetterSpacing') < 10){
+                      double temp = preferences.getDouble('fontLetterSpacing');
+                      preferences.setDouble('fontLetterSpacing', temp + 0.25);
+                    }
+                  });
+                },
                 child: Container(
                   child: Center(
                       child: Icon(CustomIcons.format_horizontal_align_center_expand, size: 30.0,)
@@ -138,7 +128,15 @@ class _StylePageState extends State<StylePage>{
             children: <Widget>[
 
               InkWell(
-                onTap: (){appData.fontDecrement();setState(() {});},
+                onTap: (){
+                  SharedPreferences.getInstance().then((preferences){
+                    if(preferences.getDouble('fontSize') > 16){
+                      double tempFontSize = preferences.getDouble('fontSize');
+                      preferences.setDouble('fontSize', tempFontSize - 1);
+                    }
+                  });
+                },
+                
                 child: Container(
                   child: Center(
                       child: Icon(CustomIcons.format_font_size_decrease, size: 35.0,)
@@ -150,7 +148,15 @@ class _StylePageState extends State<StylePage>{
               ),
 
               InkWell(
-                onTap: (){appData.fontIncrement();setState(() {});},
+                onTap: (){
+                  SharedPreferences.getInstance().then((preferences){
+                    if(preferences.getDouble('fontSize') < 50){
+                      double tempFontSize = preferences.getDouble('fontSize');
+                      preferences.setDouble('fontSize', tempFontSize + 1);
+                    }
+                  });
+                },
+
                 child: Container(
                   child: Center(
                       child: Icon(CustomIcons.format_font_size_increase, size: 35.0,)
@@ -181,8 +187,8 @@ class _StylePageState extends State<StylePage>{
                 child: UiVerse(
                   text: 'Jesús le dijo: Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por mí.',
                   number: 6,
-                  color: Theme.of(context).textTheme.body2.color,
-                  colorOfNumber: Theme.of(context).textTheme.body1.color,
+                  color: Theme.of(context).textTheme.bodyText1.color,
+                  colorOfNumber: Theme.of(context).textTheme.bodyText2.color,
                   fontSize: appData.fontSize,
                   height: appData.fontHeight,
                   letterSeparation: appData.fontLetterSpacing,

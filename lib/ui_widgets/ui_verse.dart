@@ -9,8 +9,8 @@ class UiVerse extends StatefulWidget{
   final double height;
   final double letterSeparation;
 
-  Color color;
-  Color colorOfNumber;
+  final Color color;
+  final Color colorOfNumber;
 
   final double separation;
 
@@ -31,11 +31,6 @@ class UiVerse extends StatefulWidget{
   });
 
   _UiVerseState createState() => _UiVerseState();
-
-  void setColor(Color colorVerse, Color colorNumber){
-    this.color = color;
-    this.colorOfNumber = color;
-  }
 }
 
 class _UiVerseState extends State<UiVerse>{

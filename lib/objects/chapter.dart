@@ -1,11 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:yhwh/ui_widgets/ui_verse.dart';
-
 class Chapter {
+  Chapter({this.number, this.versos});
+  
   int number = 0;
   List<List> versos = List<List>();
-
-  Chapter({this.number, this.versos});
 
   Future<void> fromMap(Map map) async
   {

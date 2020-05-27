@@ -1,38 +1,99 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
-import 'package:yhwh/data/Data.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:yhwh/data/Define.dart';
 import 'package:yhwh/ui_widgets/chapter_footer.dart';
 import 'package:yhwh/ui_widgets/ui_verse.dart';
 
 class BookViewer extends StatefulWidget {
-  final AsyncSnapshot snapshot;
-  BookViewer({this.snapshot});
+  BookViewer({
+    @required this.bookNumber,
+    @required this.chapterNumber,
+    @required this.chapterFooter,
+    // @required this.scrollController
+  });
+  
+  // final ScrollController scrollController;
+  final ChapterFooter chapterFooter;
+  final int bookNumber;
+  final int chapterNumber;
 
   _BookViewerState createState() => _BookViewerState();
 }
 
 class _BookViewerState extends State<BookViewer> {
 
+  List<Widget> content = List<Widget>();
+  Future getChapter(int book, int chapter) async => json.decode(await rootBundle.loadString(intToBookPath[book]))['chapters'][chapter - 1]['verses'];
+
   @override
-  Widget build(BuildContext context)
-  {
-    return SliverList(
-        delegate: SliverChildBuilderDelegate((context, item)
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: getChapter(widget.bookNumber, widget.chapterNumber),
+      builder: (BuildContext buildContext, AsyncSnapshot asyncSnapshot)
+      {
+        if(asyncSnapshot.hasData)
         {
-            return UiVerse(
-              number: widget.snapshot.data.chapters[appData.getChapterNumber - 1].versos[item][0],
-              text: widget.snapshot.data.chapters[appData.getChapterNumber - 1].versos[item][1],
-              color: Theme.of(context).textTheme.body2.color,
-              colorOfNumber: Theme.of(context).textTheme.body1.color,
-              fontSize: appData.fontSize,
-              height: appData.fontHeight,
-              letterSeparation: appData.fontLetterSpacing,
+          content = [];
+
+          // Cargar versiculos
+          asyncSnapshot.data.forEach((verso) {
+            content.add(
+              UiVerse(
+                number: int.tryParse(verso['id'].split(':')[1]),
+                text: verso['text'].replaceAll('\n', ''),
+                color: Theme.of(context).textTheme.bodyText1.color,
+                colorOfNumber: Theme.of(context).textTheme.bodyText2.color,
+                fontSize: 20.0,
+                height: 1.8,
+                letterSeparation: 0,
+              )
             );
-        },
-          childCount: widget.snapshot.data.chapters[appData.getChapterNumber - 1].versos.length,
-      ),
+          });
+
+
+          int titlesAddes = 0;
+
+          titles[widget.bookNumber][widget.chapterNumber].forEach((key, value) {
+            content.insert(key + titlesAddes, 
+              Padding(
+                padding: const EdgeInsets.only(top: 15),
+                child: ListTile(
+                  title: Text(
+                    value,
+                    style: Theme.of(context).textTheme.headline5.copyWith(
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ),
+              )
+            );
+            
+            titlesAddes += 1;
+          });
+          
+          
+          // Agregar pie de pagina
+          content.add(widget.chapterFooter);
+          return SliverList(delegate: SliverChildListDelegate(content));
+        }
+
+        else return SliverToBoxAdapter(
+          child: Padding(
+            padding: EdgeInsets.only(top: 100),
+            child: Center(
+              child: CircularProgressIndicator()
+            ),
+          ),
+        );
+      },
     );
-
-
   }
 }

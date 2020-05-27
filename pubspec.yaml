@@ -1,5 +1,9 @@
 name: yhwh
-description: Aplicación dedicada a la lectura y estudio bíblico para todos los niveles de conocimientos.
+description: A new Flutter project.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -14,23 +18,33 @@ description: Aplicación dedicada a la lectura y estudio bíblico para todos los
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-
+  
+  dynamic_theme: ^1.0.1
   cupertino_icons: ^0.1.2
+  scroll_bottom_navigation_bar: ^3.0.0
+  scroll_app_bar: ^1.0.0+2
   diacritic: ^0.1.1
-  flutter_phoenix: ^0.1.0
   path_provider: ^1.6.7
   flutter_launcher_icons: "^0.7.3"
+  http: ^0.12.1
+  shared_preferences: ^0.5.7+2
+  flutter_launcher_name: "^0.0.1"
+  
+
+# flutter pub run flutter_launcher_name:main
+flutter_launcher_name:
+  name: "Biblia del Ministro"
 
 # el comando es: "flutter pub run flutter_launcher_icons:main"
 flutter_icons:
   android: true
   ios: true
-  image_path: "lib/icons/icon_app.png"
+  image_path: "Appicon/icon.png"
 
 dev_dependencies:
   flutter_test:

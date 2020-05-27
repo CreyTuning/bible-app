@@ -207,3 +207,378 @@ Map<int, String> intToBook =
   65: "Judas",
   66: "Revelación"
 };
+
+Map<int, String> intToBookEnglish =
+{
+  1: "Gen",
+  2: "Ex",
+  3: "Lev",
+  4: "Num",
+  5: "Deuteronomio",
+  6: "Josué",
+  7: "Jueces",
+  8: "Rut",
+  9: "1 Samuel",
+  10: "2 Samuel",
+  11: "1 Reyes",
+  12: "2 Reyes",
+  13: "1 Crónicas",
+  14: "2 Crónicas",
+  15: "Esdras",
+  16: "Nehemías",
+  17: "Ester",
+  18: "Job",
+  19: "Salmos",
+  20: "Proverbios",
+  21: "Eclesiastés",
+  22: "Cantares",
+  23: "Isaías",
+  24: "Jeremías",
+  25: "Lamentaciones",
+  26: "Ezequiel",
+  27: "Daniel",
+  28: "Oseas",
+  29: "Joel",
+  30: "Amós",
+  31: "Abdías",
+  32: "Jonás",
+  33: "Miqueas",
+  34: "Nahum",
+  35: "Habacuc",
+  36: "Sofonías",
+  37: "Haggeo",
+  38: "Zacarías",
+  39: "Malaquías",
+  40: "Mateo",
+  41: "Marcos",
+  42: "Lucas",
+  43: "Juan",
+  44: "Actos",
+  45: "Romanos",
+  46: "1 Corintios",
+  47: "2 Corintios",
+  48: "Gálatas",
+  49: "Efesios",
+  50: "Filipenses",
+  51: "Colosenses",
+  52: "1 Tesalonicenses",
+  53: "2 Tesalonicenses",
+  54: "1 Timoteo",
+  55: "2 Timoteo",
+  56: "Tito",
+  57: "Filemón",
+  58: "Hebreos",
+  59: "Jacobo",
+  60: "1 Pedro",
+  61: "2 Pedro",
+  62: "1 Juan",
+  63: "2 Juan",
+  64: "3 Juan",
+  65: "Judas",
+  66: "Revelación"
+};
+
+List namesAndChapters = const [
+    ["Génesis", 50],
+    ["Éxodo", 40],
+    ["Levítico", 27],
+    ["Números", 36],
+    ["Deuteronomio", 34],
+    ["Josué", 24],
+    ["Jueces", 21],
+    ["Rut", 4],
+    ["1 Samuel", 31],
+    ["2 Samuel", 24],
+    ["1 Reyes", 22],
+    ["2 Reyes", 25],
+    ["1 Crónicas", 29],
+    ["2 Crónicas", 36],
+    ["Esdras", 10],
+    ["Nehemías", 13],
+    ["Ester", 10],
+    ["Job", 42],
+    ["Salmos", 150],
+    ["Proverbios", 31],
+    ["Eclesiastés", 12],
+    ["Cantares", 8],
+    ["Isaías", 66],
+    ["Jeremías", 52],
+    ["Lamentaciones", 5],
+    ["Ezequiel", 48],
+    ["Daniel", 12],
+    ["Oseas", 14],
+    ["Joel", 3],
+    ["Amós", 9],
+    ["Abdías", 1],
+    ["Jonás", 4],
+    ["Miqueas", 7],
+    ["Nahum", 3],
+    ["Habacuc", 3],
+    ["Sofonías", 3],
+    ["Haggeo", 2],
+    ["Zacarías", 14],
+    ["Malaquías", 4],
+    ["Mateo", 18],
+    ["Marcos", 16],
+    ["Lucas", 24],
+    ["Juan", 21],
+    ["Actos", 28],
+    ["Romanos", 16],
+    ["1 Corintios", 16],
+    ["2 Corintios", 13],
+    ["Gálatas", 6],
+    ["Efesios", 6],
+    ["Filipenses", 4],
+    ["Colosenses", 4],
+    ["1 Tesalonicenses", 5],
+    ["2 Tesalonicenses", 3],
+    ["1 Timoteo", 6],
+    ["2 Timoteo", 4],
+    ["Tito", 3],
+    ["Filemón", 1],
+    ["Hebreos", 13],
+    ["Jacobo", 5],
+    ["1 Pedro", 5],
+    ["2 Pedro", 3],
+    ["1 Juan", 5],
+    ["2 Juan", 1],
+    ["3 Juan", 1],
+    ["Judas", 1],
+    ["Revelación", 22]
+  ];
+
+Map titles = {
+  1 : { // Libro de Genesis
+    
+    1 : { //Capitulo #1
+      0 : 'La creación del mundo',
+      2 : 'El primer día de la creación',
+      5 : 'El segundo día de la creación',
+      8 : 'El tercer día de la creación',
+      13 : 'El cuarto día de la creación',
+      19 : 'El quinto día de la creación',
+      23 : 'El sexto día de la creación',
+      25 : 'Creación del hombre y de la mujer'
+    },
+
+    2 : { //Capitulo #2
+      0 : 'El séptimo día',
+      3 : 'Comienzo de la humanidad',
+      7 : 'El huerto del Edén',
+      17 : 'Dios establece el matrimonio'
+    },
+
+    3 : { //Capitulo #3
+      0 : 'Desobediencia y caída del hombre',
+      7 : 'Sentencia por el pecado y promesa de un Salvador',
+      21 : 'Castigo por el pecado'
+    },
+
+    4 : { //Capitulo #4
+      0 : 'Caín y Abel',
+      8 : 'La maldición de Caín',
+      15 : 'Descendientes de Caín',
+      24 : 'Set y sus decendientes'
+    },
+
+    5 : {
+      0 : 'Descendientes de Adán',
+      20 : 'Dios se lleva a Enoc'
+    },
+
+    6 : {
+      0 : 'Maldad de los hombres',
+      8 : 'Noé construye el arca',
+      12 : 'Preparativos para el diluvio'
+    },
+
+    7 : {
+      0 : 'Noé entra en el arca',
+      5 : 'El diluvio',
+      16 : 'El agua cubre toda la tierra'
+    },
+
+    8 : {
+      0 : 'Bajan las aguas',
+      12: 'Noé sale del arca',
+      19 : 'Noé agradece a Dios'
+    },
+
+    9 : {
+      0 : 'Pacto de Dios con Noé',
+      17 : 'Noé y sus hijos'
+    },
+
+    10 : {
+      0 : 'Orígenes de las naciones',
+      1 : 'Los hijos de Jafet',
+      5 : 'Los hijos de Cam',
+      20 : 'Los hijos de Sem'
+    },
+
+    11 : {
+      0 : 'La torre de Babel',
+      9 : 'Descendientes de Sem',
+      26 : 'Descendientes de Taré'
+    },
+
+    12 : {
+      0 : 'Dios llama a Abram',
+      9 : 'Abram en Egipto'
+    },
+
+    13 : {
+      0 : 'Regreso de Abram a Canaán',
+      4 : 'Separación de Abram y Lot',
+      13 : 'Promesa de Dios a Abram'
+    },
+
+    14 : {
+
+    },
+
+    15 : {
+
+    },
+
+    16 : {
+
+    },
+
+    17 : {
+
+    },
+
+    18 : {
+
+    },
+
+    19 : {
+
+    },
+
+    20 : {
+
+    },
+
+    21 : {
+
+    },
+
+    22 : {
+
+    },
+
+    23 : {
+
+    },
+
+    24 : {
+
+    },
+
+    25 : {
+
+    },
+
+    26 : {
+
+    },
+
+    27 : {
+
+    },
+
+    28 : {
+
+    },
+
+    29 : {
+
+    },
+
+    30 : {
+
+    },
+
+    31 : {
+
+    },
+
+    32 : {
+
+    },
+
+    33 : {
+
+    },
+
+    34 : {
+
+    },
+
+    35 : {
+
+    },
+
+    36 : {
+
+    },
+
+    37 : {
+
+    },
+
+    38 : {
+
+    },
+
+    39 : {
+
+    },
+
+    40 : {
+
+    },
+
+    41 : {
+
+    },
+
+    42 : {
+
+    },
+
+    43 : {
+
+    },
+
+    44 : {
+
+    },
+
+    45 : {
+
+    },
+
+    46 : {
+
+    },
+
+    47 : {
+
+    },
+
+    48 : {
+
+    },
+
+    49 : {
+
+    },
+
+    50 : {
+
+    },
+  }
+};

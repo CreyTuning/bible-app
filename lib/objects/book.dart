@@ -1,15 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:yhwh/objects/chapter.dart';
 
 class Book {
+  Book({this.title, this.description, this.chapters});
+
   String title = 'title';
   String description = 'description';
   String abbreviation = 'abbreviation';
-  BuildContext context;
-
   List<Chapter> chapters = List<Chapter>();
-
-  Book({this.title, this.description, this.chapters, this.context});
 
 
   Future<void> fromMap(Map map) async

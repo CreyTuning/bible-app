@@ -3,8 +3,6 @@ import 'package:yhwh/data/Data.dart';
 import 'package:flutter/material.dart';
 import 'package:diacritic/diacritic.dart';
 import 'package:yhwh/data/Define.dart';
-import 'package:yhwh/pages/BiblePage/StylePage.dart';
-import 'package:yhwh/ui_widgets/ui_bookListTile.dart';
 
 
 // ignore: must_be_immutable
@@ -16,8 +14,6 @@ class BookSelection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-//    snapshot = ModalRoute.of(context).settings.arguments;
-
 
     Map args = ModalRoute.of(context).settings.arguments;
 
@@ -112,8 +108,8 @@ class _SelecionarLibroState extends State<SelecionarLibro>
 {
   TextEditingController editingController = TextEditingController();
 
-  List<List> duplicateItems = List.generate(appData.namesAndChapters.length, (item) {
-      return [item + 1, appData.namesAndChapters[item][0], appData.namesAndChapters[item][1]];
+  List<List> duplicateItems = List.generate(namesAndChapters.length, (item) {
+      return [item + 1, namesAndChapters[item][0], namesAndChapters[item][1]];
   });
 
   var items = List<List>();

@@ -10,12 +10,11 @@ class ChapterFooter extends StatelessWidget
         Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: RichText(
-              text: TextSpan(text: 'La Valera 1602 Purificada es la obra de la Iglesia Bautista Bíblica de la Gracia en Monterrey.',
+              text: TextSpan(text: 'La Valera 1602 Purificada y Revisada es la obra de la Iglesia Bautista Bíblica de la Gracia en Monterrey revisada en el año 2020 desde Venezuela.',
                   style: TextStyle(
                       fontSize: 15,
                       fontFamily: 'Baloo',
-//                      letterSpacing: 0.6,
-                      color: Theme.of(context).textTheme.body1.color,
+                      color: Theme.of(context).textTheme.bodyText2.color,
                       height: 1.2
                   )
               ),
@@ -30,7 +29,6 @@ class ChapterFooter extends StatelessWidget
                 fontSize: 14,
                 fontFamily: 'Baloo',
                 fontWeight: FontWeight.bold,
-//                letterSpacing: 1,
                 color: Theme.of(context).accentColor,
               )),
           onPressed: (){Navigator.pushNamed(context, 'bible_information');},
