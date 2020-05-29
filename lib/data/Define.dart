@@ -411,9 +411,9 @@ Map titles = {
 
     10 : {
       0 : 'Orígenes de las naciones',
-      1 : 'Los hijos de Jafet',
-      5 : 'Los hijos de Cam',
-      20 : 'Los hijos de Sem'
+      1 : 'Los descendientes de Jafet',
+      5 : 'Los descendientes de Cam',
+      20 : 'Los descendientes de Sem'
     },
 
     11 : {
@@ -434,67 +434,101 @@ Map titles = {
     },
 
     14 : {
-
+      0 : 'Abram rescata a Lot',
+      16 : 'Abram entrega el diezmo'
     },
 
     15 : {
-
+      0 : 'Dios promete un hijo a Abram',
+      11 : 'Pacto de Dios con Abram'
     },
 
     16 : {
-
+      0 : 'El hijo de Abram y Agar',
+      6 : 'Nacimiento de Ismael',
+      10 : 'He visto al que me ve'
     },
 
     17 : {
-
+      0 : 'El pacto confirmado',
+      8 : 'La circuncisión como señal del pacto'
     },
 
     18 : {
-
+      0 : 'Promesa del nacimiento de Isaac',
+      15 : 'Abraham intercede por Sodoma y Gomorra'
     },
 
     19 : {
-
+      0 : 'Corrupción de Sodoma',
+      11 : 'Lot huye de Sodoma',
+      22 : 'Destrucción de Sodoma y Gomorra',
+      29 : 'Lot y sus dos hijas'
     },
 
     20 : {
-
+      0 : 'Abraham y Abimelec',
+      7 : 'Abimelec reprende a Abraham'
     },
 
     21 : {
-
+      0 : 'Nacimiento de Isaac',
+      7 : 'Agar e Ismael expulsados',
+      21 : 'Pacto entre Abraham y Abimelec'
     },
 
     22 : {
-
+      0 : 'Dios prueba a Abraham',
+      6 : 'Dios proveerá',
+      14 : 'Juramento de Dios',
+      19 : 'Descendientes de Nacor'
     },
 
     23 : {
-
+      0 : 'Muerte y sepultura de Sara',
     },
 
     24 : {
-
+      0 : 'Abraham busca esposa para Isaac',
+      9 : 'Rebeca es escogida',
+      16 : 'Carácter servicial de Rebeca',
+      27 : 'Rebeca confirma su elección',
+      33 : 'Mensaje del criado de Abraham',
+      49 : 'Del SEÑOR ha salido esto',
+      60 : 'Isaac y Rebeca se encuentran'
     },
 
     25 : {
-
+      0 : 'Descendientes de Abraham y Cetura',
+      6 : 'Muerte y sepultura de Abraham',
+      11 : 'Descendientes de Ismael',
+      18 : 'Nacimiento de Esaú y de Jacob',
+      26 : 'Esaú vende su primogenitura'
     },
 
     26 : {
-
+      0 : 'Dios renueva la promesa a Isaac',
+      5 : 'Isaac engaña a Abimelec',
+      11 : 'Bendición de Dios sobre Isaac',
+      25 : 'Pacto entre Isaac y Abimelec'
     },
 
     27 : {
-
+      0 : 'Jacob suplanta a Esaú',
+      25 : 'Isaac bendice a Jacob',
+      40 : 'Rencor de Esaú'
     },
 
     28 : {
-
+      0 : 'Jacob enviado a Padán-aram',
+      9 : 'Sueño de Jacob',
+      15 : '¡Puerta del cielo!'
     },
 
     29 : {
-
+      0 : 'Encuentro de Jacob y Raquel',
+      12 : 'Labán engaña a Jacob',
+      30 : 'Hijos de Jacob'
     },
 
     30 : {
