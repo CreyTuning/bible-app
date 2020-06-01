@@ -96,7 +96,8 @@ class _UiVerseState extends State<UiVerse>{
     }
 
     return InkWell(
-      onDoubleTap: (){print(widget.text);},
+      // onDoubleTap: (){print(widget.text);},
+      // radius: 40,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: content,

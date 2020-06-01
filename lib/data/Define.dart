@@ -351,268 +351,308 @@ Map titles = {
   1 : { // Libro de Genesis
     
     1 : { //Capitulo #1
-      0 : 'La creación del mundo',
-      2 : 'El primer día de la creación',
-      5 : 'El segundo día de la creación',
-      8 : 'El tercer día de la creación',
-      13 : 'El cuarto día de la creación',
-      19 : 'El quinto día de la creación',
-      23 : 'El sexto día de la creación',
-      25 : 'Creación del hombre y de la mujer'
+      1 : 'La creación del mundo',
+      3 : 'El primer día de la creación',
+      6 : 'El segundo día de la creación',
+      9 : 'El tercer día de la creación',
+      14 : 'El cuarto día de la creación',
+      20 : 'El quinto día de la creación',
+      24 : 'El sexto día de la creación',
+      26 : 'Creación del hombre y de la mujer'
     },
 
     2 : { //Capitulo #2
-      0 : 'El séptimo día',
-      3 : 'Comienzo de la humanidad',
-      7 : 'El huerto del Edén',
-      17 : 'Dios establece el matrimonio'
+      1 : 'El séptimo día',
+      4 : 'Comienzo de la humanidad',
+      8 : 'El huerto del Edén',
+      18 : 'Dios establece el matrimonio'
     },
 
     3 : { //Capitulo #3
-      0 : 'Desobediencia y caída del hombre',
-      7 : 'Sentencia por el pecado y promesa de un Salvador',
-      21 : 'Castigo por el pecado'
+      1 : 'Desobediencia y caída del hombre',
+      8 : 'Sentencia por el pecado y promesa de un Salvador',
+      22 : 'Castigo por el pecado'
     },
 
     4 : { //Capitulo #4
-      0 : 'Caín y Abel',
-      8 : 'La maldición de Caín',
-      15 : 'Descendientes de Caín',
-      24 : 'Set y sus decendientes'
+      1 : 'Caín y Abel',
+      9 : 'La maldición de Caín',
+      16 : 'Descendientes de Caín',
+      25 : 'Set y sus decendientes'
     },
 
     5 : {
-      0 : 'Descendientes de Adán',
-      20 : 'Dios se lleva a Enoc'
+      1 : 'Descendientes de Adán',
+      21 : 'Dios se lleva a Enoc'
     },
 
     6 : {
-      0 : 'Maldad de los hombres',
-      8 : 'Noé construye el arca',
-      12 : 'Preparativos para el diluvio'
+      1 : 'Maldad de los hombres',
+      9 : 'Noé construye el arca',
+      13 : 'Preparativos para el diluvio'
     },
 
     7 : {
-      0 : 'Noé entra en el arca',
-      5 : 'El diluvio',
-      16 : 'El agua cubre toda la tierra'
+      1 : 'Noé entra en el arca',
+      6 : 'El diluvio',
+      17 : 'El agua cubre toda la tierra'
     },
 
     8 : {
-      0 : 'Bajan las aguas',
-      12: 'Noé sale del arca',
-      19 : 'Noé agradece a Dios'
+      1 : 'Bajan las aguas',
+      13: 'Noé sale del arca',
+      20 : 'Noé agradece a Dios'
     },
 
     9 : {
-      0 : 'Pacto de Dios con Noé',
-      17 : 'Noé y sus hijos'
+      1 : 'Pacto de Dios con Noé',
+      18 : 'Noé y sus hijos'
     },
 
     10 : {
-      0 : 'Orígenes de las naciones',
-      1 : 'Los descendientes de Jafet',
-      5 : 'Los descendientes de Cam',
-      20 : 'Los descendientes de Sem'
+      1 : 'Orígenes de las naciones',
+      2 : 'Los descendientes de Jafet',
+      6 : 'Los descendientes de Cam',
+      21 : 'Los descendientes de Sem'
     },
 
     11 : {
-      0 : 'La torre de Babel',
-      9 : 'Descendientes de Sem',
-      26 : 'Descendientes de Taré'
+      1 : 'La torre de Babel',
+      10 : 'Descendientes de Sem',
+      27 : 'Descendientes de Taré'
     },
 
     12 : {
-      0 : 'Dios llama a Abram',
-      9 : 'Abram en Egipto'
+      1 : 'Dios llama a Abram',
+      10 : 'Abram en Egipto'
     },
 
     13 : {
-      0 : 'Regreso de Abram a Canaán',
-      4 : 'Separación de Abram y Lot',
-      13 : 'Promesa de Dios a Abram'
+      1 : 'Regreso de Abram a Canaán',
+      5 : 'Separación de Abram y Lot',
+      14 : 'Promesa de Dios a Abram'
     },
 
     14 : {
-      0 : 'Abram rescata a Lot',
-      16 : 'Abram entrega el diezmo'
+      1 : 'Abram rescata a Lot',
+      17 : 'Abram entrega el diezmo'
     },
 
     15 : {
-      0 : 'Dios promete un hijo a Abram',
-      11 : 'Pacto de Dios con Abram'
+      1 : 'Dios promete un hijo a Abram',
+      12 : 'Pacto de Dios con Abram'
     },
 
     16 : {
-      0 : 'El hijo de Abram y Agar',
-      6 : 'Nacimiento de Ismael',
-      10 : 'He visto al que me ve'
+      1 : 'El hijo de Abram y Agar',
+      7 : 'Nacimiento de Ismael',
+      11 : 'He visto al que me ve'
     },
 
     17 : {
-      0 : 'El pacto confirmado',
-      8 : 'La circuncisión como señal del pacto'
+      1 : 'El pacto confirmado',
+      9 : 'La circuncisión como señal del pacto'
     },
 
     18 : {
-      0 : 'Promesa del nacimiento de Isaac',
-      15 : 'Abraham intercede por Sodoma y Gomorra'
+      1 : 'Promesa del nacimiento de Isaac',
+      14 : 'Abraham intercede por Sodoma y Gomorra'
     },
 
     19 : {
-      0 : 'Corrupción de Sodoma',
-      11 : 'Lot huye de Sodoma',
-      22 : 'Destrucción de Sodoma y Gomorra',
-      29 : 'Lot y sus dos hijas'
+      1 : 'Corrupción de Sodoma',
+      12 : 'Lot huye de Sodoma',
+      23 : 'Destrucción de Sodoma y Gomorra',
+      30 : 'Lot y sus dos hijas'
     },
 
     20 : {
-      0 : 'Abraham y Abimelec',
-      7 : 'Abimelec reprende a Abraham'
+      1 : 'Abraham y Abimelec',
+      8 : 'Abimelec reprende a Abraham'
     },
 
     21 : {
-      0 : 'Nacimiento de Isaac',
-      7 : 'Agar e Ismael expulsados',
-      21 : 'Pacto entre Abraham y Abimelec'
+      1 : 'Nacimiento de Isaac',
+      8 : 'Agar e Ismael expulsados',
+      22 : 'Pacto entre Abraham y Abimelec'
     },
 
     22 : {
-      0 : 'Dios prueba a Abraham',
-      6 : 'Dios proveerá',
-      14 : 'Juramento de Dios',
-      19 : 'Descendientes de Nacor'
+      1 : 'Dios prueba a Abraham',
+      7 : 'Dios proveerá',
+      15 : 'Juramento de Dios',
+      20 : 'Descendientes de Nacor'
     },
 
     23 : {
-      0 : 'Muerte y sepultura de Sara',
+      1 : 'Muerte y sepultura de Sara',
     },
 
     24 : {
-      0 : 'Abraham busca esposa para Isaac',
-      9 : 'Rebeca es escogida',
-      16 : 'Carácter servicial de Rebeca',
-      27 : 'Rebeca confirma su elección',
-      33 : 'Mensaje del criado de Abraham',
-      49 : 'Del SEÑOR ha salido esto',
-      60 : 'Isaac y Rebeca se encuentran'
+      1 : 'Abraham busca esposa para Isaac',
+      10 : 'Rebeca es escogida',
+      17 : 'Carácter servicial de Rebeca',
+      28 : 'Rebeca confirma su elección',
+      34 : 'Mensaje del criado de Abraham',
+      50 : 'Del SEÑOR ha salido esto',
+      61 : 'Isaac y Rebeca se encuentran'
     },
 
     25 : {
-      0 : 'Descendientes de Abraham y Cetura',
-      6 : 'Muerte y sepultura de Abraham',
-      11 : 'Descendientes de Ismael',
-      18 : 'Nacimiento de Esaú y de Jacob',
-      26 : 'Esaú vende su primogenitura'
+      1 : 'Descendientes de Abraham y Cetura',
+      7 : 'Muerte y sepultura de Abraham',
+      12 : 'Descendientes de Ismael',
+      19 : 'Nacimiento de Esaú y de Jacob',
+      27 : 'Esaú vende su primogenitura'
     },
 
     26 : {
-      0 : 'Dios renueva la promesa a Isaac',
-      5 : 'Isaac engaña a Abimelec',
-      11 : 'Bendición de Dios sobre Isaac',
-      25 : 'Pacto entre Isaac y Abimelec'
+      1 : 'Dios renueva la promesa a Isaac',
+      6 : 'Isaac engaña a Abimelec',
+      12 : 'Bendición de Dios sobre Isaac',
+      26 : 'Pacto entre Isaac y Abimelec'
     },
 
     27 : {
-      0 : 'Jacob suplanta a Esaú',
-      25 : 'Isaac bendice a Jacob',
-      40 : 'Rencor de Esaú'
+      1 : 'Jacob suplanta a Esaú',
+      26 : 'Isaac bendice a Jacob',
+      41 : 'Rencor de Esaú'
     },
 
     28 : {
-      0 : 'Jacob enviado a Padán-aram',
-      9 : 'Sueño de Jacob',
-      15 : '¡Puerta del cielo!'
+      1 : 'Jacob enviado a Padán-aram',
+      10 : 'Sueño de Jacob',
+      16 : '¡Puerta del cielo!'
     },
 
     29 : {
-      0 : 'Encuentro de Jacob y Raquel',
-      12 : 'Labán engaña a Jacob',
-      30 : 'Hijos de Jacob'
+      1 : 'Encuentro de Jacob y Raquel',
+      13 : 'Labán engaña a Jacob',
+      31 : 'Hijos de Jacob'
     },
 
     30 : {
-
+      1 : 'Lea y Raquel',
+      14 : 'Las madrágoras',
+      25 : 'Prosperidad de Jacob'
     },
 
     31 : {
-
+      1 : 'Jacob decide volver a Canaán',
+      17 : 'Jacob huye de Labán',
+      22 : 'Labán alcanza a Jacob',
+      36 : 'Jacob responde a Labán',
+      43 : 'Pacto entre Labán y Jacob'
     },
 
     32 : {
-
+      1 : 'Jacob teme encontrarse con Esaú',
+      9 : 'Jacob pide la protección de Dios',
+      22 : 'Jacob lucha con el ángel de Dios'
     },
 
     33 : {
-
+      1 : 'Encuentro de Jacob y Esaú',
+      18 : 'Jacob en Siquem'
     },
 
     34 : {
-
+      1 : 'Deshonra de Dina en Siquem',
+      18 : 'Venganza de los hijos de Jacob'
     },
 
     35 : {
-
+      1 : 'Jacob vuelve a Betel',
+      9 : 'Dios bendice a Jacob',
+      16 : 'Nacimiento de Benjamín y muerte de Raquel',
+      22 : 'Los doce hijos de Jacob',
+      27 : 'Muerte de Isaac'
     },
 
     36 : {
-
+      1 : 'Descendientes de Esaú',
+      20 : 'Descendientes de Seir',
+      31 : 'Reyes de Edom'
     },
 
     37 : {
-
+      1 : 'José y sus hermanos',
+      5 : 'Sueños de José',
+      12 : 'José va en busca de sus hermanos',
+      18 : 'Complot de los hermanos de José',
+      25 : 'José vendido como esclavo',
+      29 : 'Jacob llora a José'
     },
 
     38 : {
-
+      1 : 'Judá y Tamar',
+      15 : 'Error de Judá'
     },
 
     39 : {
-
+      1 : 'José prospera en Egipto',
+      7 : 'José y la mujer de Potifar',
+      19 : 'José arrojado a la cárcel'
     },
 
     40 : {
-
+      1 : 'José interpreta dos sueños',
+      9 : 'Sueño del copero del rey',
+      16 : 'Sueño del panadero del rey',
+      20 : 'Cumplimiento de las interpretaciones'
     },
 
     41 : {
-
+      1 : 'Los sueños de Faraón',
+      14 : 'José interpreta el sueño de Faraón',
+      37 : 'José gobernador de todo Egipto',
+      53 : 'Los siete años de hambre'
     },
 
     42 : {
-
+      1 : 'Los hermanos de José van a Egipto',
+      25 : 'Regreso a Canaán'
     },
 
     43 : {
-
+      1 : 'Los hermanos de José regresan a Egipto',
+      16 : 'José y Benjamín'
     },
 
     44 : {
-
+      1 : 'La copa de José',
+      18 : 'Judá intercede por Benjamín'
     },
 
     45 : {
-
+      1 : 'José se da a conocer a sus hermanos',
+      16 : 'Invitación de Faraón',
+      21 : 'Regreso a Canaán'
     },
 
     46 : {
-
+      1 : 'Israel y su familia en Egipto',
+      28 : 'Encuentro de Jacob y José'
     },
 
     47 : {
-
+      1 : 'Jacob presentado a Faraón',
+      13 : 'Consecuencias económicas del hambre',
+      27 : 'Petición de Jacob a José'
     },
 
     48 : {
-
+      1 : 'Jacob bendice a los hijos de José',
     },
 
     49 : {
-
+      1 : 'Profecía de Israel acerca de sus hijos',
+      28 : 'Muerte de Jacob'
     },
 
     50 : {
-
+      1 : 'Sepultura de Jacob',
+      15 : 'Muerte de José'
     },
   }
 };

@@ -1,52 +1,22 @@
 import 'package:flutter/widgets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yhwh/data/Data.dart';
 import 'package:flutter/material.dart';
 import 'package:diacritic/diacritic.dart';
 import 'package:yhwh/data/Define.dart';
 
 
-// ignore: must_be_immutable
-class BookSelection extends StatelessWidget {
-  AsyncSnapshot snapshot;
-  ScrollController scrollController;
-
-  BookSelection({Key key, this.snapshot, this.scrollController}) : super(key: key);
+class BookSelection extends StatefulWidget {
+  BookSelection({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-
-    Map args = ModalRoute.of(context).settings.arguments;
-
-    snapshot = args['snapshot'];
-    scrollController = args['scrollController'];
-
-
-    return MyTabbedPage(snapshot: snapshot, scrollController: scrollController,);
-  }
+  _BookSelectionState createState() =>  _BookSelectionState();
 }
 
 
+class _BookSelectionState extends State<BookSelection> with SingleTickerProviderStateMixin {
 
-// ignore: must_be_immutable
-class MyTabbedPage extends StatefulWidget {
-  AsyncSnapshot snapshot;
-  ScrollController scrollController;
-
-
-  MyTabbedPage({Key key, this.snapshot, this.scrollController}) : super(key: key);
-
-  @override
-  _MyTabbedPageState createState() =>  _MyTabbedPageState(snapshot: snapshot, scrollController: scrollController);
-}
-
-
-
-
-class _MyTabbedPageState extends State<MyTabbedPage> with SingleTickerProviderStateMixin {
-  AsyncSnapshot snapshot;
-  ScrollController scrollController;
-
-  _MyTabbedPageState({this.snapshot, this.scrollController});
+  _BookSelectionState();
 
   final List<Tab> myTabs = <Tab>[
     Tab(child: Text('Libro')),
@@ -83,8 +53,8 @@ class _MyTabbedPageState extends State<MyTabbedPage> with SingleTickerProviderSt
         controller: _tabController,
         children:
         [
-          SelecionarLibro(tabController: _tabController, snapshot: snapshot, readViewScrollController: scrollController),
-          SeleccionarCapitulo(asyncSnapshot: snapshot, tabController: _tabController, readViewScrollController: scrollController)
+          SelecionarLibro(tabController: _tabController),
+          SeleccionarCapitulo(tabController: _tabController)
         ],
       )
     );
@@ -95,17 +65,15 @@ class _MyTabbedPageState extends State<MyTabbedPage> with SingleTickerProviderSt
 
 class SelecionarLibro extends StatefulWidget
 {
-  TabController tabController;
-  AsyncSnapshot snapshot;
-  ScrollController scrollController;
-  ScrollController readViewScrollController;
+  final TabController tabController;
 
-  SelecionarLibro({this.tabController, this.readViewScrollController, this.snapshot});
+  SelecionarLibro({this.tabController});
   _SelecionarLibroState createState() => _SelecionarLibroState();
 }
 
 class _SelecionarLibroState extends State<SelecionarLibro>
 {
+  ScrollController scrollController = ScrollController();
   TextEditingController editingController = TextEditingController();
 
   List<List> duplicateItems = List.generate(namesAndChapters.length, (item) {
@@ -117,7 +85,7 @@ class _SelecionarLibroState extends State<SelecionarLibro>
   @override
   void initState() {
     items.addAll(duplicateItems);
-    widget.scrollController = ScrollController(initialScrollOffset: 56.0 * (appData.getBookNumber - 1));
+    scrollController = ScrollController(initialScrollOffset: 56.0 * (appData.getBookNumber - 1));
     super.initState();
   }
 
@@ -180,7 +148,7 @@ class _SelecionarLibroState extends State<SelecionarLibro>
           Expanded(
             child: Scrollbar(
               child: ListView.builder(
-                controller: widget.scrollController,
+                controller: scrollController,
                 shrinkWrap: true,
                 itemCount: items.length,
                 itemBuilder: (context, index) {
@@ -205,9 +173,13 @@ class _SelecionarLibroState extends State<SelecionarLibro>
                       await appData.setChapter(1);
                       await appData.saveData();
 
+                      SharedPreferences.getInstance().then((preferences){
+                        preferences.setInt('bookNumber', items[index][0]);
+                        preferences.setInt('chapterNumber', 1);
+                      });
+
                       setState(() {
                         widget.tabController.animateTo((widget.tabController.index + 1) % 2);
-                        widget.readViewScrollController.jumpTo(0);
                       });
                     },
                   );
@@ -225,22 +197,33 @@ class _SelecionarLibroState extends State<SelecionarLibro>
 
 class SeleccionarCapitulo extends StatefulWidget
 {
-  AsyncSnapshot asyncSnapshot;
-  TabController tabController;
-  ScrollController readViewScrollController;
-  SeleccionarCapitulo({this.asyncSnapshot, this.tabController, this.readViewScrollController});
+  final TabController tabController;
+  SeleccionarCapitulo({this.tabController});
 
   _SeleccionarCapituloState createState() => _SeleccionarCapituloState();
 }
 
 class _SeleccionarCapituloState extends State<SeleccionarCapitulo>
 {
+
+  int chapterCount = 0;
+
+  @override
+  void initState() {
+    SharedPreferences.getInstance().then((preferences){
+      setState(() {
+        chapterCount = namesAndChapters[preferences.getInt('bookNumber') - 1][1];
+      });
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scrollbar(
       child: GridView.builder(
           padding: EdgeInsets.fromLTRB(10, 5, 10, 150.0),
-          itemCount: widget.asyncSnapshot.data.chapters.length,
+          itemCount: chapterCount,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 4,
               childAspectRatio: 1.15
@@ -257,8 +240,8 @@ class _SeleccionarCapituloState extends State<SeleccionarCapitulo>
                     await appData.saveData();
                     Navigator.pop(context);
 
-                    setState(() {
-                      widget.readViewScrollController.jumpTo(0);
+                    SharedPreferences.getInstance().then((preferences){
+                      preferences.setInt('chapterNumber', item + 1);
                     });
                   },
                 )

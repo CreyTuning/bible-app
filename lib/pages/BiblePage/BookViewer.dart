@@ -46,7 +46,7 @@ class _BookViewerState extends State<BookViewer> {
             
             content.add(
               UiVerse(
-                title: titles[widget.bookNumber][widget.chapterNumber].containsKey(int.tryParse(verso['id'].split(':')[1]) - 1) == true ? titles[widget.bookNumber][widget.chapterNumber][int.tryParse(verso['id'].split(':')[1]) - 1] : null,
+                title: titles[widget.bookNumber][widget.chapterNumber].containsKey(int.tryParse(verso['id'].split(':')[1])) == true ? titles[widget.bookNumber][widget.chapterNumber][int.tryParse(verso['id'].split(':')[1])] : null,
                 number: int.tryParse(verso['id'].split(':')[1]),
                 text: verso['text'].replaceAll('\n', ''),
                 color: Theme.of(context).textTheme.bodyText1.color,
@@ -59,25 +59,6 @@ class _BookViewerState extends State<BookViewer> {
           });
 
 
-          // int titlesAddes = 0;
-
-          // titles[widget.bookNumber][widget.chapterNumber].forEach((key, value) {
-          //   content.insert(key + titlesAddes, 
-          //     Padding(
-          //       padding: const EdgeInsets.only(top: 15),
-          //       child: ListTile(
-          //         title: Text(
-          //           value,
-          //           style: Theme.of(context).textTheme.headline5.copyWith(
-          //             fontWeight: FontWeight.bold
-          //           ),
-          //         ),
-          //       ),
-          //     )
-          //   );
-            
-          //   titlesAddes += 1;
-          // });
           
           
           // Agregar pie de pagina

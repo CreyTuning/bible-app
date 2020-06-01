@@ -6,7 +6,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yhwh/data/Define.dart';
 import 'package:yhwh/pages/BiblePage/StylePage.dart';
 import 'package:yhwh/ui_widgets/chapter_footer.dart';
-
 import 'BookViewer.dart';
 
 
@@ -153,10 +152,9 @@ class _BiblePageState extends State<BiblePage> {
                   ),
 
                   onPressed: () {
-                    // Navigator.pushNamed(context, 'books', arguments: {
-                    //   'snapshot' : snapshot,
-                    //   'scrollController' : scrollController
-                    // });
+                    Navigator.pushNamed(context, 'books', arguments: {
+                      'scrollController' : scrollController
+                    });
                   },
                 ),
                 
