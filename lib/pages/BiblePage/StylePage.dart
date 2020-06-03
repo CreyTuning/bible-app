@@ -185,6 +185,7 @@ class _StylePageState extends State<StylePage>{
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 10.0),
                 child: UiVerse(
+                  title: null,
                   text: 'Jesús le dijo: Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por mí.',
                   number: 6,
                   color: Theme.of(context).textTheme.bodyText1.color,

@@ -2,8 +2,10 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yhwh/data/Define.dart';
+import 'package:yhwh/pages/BiblePage/BookSelection_copy.dart';
 import 'package:yhwh/pages/BiblePage/StylePage.dart';
 import 'package:yhwh/ui_widgets/chapter_footer.dart';
 import 'BookViewer.dart';
@@ -20,7 +22,8 @@ class _BiblePageState extends State<BiblePage> {
   
   int bookNumber = 0;
   int chapterNumber = 0;
-  ScrollController scrollController = ScrollController(keepScrollOffset: true);
+  int verseNumber = 0;
+  ItemScrollController itemScrollController = ItemScrollController();
 
 
   @override
@@ -29,9 +32,26 @@ class _BiblePageState extends State<BiblePage> {
       setState(() {
         bookNumber = preferences.getInt('bookNumber') ?? 1;
         chapterNumber = preferences.getInt('chapterNumber') ?? 1;
+        verseNumber = preferences.getInt('verseNumber') ?? 1;
       });
     });
     super.initState();
+  }
+
+  void setReference(int book, int chapter, int verse){
+    SharedPreferences.getInstance().then((preferences){
+      setState(() {
+        preferences.setInt('bookNumber', book);
+        preferences.setInt('chapterNumber', chapter);
+        preferences.setInt('verseNumber', verse);
+        
+        bookNumber = book;
+        chapterNumber = chapter;
+        verseNumber = verse;
+      
+        itemScrollController.jumpTo(index: verse);
+      });
+    });
   }
 
   void nextChapter(){
@@ -39,22 +59,25 @@ class _BiblePageState extends State<BiblePage> {
       SharedPreferences.getInstance().then((preferences){
         if (chapterNumber < namesAndChapters[bookNumber - 1][1]) {
           chapterNumber++;
+          verseNumber = 1;
           preferences.setInt('chapterNumber', chapterNumber);
+          preferences.setInt('verseNumber', verseNumber);
         }
 
         else if (chapterNumber == namesAndChapters[bookNumber - 1][1]) {
           if (bookNumber < 66) {
             bookNumber += 1;
             chapterNumber = 1;
+            verseNumber = 1;
             preferences.setInt('bookNumber', bookNumber);
             preferences.setInt('chapterNumber', chapterNumber);
-            print('$bookNumber $chapterNumber');
+            preferences.setInt('verseNumber', verseNumber);
           }
         }
       });
     });
 
-    scrollController.animateTo(0, duration: Duration(milliseconds: 500), curve: Curves.ease);
+    itemScrollController.scrollTo(index: 0, duration: Duration(milliseconds: 500), curve: Curves.ease);
   }
 
   void previousChapter(){
@@ -79,7 +102,7 @@ class _BiblePageState extends State<BiblePage> {
       });
     });
 
-    scrollController.animateTo(0, duration: Duration(milliseconds: 500), curve: Curves.ease);
+    itemScrollController.scrollTo(index: 0, duration: Duration(milliseconds: 500), curve: Curves.ease);
   }
 
   void setTextFormat(double fontSize, double fontHeight, double fontLetterSpacing){
@@ -133,67 +156,65 @@ class _BiblePageState extends State<BiblePage> {
         ),
       ),
 
-      body: Scrollbar(
-        child: CustomScrollView(
-          controller: scrollController,
-          slivers: <Widget>[
-            SliverAppBar(
-              floating: true,
-              forceElevated: true,
-              snap: true,
-              actions: <Widget>[
+      appBar: AppBar(
+        actions: <Widget>[
 
-                FlatButton(
-                  child: Row(
-                    children: <Widget>[
-                      Text('${intToBook[bookNumber]} $chapterNumber'),
-                      Icon(Icons.arrow_drop_down, color: Theme.of(context).iconTheme.color),
-                    ],
-                  ),
-
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'books', arguments: {
-                      'scrollController' : scrollController
-                    });
-                  },
-                ),
-                
-                Spacer(),
-
-                Container(
-                  width: 60.0,
-                  height: 60.0,
-                  child: FlatButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100)
-                    ),
-                    child: Icon(Icons.color_lens, color: Theme.of(context).iconTheme.color),
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => StylePage(setTextFormat: setTextFormat)));
-                    },
-
-                    onLongPress: (){
-                      DynamicTheme.of(context).setBrightness(Theme.of(context).brightness == Brightness.dark? Brightness.light: Brightness.dark);
-                      
-                      SharedPreferences.getInstance().then((preferences){
-                        preferences.setBool('darkMode', (DynamicTheme.of(context).brightness == Brightness.dark) ? false : true);
-                      });
-                    }
-                  ),
-                ),
+          FlatButton(
+            child: Row(
+              children: <Widget>[
+                Text('${intToBook[bookNumber]} $chapterNumber'),
+                Icon(Icons.arrow_drop_down, color: Theme.of(context).iconTheme.color),
               ],
             ),
-          
-            BookViewer(
-              bookNumber: bookNumber,
-              chapterNumber: chapterNumber,
-              chapterFooter: ChapterFooter(),
-            ),
 
-          ],
-        )
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BookSelectionPage(
+                    actualBook: bookNumber,
+                    actualChapter: chapterNumber,
+                    actualVerse: verseNumber,
+                    setReference: setReference,
+                  )
+                )
+              );
+            },
+          ),
+          
+          Spacer(),
+
+          Container(
+            width: 60.0,
+            height: 60.0,
+            child: FlatButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(100)
+              ),
+              child: Icon(Icons.color_lens, color: Theme.of(context).iconTheme.color),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => StylePage(setTextFormat: setTextFormat)));
+              },
+
+              onLongPress: (){
+                DynamicTheme.of(context).setBrightness(Theme.of(context).brightness == Brightness.dark? Brightness.light: Brightness.dark);
+                
+                SharedPreferences.getInstance().then((preferences){
+                  preferences.setBool('darkMode', (DynamicTheme.of(context).brightness == Brightness.dark) ? false : true);
+                });
+              }
+            ),
+          ),
+        ],
+      ),
+
+      body: BookViewer(
+        bookNumber: bookNumber,
+        chapterNumber: chapterNumber,
+        verseNumber: verseNumber,
+        chapterFooter: ChapterFooter(),
+        itemScrollController: itemScrollController,
       ),
     );
   }
-
 }

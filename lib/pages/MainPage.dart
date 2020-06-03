@@ -28,50 +28,60 @@ class MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: PageSelector(index: tabIndex),
       
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.35),
+              blurRadius: 4
+            )
+          ]
+        ),
 
-        currentIndex: tabIndex,
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Theme.of(context).bottomAppBarColor,
+        child: BottomNavigationBar(
+          currentIndex: tabIndex,
+          elevation: 0,
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Theme.of(context).bottomAppBarColor,
 
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text('Inicio'),
-          ),
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              title: Text('Inicio'),
+            ),
 
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.book_solid),
-            title: Text('Biblia'),
-          ),
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.book_solid),
+              title: Text('Biblia'),
+            ),
 
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            title: Text('Aprender'),
-          ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.school),
+              title: Text('Aprender'),
+            ),
 
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            title: Text('Favoritos'),
-          ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.favorite),
+              title: Text('Favoritos'),
+            ),
 
-          BottomNavigationBarItem(
-            icon: Icon(CustomIcons.sheep),
-            title: Text('Ovejas'),
-          ),
-        ],
-        onTap: (int index){
-          setState(() {
-            tabIndex = index;
-          });
+            BottomNavigationBarItem(
+              icon: Icon(CustomIcons.sheep),
+              title: Text('Ovejas'),
+            ),
+          ],
+          onTap: (int index){
+            setState(() {
+              tabIndex = index;
+            });
 
-          SharedPreferences.getInstance().then((preferences){
-            preferences.setInt('bottomNavigationBarIndex', tabIndex);
-          });
-        },
+            SharedPreferences.getInstance().then((preferences){
+              preferences.setInt('bottomNavigationBarIndex', tabIndex);
+            });
+          },
+        ),
       )
     );
   }

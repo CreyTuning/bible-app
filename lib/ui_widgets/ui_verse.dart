@@ -87,7 +87,8 @@ class _UiVerseState extends State<UiVerse>{
             title: Text(
               widget.title,
               style: Theme.of(context).textTheme.headline5.copyWith(
-                fontWeight: FontWeight.bold
+                fontWeight: FontWeight.bold,
+                height: widget.height
               ),
             ),
           ),
