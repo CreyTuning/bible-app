@@ -81,13 +81,13 @@ class _BookViewerState extends State<BookViewer> {
                     fillColor: Theme.of(context).bottomAppBarColor,
                     child: Icon(Icons.arrow_upward, color: Theme.of(context).iconTheme.color,),
                     onPressed: (){
-                      widget.itemScrollController.scrollTo(
-                        index: 0,
-                        duration: Duration(milliseconds: 350),
-                        curve: Curves.easeOut
-                      );
+                      // widget.itemScrollController.scrollTo(
+                      //   index: 0,
+                      //   duration: Duration(milliseconds: 350),
+                      //   curve: Curves.easeOut
+                      // );
 
-                      // widget.itemScrollController.jumpTo(index: 0);
+                      widget.itemScrollController.jumpTo(index: 0);
                     }
                   )
                 ),
@@ -97,7 +97,6 @@ class _BookViewerState extends State<BookViewer> {
 
           return Scrollbar(
             child: ScrollablePositionedList.builder(
-              minCacheExtent: 0,
               initialScrollIndex: widget.verseNumber - 1,
               itemScrollController: widget.itemScrollController,
               itemPositionsListener: itemPositionsListener,
@@ -107,11 +106,8 @@ class _BookViewerState extends State<BookViewer> {
           );
         }
 
-        else return Padding(
-          padding: EdgeInsets.only(top: 100),
-          child: Center(
-            child: CircularProgressIndicator()
-          ),
+        else return Center(
+          child: CircularProgressIndicator()
         );
       },
     );

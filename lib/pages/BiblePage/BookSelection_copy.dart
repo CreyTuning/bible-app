@@ -75,29 +75,31 @@ class _BookSelectionPageState extends State<BookSelectionPage> with SingleTicker
           ),
           
           // Seleccionar Capitulo
-          GridView.builder(
-            padding: EdgeInsets.fromLTRB(10, 5, 10, 150.0),
-            itemCount: namesAndChapters[book - 1][1],
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4,
-                childAspectRatio: 1.15
-            ),
+          Scrollbar(
+            child: GridView.builder(
+              padding: EdgeInsets.fromLTRB(10, 5, 10, 150.0),
+              itemCount: namesAndChapters[book - 1][1],
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  childAspectRatio: 1.15
+              ),
 
-            itemBuilder: (context, item) {
-              return GridTile(
-                  child: FlatButton(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-                    child: Text('${item + 1}', style: Theme.of(context).textTheme.button),
-                    onPressed: () async{
-                      setState(() {
-                        widget.setReference(book, item + 1, 1);
-                        setLocalReferece(book, item + 1, 1);
-                        tabController.animateTo(2);
-                      });
-                    },
-                  )
-              );
-            }
+              itemBuilder: (context, item) {
+                return GridTile(
+                    child: FlatButton(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+                      child: Text('${item + 1}', style: Theme.of(context).textTheme.button),
+                      onPressed: () async{
+                        setState(() {
+                          widget.setReference(book, item + 1, 1);
+                          setLocalReferece(book, item + 1, 1);
+                          tabController.animateTo(2);
+                        });
+                      },
+                    )
+                );
+              }
+            ),
           ),
           
           // Seleccionar Versiculo
@@ -105,27 +107,29 @@ class _BookSelectionPageState extends State<BookSelectionPage> with SingleTicker
             future: getVersesCount(book, chapter),
             builder: (BuildContext buildContext, AsyncSnapshot<int> asyncSnapshot)
             {
-              return GridView.builder(
-                padding: EdgeInsets.fromLTRB(10, 5, 10, 150.0),
-                itemCount: asyncSnapshot.data,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
-                    childAspectRatio: 1.15
-                ),
+              return Scrollbar(
+                child: GridView.builder(
+                  padding: EdgeInsets.fromLTRB(10, 5, 10, 150.0),
+                  itemCount: asyncSnapshot.data,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4,
+                      childAspectRatio: 1.15
+                  ),
 
-                itemBuilder: (context, item) {
-                  return GridTile(
-                      child: FlatButton(
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-                        child: Text('${item + 1}', style: Theme.of(context).textTheme.button),
-                        onPressed: () async{
-                          widget.setReference(book, chapter, item + 1);
-                          setLocalReferece(book, chapter, item + 1);
-                          Navigator.pop(context);
-                        },
-                      )
-                  );
-                }
+                  itemBuilder: (context, item) {
+                    return GridTile(
+                        child: FlatButton(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+                          child: Text('${item + 1}', style: Theme.of(context).textTheme.button),
+                          onPressed: () async{
+                            widget.setReference(book, chapter, item + 1);
+                            setLocalReferece(book, chapter, item + 1);
+                            Navigator.pop(context);
+                          },
+                        )
+                    );
+                  }
+                ),
               );
             }
           ),
@@ -209,7 +213,9 @@ class _SelecionarLibroState extends State<SelecionarLibro>
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
-              textInputAction: TextInputAction.done,
+              focusNode: FocusNode(),
+              textInputAction: TextInputAction.none,
+              
               onChanged: (value) {
                 filterSearchResults(value);
               },
