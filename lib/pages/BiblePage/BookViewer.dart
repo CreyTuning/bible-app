@@ -79,13 +79,15 @@ class _BookViewerState extends State<BookViewer> {
                   child: RawMaterialButton(
                     shape: CircleBorder(),
                     fillColor: Theme.of(context).bottomAppBarColor,
-                    child: Icon(Icons.keyboard_arrow_up, color: Theme.of(context).iconTheme.color,),
+                    child: Icon(Icons.arrow_upward, color: Theme.of(context).iconTheme.color,),
                     onPressed: (){
                       widget.itemScrollController.scrollTo(
                         index: 0,
-                        duration: Duration(milliseconds: 600),
-                        curve: Curves.easeInOutCubic
+                        duration: Duration(milliseconds: 350),
+                        curve: Curves.easeOut
                       );
+
+                      // widget.itemScrollController.jumpTo(index: 0);
                     }
                   )
                 ),

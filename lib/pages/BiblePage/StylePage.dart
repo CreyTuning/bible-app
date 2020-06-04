@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:yhwh/data/Data.dart';
 import 'package:yhwh/icons/custom_icons_icons.dart';
 import 'package:yhwh/ui_widgets/ui_verse.dart';
 
@@ -58,7 +57,9 @@ class _StylePageState extends State<StylePage>{
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               InkWell(
-                onTap: (){appData.fontLineSpaceDecrement(); setState(() {});},
+                onTap: (){
+                  setState(() {});
+                },
                 child: Container(
                   child: Center(
                       child: Icon(CustomIcons.arrow_collapse_vertical, size: 30.0,)
@@ -70,7 +71,9 @@ class _StylePageState extends State<StylePage>{
               ),
 
               InkWell(
-                onTap: (){appData.fontLineSpaceIncrement(); setState(() {});},
+                onTap: (){
+                  setState(() {});
+                },
                 child: Container(
                   child: Center(
                       child: Icon(CustomIcons.arrow_expand_vertical, size: 30.0,)
@@ -190,9 +193,6 @@ class _StylePageState extends State<StylePage>{
                   number: 6,
                   color: Theme.of(context).textTheme.bodyText1.color,
                   colorOfNumber: Theme.of(context).textTheme.bodyText2.color,
-                  fontSize: appData.fontSize,
-                  height: appData.fontHeight,
-                  letterSeparation: appData.fontLetterSpacing,
                 ),
               )
             ),

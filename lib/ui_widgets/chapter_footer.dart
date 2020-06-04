@@ -34,7 +34,7 @@ class ChapterFooter extends StatelessWidget
           onPressed: (){Navigator.pushNamed(context, 'bible_information');},
         ),
 
-        Container(height: 230)
+        Container(height: 130)
       ],
     );
   }

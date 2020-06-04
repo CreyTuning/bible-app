@@ -38,6 +38,8 @@ class _BiblePageState extends State<BiblePage> {
     super.initState();
   }
 
+  List<int> getReference() => [bookNumber, chapterNumber, verseNumber];
+
   void setReference(int book, int chapter, int verse){
     SharedPreferences.getInstance().then((preferences){
       setState(() {
@@ -49,60 +51,64 @@ class _BiblePageState extends State<BiblePage> {
         chapterNumber = chapter;
         verseNumber = verse;
       
-        itemScrollController.jumpTo(index: verse);
+        itemScrollController.jumpTo(index: verse - 1);
       });
     });
   }
 
   void nextChapter(){
-    setState(() {
-      SharedPreferences.getInstance().then((preferences){
-        if (chapterNumber < namesAndChapters[bookNumber - 1][1]) {
-          chapterNumber++;
+    itemScrollController.jumpTo(index: 0);
+    
+    SharedPreferences.getInstance().then((preferences){
+      if (chapterNumber < namesAndChapters[bookNumber - 1][1]) {
+        chapterNumber++;
+        verseNumber = 1;
+        preferences.setInt('chapterNumber', chapterNumber);
+        preferences.setInt('verseNumber', verseNumber);
+      }
+
+      else if (chapterNumber == namesAndChapters[bookNumber - 1][1]) {
+        if (bookNumber < 66) {
+          bookNumber += 1;
+          chapterNumber = 1;
           verseNumber = 1;
+          preferences.setInt('bookNumber', bookNumber);
           preferences.setInt('chapterNumber', chapterNumber);
           preferences.setInt('verseNumber', verseNumber);
         }
-
-        else if (chapterNumber == namesAndChapters[bookNumber - 1][1]) {
-          if (bookNumber < 66) {
-            bookNumber += 1;
-            chapterNumber = 1;
-            verseNumber = 1;
-            preferences.setInt('bookNumber', bookNumber);
-            preferences.setInt('chapterNumber', chapterNumber);
-            preferences.setInt('verseNumber', verseNumber);
-          }
-        }
-      });
+      }
     });
 
-    itemScrollController.scrollTo(index: 0, duration: Duration(milliseconds: 500), curve: Curves.ease);
+    setState(() {
+      
+    });
   }
 
   void previousChapter(){
-    setState(() {
-      SharedPreferences.getInstance().then((preferences){
-        if (chapterNumber > 1) {
-          chapterNumber--;
+    itemScrollController.jumpTo(index: 0);
+
+    SharedPreferences.getInstance().then((preferences){
+      if (chapterNumber > 1) {
+        chapterNumber--;
+        preferences.setInt('chapterNumber', chapterNumber);
+      }
+
+      else if (chapterNumber == 1)
+      {
+        if(bookNumber > 1)
+        {
+          bookNumber -= 1;
+          chapterNumber = namesAndChapters[bookNumber - 1][1];
+          print(namesAndChapters[bookNumber - 1][1]);
+          preferences.setInt('bookNumber', bookNumber);
           preferences.setInt('chapterNumber', chapterNumber);
         }
-
-        else if (chapterNumber == 1)
-        {
-          if(bookNumber > 1)
-          {
-            bookNumber -= 1;
-            chapterNumber = namesAndChapters[bookNumber - 1][1];
-            print(namesAndChapters[bookNumber - 1][1]);
-            preferences.setInt('bookNumber', bookNumber);
-            preferences.setInt('chapterNumber', chapterNumber);
-          }
-        }
-      });
+      }
     });
 
-    itemScrollController.scrollTo(index: 0, duration: Duration(milliseconds: 500), curve: Curves.ease);
+    setState(() {
+      
+    });
   }
 
   void setTextFormat(double fontSize, double fontHeight, double fontLetterSpacing){
@@ -172,10 +178,8 @@ class _BiblePageState extends State<BiblePage> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => BookSelectionPage(
-                    actualBook: bookNumber,
-                    actualChapter: chapterNumber,
-                    actualVerse: verseNumber,
                     setReference: setReference,
+                    getReference: getReference,
                   )
                 )
               );
