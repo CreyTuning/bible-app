@@ -196,9 +196,9 @@ class _BiblePageState extends State<BiblePage> {
                   borderRadius: BorderRadius.circular(100)
               ),
               child: Icon(Icons.color_lens, color: Theme.of(context).iconTheme.color),
-              // onPressed: () {
-              //   Navigator.push(context, MaterialPageRoute(builder: (context) => StylePage(setTextFormat: setTextFormat)));
-              // },
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => StylePage(setTextFormat: setTextFormat)));
+              },
 
               onLongPress: (){
                 DynamicTheme.of(context).setBrightness(Theme.of(context).brightness == Brightness.dark? Brightness.light: Brightness.dark);

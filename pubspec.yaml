@@ -31,12 +31,10 @@ dependencies:
   diacritic: ^0.1.1
   path_provider: ^1.6.7
   flutter_launcher_icons: "^0.7.3"
-  http: ^0.12.1
   shared_preferences: ^0.5.7+2
   flutter_launcher_name: "^0.0.1"
   scrollable_positioned_list: ^0.1.6
-  indexed_list_view: ^1.0.9
-  list_view_item_builder: ^1.2.0
+  floating_pullup_card: ^0.2.1
   
 
 # flutter pub run flutter_launcher_name:main
@@ -92,3 +90,9 @@ flutter:
     - family: Baloo
       fonts:
         - asset: lib/fonts/BalooPaaji2-Regular.ttf
+    
+    - family: Roboto-Italic
+      fonts:
+        - asset: lib/fonts/Roboto-Italic.ttf
+
+    

@@ -97,7 +97,17 @@ class _UiVerseState extends State<UiVerse>{
 
   List<TextSpan> textToRichText(int verseNumber, String text){
     List<TextSpan> list = [];
-    List<String> splitText = text.split(' '); //replaceAll('Del SEÑOR', 'YHWH').replaceAll('del SEÑOR', 'YHWH').replaceAll('El SEÑOR', 'YHWH').replaceAll('el SEÑOR', 'YHWH').replaceAll('Y YHWH', 'Mas YHWH').replaceAll('y YHWH', 'mas YHWH').
+    List<String> splitText = text.replaceAll('ángel del SEÑOR', 'ángel de YHWH').
+                                  replaceAll('nombre del SEÑOR', 'nombre de YHWH').
+                                  replaceAll('Del SEÑOR', 'YHWH').
+                                  replaceAll('del SEÑOR', 'YHWH').
+                                  replaceAll('El SEÑOR', 'YHWH').
+                                  replaceAll('el SEÑOR', 'YHWH').
+                                  replaceAll('Al SEÑOR', 'A YHWH').
+                                  replaceAll('al SEÑOR', 'a YHWH').
+                                  replaceAll('Y YHWH', 'Mas YHWH').
+                                  replaceAll('y YHWH', 'mas YHWH').
+                                  split(' ');
     bool isOpen = false;
 
     list.add(
@@ -112,36 +122,107 @@ class _UiVerseState extends State<UiVerse>{
     
     splitText.forEach((element) {
       
+      // Verificar si se activa el IsOpen
       if(element[0] == '[')
         isOpen = true;
 
-      if(isOpen){
-        list.add(
-          TextSpan(
-            text: element.replaceAll('[', '').replaceAll(']', '') + ' ',
-            style: TextStyle(
-              color: widget.color,
-              fontStyle: FontStyle.italic,
+      if(element.length >= 3 && element[1] == '[')
+        isOpen = true;
 
+
+
+      if(isOpen){
+        if(element.length >= 3 && element[1] == '['){
+          
+          list.add(
+            TextSpan(
+              text: element[0],
             )
-          )
-        );
+          );
+          
+          list.add(
+            TextSpan(
+              text: element.substring(1, element.length - 1).replaceAll('[', '').replaceAll(']', '') + ' ',
+              style: TextStyle(
+                color: Theme.of(context).textTheme.bodyText2.color,
+                fontFamily: 'Roboto-Italic'
+                // fontSize: widget.fontSize - 2,
+                // fontStyle: FontStyle.italic,
+              )
+            )
+          );
+        }
+
+        else if(element.contains(']') && !element.endsWith(']')){
+          list.add(
+            TextSpan(
+              text: element.substring(0, element.length - 2).replaceAll('[', '').replaceAll(']', ''),
+              style: TextStyle(
+                color: Theme.of(context).textTheme.bodyText2.color,
+                fontFamily: 'Roboto-Italic'
+                // fontSize: widget.fontSize - 2,
+                // fontStyle: FontStyle.italic,
+              )
+            )
+          );
+
+          list.add(
+            TextSpan(
+              text: element[element.length - 1] + ' '
+            )
+          );
+        }
+
+        else {
+          list.add(
+            TextSpan(
+              text: element.replaceAll('[', '').replaceAll(']', '') + ' ',
+              style: TextStyle(
+                color: Theme.of(context).textTheme.bodyText2.color,
+                fontFamily: 'Roboto-Italic'
+                // fontSize: widget.fontSize - 2,
+                // fontStyle: FontStyle.italic,
+              )
+            )
+          );
+        }
         
-        if(element[element.length - 1] == ']')
+        if(element.contains(']'))
           isOpen = false;
       }
 
       else{
-        if(false) //element == 'SEÑOR' || element == 'YHWH'){
+        if(element == 'YHWH'|| element == 'SEÑOR')
         { 
           list.add(
             TextSpan(
               text: element + ' ',
               style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Baloo',
+                height: 0
+              )
+            )
+          );
+        }
+
+        else if(element == 'YHWH:' || element == 'YHWH,' || element == 'YHWH;' || element == 'YHWH.')
+        {
+          list.add(
+            TextSpan(
+              text: element.substring(0, element.length - 1),
+              style: TextStyle(
                 // color: Colors.green,
                 fontWeight: FontWeight.bold,
-                fontFamily: 'Baloo'
+                fontFamily: 'Baloo',
+                height: 0
               )
+            )
+          );
+
+          list.add(
+            TextSpan(
+              text: element[element.length - 1] + ' '
             )
           );
         }
@@ -150,7 +231,6 @@ class _UiVerseState extends State<UiVerse>{
           list.add(
             TextSpan(
               text: element + ' ',
-              // style: TextStyle(color: Colors.green)
             )
           );
         }
