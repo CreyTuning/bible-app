@@ -87,7 +87,8 @@ class _BookViewerState extends State<BookViewer> {
                       //   curve: Curves.easeOut
                       // );
 
-                      widget.itemScrollController.jumpTo(index: 0);
+                      // widget.itemScrollController.jumpTo(index: 0);
+                      widget.itemScrollController.scrollTo(index: 0, duration: Duration(milliseconds: 300));
                     }
                   )
                 ),

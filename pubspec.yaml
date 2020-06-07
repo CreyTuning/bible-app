@@ -35,6 +35,8 @@ dependencies:
   shared_preferences: ^0.5.7+2
   flutter_launcher_name: "^0.0.1"
   scrollable_positioned_list: ^0.1.6
+  indexed_list_view: ^1.0.9
+  list_view_item_builder: ^1.2.0
   
 
 # flutter pub run flutter_launcher_name:main

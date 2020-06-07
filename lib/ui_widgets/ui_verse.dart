@@ -56,20 +56,7 @@ class _UiVerseState extends State<UiVerse>{
                 letterSpacing: this.widget.letterSeparation
             ),
 
-            children: [
-              TextSpan( // Numero de versiculo
-                  text: this.widget.number.toString(),
-                  style: TextStyle(
-                      color: this.widget.colorOfNumber,
-                      fontSize: this.widget.fontSize - 7.0
-                  )
-              ),
-
-
-              TextSpan( // Texto del versiculo
-                  text: " ${this.widget.text}"
-              )
-            ]
+            children: textToRichText(this.widget.number, this.widget.text) //[
           ),
         ),
       ),
@@ -104,5 +91,72 @@ class _UiVerseState extends State<UiVerse>{
         children: content,
       ),
     );
+  }
+
+
+
+  List<TextSpan> textToRichText(int verseNumber, String text){
+    List<TextSpan> list = [];
+    List<String> splitText = text.split(' '); //replaceAll('Del SEÑOR', 'YHWH').replaceAll('del SEÑOR', 'YHWH').replaceAll('El SEÑOR', 'YHWH').replaceAll('el SEÑOR', 'YHWH').replaceAll('Y YHWH', 'Mas YHWH').replaceAll('y YHWH', 'mas YHWH').
+    bool isOpen = false;
+
+    list.add(
+      TextSpan( // Numero de versiculo
+        text: verseNumber.toString() + ' ',
+        style: TextStyle(
+            color: this.widget.colorOfNumber,
+            fontSize: this.widget.fontSize - 7.0
+        )
+      )
+    );
+    
+    splitText.forEach((element) {
+      
+      if(element[0] == '[')
+        isOpen = true;
+
+      if(isOpen){
+        list.add(
+          TextSpan(
+            text: element.replaceAll('[', '').replaceAll(']', '') + ' ',
+            style: TextStyle(
+              color: widget.color,
+              fontStyle: FontStyle.italic,
+
+            )
+          )
+        );
+        
+        if(element[element.length - 1] == ']')
+          isOpen = false;
+      }
+
+      else{
+        if(false) //element == 'SEÑOR' || element == 'YHWH'){
+        { 
+          list.add(
+            TextSpan(
+              text: element + ' ',
+              style: TextStyle(
+                // color: Colors.green,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Baloo'
+              )
+            )
+          );
+        }
+        
+        else{
+          list.add(
+            TextSpan(
+              text: element + ' ',
+              // style: TextStyle(color: Colors.green)
+            )
+          );
+        }
+      }
+    });
+
+    return list;
   }
 }
