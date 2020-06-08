@@ -99,9 +99,11 @@ class _UiVerseState extends State<UiVerse>{
   {
     List<TextSpan> list = [];
     List<String> splitText = text.replaceAll('ángel del SEÑOR', 'ángel de YHWH').
+                                  replaceAll('Ángel del SEÑOR', 'Ángel de YHWH').
+                                  replaceAll('angel del SEÑOR', 'angel de YHWH').
+                                  replaceAll('Angel del SEÑOR', 'Angel de YHWH').
                                   replaceAll('palabra del SEÑOR', 'palabra de YHWH').
                                   replaceAll('Palabra del SEÑOR', 'Palabra de YHWH').
-                                  replaceAll('ángel del SEÑOR', 'ángel de YHWH').
                                   replaceAll('trono del SEÑOR', 'trono de YHWH').
                                   replaceAll('Nombre del SEÑOR', 'Nombre de YHWH').
                                   replaceAll('el SEÑOR ([YHWH])', 'YHWH').
@@ -243,8 +245,8 @@ class _UiVerseState extends State<UiVerse>{
           );
         }
 
-        else if(element == 'YHWH:' || element == 'YHWH,' || element == 'YHWH;' || element == 'YHWH.' ||
-              element == 'SEÑOR:' || element == 'SEÑOR,' || element == 'SEÑOR;' || element == 'SEÑOR.')
+        else if(element == 'YHWH:' || element == 'YHWH,' || element == 'YHWH;' || element == 'YHWH.' || element == 'YHWH?' ||
+              element == 'SEÑOR:' || element == 'SEÑOR,' || element == 'SEÑOR;' || element == 'SEÑOR.' || element == 'SEÑOR?')
         {
           list.add(
             TextSpan(

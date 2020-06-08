@@ -657,46 +657,250 @@ Map titles = {
   },
   
   2 : {
-    1 : {},
-    2 : {},
-    3 : {},
-    4 : {},
-    5 : {},
-    6 : {},
-    7 : {},
-    8 : {},
-    9 : {},
-    10 : {},
-    11 : {},
-    12 : {},
-    13 : {},
-    14 : {},
-    15 : {},
-    16 : {},
-    17 : {},
-    18 : {},
-    19 : {},
-    20 : {},
-    21 : {},
-    22 : {},
-    23 : {},
-    24 : {},
-    25 : {},
-    26 : {},
-    27 : {},
-    28 : {},
-    29 : {},
-    30 : {},
-    31 : {},
-    32 : {},
-    33 : {},
-    34 : {},
-    35 : {},
-    36 : {},
-    37 : {},
-    38 : {},
-    39 : {},
-    40 : {},
+    1 : {
+      1 : 'Opresión de los israelitas en Egipto',
+      8 : 'Sufrimiento del pueblo de Israel',
+      15 : 'Ordenan matar a los niños'
+    },
+
+    2 : {
+      1 : 'Nacimiento de Moisés', 
+      6 : 'Moisés en casa de Faraón',
+      11 : 'Moisés huye a Madián',
+      16 : 'Moisés en Madián',
+      23 : 'Dios oye a Israel'
+    },
+
+    3 : {
+      1 : 'Moisés y la zarza ardiendo',
+      7 : 'Misión de Moisés',
+      13 : 'El nombre de Dios',
+      16 : 'Instrucciones de Dios a Moisés'
+    },
+
+    4 : {
+      1 : 'Dios da poderes a Moisés',
+      18 : 'Moisés regresa a Egipto',
+      27 : 'Moisés y Aarón ante el pueblo'
+    },
+
+    5 : {
+      1 : 'Moisés y Aarón ante el faraón',
+      6 : 'Se agrava el trabajo del pueblo',
+      15 : 'Queja de los jefes hebreos',
+      22 : 'Oración de Moisés'
+    },
+
+    6 : {
+      1 : 'Dios confirma su promesa a Moisés',
+      14 : 'Genealogía de Moisés y de Aarón',
+      28 : 'Anuncio de las plagas'
+    },
+
+    7 : {
+      1 : 'Aarón, portavoz de Moisés',
+      8 : 'La vara se transforma en serpiente',
+      14 : 'Primera plaga: el agua hecha sangre'
+    },
+
+    8 : {
+      1 : 'Segunda plaga: las ranas',
+      16 : 'Tercera plaga: los piojos',
+      20 : 'Cuarta plaga: los insectos'
+    },
+
+    9 : {
+      1 : 'Quinta plaga: la peste en el ganado',
+      8 : 'Sexta plaga: las úlceras',
+      13 : 'Séptima plaga: el granizo'
+    },
+
+    10 : {
+      1 : 'Octava plaga: las langostas',
+      21 : 'Novena plaga: las tinieblas'
+    },
+
+    11 : {
+      1 : 'Anuncio de la décima plaga'
+    },
+    
+    12 : {
+      1 : 'Institución de la Pascua',
+      29 : 'Muerte de los primogénitos',
+      37 : 'Los israelitas salen de Egipto',
+      43 : 'Ordenanza de la Pascua'
+    },
+
+    13 : {
+      1 : 'Consagración de los primogénitos',
+      17 : 'Dios guía a su pueblo'
+    },
+
+    14 : {
+      1 : 'Faraón persigue a los israelitas',
+      21 : 'Paso del mar Rojo',
+      26 : 'Dios salva a su pueblo con poder'
+    },
+
+    15 : {
+      1 : 'Cántico triunfal de Moisés',
+      19 : 'Canto de Miriam',
+      22 : 'Las aguas de Mara'
+    },
+
+    16 : {
+      1 : 'Descontento de los israelitas',
+      13 : 'Las codornices y el maná'
+    },
+
+    17 : {
+      1 : 'La peña de Horeb',
+      8 : 'Guerra con Amalec'
+    },
+
+    18 : {
+      1 : 'Visita de Jetro a Moisés',
+      13 : 'Nombramiento de jueces'
+    },
+
+    19 : {
+      1 : 'Consagración del pueblo en Sinaí',
+      16 : 'La majestuosa presencia del SEÑOR'
+    },
+
+    20 : {
+      1 : 'Los Diez Mandamientos',
+      2 : 'El pueblo teme al SEÑOR'
+    },
+
+    21 : {
+      1 : 'Leyes sobre la esclavitud',
+      12 : 'Leyes sobre el homicidio y la violencia',
+      26 : 'Leyes para los amos y propietarios'
+    },
+
+    22 : {
+      1 : 'Leyes sobre la restitución',
+      16 : 'Leyes diversas',
+      20 : 'Promesa del retorno a Canaán'
+    },
+
+    23 : {
+      1 : 'Deberes hacia el prójimo',
+      14 : 'Fiestas anuales y primicias'
+    },
+
+    24 : {
+      1 : 'El pacto de Dios con Israel',
+      12 : 'Moisés va por la ley de Dios'
+    },
+
+    25 : {
+      1 : 'La ofrenda para el tabernáculo',
+      10 : 'El arca del testimonio',
+      23 : 'La mesa del pan de la Presencia',
+      31 : 'El candelabro'
+    },
+
+    26 : {
+      1 : 'Construcción del tabernáculo',
+      31 : 'El velo'
+    },
+
+    27 : {
+      1 : 'El altar del holocausto',
+      9 : 'El atrio del tabernáculo',
+      20 : 'El aceite para las lámparas'
+    },
+
+    28 : {
+      1 : 'Las vestiduras sacerdotales',
+      5 : 'El efod',
+      15 : 'El pectoral del juicio',
+      31 : 'La túnica del efod',
+      36 : 'Otras vestiduras sacerdotales'
+    },
+
+    29 : {
+      1 : 'Consagración de Aarón y de sus hijos',
+      38 : 'Ofrendas diarias'
+    },
+
+    30 : {
+      1 : 'El altar del incienso',
+      11 : 'La ofrenda del rescate',
+      17 : 'La fuente de bronce',
+      22 : 'El aceite de la unción',
+      34 : 'El incienso aromático'
+    },
+
+    31 : {
+      1 : 'Llamamiento de Bezaleel y de Aholiab',
+      12 : 'El sábado como señal del pacto',
+      18 : 'Las dos tablas del testimonio'
+    },
+
+    32 : {
+      1 : 'El becerro de oro',
+      7 : 'Moisés intercede por su pueblo',
+      15 : 'Moisés rompe las tablas del testimonio',
+      21 : 'Castigo del pueblo',
+      30 : 'El SEÑOR se aparta del campamento'
+    },
+
+    33 : {
+      1 : 'La presencia del Señor',
+      7 : 'La tienda fuera del campamento',
+      12 : 'El SEÑOR revela su gloria a Moisés'
+    },
+
+    34 : {
+      1 : 'Nuevas tablas de la ley',
+      10 : 'Advertencia contra la idolatría',
+      29 : 'La cara de Moisés resplandece'
+    },
+
+    35 : {
+      1 : 'Moisés reafirma la ley del sábado',
+      4 : 'Llamado para levantar el tabernáculo',
+      10 : 'Obreros para el tabernáculo',
+      20 : 'Ofrenda para el tabernáculo',
+      30 : 'Artesanos a cargo del tabernáculo'
+    },
+
+    36 : {
+      1 : 'Liberalidad del pueblo',
+      8 : 'Construcción del tabernáculo'
+    },
+
+    37 : {
+      1 : 'El arca del testimonio',
+      6 : 'El propiciatorio',
+      10 : 'La mesa de la Presencia',
+      17 : 'El candelabro de oro',
+      25 : 'El altar del incienso'
+    },
+
+    38 : {
+      1 : 'El altar del holocausto',
+      8 : 'La fuente de bronce',
+      9 : 'El atrio del tabernáculo',
+      21 : 'Suma de los materiales usados'
+    },
+
+    39 : {
+      1 : 'Las vestiduras sacerdotales',
+      2 : 'El efod',
+      8 : 'El pectoral del juicio',
+      22 : 'La túnica del efod',
+      27 : 'Otras vestiduras sacerdotales',
+      32 : 'Los artesanos presentan su labor'
+    },
+
+    40 : {
+      1 : 'Moisés erige el tabernáculo',
+      34 : 'La gloria de Dios cubre el tabernáculo'
+    },
   },
 
   3 : {
