@@ -84,8 +84,8 @@ class _UiVerseState extends State<UiVerse>{
     }
 
     return InkWell(
-      // onDoubleTap: (){print(widget.text);},
-      // radius: 40,
+      onDoubleTap: (){print(widget.text);},
+      radius: 0,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: content,
@@ -95,10 +95,17 @@ class _UiVerseState extends State<UiVerse>{
 
 
 
-  List<TextSpan> textToRichText(int verseNumber, String text){
+  List<TextSpan> textToRichText(int verseNumber, String text)
+  {
     List<TextSpan> list = [];
     List<String> splitText = text.replaceAll('ángel del SEÑOR', 'ángel de YHWH').
-                                  replaceAll('nombre del SEÑOR', 'nombre de YHWH').
+                                  replaceAll('palabra del SEÑOR', 'palabra de YHWH').
+                                  replaceAll('Palabra del SEÑOR', 'Palabra de YHWH').
+                                  replaceAll('ángel del SEÑOR', 'ángel de YHWH').
+                                  replaceAll('trono del SEÑOR', 'trono de YHWH').
+                                  replaceAll('Nombre del SEÑOR', 'Nombre de YHWH').
+                                  replaceAll('el SEÑOR ([YHWH])', 'YHWH').
+                                  replaceAll('El SEÑOR ([YHWH])', 'YHWH').
                                   replaceAll('Del SEÑOR', 'YHWH').
                                   replaceAll('del SEÑOR', 'YHWH').
                                   replaceAll('El SEÑOR', 'YHWH').
@@ -107,6 +114,7 @@ class _UiVerseState extends State<UiVerse>{
                                   replaceAll('al SEÑOR', 'a YHWH').
                                   replaceAll('Y YHWH', 'Mas YHWH').
                                   replaceAll('y YHWH', 'mas YHWH').
+                                  replaceAll('DIOS', 'YHWH').
                                   split(' ');
     bool isOpen = false;
 
@@ -123,16 +131,47 @@ class _UiVerseState extends State<UiVerse>{
     splitText.forEach((element) {
       
       // Verificar si se activa el IsOpen
-      if(element[0] == '[')
-        isOpen = true;
-
-      if(element.length >= 3 && element[1] == '[')
+      if(element.contains('['))
         isOpen = true;
 
 
+      if(isOpen)
+      {
+        if(element.contains('([') && element.contains('])')){
+          if(!element.endsWith(')'))
+          {
+            list.add(
+              TextSpan(
+                text: element.substring(0, element.length - 1).replaceAll('[', '').replaceAll(']', ''),
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.bodyText2.color,
+                  fontFamily: 'Roboto-Italic'
+                )
+              )
+            );
 
-      if(isOpen){
-        if(element.length >= 3 && element[1] == '['){
+            list.add(
+              TextSpan(
+                text: element[element.length - 1] + ' ',
+              )
+            );
+          }
+
+          else{
+            list.add(
+              TextSpan(
+                text: element.replaceAll('[', '').replaceAll(']', '') + ' ',
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.bodyText2.color,
+                  fontFamily: 'Roboto-Italic'
+                )
+              )
+            );
+          }
+          
+        }
+
+        else if(element.length >= 3 && element[1] == '['){
           
           list.add(
             TextSpan(
@@ -146,8 +185,6 @@ class _UiVerseState extends State<UiVerse>{
               style: TextStyle(
                 color: Theme.of(context).textTheme.bodyText2.color,
                 fontFamily: 'Roboto-Italic'
-                // fontSize: widget.fontSize - 2,
-                // fontStyle: FontStyle.italic,
               )
             )
           );
@@ -206,7 +243,8 @@ class _UiVerseState extends State<UiVerse>{
           );
         }
 
-        else if(element == 'YHWH:' || element == 'YHWH,' || element == 'YHWH;' || element == 'YHWH.')
+        else if(element == 'YHWH:' || element == 'YHWH,' || element == 'YHWH;' || element == 'YHWH.' ||
+              element == 'SEÑOR:' || element == 'SEÑOR,' || element == 'SEÑOR;' || element == 'SEÑOR.')
         {
           list.add(
             TextSpan(
