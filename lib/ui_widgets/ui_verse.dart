@@ -56,7 +56,7 @@ class _UiVerseState extends State<UiVerse>{
                 letterSpacing: this.widget.letterSeparation
             ),
 
-            children: textToRichText(this.widget.number, this.widget.text) //[
+            children: textToRichText(this.widget.number, this.widget.text)
           ),
         ),
       ),
@@ -84,8 +84,9 @@ class _UiVerseState extends State<UiVerse>{
     }
 
     return InkWell(
-      onDoubleTap: (){print(widget.text);},
-      radius: 0,
+      // onDoubleTap: (){print(widget.text);},
+      // radius: 0,
+      
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: content,
@@ -98,26 +99,20 @@ class _UiVerseState extends State<UiVerse>{
   List<TextSpan> textToRichText(int verseNumber, String text)
   {
     List<TextSpan> list = [];
-    List<String> splitText = text.replaceAll('ángel del SEÑOR', 'ángel de YHWH').
-                                  replaceAll('Ángel del SEÑOR', 'Ángel de YHWH').
-                                  replaceAll('angel del SEÑOR', 'angel de YHWH').
-                                  replaceAll('Angel del SEÑOR', 'Angel de YHWH').
-                                  replaceAll('palabra del SEÑOR', 'palabra de YHWH').
-                                  replaceAll('Palabra del SEÑOR', 'Palabra de YHWH').
-                                  replaceAll('trono del SEÑOR', 'trono de YHWH').
-                                  replaceAll('Nombre del SEÑOR', 'Nombre de YHWH').
-                                  replaceAll('el SEÑOR ([YHWH])', 'YHWH').
+    List<String> splitText = text.replaceAll('el SEÑOR ([YHWH])', 'YHWH').
                                   replaceAll('El SEÑOR ([YHWH])', 'YHWH').
-                                  replaceAll('Del SEÑOR', 'YHWH').
-                                  replaceAll('del SEÑOR', 'YHWH').
+                                  replaceAll('Del SEÑOR', 'De YHWH').
+                                  replaceAll('del SEÑOR', 'de YHWH').
                                   replaceAll('El SEÑOR', 'YHWH').
                                   replaceAll('el SEÑOR', 'YHWH').
                                   replaceAll('Al SEÑOR', 'A YHWH').
                                   replaceAll('al SEÑOR', 'a YHWH').
-                                  replaceAll('Y YHWH', 'Mas YHWH').
-                                  replaceAll('y YHWH', 'mas YHWH').
+                                  // replaceAll('Y YHWH', 'Mas YHWH').
+                                  // replaceAll('y YHWH', 'mas YHWH').
                                   replaceAll('DIOS', 'YHWH').
+                                  replaceAll('SEÑOR', 'YHWH').
                                   split(' ');
+
     bool isOpen = false;
 
     list.add(
@@ -147,7 +142,7 @@ class _UiVerseState extends State<UiVerse>{
                 text: element.substring(0, element.length - 1).replaceAll('[', '').replaceAll(']', ''),
                 style: TextStyle(
                   color: Theme.of(context).textTheme.bodyText2.color,
-                  fontFamily: 'Roboto-Italic'
+                  fontFamily: 'Roboto-Italic',
                 )
               )
             );
@@ -165,7 +160,7 @@ class _UiVerseState extends State<UiVerse>{
                 text: element.replaceAll('[', '').replaceAll(']', '') + ' ',
                 style: TextStyle(
                   color: Theme.of(context).textTheme.bodyText2.color,
-                  fontFamily: 'Roboto-Italic'
+                  fontFamily: 'Roboto-Italic',
                 )
               )
             );
@@ -186,7 +181,7 @@ class _UiVerseState extends State<UiVerse>{
               text: element.substring(1, element.length - 1).replaceAll('[', '').replaceAll(']', '') + ' ',
               style: TextStyle(
                 color: Theme.of(context).textTheme.bodyText2.color,
-                fontFamily: 'Roboto-Italic'
+                fontFamily: 'Roboto-Italic',
               )
             )
           );
@@ -198,7 +193,7 @@ class _UiVerseState extends State<UiVerse>{
               text: element.substring(0, element.length - 2).replaceAll('[', '').replaceAll(']', ''),
               style: TextStyle(
                 color: Theme.of(context).textTheme.bodyText2.color,
-                fontFamily: 'Roboto-Italic'
+                fontFamily: 'Roboto-Italic',
                 // fontSize: widget.fontSize - 2,
                 // fontStyle: FontStyle.italic,
               )
@@ -218,7 +213,7 @@ class _UiVerseState extends State<UiVerse>{
               text: element.replaceAll('[', '').replaceAll(']', '') + ' ',
               style: TextStyle(
                 color: Theme.of(context).textTheme.bodyText2.color,
-                fontFamily: 'Roboto-Italic'
+                fontFamily: 'Roboto-Italic',
                 // fontSize: widget.fontSize - 2,
                 // fontStyle: FontStyle.italic,
               )
@@ -271,6 +266,8 @@ class _UiVerseState extends State<UiVerse>{
           list.add(
             TextSpan(
               text: element + ' ',
+              style: TextStyle(
+              )
             )
           );
         }

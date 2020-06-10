@@ -44,6 +44,8 @@ class MainPageState extends State<MainPage> {
           currentIndex: tabIndex,
           elevation: 0,
           type: BottomNavigationBarType.fixed,
+          unselectedItemColor: Theme.of(context).iconTheme.color.withOpacity(0.6),
+          selectedItemColor: Theme.of(context).iconTheme.color,
           backgroundColor: Theme.of(context).bottomAppBarColor,
 
           items: [
