@@ -6,11 +6,11 @@ class ChapterFooter extends StatelessWidget
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Divider(height: 40, color: Color(0x00)),
+        Divider(height: 25, color: Color(0x00)),
         Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: RichText(
-              text: TextSpan(text: 'Biblia YHWH\nGratuita y de libre distribución.',
+              text: TextSpan(text: 'Reina Valera 1960 ©\nPronto el texto sera revisado y corregido para ofrecer una traducción sin errores y fiel a la Palabra de Dios.',
                 style: TextStyle(
                     fontSize: 15,
                     fontFamily: 'Baloo',
@@ -23,18 +23,20 @@ class ChapterFooter extends StatelessWidget
         ),
 
         FlatButton(
-          splashColor: Colors.white,
-            child: Text('Más información',
-              style: TextStyle(
-                fontSize: 14,
-                fontFamily: 'Baloo',
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).accentColor,
-              )),
+          child: Text('Más información',
+            style: TextStyle(
+              fontSize: 14,
+              fontFamily: 'Baloo',
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).textTheme.bodyText1.color
+            )
+          ),
           onPressed: (){Navigator.pushNamed(context, 'bible_information');},
         ),
 
-        Container(height: 100)
+        Container(
+          height: 250
+        )
       ],
     );
   }

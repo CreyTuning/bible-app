@@ -21,34 +21,50 @@ class _MyBehavior extends ScrollBehavior {
 }
 
 
-// My App class
-class MyApp extends StatelessWidget {
+
+class MyApp extends StatefulWidget {
+  MyApp({Key key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  bool brightness = false;
+  bool blackThemeEnabled = false;
   
   @override
-  Widget build(BuildContext context) {
-
-    var brightness = false;
-
+  void initState() {
     SharedPreferences.getInstance().then((preferences){
-      brightness = preferences.getBool('darkMode') ?? false;
+      setState(() {
+        brightness = preferences.getBool('darkMode') ?? false;
+        blackThemeEnabled = preferences.getBool('blackThemeEnabled') ?? false;
+      });
     });
 
     // hacer la barra de tareas transparente
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Color(0x00),
+      statusBarColor: Colors.transparent,
+      // statusBarBrightness: Brightness.dark
     ));
 
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context)
+  {
     return DynamicTheme(
       defaultBrightness: (brightness) == true ? Brightness.dark : Brightness.light,
-      data: (Brightness brightness) => AppThemes.getTheme(brightness),
+      data: (Brightness brightness) => AppThemes.getTheme(brightness, blackThemeEnabled),
 
       themedWidgetBuilder: (context, theme) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           routes: getRoutes(),
           builder: (context, child) => ScrollConfiguration(behavior: _MyBehavior(), child: child), // remove the glow effect.
-          title: 'Biblia del Ministro',
+          title: 'Biblia',
           theme: theme,
           home: MainPage(),
         );

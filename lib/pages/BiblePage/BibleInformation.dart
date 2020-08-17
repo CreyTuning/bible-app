@@ -23,7 +23,7 @@ class _BibleInformationState extends State<BibleInformation>
           children: <Widget>[
             RichText(
               text: TextSpan(
-                  text: "La Palabra de Dios",
+                  text: "Antigua Versión de Cipriano de Valera 1602.\n\nFielmente traducida y revisada al castellano del Texto Recibido griego y cotejada posteriormente con diversas traducciones castellanas.",
                   style: Theme.of(context).textTheme.bodyText1
               ),
               textAlign: TextAlign.left,
@@ -41,9 +41,9 @@ class _BibleInformationState extends State<BibleInformation>
               child: CustomScrollView(
                 slivers: <Widget>[
                   SliverAppBar(
-                    forceElevated: false,
+                    forceElevated: true,
                     floating: true,
-                     title: Text("Información"),
+                    title: Text("Reina Valera 1960 ©"),
                   ),
 
                   SliverList(
