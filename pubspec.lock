@@ -85,13 +85,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
-  floating_pullup_card:
+  floating_search_bar:
     dependency: "direct main"
     description:
-      name: floating_pullup_card
+      name: floating_search_bar
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.1"
+    version: "0.3.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -170,6 +170,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
+  persistent_bottom_nav_bar:
+    dependency: "direct main"
+    description:
+      name: persistent_bottom_nav_bar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.5"
   petitparser:
     dependency: transitive
     description:

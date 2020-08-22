@@ -87,7 +87,7 @@ class _UiVerseState extends State<UiVerse>{
               TextSpan(
                 text: this.widget.text.toString(),
                 style: TextStyle(
-                  backgroundColor: (widget.highlight) ? Colors.pink : Colors.transparent,
+                  backgroundColor: (widget.highlight) ? Colors.blueAccent : Colors.transparent,
                   color: (widget.highlight) ? Colors.white : Theme.of(context).textTheme.bodyText1.color,
                 )
               ),
@@ -104,7 +104,7 @@ class _UiVerseState extends State<UiVerse>{
     if(widget.title != null){
       content.insert(0,
         Padding(
-          padding: const EdgeInsets.fromLTRB(0, 15.0, 0, 0),
+          padding: const EdgeInsets.fromLTRB(0, 6.0, 0, 0),
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(

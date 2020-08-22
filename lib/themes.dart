@@ -28,7 +28,7 @@ class AppThemes
   static ThemeData lightTheme = ThemeData(
     primaryColor: Colors.white,
     fontFamily: 'Roboto',
-    accentColor: Colors.pinkAccent,
+    accentColor: Colors.blue,
     backgroundColor: Color(0xffffffff),
     canvasColor: Colors.white,
     brightness: Brightness.light,
@@ -72,7 +72,7 @@ class AppThemes
     primaryColor: Color(0xff252526),
     accentColorBrightness: Brightness.dark,
     fontFamily: 'Roboto',
-    accentColor: Colors.pinkAccent,
+    accentColor: Colors.blue,
     backgroundColor: Color(0xff1e1e1e),
     canvasColor: Color(0xff1e1e1e),
     brightness: Brightness.dark,
@@ -87,8 +87,8 @@ class AppThemes
     ),
 
     textTheme: TextTheme(
-        button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xfff0f2f3)),
-        bodyText1: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xffd4d4d4)),
+        button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Colors.white), //Color(0xfff0f2f3)),
+        bodyText1: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Colors.white), //Color(0xffd4d4d4)),
         bodyText2: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff8f8f8f))
 
     ),
@@ -96,7 +96,7 @@ class AppThemes
     appBarTheme: AppBarTheme(
       color: Color(0xff252526),
       brightness: Brightness.dark,
-      iconTheme: IconThemeData(color: Color(0xffd4d4d4)),
+      iconTheme: IconThemeData(color: Colors.white), //Color(0xffd4d4d4)),
 
       textTheme: TextTheme(
           headline6: TextStyle(fontSize: 20,fontFamily: 'Roboto', color: Color(0xfff0f2f3), fontWeight: FontWeight.bold),
@@ -105,7 +105,7 @@ class AppThemes
     ),
 
     iconTheme: IconThemeData(
-      color: Color(0xffd4d4d4),
+      color: Colors.white, //Color(0xffd4d4d4),
     ),
 
     floatingActionButtonTheme: FloatingActionButtonThemeData(

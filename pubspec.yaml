@@ -32,10 +32,10 @@ dependencies:
   shared_preferences: ^0.5.7+2
   flutter_launcher_name: "^0.0.1"
   scrollable_positioned_list: ^0.1.6
-  floating_pullup_card: ^0.2.1
   wakelock: ^0.1.4+2
   draggable_scrollbar: ^0.0.4
-    
+  floating_search_bar: ^0.3.0
+  persistent_bottom_nav_bar: ^2.0.5
 
 # flutter pub run flutter_launcher_name:main
 flutter_launcher_name:

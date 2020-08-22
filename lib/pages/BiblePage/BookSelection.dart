@@ -63,74 +63,53 @@ class _BookSelectionPageState extends State<BookSelectionPage> with SingleTicker
 
   @override
   Widget build(BuildContext context) {
-    // return Scaffold(
-
-    //   body: DraggableScrollbar.semicircle(
-    //     controller: myScroll,
-
-    //     // backgroundColor: Colors.white.withOpacity(0.95),
-
-
-        
-    //     child: ListView.builder(
-    //       controller: myScroll,
-    //       itemCount: 120,
-
-    //       itemBuilder: (context, item){
-    //         return ListTile(
-    //           title: Text('$item con titulos geniaslesss jajaja y mas aqui'),
-    //           subtitle: Text('$item con algo mas'),
-    //         );
-    //       }
-
-    //     ),
-        
-    //   ),
-
-    // );
-    
     return Scaffold(
       appBar: AppBar(
-        title: Container(
+        title: Text("Referencias", style: Theme.of(context).textTheme.bodyText1.copyWith(
+          fontSize: 21,
+          fontWeight: FontWeight.bold
+        )),
+        
+        // Container(
 
-          child: SwitchListTile(
-            activeColor: Theme.of(context).accentColor,
-            value: titleMode,
-            contentPadding: EdgeInsets.zero,
-            title: (titleMode)
+        //   child: SwitchListTile(
+        //     activeColor: Theme.of(context).accentColor,
+        //     value: titleMode,
+        //     contentPadding: EdgeInsets.zero,
+        //     title: (titleMode)
             
-            ? Text("Titulos", style: Theme.of(context).textTheme.bodyText1.copyWith(
-              fontSize: 21,
-              fontWeight: FontWeight.bold
-            )) 
+        //     ? Text("Buscar titulos", style: Theme.of(context).textTheme.bodyText1.copyWith(
+        //       fontSize: 21,
+        //       fontWeight: FontWeight.bold
+        //     )) 
             
-            : Text("Referencias", style: Theme.of(context).textTheme.bodyText1.copyWith(
-              fontSize: 21,
-              fontWeight: FontWeight.bold
-            )),
+        //     : Text("Referencias", style: Theme.of(context).textTheme.bodyText1.copyWith(
+        //       fontSize: 21,
+        //       fontWeight: FontWeight.bold
+        //     )),
 
-            onChanged: (value) {
-              setState(() {
-                titleMode = value;
-              });
+        //     onChanged: (value) {
+        //       setState(() {
+        //         titleMode = value;
+        //       });
 
-              SharedPreferences.getInstance().then((preferences){
-                setState(() {
-                  preferences.setBool('titleMode', titleMode);
-                });
-              });
+        //       SharedPreferences.getInstance().then((preferences){
+        //         setState(() {
+        //           preferences.setBool('titleMode', titleMode);
+        //         });
+        //       });
 
-            },
-          ),
-        ),
+        //     },
+        //   ),
+        // ),
         
         bottom: (titleMode)
         ? TabBar(
           controller: tabController,
           tabs: [
-            Tab(text: 'Todos'),
             Tab(text: 'Libros'),
-            Tab(text: 'Capitulos'),
+            Tab(text: 'Titulos'),
+            Tab(text: 'Todo'),
           ]
         )
         : TabBar(
@@ -148,7 +127,7 @@ class _BookSelectionPageState extends State<BookSelectionPage> with SingleTicker
         
         children: [
           (titleMode)
-          ? SeleccionarTituloTodos(
+          ? SelecionarLibroTitulo(
             setReference: widget.setReference,
             getReference: widget.getReference,
             setLocalReference: setLocalReferece,
@@ -163,7 +142,7 @@ class _BookSelectionPageState extends State<BookSelectionPage> with SingleTicker
           
           // Seleccionar Capitulo
           (titleMode)
-          ? SelecionarLibroTitulo(
+          ? SeleccionarTituloCapitulo(
             setReference: widget.setReference,
             getReference: widget.getReference,
             setLocalReference: setLocalReferece,
@@ -220,7 +199,7 @@ class _BookSelectionPageState extends State<BookSelectionPage> with SingleTicker
           
           // Seleccionar Versiculo
           (titleMode)
-          ? SeleccionarTituloCapitulo(
+          ? SeleccionarTituloTodos(
             setReference: widget.setReference,
             getReference: widget.getReference,
             setLocalReference: setLocalReferece,
@@ -323,7 +302,7 @@ class _SelecionarLibroState extends State<SelecionarLibro>
     if(query.isNotEmpty) {
       List<List> dummyListData = List<List>();
       dummySearchList.forEach((item) {
-        if(removeDiacritics(item[0]).toLowerCase().contains(removeDiacritics(query).toLowerCase())) {
+        if(removeDiacritics(item[1]).toLowerCase().contains(removeDiacritics(query).toLowerCase())) {
           dummyListData.add(item);
         }
       });
@@ -352,10 +331,13 @@ class _SelecionarLibroState extends State<SelecionarLibro>
           Padding(
             padding: EdgeInsets.fromLTRB(10, 5, 10, 1),
             child: TextField(
+              enableSuggestions: true,
+              keyboardAppearance: Theme.of(context).brightness,
               focusNode: FocusNode(),
               textInputAction: TextInputAction.none,
               
               onChanged: (value) {
+                scrollController.jumpTo(0);
                 filterSearchResults(value);
               },
 
@@ -368,7 +350,7 @@ class _SelecionarLibroState extends State<SelecionarLibro>
                   )
                 ),
 
-                hintText: "Buscar",
+                hintText: "Buscar...",
                 prefixIcon: Icon(Icons.search, color: Theme.of(context).iconTheme.color),
               )
             ),
@@ -606,7 +588,7 @@ class _SeleccionarTituloTodosState extends State<SeleccionarTituloTodos>
       dummySearchList.forEach((item) {
         // scrollController.jumpTo(0);
 
-        if(removeDiacritics(item[0]).toLowerCase().contains(removeDiacritics(query).toLowerCase())) {
+        if(removeDiacritics(item[1]).toLowerCase().contains(removeDiacritics(query).toLowerCase())) {
           dummyListData.add(item);
         }
       });
@@ -664,83 +646,14 @@ class _SeleccionarTituloTodosState extends State<SeleccionarTituloTodos>
         
         child: ListView.builder(
 
-          padding: EdgeInsets.fromLTRB(3, 3, 3, 55),
+          padding: EdgeInsets.fromLTRB(0, 3, 0, 55),
           controller: scrollController,
           itemCount: items.length,
           cacheExtent: 10,
-          itemExtent: 78,
+          itemExtent: 75,
           itemBuilder: (context, index) {
 
-            return Column(
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                Container(
-                  height: 75,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: Theme.of(context).appBarTheme.color,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.3),
-                        blurRadius: 1.5
-                      )
-                    ]
-                  ),
-
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          '${intToBook[items[index][1]]} ${items[index][2].toString()}:${items[index][3].toString()}',
-                          style: Theme.of(context).textTheme.bodyText2.copyWith(
-                            fontSize: 16,
-                            height: 1.5
-                          )
-                        ),
-
-                        RichText(
-                          text: TextSpan(
-                            text: items[index][0], 
-                            style: Theme.of(context).textTheme.bodyText1.copyWith(
-                              fontSize: 17
-                            )
-                          ),
-
-                          overflow: TextOverflow.ellipsis,
-                          
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-
-                Divider(
-                  height: 3,
-                  color: Colors.transparent
-                )
-
-              ],
-            );
-
-            return ListTile(
-
-              title: Text(items[index][0], style: Theme.of(context).textTheme.bodyText1),
-              subtitle: Text(
-                '${intToBook[items[index][1]]} ${items[index][2].toString()}:${items[index][3].toString()}',
-                style: Theme.of(context).textTheme.bodyText2.copyWith(
-                  fontSize: 16,
-                  height: 1.5
-                )
-              ),
-
-              // dense: true,
-
-              contentPadding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-              
+            return InkWell(
               onTap: () async
               {
                 setState(() {
@@ -749,8 +662,41 @@ class _SeleccionarTituloTodosState extends State<SeleccionarTituloTodos>
                   Navigator.pop(context);
                 });
               },
-            );
 
+              child: Container(
+                height: 75,
+                width: double.infinity,
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      RichText(
+                        text: TextSpan(
+                          text: items[index][0], 
+                          style: Theme.of(context).textTheme.bodyText1.copyWith(
+                            fontSize: 17
+                          )
+                        ),
+
+                        overflow: TextOverflow.ellipsis,
+                        
+                      ),
+
+                      Text(
+                        '${intToBook[items[index][1]]} ${items[index][2].toString()}:${items[index][3].toString()}',
+                        style: Theme.of(context).textTheme.bodyText2.copyWith(
+                          fontSize: 16,
+                          height: 1.5
+                        )
+                      ),
+                      
+                    ],
+                  ),
+                ),
+              ),
+            );
           },
         ),
       ),
@@ -790,7 +736,7 @@ class _SelecionarLibroTituloState extends State<SelecionarLibroTitulo>
   @override
   void initState() {
     items.addAll(duplicateItems);
-    scrollController = ScrollController(initialScrollOffset: 73.0 * (widget.getReference()[0] - 1));
+    scrollController = ScrollController(initialScrollOffset: 75.0 * (widget.getReference()[0] - 1));
     super.initState();
   }
 
@@ -824,90 +770,115 @@ class _SelecionarLibroTituloState extends State<SelecionarLibroTitulo>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.fromLTRB(10, 5, 10, 1),
-            child: TextField(
-              focusNode: FocusNode(),
-              textInputAction: TextInputAction.none,
-              
-              onChanged: (value) {
-                scrollController.jumpTo(0);
-                filterSearchResults(value);
-              },
 
-              cursorColor: Theme.of(context).accentColor,
-              controller: editingController,
-              decoration: InputDecoration(
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Theme.of(context).accentColor,
-                  )
-                ),
+    return Scaffold(
+      appBar: PreferredSize(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(0, 5, 0, 1),
+          child: TextField(
+            focusNode: FocusNode(),
+            textInputAction: TextInputAction.none,
+            
+            onChanged: (value) {
+              scrollController.jumpTo(0);
+              filterSearchResults(value);
+            },
 
-                hintText: "Buscar",
-                prefixIcon: Icon(Icons.search, color: Theme.of(context).iconTheme.color),
-              )
-            ),
-          ),
-
-          Expanded(
-            child: Scrollbar(
-              child: ListView.builder(
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 55),
-                controller: scrollController,
-                itemExtent: 73,
-                cacheExtent: 10,
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-
-                  return ListTile(
-
-                    title: intToBook[widget.getReference()[0]] == items[index][1]
-                        ? Text(items[index][1], style: TextStyle(
-                      fontSize: 19,
-                      color: Theme.of(context).textTheme.bodyText1.color,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: Theme.of(context).textTheme.button.fontFamily,))
-                        : Text(items[index][1], style: Theme.of(context).textTheme.bodyText1),
-                      
-
-                    subtitle: Text(
-                      titles.containsKey(items[index][0])
-                      ? titles[items[index][0]].containsKey(1)
-                        ? titles[items[index][0]][1].containsKey(1)
-                          ? titles[items[index][0]][1][1]
-                          : ''
-                        : ''
-                      : '',
-
-                      style: Theme.of(context).textTheme.bodyText2.copyWith(
-                        fontSize: 16,
-                        height: 1.5
-                      )
-                    ),
-
-                    trailing: Icon(Icons.arrow_forward_ios, size: 15,),
-
-                    // dense: true,
-
-                    onTap: () async
-                    {
-                      setState(() {
-                        widget.tabController.animateTo(2);
-                        widget.setReference(items[index][0], 1, 1);
-                        widget.setLocalReference(items[index][0], 1, 1);
-                      });
-                    },
-                  );
-
-                },
+            cursorColor: Theme.of(context).accentColor,
+            controller: editingController,
+            decoration: InputDecoration(
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Theme.of(context).accentColor,
+                )
               ),
+
+              hintText: "Buscar",
+              prefixIcon: Icon(Icons.search, color: Theme.of(context).iconTheme.color),
             )
           ),
-        ],
+        ),
+        preferredSize: Size.fromHeight(50)
+      ),
+
+      body: DraggableScrollbar.semicircle(
+        controller: scrollController,
+        
+        child: ListView.builder(
+
+          padding: EdgeInsets.fromLTRB(0, 3, 0, 55),
+          controller: scrollController,
+          itemCount: items.length,
+          cacheExtent: 10,
+          itemExtent: 75,
+          itemBuilder: (context, index) {
+
+            return InkWell(
+              onTap: () async
+              {
+                setState(() {
+                  widget.tabController.animateTo(1);
+                  widget.setReference(items[index][0], 1, 1);
+                  widget.setLocalReference(items[index][0], 1, 1);
+                });
+              },
+
+              child: Container(
+                height: 75,
+                width: double.infinity,
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+
+                      intToBook[widget.getReference()[0]] == items[index][1]
+                      ? Text(items[index][1],
+                        
+                          style: Theme.of(context).textTheme.bodyText2.copyWith(
+                            height: 1.5,
+                            fontSize: 17,
+                            color: Theme.of(context).textTheme.bodyText1.color,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: Theme.of(context).textTheme.button.fontFamily,
+                          ),
+                        )
+
+                      : Text(items[index][1], style: Theme.of(context).textTheme.bodyText1.copyWith(
+                        height: 1.5,
+                        fontSize: 17,
+                        // color: Theme.of(context).textTheme.bodyText1.color,
+                        // fontWeight: FontWeight.bold,
+                        fontFamily: Theme.of(context).textTheme.button.fontFamily,
+                      )),
+
+                      RichText(
+                        text: TextSpan(
+                          text: titles.containsKey(items[index][0])
+                            ? titles[items[index][0]].containsKey(1)
+                              ? titles[items[index][0]][1].containsKey(1)
+                                ? titles[items[index][0]][1][1]
+                                : 'no contiene titulos'
+                              : 'no contiene titulos'
+                            : 'no contiene titulos',
+                          
+                          style: Theme.of(context).textTheme.bodyText2.copyWith(
+                            fontSize: 16,
+                            height: 1.5
+                          )
+                        ),
+
+                        overflow: TextOverflow.ellipsis,
+                        
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
@@ -992,74 +963,94 @@ class _SeleccionarTituloCapituloState extends State<SeleccionarTituloCapitulo>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.fromLTRB(10, 5, 10, 1),
-            child: TextField(
-              focusNode: FocusNode(),
-              textInputAction: TextInputAction.none,
-              
-              onChanged: (value) {
-                filterSearchResults(value);
-              },
 
-              cursorColor: Theme.of(context).accentColor,
-              controller: editingController,
-              decoration: InputDecoration(
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Theme.of(context).accentColor,
-                  )
-                ),
+    return Scaffold(
+      appBar: PreferredSize(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(0, 5, 0, 1),
+          child: TextField(
+            focusNode: FocusNode(),
+            textInputAction: TextInputAction.none,
+            
+            onChanged: (value) {
+              scrollController.jumpTo(0);
+              filterSearchResults(value);
+            },
 
-                hintText: "Buscar",
-                prefixIcon: Icon(Icons.search, color: Theme.of(context).iconTheme.color),
-              )
-            ),
-          ),
-
-          Expanded(
-            child: Scrollbar(
-              child: ListView.builder(
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 55),
-                controller: scrollController,
-                // shrinkWrap: true,
-                itemExtent: 73,
-                cacheExtent: 10,
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-
-                  return ListTile(
-
-                    title: Text(items[index][0], style: Theme.of(context).textTheme.bodyText1),
-                    subtitle: Text(
-                      '${intToBook[items[index][1]]} ${items[index][2].toString()}:${items[index][3].toString()}',
-                      style: Theme.of(context).textTheme.bodyText2.copyWith(
-                        fontSize: 16,
-                        height: 1.5
-                      )
-                    ),
-                    // dense: true,
-
-                    contentPadding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                    
-                    onTap: () async
-                    {
-                      setState(() {
-                        widget.setReference(items[index][1], items[index][2], items[index][3]);
-                        widget.setLocalReference(items[index][1], items[index][2], items[index][3]);
-                        Navigator.pop(context);
-                      });
-                    },
-                  );
-
-                },
+            cursorColor: Theme.of(context).accentColor,
+            controller: editingController,
+            decoration: InputDecoration(
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Theme.of(context).accentColor,
+                )
               ),
+
+              hintText: "Buscar",
+              prefixIcon: Icon(Icons.search, color: Theme.of(context).iconTheme.color),
             )
           ),
-        ],
+        ),
+        preferredSize: Size.fromHeight(50)
+      ),
+
+      body: DraggableScrollbar.semicircle(
+        controller: scrollController,
+        
+        child: ListView.builder(
+
+          padding: EdgeInsets.fromLTRB(0, 3, 0, 55),
+          controller: scrollController,
+          itemCount: items.length,
+          cacheExtent: 10,
+          itemExtent: 75,
+          itemBuilder: (context, index) {
+
+            return InkWell(
+              onTap: () async
+              {
+                setState(() {
+                  widget.setReference(items[index][1], items[index][2], items[index][3]);
+                  widget.setLocalReference(items[index][1], items[index][2], items[index][3]);
+                  Navigator.pop(context);
+                });
+              },
+
+              child: Container(
+                height: 75,
+                width: double.infinity,
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      RichText(
+                        text: TextSpan(
+                          text: items[index][0], 
+                          style: Theme.of(context).textTheme.bodyText1.copyWith(
+                            fontSize: 17
+                          )
+                        ),
+
+                        overflow: TextOverflow.ellipsis,
+                        
+                      ),
+
+                      Text(
+                        '${intToBook[items[index][1]]} ${items[index][2].toString()}:${items[index][3].toString()}',
+                        style: Theme.of(context).textTheme.bodyText2.copyWith(
+                          fontSize: 16,
+                          height: 1.5
+                        )
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

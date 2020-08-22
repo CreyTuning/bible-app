@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:yhwh/icons/custom_icons_icons.dart';
 
 import '../../themes.dart';
 
@@ -150,11 +151,33 @@ class _StylePageState extends State<StylePage>{
 
                   TopLabel(text: 'Colores personalizados'),
 
-                  SwitchListTile(
+                  // SwitchListTile(
+                  //   activeColor: Theme.of(context).accentColor,
+                  //   value: DynamicTheme.of(context).brightness == Brightness.dark ? true : false,
+                  //   title: Text("Modo oscuro", style: Theme.of(context).textTheme.button),
+                  //   subtitle: Text("Lectura nocturna",
+                  //     style: Theme.of(context).textTheme.bodyText1.copyWith(
+                  //         fontSize: 16,
+                  //         color: Theme.of(context).textTheme.bodyText2.color
+                  //     )
+                  //   ),
+
+                  //   onChanged: (value)
+                  //   {
+                  //     DynamicTheme.of(context).setBrightness(Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark);
+                  //     DynamicTheme.of(context).setThemeData(AppThemes.getTheme(Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark, blackThemeEnabled));
+
+                  //     SharedPreferences.getInstance().then((preferences){
+                  //       preferences.setBool('darkMode', (DynamicTheme.of(context).brightness == Brightness.dark) ? false : true);
+                  //     });
+                  //   },
+                  // ),
+
+                  CheckboxListTile(
                     activeColor: Theme.of(context).accentColor,
                     value: DynamicTheme.of(context).brightness == Brightness.dark ? true : false,
                     title: Text("Modo oscuro", style: Theme.of(context).textTheme.button),
-                    subtitle: Text("Lectura nocturna",
+                    subtitle: Text("Invierte tonalidad de la interfaz",
                       style: Theme.of(context).textTheme.bodyText1.copyWith(
                           fontSize: 16,
                           color: Theme.of(context).textTheme.bodyText2.color
@@ -172,41 +195,135 @@ class _StylePageState extends State<StylePage>{
                     },
                   ),
 
-                  SwitchListTile(
-                    activeColor: Theme.of(context).accentColor,
-                    value: blackThemeEnabled,
-                    title: Text("Pantalla Oled", style: Theme.of(context).textTheme.button),
-                    subtitle: Text("Fondo de color negro",
-                      style: Theme.of(context).textTheme.bodyText1.copyWith(
-                          fontSize: 16,
-                          color: Theme.of(context).textTheme.bodyText2.color
-                      )
-                    ),
+                  // SwitchListTile(
+                  //   activeColor: Theme.of(context).accentColor,
+                  //   value: blackThemeEnabled,
+                  //   title: Text("Pantalla Oled", style: Theme.of(context).textTheme.button),
+                  //   subtitle: Text("Fondo de color negro",
+                  //     style: Theme.of(context).textTheme.bodyText1.copyWith(
+                  //         fontSize: 16,
+                  //         color: Theme.of(context).textTheme.bodyText2.color
+                  //     )
+                  //   ),
 
-                    onChanged: (value)
-                    {
-                      // DynamicTheme.of(context).setBrightness(Theme.of(context).brightness == Brightness.dark? Brightness.light: Brightness.dark);
+                  //   onChanged: (value)
+                  //   {
+                  //     // DynamicTheme.of(context).setBrightness(Theme.of(context).brightness == Brightness.dark? Brightness.light: Brightness.dark);
                       
-                      blackThemeEnabled = value;
+                  //     blackThemeEnabled = value;
 
-                      SharedPreferences.getInstance().then((preferences){
-                        setState(() {
-                          preferences.setBool('blackThemeEnabled', value);
-                        });
-                      });
+                  //     SharedPreferences.getInstance().then((preferences){
+                  //       setState(() {
+                  //         preferences.setBool('blackThemeEnabled', value);
+                  //       });
+                  //     });
 
-                      DynamicTheme.of(context).setThemeData(AppThemes.getTheme(Theme.of(context).brightness, blackThemeEnabled));
+                  //     DynamicTheme.of(context).setThemeData(AppThemes.getTheme(Theme.of(context).brightness, blackThemeEnabled));
 
-                    },
-                  ),
+                  //   },
+                  // ),
 
                   // ColorSelector(),
 
                   TopLabel(text: 'Preferencias de caracteres'),
+                  
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
+                        child: Center(
+                          child: Icon(Icons.format_size),
+                        ),
+                      ),
+                      
+                      Expanded(
+                        child: Slider(
+                          onChangeEnd: (value){
+                            saveAndUpdateValues();
+                          },
 
-                  ValueChanger( title: 'Tamaño de letra', value: '${fontSize.toInt()} pts', lessFuction: lessFontSize, plusFuction: plusFontSize ),
-                  ValueChanger( title: 'Altura de linea', value: '${height.toStringAsPrecision(2)} pts', lessFuction: lessHeight, plusFuction: plusHeight),
-                  ValueChanger( title: 'Espaciado de letras', value: '$letterSeparation pts', lessFuction: lessLetterSeparation, plusFuction: plusLetterSeparation),
+                          activeColor: Theme.of(context).accentColor,
+                          value: fontSize,
+                          min: 18,
+                          max: 30,
+                          divisions: 12,
+                          label: 'Tamaño de letra: ${fontSize.round().toString()}',
+                          onChanged: (double value) {
+                            setState(() {
+                              fontSize = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
+                        child: Center(
+                          child: Icon(Icons.format_line_spacing),
+                        ),
+                      ),
+                      
+                      Expanded(
+                        child: Slider(
+                          onChangeEnd: (value){
+                            saveAndUpdateValues();
+                          },
+
+                          activeColor: Theme.of(context).accentColor,
+                          value: height,
+                          min: 1.05,
+                          max: 3.05,
+                          divisions: 8,
+                          label: 'Altura de linea: ${(height * 10).round()}',
+                          onChanged: (double value) {
+                            setState(() {
+                              height = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+
+
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
+                        child: Center(
+                          child: Icon(CustomIcons.format_horizontal_align_center_expand),
+                        ),
+                      ),
+                      
+                      Expanded(
+                        child: Slider(
+                          onChangeEnd: (value){
+                            saveAndUpdateValues();
+                          },
+
+                          activeColor: Theme.of(context).accentColor,
+                          value: letterSeparation,
+                          min: -1.5,
+                          max: 5,
+                          divisions: 13,
+                          label: 'Separación de letras: ${letterSeparation.toString()}',
+                          onChanged: (double value) {
+                            setState(() {
+                              letterSeparation = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  // ValueChanger( title: 'Tamaño de letra', value: '${fontSize.toInt()} pts', lessFuction: lessFontSize, plusFuction: plusFontSize ),
+                  // ValueChanger( title: 'Altura de linea', value: '${height.toStringAsPrecision(2)} pts', lessFuction: lessHeight, plusFuction: plusHeight),
+                  // ValueChanger( title: 'Espaciado de letras', value: '$letterSeparation pts', lessFuction: lessLetterSeparation, plusFuction: plusLetterSeparation),
                 ],
               ),
             ),
@@ -363,16 +480,16 @@ class _ColorSelectorState extends State<ColorSelector> {
       index = value;
     });
 
-    SharedPreferences.getInstance().then((preferences){
-      preferences.setInt('colorAccent', value);
-    });
+    // SharedPreferences.getInstance().then((preferences){
+    //   preferences.setInt('colorAccent', value);
+    // });
 
-    DynamicTheme.of(context).setThemeData(
-      DynamicTheme.of(context).data.copyWith(
-        accentColor: widget.colors[value],
-        primaryColor: widget.colors[value]
-      )
-    );
+    // DynamicTheme.of(context).setThemeData(
+    //   DynamicTheme.of(context).data.copyWith(
+    //     accentColor: widget.colors[value],
+    //     primaryColor: widget.colors[value]
+    //   )
+    // );
   }
 
   @override

@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
-// import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yhwh/data/Define.dart';
 import 'package:yhwh/pages/BiblePage/BookSelection.dart';
 import 'package:yhwh/pages/BiblePage/HighlightPage.dart';
+import 'package:yhwh/pages/BiblePage/SecondaryBookSelection.dart';
 import 'package:yhwh/pages/BiblePage/StylePage.dart';
 import 'package:yhwh/ui_widgets/ScrollableListEdited/scrollable_positioned_list.dart';
 import 'package:yhwh/ui_widgets/chapter_footer.dart';
@@ -56,16 +56,14 @@ class _BiblePageState extends State<BiblePage> {
         chapterNumber = chapter;
         verseNumber = verse;
       
-        itemScrollController.jumpTo(index: verse);
-        widget.scrollController.jumpTo(widget.scrollController.offset - 73);
+        itemScrollController.jumpTo(index: verse - 1);
       });
     });
   }
 
   void nextChapter(){
     widget.scrollController.jumpTo(0);
-    itemScrollController.jumpTo(index: 1);
-    widget.scrollController.jumpTo(widget.scrollController.offset - 73);
+    itemScrollController.jumpTo(index: 0);
     
     SharedPreferences.getInstance().then((preferences){
       if (chapterNumber < namesAndChapters[bookNumber - 1][1]) {
@@ -94,8 +92,8 @@ class _BiblePageState extends State<BiblePage> {
 
   void previousChapter(){
     widget.scrollController.jumpTo(0);
-    itemScrollController.jumpTo(index: 1);
-    widget.scrollController.jumpTo(widget.scrollController.offset - 73);
+    itemScrollController.jumpTo(index: 0);
+    // widget.scrollController.jumpTo(widget.scrollController.offset - 73);
 
     SharedPreferences.getInstance().then((preferences){
       if (chapterNumber > 1) {
@@ -132,11 +130,11 @@ class _BiblePageState extends State<BiblePage> {
       return Center(child: CircularProgressIndicator());
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      // extendBodyBehindAppBar: true,
       extendBody: true,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 0, 16, 40),
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
@@ -146,7 +144,7 @@ class _BiblePageState extends State<BiblePage> {
               width: 41.0,
               height: 41.0,
               decoration: BoxDecoration(
-                color: Theme.of(context).floatingActionButtonTheme.backgroundColor.withOpacity(0.95),
+                color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
                 borderRadius: BorderRadius.circular(100),
                 boxShadow: [
                   BoxShadow(
@@ -172,7 +170,7 @@ class _BiblePageState extends State<BiblePage> {
               width: 41.0,
               height: 41.0,
               decoration: BoxDecoration(
-                color: Theme.of(context).floatingActionButtonTheme.backgroundColor.withOpacity(0.95),
+                color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
                 borderRadius: BorderRadius.circular(100),
                 boxShadow: [
                   BoxShadow(
@@ -228,14 +226,26 @@ class _BiblePageState extends State<BiblePage> {
             },
 
             onLongPress: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => BookSelectionPage(
-                    initialTab: 1,
-                    setReference: setReference,
-                    getReference: getReference,
-                  )
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => SecondaryBookSelectionPage(
+              //       initialTab: 0,
+              //     )
+              //   )
+              // );
+
+              showDialog(
+
+                context: context,
+                child: Padding(
+
+                  padding: EdgeInsets.all(20),
+
+                  child: SecondaryBookSelectionPage(
+                    initialTab: 0,
+                  ),
+
                 )
               );
             },
@@ -248,7 +258,7 @@ class _BiblePageState extends State<BiblePage> {
             padding: const EdgeInsets.symmetric(vertical: 5),
             child: InkWell(
               child: Container(
-                child: Icon(Icons.folder_open, color: Theme.of(context).iconTheme.color, size: 21,),
+                child: Icon(Icons.bookmark, color: Theme.of(context).iconTheme.color, size: 21,),
                 width: 50,
               ),
               borderRadius: BorderRadius.circular(30),
@@ -263,7 +273,7 @@ class _BiblePageState extends State<BiblePage> {
             padding: const EdgeInsets.symmetric(vertical: 5),
             child: InkWell(
               child: Container(
-                child: Icon(Icons.tune, color: Theme.of(context).iconTheme.color, size: 21,),
+                child: Icon(Icons.settings, color: Theme.of(context).iconTheme.color, size: 21,),
                 width: 50,
               ),
               borderRadius: BorderRadius.circular(30),
