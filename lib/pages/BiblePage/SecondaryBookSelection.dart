@@ -71,7 +71,7 @@ class _SecondaryBookSelectionPageState extends State<SecondaryBookSelectionPage>
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).floatingActionButtonTheme.backgroundColor,
-        child: Icon(Icons.check),
+        child: Icon(Icons.check, color: Theme.of(context).textTheme.bodyText1.color),
         onPressed: () async{
           setLocalReference(book, chapter, verse);
           tabController.animateTo(0);

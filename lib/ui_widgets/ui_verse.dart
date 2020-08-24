@@ -102,19 +102,118 @@ class _UiVerseState extends State<UiVerse>{
     
     
     if(widget.title != null){
+
+      List split = widget.title.split('\n');
+      List<Widget> widgets = [];
+
+
+      split.forEach((element)
+      {
+        if(element.split(' ')[0] == '#title_big')
+        {
+          widgets.add(
+            Container(
+              width: double.infinity,
+              child: RichText(
+                // textAlign: TextAlign.center,
+                text: TextSpan(
+                  text: element.replaceAll('#title_big ', ''),
+                  style: Theme.of(context).textTheme.bodyText1.copyWith(
+                    fontWeight: FontWeight.bold,
+                    height: widget.height,
+                    fontSize: widget.fontSize + 5,
+                    letterSpacing: widget.letterSeparation
+                  ),
+                ),
+              ),
+            ),
+          );
+
+          // widgets.add(
+          //   Container(height: widget.height * 2)
+          // );
+        }
+
+        else if(element.split(' ')[0] == '#subtitle')
+        {
+
+          widgets.add(
+            Container(
+              height: widget.height + 0.3,
+            )
+          );
+
+          widgets.add(
+            Container(
+              width: double.infinity,
+              child: RichText(
+                text: TextSpan(
+                  text: element.replaceAll('#subtitle ', ''),
+                  style: Theme.of(context).textTheme.bodyText1.copyWith(
+                    fontStyle: FontStyle.italic,
+                    height: widget.height,
+                    fontSize: widget.fontSize,
+                    letterSpacing: widget.letterSeparation,
+                    color: Theme.of(context).textTheme.bodyText2.color
+                  ),
+                ),
+              ),
+            ),
+          );
+        }
+
+        else if(element.split(' ')[0] == '#center')
+        {
+          widgets.add(
+            Container(
+              width: double.infinity,
+              child: RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  text: element.replaceAll('#center ', ''),
+                  style: Theme.of(context).textTheme.bodyText1.copyWith(
+                    fontWeight: FontWeight.bold,
+                    height: widget.height,
+                    fontSize: widget.fontSize,
+                    letterSpacing: widget.letterSeparation
+                  ),
+                ),
+              ),
+            )
+          );
+
+          // widgets.add(
+          //   Container(height: widget.height * 3)
+          // );
+        }
+
+        else{
+          widgets.add(
+            RichText(
+              text: TextSpan(
+                text: element,
+                style: Theme.of(context).textTheme.bodyText1.copyWith(
+                  fontWeight: FontWeight.bold,
+                  height: widget.height,
+                  fontSize: widget.fontSize,
+                  letterSpacing: widget.letterSeparation
+                ),
+              ),
+            ),
+          );
+        }
+      });
+
       content.insert(0,
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 6.0, 0, 0),
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
-              widget.title,
-              style: Theme.of(context).textTheme.bodyText1.copyWith(
-                fontWeight: FontWeight.bold,
-                height: widget.height,
-                fontSize: widget.fontSize,
-                letterSpacing: widget.letterSeparation
-              ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: widgets
             ),
           ),
         ),

@@ -35,6 +35,7 @@ class MainPageState extends State<MainPage> {
       PersistentBottomNavBarItem(
         icon: Icon(Icons.home),
         title: ("Inicio"),
+        titleFontSize: 16,
         activeColor: Theme.of(context).textTheme.bodyText1.color,
         inactiveColor: Theme.of(context).textTheme.bodyText2.color,
       ),
@@ -42,6 +43,7 @@ class MainPageState extends State<MainPage> {
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.book_solid),
         title: ("Leer"),
+        titleFontSize: 16,
         activeColor: Theme.of(context).textTheme.bodyText1.color,
         inactiveColor: Theme.of(context).textTheme.bodyText2.color,
       ),
@@ -49,6 +51,7 @@ class MainPageState extends State<MainPage> {
       PersistentBottomNavBarItem(
         icon: Icon(Icons.school),
         title: ("Aprender"),
+        titleFontSize: 12,
         activeColor: Theme.of(context).textTheme.bodyText1.color,
         inactiveColor: Theme.of(context).textTheme.bodyText2.color,
       ),
@@ -56,6 +59,7 @@ class MainPageState extends State<MainPage> {
       PersistentBottomNavBarItem(
         icon: Icon(Icons.search),
         title: ("Buscar"),
+        titleFontSize: 15,
         activeColor: Theme.of(context).textTheme.bodyText1.color,
         inactiveColor: Theme.of(context).textTheme.bodyText2.color,
       ),
@@ -63,6 +67,7 @@ class MainPageState extends State<MainPage> {
       PersistentBottomNavBarItem(
         icon: Icon(Icons.person),
         title: ("Ministro"),
+        titleFontSize: 14,
         activeColor: Theme.of(context).textTheme.bodyText1.color,
         inactiveColor: Theme.of(context).textTheme.bodyText2.color,
       ),

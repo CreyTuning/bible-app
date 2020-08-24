@@ -66,7 +66,7 @@ class _BookSelectionPageState extends State<BookSelectionPage> with SingleTicker
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).floatingActionButtonTheme.backgroundColor,
-        child: Icon(Icons.check),
+        child: Icon(Icons.check, color: Theme.of(context).textTheme.bodyText1.color),
         onPressed: () async{
           widget.setReference(book, chapter, verse);
           setLocalReferece(book, chapter, verse);
