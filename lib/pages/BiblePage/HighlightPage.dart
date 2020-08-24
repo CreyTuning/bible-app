@@ -39,63 +39,10 @@ class _HighlightPageState extends State<HighlightPage> {
   }
 
   @override
-  void initState() {
-    contentUpdate();
-    
+  void initState() {    
     super.initState();
   }
 
-  void contentUpdate(){
-    Highlight.readHighlight().then((value){
-      setState(() {
-        highlight = json.decode(value);
-
-        highlight.forEach((key, value) {
-          
-          content.add(
-            CardVerseHightlight(
-              date: '${value.toString().substring(0, 16)}',
-              reference: '${intToAbreviatura[int.parse(key.toString().split(':')[0])]} ${key.toString().split(':')[1]}:${key.toString().split(':')[2]}',
-              text: FutureBuilder(
-                initialData: 'Cargando...',
-                future: getVerse(int.parse(key.split(':')[0]), int.parse(key.split(':')[1]), int.parse(key.split(':')[2])),
-                builder: (BuildContext context, AsyncSnapshot asyncSnapshot){
-                  if(asyncSnapshot.hasData){
-                    return RichText(
-                      maxLines: 3,
-
-                      text: TextSpan(
-                        text: '${asyncSnapshot.data}',
-                        style: Theme.of(context).textTheme.bodyText2
-                      ),
-
-                      overflow: TextOverflow.fade,
-                    );
-                  }
-
-                  else{
-                    return RichText(
-                      maxLines: 3,
-
-                      text: TextSpan(
-                        text: 'Cargando...',
-                        style: Theme.of(context).textTheme.bodyText2
-                      ),
-
-                      overflow: TextOverflow.fade,
-                    );
-                  }
-                }
-              ),
-            )
-          );
-        });
-
-        content = content.reversed.toList();
-
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,15 +52,78 @@ class _HighlightPageState extends State<HighlightPage> {
         title: Text('Resaltados'),
       ),
 
-      body: Scrollbar(
-        child: ListView.builder(
-          padding: EdgeInsets.fromLTRB(0, 5, 0, 55),
-          itemBuilder: (BuildContext context, int item){
-            return content[item];
-          },
+      body: FutureBuilder(
+        future: Highlight.readHighlight(),
+        initialData: '',
+        builder: (BuildContext buildContext, AsyncSnapshot<dynamic> asyncSnapshot){
 
-          itemCount: content.length,
-        ),
+          if(asyncSnapshot.hasData)
+          {
+            highlight = json.decode(asyncSnapshot.data);
+
+            highlight.forEach((key, value) {
+              content.add(
+                CardVerseHightlight(
+                  date: '${value.toString().substring(0, 16)}',
+                  reference: '${intToAbreviatura[int.parse(key.toString().split(':')[0])]} ${key.toString().split(':')[1]}:${key.toString().split(':')[2]}',
+                  text: FutureBuilder(
+                    initialData: 'Cargando...',
+                    future: getVerse(int.parse(key.split(':')[0]), int.parse(key.split(':')[1]), int.parse(key.split(':')[2])),
+                    builder: (BuildContext context, AsyncSnapshot asyncSnapshot){
+                      if(asyncSnapshot.hasData){
+                        return RichText(
+                          maxLines: 3,
+
+                          text: TextSpan(
+                            text: '${asyncSnapshot.data}',
+                            style: Theme.of(context).textTheme.bodyText2
+                          ),
+
+                          overflow: TextOverflow.fade,
+                        );
+                      }
+
+                      else{
+                        return RichText(
+                          maxLines: 3,
+
+                          text: TextSpan(
+                            text: 'Cargando...',
+                            style: Theme.of(context).textTheme.bodyText2
+                          ),
+
+                          overflow: TextOverflow.fade,
+                        );
+                      }
+                    }
+                  ),
+                )
+              );
+            });
+
+            content = content.reversed.toList();
+
+            return Scrollbar(
+              child: ListView.builder(
+                itemExtent: 140,
+                padding: EdgeInsets.fromLTRB(0, 5, 0, 55),
+                itemBuilder: (BuildContext context, int item){
+                  return content[item];
+                },
+
+                itemCount: content.length,
+              )
+            );
+          }
+
+          else{
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          
+        }
       )
     );
   }

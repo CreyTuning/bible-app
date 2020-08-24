@@ -64,44 +64,21 @@ class _BookSelectionPageState extends State<BookSelectionPage> with SingleTicker
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).floatingActionButtonTheme.backgroundColor,
+        child: Icon(Icons.check),
+        onPressed: () async{
+          widget.setReference(book, chapter, verse);
+          setLocalReferece(book, chapter, verse);
+          Navigator.pop(context);
+        },
+      ),
+
       appBar: AppBar(
         title: Text("Referencias", style: Theme.of(context).textTheme.bodyText1.copyWith(
           fontSize: 21,
           fontWeight: FontWeight.bold
         )),
-        
-        // Container(
-
-        //   child: SwitchListTile(
-        //     activeColor: Theme.of(context).accentColor,
-        //     value: titleMode,
-        //     contentPadding: EdgeInsets.zero,
-        //     title: (titleMode)
-            
-        //     ? Text("Buscar titulos", style: Theme.of(context).textTheme.bodyText1.copyWith(
-        //       fontSize: 21,
-        //       fontWeight: FontWeight.bold
-        //     )) 
-            
-        //     : Text("Referencias", style: Theme.of(context).textTheme.bodyText1.copyWith(
-        //       fontSize: 21,
-        //       fontWeight: FontWeight.bold
-        //     )),
-
-        //     onChanged: (value) {
-        //       setState(() {
-        //         titleMode = value;
-        //       });
-
-        //       SharedPreferences.getInstance().then((preferences){
-        //         setState(() {
-        //           preferences.setBool('titleMode', titleMode);
-        //         });
-        //       });
-
-        //     },
-        //   ),
-        // ),
         
         bottom: (titleMode)
         ? TabBar(
@@ -159,39 +136,39 @@ class _BookSelectionPageState extends State<BookSelectionPage> with SingleTicker
 
               itemBuilder: (context, item) {
                 return GridTile(
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(100),
-                      
-                      onTap: () async{
-                        setState(() {
-                          widget.setReference(book, item + 1, 1);
-                          setLocalReferece(book, item + 1, 1);
-                          tabController.animateTo(2);
-                        });
-                      },
-                      
-                      child: Center(
-                        child: Container(
-                          width: 40,
-                          height: 40,
-                          alignment: Alignment.center,
-                          
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            color: (item == chapter - 1) ? Theme.of(context).accentColor : Colors.transparent,
-                          ),
-                          
-                          child: Text(
-                            '${item + 1}',
-                            style: Theme.of(context).textTheme.button.copyWith(
-                              fontSize: 19,
-                              color: (item == chapter - 1) ? Colors.white : Theme.of(context).textTheme.bodyText1.color,
-                              // fontWeight: FontWeight.bold
-                            )
-                          ),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(100),
+                    
+                    onTap: () async{
+                      setState(() {
+                        widget.setReference(book, item + 1, 1);
+                        setLocalReferece(book, item + 1, 1);
+                        tabController.animateTo(2);
+                      });
+                    },
+                    
+                    child: Center(
+                      child: Container(
+                        width: 40,
+                        height: 40,
+                        alignment: Alignment.center,
+                        
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: (item == chapter - 1) ? Theme.of(context).accentColor : Colors.transparent,
                         ),
-                      )
+                        
+                        child: Text(
+                          '${item + 1}',
+                          style: Theme.of(context).textTheme.button.copyWith(
+                            fontSize: 19,
+                            color: (item == chapter - 1) ? Colors.white : Theme.of(context).textTheme.bodyText1.color,
+                            // fontWeight: FontWeight.bold
+                          )
+                        ),
+                      ),
                     )
+                  )
                 );
               }
             ),

@@ -226,14 +226,6 @@ class _BiblePageState extends State<BiblePage> {
             },
 
             onLongPress: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => SecondaryBookSelectionPage(
-              //       initialTab: 0,
-              //     )
-              //   )
-              // );
 
               showDialog(
 

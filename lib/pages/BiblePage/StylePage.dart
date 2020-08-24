@@ -151,33 +151,11 @@ class _StylePageState extends State<StylePage>{
 
                   TopLabel(text: 'Colores personalizados'),
 
-                  // SwitchListTile(
-                  //   activeColor: Theme.of(context).accentColor,
-                  //   value: DynamicTheme.of(context).brightness == Brightness.dark ? true : false,
-                  //   title: Text("Modo oscuro", style: Theme.of(context).textTheme.button),
-                  //   subtitle: Text("Lectura nocturna",
-                  //     style: Theme.of(context).textTheme.bodyText1.copyWith(
-                  //         fontSize: 16,
-                  //         color: Theme.of(context).textTheme.bodyText2.color
-                  //     )
-                  //   ),
-
-                  //   onChanged: (value)
-                  //   {
-                  //     DynamicTheme.of(context).setBrightness(Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark);
-                  //     DynamicTheme.of(context).setThemeData(AppThemes.getTheme(Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark, blackThemeEnabled));
-
-                  //     SharedPreferences.getInstance().then((preferences){
-                  //       preferences.setBool('darkMode', (DynamicTheme.of(context).brightness == Brightness.dark) ? false : true);
-                  //     });
-                  //   },
-                  // ),
-
-                  CheckboxListTile(
+                  SwitchListTile(
                     activeColor: Theme.of(context).accentColor,
                     value: DynamicTheme.of(context).brightness == Brightness.dark ? true : false,
                     title: Text("Modo oscuro", style: Theme.of(context).textTheme.button),
-                    subtitle: Text("Invierte tonalidad de la interfaz",
+                    subtitle: Text("Lectura nocturna",
                       style: Theme.of(context).textTheme.bodyText1.copyWith(
                           fontSize: 16,
                           color: Theme.of(context).textTheme.bodyText2.color
@@ -194,6 +172,28 @@ class _StylePageState extends State<StylePage>{
                       });
                     },
                   ),
+
+                  // CheckboxListTile(
+                  //   activeColor: Theme.of(context).accentColor,
+                  //   value: DynamicTheme.of(context).brightness == Brightness.dark ? true : false,
+                  //   title: Text("Modo oscuro", style: Theme.of(context).textTheme.button),
+                  //   // subtitle: Text("Invierte tonalidad de la interfaz",
+                  //   //   style: Theme.of(context).textTheme.bodyText1.copyWith(
+                  //   //       fontSize: 16,
+                  //   //       color: Theme.of(context).textTheme.bodyText2.color
+                  //   //   )
+                  //   // ),
+
+                  //   onChanged: (value)
+                  //   {
+                  //     DynamicTheme.of(context).setBrightness(Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark);
+                  //     DynamicTheme.of(context).setThemeData(AppThemes.getTheme(Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark, blackThemeEnabled));
+
+                  //     SharedPreferences.getInstance().then((preferences){
+                  //       preferences.setBool('darkMode', (DynamicTheme.of(context).brightness == Brightness.dark) ? false : true);
+                  //     });
+                  //   },
+                  // ),
 
                   // SwitchListTile(
                   //   activeColor: Theme.of(context).accentColor,

@@ -69,6 +69,32 @@ class _SecondaryBookSelectionPageState extends State<SecondaryBookSelectionPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).floatingActionButtonTheme.backgroundColor,
+        child: Icon(Icons.check),
+        onPressed: () async{
+          setLocalReference(book, chapter, verse);
+          tabController.animateTo(0);
+          
+          showDialog(
+            context: context,
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: ParallelBookViewer(
+                bookNumber: getLocalReference()[0],
+                chapterNumber: getLocalReference()[1],
+                verseNumber: verse,
+                itemScrollController: ItemScrollController(),
+                chapterFooter: ChapterFooter(),
+                scrollController: ScrollController(),
+              ),
+            )
+          );
+
+          // Navigator.pop(context);
+        },
+      ),
+
       appBar: AppBar(
         title: Text("Lectura paralela", style: Theme.of(context).textTheme.bodyText1.copyWith(
           fontSize: 20,
