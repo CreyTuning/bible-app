@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yhwh/pages/BiblePage/BibleInformation.dart';
 
 class ChapterFooter extends StatelessWidget
 {
@@ -31,7 +32,14 @@ class ChapterFooter extends StatelessWidget
               color: Theme.of(context).textTheme.bodyText1.color
             )
           ),
-          onPressed: (){Navigator.pushNamed(context, 'bible_information');},
+          onPressed: (){
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => BibleInformation()
+              )
+            );
+          },
         ),
 
         Container(

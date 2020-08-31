@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:wakelock/wakelock.dart';
 import 'package:yhwh/pages/BiblePage/BiblePage.dart';
 import 'package:yhwh/pages/Buscar/BuscarPage.dart';
 import 'package:yhwh/pages/PageSelector.dart';
@@ -125,6 +126,20 @@ class MainPageState extends State<MainPage> {
 
       onItemSelected: (index){
         tabIndex = index;
+
+        switch (index) {
+          case 0 : Wakelock.disable();
+            break;
+          case 1 : Wakelock.enable();
+            break;
+          case 2 : Wakelock.disable();
+            break;
+          case 3 : Wakelock.disable();
+            break;
+          case 4 : Wakelock.disable();
+            break;
+          default:
+        }
  
         SharedPreferences.getInstance().then((preferences){
           preferences.setInt('bottomNavigationBarIndex', tabIndex);

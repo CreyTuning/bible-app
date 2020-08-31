@@ -197,16 +197,23 @@ class _BiblePageState extends State<BiblePage> {
         actions: <Widget>[
 
           InkWell(
+            borderRadius: BorderRadius.circular(10),
             child: Padding(
               padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
               child: Row(
                 children: <Widget>[
-                  Text(
-                    '${intToBook[bookNumber]} $chapterNumber', style: Theme.of(context).textTheme.bodyText1.copyWith(
-                      fontFamily: 'Roboto-Medium',
-                      fontSize: 16.6,
-                    ),
+
+                  RichText(
+                    overflow: TextOverflow.ellipsis,
+                    text: TextSpan(
+                      text: '${intToAbreviatura[bookNumber]} $chapterNumber',
+                      style: Theme.of(context).textTheme.bodyText1.copyWith(
+                        fontFamily: 'Roboto-Medium',
+                        fontSize: 16.6,
+                      ),
+                    )
                   ),
+
                   Icon(Icons.arrow_drop_down, color: Theme.of(context).iconTheme.color, size: 20,),
                 ],
               ),
@@ -243,15 +250,60 @@ class _BiblePageState extends State<BiblePage> {
             },
             
           ),
+
+          InkWell(
+            borderRadius: BorderRadius.circular(10),
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
+              child: Row(
+                children: <Widget>[
+
+                  RichText(
+                    overflow: TextOverflow.ellipsis,
+                    text: TextSpan(
+                      text: 'RVR60',
+                      style: Theme.of(context).textTheme.bodyText1.copyWith(
+                        fontFamily: 'Roboto-Medium',
+                        fontSize: 16.6,
+                      ),
+                    )
+                  ),
+
+                  Icon(Icons.arrow_drop_down, color: Theme.of(context).iconTheme.color, size: 20,),
+                ],
+              ),
+            ),
+
+            onTap: () {},
+            onLongPress: () {},
+            
+          ),
           
+          Spacer(flex: 10,),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 7),
+            child: InkWell(
+              child: Container(
+                child: Icon(Icons.color_lens, color: Theme.of(context).iconTheme.color, size: 21,),
+                width: 43,
+                height: 45,
+              ),
+              borderRadius: BorderRadius.circular(30),
+              onTap: () {},
+              onLongPress: () {},
+            ),
+          ),
+
           Spacer(),
 
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5),
+            padding: const EdgeInsets.symmetric(vertical: 7),
             child: InkWell(
               child: Container(
                 child: Icon(Icons.bookmark, color: Theme.of(context).iconTheme.color, size: 21,),
-                width: 50,
+                width: 43,
+                height: 45,
               ),
               borderRadius: BorderRadius.circular(30),
               onTap: () {
@@ -261,12 +313,14 @@ class _BiblePageState extends State<BiblePage> {
             ),
           ),
 
+          Spacer(),
+
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5),
+            padding: const EdgeInsets.symmetric(vertical: 7),
             child: InkWell(
               child: Container(
                 child: Icon(Icons.settings, color: Theme.of(context).iconTheme.color, size: 21,),
-                width: 50,
+                width: 43,
               ),
               borderRadius: BorderRadius.circular(30),
               onTap: () {
@@ -276,7 +330,7 @@ class _BiblePageState extends State<BiblePage> {
             ),
           ),
 
-          SizedBox(width: 5,)
+          SizedBox(width: 5)
 
         ],
       ),

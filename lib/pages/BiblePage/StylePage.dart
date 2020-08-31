@@ -134,6 +134,7 @@ class _StylePageState extends State<StylePage>{
           ],
 
           bottom: TabBar(
+            indicatorColor: Theme.of(context).textTheme.bodyText1.color,
             controller: tabController,
             tabs: [
               Tab(icon: Icon(Icons.format_size)),
@@ -152,7 +153,7 @@ class _StylePageState extends State<StylePage>{
                   TopLabel(text: 'Colores personalizados'),
 
                   SwitchListTile(
-                    activeColor: Theme.of(context).accentColor,
+                    activeColor: Theme.of(context).textTheme.bodyText1.color,
                     value: DynamicTheme.of(context).brightness == Brightness.dark ? true : false,
                     title: Text("Modo oscuro", style: Theme.of(context).textTheme.button),
                     subtitle: Text("Lectura nocturna",
@@ -242,7 +243,8 @@ class _StylePageState extends State<StylePage>{
                             saveAndUpdateValues();
                           },
 
-                          activeColor: Theme.of(context).accentColor,
+                          activeColor: Theme.of(context).textTheme.bodyText1.color,
+                          inactiveColor: Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
                           value: fontSize,
                           min: 18,
                           max: 30,
@@ -273,7 +275,8 @@ class _StylePageState extends State<StylePage>{
                             saveAndUpdateValues();
                           },
 
-                          activeColor: Theme.of(context).accentColor,
+                          activeColor: Theme.of(context).textTheme.bodyText1.color,
+                          inactiveColor: Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
                           value: height,
                           min: 1.05,
                           max: 3.05,
@@ -305,12 +308,13 @@ class _StylePageState extends State<StylePage>{
                             saveAndUpdateValues();
                           },
 
-                          activeColor: Theme.of(context).accentColor,
+                          activeColor: Theme.of(context).textTheme.bodyText1.color,
+                          inactiveColor: Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
                           value: letterSeparation,
                           min: -1.5,
                           max: 5,
                           divisions: 13,
-                          label: 'Separación de letras: ${letterSeparation.toString()}',
+                          label: 'Separación de letras: ${(letterSeparation * 10).round()}',
                           onChanged: (double value) {
                             setState(() {
                               letterSeparation = value;

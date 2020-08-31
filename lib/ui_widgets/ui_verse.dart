@@ -87,7 +87,7 @@ class _UiVerseState extends State<UiVerse>{
               TextSpan(
                 text: this.widget.text.toString(),
                 style: TextStyle(
-                  backgroundColor: (widget.highlight) ? Colors.blueAccent : Colors.transparent,
+                  backgroundColor: (widget.highlight) ? Colors.pinkAccent : Colors.transparent,
                   color: (widget.highlight) ? Colors.white : Theme.of(context).textTheme.bodyText1.color,
                 )
               ),
@@ -136,13 +136,6 @@ class _UiVerseState extends State<UiVerse>{
 
         else if(element.split(' ')[0] == '#subtitle')
         {
-
-          widgets.add(
-            Container(
-              height: widget.height + 0.3,
-            )
-          );
-
           widgets.add(
             Container(
               width: double.infinity,
@@ -150,15 +143,19 @@ class _UiVerseState extends State<UiVerse>{
                 text: TextSpan(
                   text: element.replaceAll('#subtitle ', ''),
                   style: Theme.of(context).textTheme.bodyText1.copyWith(
+                    fontFamily: 'Roboto-Italic',
                     fontStyle: FontStyle.italic,
                     height: widget.height,
                     fontSize: widget.fontSize,
                     letterSpacing: widget.letterSeparation,
-                    color: Theme.of(context).textTheme.bodyText2.color
                   ),
                 ),
               ),
             ),
+          );
+
+          widgets.add(
+            Container(height: widget.height * 10)
           );
         }
 
