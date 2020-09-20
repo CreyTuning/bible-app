@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import 'package:wakelock/wakelock.dart';
-import 'package:yhwh/pages/BiblePage/BiblePage.dart';
-import 'package:yhwh/pages/Buscar/BuscarPage.dart';
 import 'package:yhwh/pages/PageSelector.dart';
 
 
@@ -14,9 +11,7 @@ class MainPage extends StatefulWidget{
 }
 
 class MainPageState extends State<MainPage> {
-
-  PersistentTabController _controller = PersistentTabController(initialIndex: 1);
-  ScrollController scrollController = ScrollController();
+  AutoScrollController autoScrollController = AutoScrollController();
   int tabIndex = 0;
 
   @override
@@ -31,122 +26,66 @@ class MainPageState extends State<MainPage> {
     super.initState();
   }
 
-  List<PersistentBottomNavBarItem> _navBarsItems() {
-    return [
-      PersistentBottomNavBarItem(
-        icon: Icon(Icons.home),
-        title: ("Inicio"),
-        titleFontSize: 16,
-        activeColor: Theme.of(context).textTheme.bodyText1.color,
-        inactiveColor: Theme.of(context).textTheme.bodyText2.color,
-      ),
-
-      PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.book_solid),
-        title: ("Leer"),
-        titleFontSize: 16,
-        activeColor: Theme.of(context).textTheme.bodyText1.color,
-        inactiveColor: Theme.of(context).textTheme.bodyText2.color,
-      ),
-
-      PersistentBottomNavBarItem(
-        icon: Icon(Icons.school),
-        title: ("Aprender"),
-        titleFontSize: 12,
-        activeColor: Theme.of(context).textTheme.bodyText1.color,
-        inactiveColor: Theme.of(context).textTheme.bodyText2.color,
-      ),
-
-      PersistentBottomNavBarItem(
-        icon: Icon(Icons.search),
-        title: ("Buscar"),
-        titleFontSize: 15,
-        activeColor: Theme.of(context).textTheme.bodyText1.color,
-        inactiveColor: Theme.of(context).textTheme.bodyText2.color,
-      ),
-
-      PersistentBottomNavBarItem(
-        icon: Icon(Icons.person),
-        title: ("Ministro"),
-        titleFontSize: 14,
-        activeColor: Theme.of(context).textTheme.bodyText1.color,
-        inactiveColor: Theme.of(context).textTheme.bodyText2.color,
-      ),
-    ];
-  }
-
-
   @override
   Widget build(BuildContext context) {
-    return PersistentTabView(
-      controller: _controller,
+    return Scaffold(
 
-      screens: [
-        EnDesarrollo(title: 'Inicio'),
-        BiblePage(scrollController: scrollController),
-        EnDesarrollo(title: 'Aprender'),
-        BuscarPage(),
-        EnDesarrollo(title: 'Ministro')
-      ],
+      body: PageSelector(index: tabIndex, autoScrollController: autoScrollController,),
 
-      items: _navBarsItems(),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 5
+            )
+          ],
+        ),
 
-      confineInSafeArea: true,
-      backgroundColor: Theme.of(context).bottomAppBarColor,
-      handleAndroidBackButtonPress: true,
-      resizeToAvoidBottomInset: true, // This needs to be true if you want to move up the screen when keyboard appears.
-      stateManagement: true,
-      hideNavigationBarWhenKeyboardShows: true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument.
-      iconSize: 22,
-      navBarHeight: 50,
-      padding: NavBarPadding.fromLTRB(0, 0, 16, 16),
+        child: BottomNavigationBar(
+          currentIndex: tabIndex,
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Theme.of(context).bottomAppBarColor,
+          selectedItemColor: Theme.of(context).textTheme.bodyText1.color,
+          unselectedItemColor: Theme.of(context).textTheme.bodyText2.color,
 
-      decoration: NavBarDecoration(
-        colorBehindNavBar: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            blurRadius: 5
-          )
-        ],
-      ),
-      
-      popAllScreensOnTapOfSelectedTab: true,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              title: Text('Inicio'),
+            ),
 
-      itemAnimationProperties: ItemAnimationProperties( // Navigation Bar's items animation properties.
-        duration: Duration(milliseconds: 200),
-        curve: Curves.ease,
-      ),
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.book_solid),
+              title: Text('Biblia'),
+            ),
 
-      screenTransitionAnimation: ScreenTransitionAnimation( // Screen transition animation on change of selected tab.
-        animateTabTransition: true,
-        curve: Curves.ease,
-        duration: Duration(milliseconds: 200),
-      ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.school),
+              title: Text('Aprender'),
+            ),
 
-      onItemSelected: (index){
-        tabIndex = index;
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              title: Text('Buscar'),
+            ),
 
-        switch (index) {
-          case 0 : Wakelock.disable();
-            break;
-          case 1 : Wakelock.enable();
-            break;
-          case 2 : Wakelock.disable();
-            break;
-          case 3 : Wakelock.disable();
-            break;
-          case 4 : Wakelock.disable();
-            break;
-          default:
-        }
- 
-        SharedPreferences.getInstance().then((preferences){
-          preferences.setInt('bottomNavigationBarIndex', tabIndex);
-        });
-      },
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              title: Text('Ministro'),
+            ),
+          ],
+          onTap: (int index){
+            setState(() {
+              tabIndex = index;
+            });
 
-      navBarStyle: NavBarStyle.style9 // Choose the nav bar style with this property.
+            SharedPreferences.getInstance().then((preferences){
+              preferences.setInt('bottomNavigationBarIndex', tabIndex);
+            });
+          },
+        ),
+      )
     );
   }
 }

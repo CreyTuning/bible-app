@@ -11,7 +11,8 @@ class ChapterFooter extends StatelessWidget
         Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: RichText(
-              text: TextSpan(text: 'Reina Valera 1960 ©\nPronto el texto sera revisado y corregido para ofrecer una traducción sin errores y fiel a la Palabra de Dios.',
+              text: TextSpan(
+                text: 'Reina Valera 1960 ©\nPronto el texto sera revisado y corregido para ofrecer una traducción sin errores y fiel a la Palabra de Dios.',
                 style: TextStyle(
                     fontSize: 15,
                     fontFamily: 'Baloo',

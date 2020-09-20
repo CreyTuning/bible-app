@@ -18,8 +18,8 @@ class _HighlightPageState extends State<HighlightPage> {
   List content = [];
 
   Future getVerse(int book, int chapter, int verse) async {
-    Map data = json.decode(await rootBundle.loadString(intToBookPath[book]));
-    return data['chapters'][chapter - 1]['verses'][verse - 1]['text'].toString();
+    Map data = json.decode(await rootBundle.loadString('lib/bibles/RVR60/${book}_$chapter.json'));
+    return data['verses'][verse - 1]['text'].toString();
   }
 
   void highlightVerse(String reference){

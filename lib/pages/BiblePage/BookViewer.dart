@@ -1,16 +1,11 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-// import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:yhwh/data/Define.dart';
 import 'package:yhwh/data/Titles.dart';
 import 'package:yhwh/pages/BiblePage/Classes/Highlight.dart';
-import 'package:yhwh/ui_widgets/ScrollableListEdited/item_positions_listener.dart';
-import 'package:yhwh/ui_widgets/ScrollableListEdited/scrollable_positioned_list.dart';
-import 'package:yhwh/ui_widgets/chapter_footer.dart';
 import 'package:yhwh/ui_widgets/ui_verse.dart';
 
 class BookViewer extends StatefulWidget {
@@ -18,32 +13,31 @@ class BookViewer extends StatefulWidget {
     @required this.bookNumber,
     @required this.chapterNumber,
     @required this.chapterFooter,
-    @required this.itemScrollController,
     @required this.verseNumber,
-    @required this.scrollController,
+    @required this.autoScrollController,
   });
   
-  final ChapterFooter chapterFooter;
+  final Widget chapterFooter;
   final int bookNumber;
   final int chapterNumber;
   final int verseNumber;
-  final ItemScrollController itemScrollController;
-  final ScrollController scrollController;
+  final AutoScrollController autoScrollController;
   
   _BookViewerState createState() => _BookViewerState();
 }
 
 class _BookViewerState extends State<BookViewer> {
-  final ItemPositionsListener itemPositionsListener = ItemPositionsListener.create();
+  
   List<Widget> content = List<Widget>();
-  Future getChapter(int book, int chapter) async => json.decode(await rootBundle.loadString(intToBookPath[book]))['chapters'][chapter - 1]['verses'];
-
-
   double fontSize = 20.0;
   double height = 1.8;
   double letterSeparation = 0.0;
   Map highlight = {};
 
+
+  Future getChapter(int book, int chapter) async {
+    return json.decode(await rootBundle.loadString('lib/bibles/RVR60/${book}_$chapter.json'))['verses'];
+  }
 
   void highlightVerse(String reference){
     setState(() {
@@ -92,8 +86,6 @@ class _BookViewerState extends State<BookViewer> {
       setState(() {
       });
     });
-
-    // widget.scrollController.jumpTo(widget.scrollController.offset + 55);
     
     super.initState();
   }
@@ -137,14 +129,29 @@ class _BookViewerState extends State<BookViewer> {
           // Agregar pie de pagina
           content.add(widget.chapterFooter);
 
-          return NewScrollablePositionedList.builder(
-            initialScrollIndex: 0,
-            itemScrollController: widget.itemScrollController,
-            itemPositionsListener: itemPositionsListener,
-            itemCount: content.length,
-            itemBuilder: (context, i) => content[i],
-            myScrollController: widget.scrollController,
+          return Scrollbar(
+            child: ListView.builder(
+              itemCount: content.length,
+              controller: widget.autoScrollController,
+              itemBuilder: (context, index) {
+                return AutoScrollTag(
+                  key: ValueKey(index),
+                  controller: widget.autoScrollController,
+                  index: index,
+                  child: content[index]
+                );
+              },
+            ),
           );
+
+          // return NewScrollablePositionedList.builder(
+          //   initialScrollIndex: 0,
+          //   itemScrollController: widget.itemScrollController,
+          //   itemPositionsListener: itemPositionsListener,
+          //   itemCount: content.length,
+          //   itemBuilder: (context, i) => content[i],
+          //   myScrollController: widget.scrollController,
+          // );
         }
 
         else return Center(

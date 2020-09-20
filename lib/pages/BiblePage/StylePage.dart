@@ -2,10 +2,12 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yhwh/icons/custom_icons_icons.dart';
-
+import 'package:yhwh/pages/BiblePage/BookViewerForStylePage.dart';
 import '../../themes.dart';
+
 
 class StylePage extends StatefulWidget{
   StylePage({this.setTextFormat});
@@ -23,6 +25,7 @@ class _StylePageState extends State<StylePage>{
   double height = 1.80;
   double letterSeparation = 0;
   bool blackThemeEnabled = false;
+  bool highlightVersePreview = false; 
 
 
   @override
@@ -111,7 +114,7 @@ class _StylePageState extends State<StylePage>{
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Ajustes de lectura'),
+          title: Text('Preferencias'),
           actions: <Widget>[
             Container(
               width: 60.0,
@@ -138,25 +141,183 @@ class _StylePageState extends State<StylePage>{
             controller: tabController,
             tabs: [
               Tab(icon: Icon(Icons.format_size)),
-              Tab(icon: Icon(Icons.swap_horiz)),
+              Tab(icon: Icon(Icons.color_lens)),
             ]
           ),
         ),
 
         body: TabBarView(
           children: [
+            
+            //Ajustes de lectura
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+
+                TopLabel(text: 'Vista previa de lectura'),
+                Divider(
+                  color: Colors.transparent,
+                  height: 5,
+                ),
+
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      // padding: EdgeInsets.symmetric(vertical: 5),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color: Theme.of(context).textTheme.bodyText1.color,
+                          width: 2
+                        )
+                      ),
+
+                      clipBehavior: Clip.antiAlias,
+
+                      child: BookViewerForStylePage(
+                        bookNumber: 1,
+                        chapterNumber: 1,
+                        chapterFooter: SizedBox(height: 20),
+                        verseNumber: 1,
+                        autoScrollController: AutoScrollController(),
+                        fontSize: fontSize,
+                        height: height,
+                        letterSeparation: letterSeparation,
+                      )
+                    ),
+                  ),
+                ),
+
+                
+                Padding(
+                  padding: EdgeInsets.only(bottom: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TopLabel(text: 'Preferencias de caracteres'),
+                      Divider(
+                        color: Colors.transparent,
+                        height: 5,
+                      ),
+                      
+                      Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
+                            child: Center(
+                              child: Icon(Icons.format_size),
+                            ),
+                          ),
+                          
+                          Expanded(
+                            child: Slider(
+                              onChangeEnd: (value){
+                                saveAndUpdateValues();
+                              },
+
+                              activeColor: Theme.of(context).textTheme.bodyText1.color,
+                              inactiveColor: Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
+                              value: fontSize,
+                              min: 18,
+                              max: 30,
+                              divisions: 12,
+                              // label: 'Tamaño de letra: ${fontSize.round().toString()}',
+                              onChanged: (double value) {
+                                setState(() {
+                                  fontSize = value;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
+                            child: Center(
+                              child: Icon(Icons.format_line_spacing),
+                            ),
+                          ),
+                          
+                          Expanded(
+                            child: Slider(
+                              onChangeEnd: (value){
+                                saveAndUpdateValues();
+                              },
+
+                              activeColor: Theme.of(context).textTheme.bodyText1.color,
+                              inactiveColor: Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
+                              value: height,
+                              min: 1.05,
+                              max: 3.05,
+                              divisions: 8,
+                              // label: 'Altura de linea: ${(height * 10).round()}',
+                              onChanged: (double value) {
+                                setState(() {
+                                  height = value;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+
+
+                      Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
+                            child: Center(
+                              child: Icon(CustomIcons.format_horizontal_align_center_expand),
+                            ),
+                          ),
+                          
+                          Expanded(
+                            child: Slider(
+                              onChangeEnd: (value){
+                                saveAndUpdateValues();
+                              },
+
+                              activeColor: Theme.of(context).textTheme.bodyText1.color,
+                              inactiveColor: Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
+                              value: letterSeparation,
+                              min: -1.5,
+                              max: 5,
+                              divisions: 13,
+                              // label: 'Separación de letras: ${(letterSeparation * 10).round()}',
+                              onChanged: (double value) {
+                                setState(() {
+                                  letterSeparation = value;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                )
+
+              ],
+            ),
+
+            
+            // Colores personalizados
             Scrollbar(
               child: ListView(
                 padding: EdgeInsets.only(bottom: 55),
                 children: <Widget>[
 
-                  TopLabel(text: 'Colores personalizados'),
+                  TopLabel(text: 'Combinación de colores'),
 
                   SwitchListTile(
                     activeColor: Theme.of(context).textTheme.bodyText1.color,
                     value: DynamicTheme.of(context).brightness == Brightness.dark ? true : false,
-                    title: Text("Modo oscuro", style: Theme.of(context).textTheme.button),
-                    subtitle: Text("Lectura nocturna",
+                    title: Text("Lectura nocturna", style: Theme.of(context).textTheme.button),
+                    subtitle: Text("Colores oscuros",
                       style: Theme.of(context).textTheme.bodyText1.copyWith(
                           fontSize: 16,
                           color: Theme.of(context).textTheme.bodyText2.color
@@ -174,184 +335,41 @@ class _StylePageState extends State<StylePage>{
                     },
                   ),
 
-                  // CheckboxListTile(
-                  //   activeColor: Theme.of(context).accentColor,
-                  //   value: DynamicTheme.of(context).brightness == Brightness.dark ? true : false,
-                  //   title: Text("Modo oscuro", style: Theme.of(context).textTheme.button),
-                  //   // subtitle: Text("Invierte tonalidad de la interfaz",
-                  //   //   style: Theme.of(context).textTheme.bodyText1.copyWith(
-                  //   //       fontSize: 16,
-                  //   //       color: Theme.of(context).textTheme.bodyText2.color
-                  //   //   )
-                  //   // ),
+                  (DynamicTheme.of(context).brightness == Brightness.dark) ? SwitchListTile(
+                    activeColor: Theme.of(context).textTheme.bodyText1.color,
+                    value: blackThemeEnabled,
+                    title: Text("Fondo negro", style: Theme.of(context).textTheme.button),
+                    subtitle: Text("Diseñado para pantallas Oled",
+                      style: Theme.of(context).textTheme.bodyText1.copyWith(
+                          fontSize: 16,
+                          color: Theme.of(context).textTheme.bodyText2.color
+                      )
+                    ),
 
-                  //   onChanged: (value)
-                  //   {
-                  //     DynamicTheme.of(context).setBrightness(Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark);
-                  //     DynamicTheme.of(context).setThemeData(AppThemes.getTheme(Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark, blackThemeEnabled));
-
-                  //     SharedPreferences.getInstance().then((preferences){
-                  //       preferences.setBool('darkMode', (DynamicTheme.of(context).brightness == Brightness.dark) ? false : true);
-                  //     });
-                  //   },
-                  // ),
-
-                  // SwitchListTile(
-                  //   activeColor: Theme.of(context).accentColor,
-                  //   value: blackThemeEnabled,
-                  //   title: Text("Pantalla Oled", style: Theme.of(context).textTheme.button),
-                  //   subtitle: Text("Fondo de color negro",
-                  //     style: Theme.of(context).textTheme.bodyText1.copyWith(
-                  //         fontSize: 16,
-                  //         color: Theme.of(context).textTheme.bodyText2.color
-                  //     )
-                  //   ),
-
-                  //   onChanged: (value)
-                  //   {
-                  //     // DynamicTheme.of(context).setBrightness(Theme.of(context).brightness == Brightness.dark? Brightness.light: Brightness.dark);
+                    onChanged: (value)
+                    {
+                      // DynamicTheme.of(context).setBrightness(Theme.of(context).brightness == Brightness.dark? Brightness.light: Brightness.dark);
                       
-                  //     blackThemeEnabled = value;
+                      blackThemeEnabled = value;
 
-                  //     SharedPreferences.getInstance().then((preferences){
-                  //       setState(() {
-                  //         preferences.setBool('blackThemeEnabled', value);
-                  //       });
-                  //     });
+                      SharedPreferences.getInstance().then((preferences){
+                        setState(() {
+                          preferences.setBool('blackThemeEnabled', value);
+                        });
+                      });
 
-                  //     DynamicTheme.of(context).setThemeData(AppThemes.getTheme(Theme.of(context).brightness, blackThemeEnabled));
+                      DynamicTheme.of(context).setThemeData(AppThemes.getTheme(Theme.of(context).brightness, blackThemeEnabled));
 
-                  //   },
-                  // ),
-
-                  // ColorSelector(),
-
-                  TopLabel(text: 'Preferencias de caracteres'),
-                  
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
-                        child: Center(
-                          child: Icon(Icons.format_size),
-                        ),
-                      ),
-                      
-                      Expanded(
-                        child: Slider(
-                          onChangeEnd: (value){
-                            saveAndUpdateValues();
-                          },
-
-                          activeColor: Theme.of(context).textTheme.bodyText1.color,
-                          inactiveColor: Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
-                          value: fontSize,
-                          min: 18,
-                          max: 30,
-                          divisions: 12,
-                          label: 'Tamaño de letra: ${fontSize.round().toString()}',
-                          onChanged: (double value) {
-                            setState(() {
-                              fontSize = value;
-                            });
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
-                        child: Center(
-                          child: Icon(Icons.format_line_spacing),
-                        ),
-                      ),
-                      
-                      Expanded(
-                        child: Slider(
-                          onChangeEnd: (value){
-                            saveAndUpdateValues();
-                          },
-
-                          activeColor: Theme.of(context).textTheme.bodyText1.color,
-                          inactiveColor: Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
-                          value: height,
-                          min: 1.05,
-                          max: 3.05,
-                          divisions: 8,
-                          label: 'Altura de linea: ${(height * 10).round()}',
-                          onChanged: (double value) {
-                            setState(() {
-                              height = value;
-                            });
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
+                    },
+                  ) : SizedBox(),
 
 
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
-                        child: Center(
-                          child: Icon(CustomIcons.format_horizontal_align_center_expand),
-                        ),
-                      ),
-                      
-                      Expanded(
-                        child: Slider(
-                          onChangeEnd: (value){
-                            saveAndUpdateValues();
-                          },
+                  TopLabel(text: 'Color del resaltador'),
+                  ColorSelector()
 
-                          activeColor: Theme.of(context).textTheme.bodyText1.color,
-                          inactiveColor: Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
-                          value: letterSeparation,
-                          min: -1.5,
-                          max: 5,
-                          divisions: 13,
-                          label: 'Separación de letras: ${(letterSeparation * 10).round()}',
-                          onChanged: (double value) {
-                            setState(() {
-                              letterSeparation = value;
-                            });
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  // ValueChanger( title: 'Tamaño de letra', value: '${fontSize.toInt()} pts', lessFuction: lessFontSize, plusFuction: plusFontSize ),
-                  // ValueChanger( title: 'Altura de linea', value: '${height.toStringAsPrecision(2)} pts', lessFuction: lessHeight, plusFuction: plusHeight),
-                  // ValueChanger( title: 'Espaciado de letras', value: '$letterSeparation pts', lessFuction: lessLetterSeparation, plusFuction: plusLetterSeparation),
                 ],
               ),
             ),
-
-            
-            
-            
-            
-            Center(child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Icon(Icons.settings, size: 59.0,),
-                Divider(color: Colors.transparent),
-                Text('Gestor de palabras', style: TextStyle(fontWeight: FontWeight.bold)),
-                Text('En desarrollo', style: TextStyle(
-                  color: Theme.of(context).textTheme.bodyText2.color,
-                  fontSize: 15,
-                  fontStyle: FontStyle.italic
-                )),
-              ],
-            )),
-          
-          
-          
           
           ],
         )

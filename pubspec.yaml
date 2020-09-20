@@ -33,9 +33,8 @@ dependencies:
   flutter_launcher_name: "^0.0.1"
   scrollable_positioned_list: ^0.1.6
   wakelock: ^0.1.4+2
-  draggable_scrollbar: ^0.0.4
   floating_search_bar: ^0.3.0
-  persistent_bottom_nav_bar: ^2.0.5
+  scroll_to_index: ^1.0.6
 
 # flutter pub run flutter_launcher_name:main
 flutter_launcher_name:
@@ -44,7 +43,6 @@ flutter_launcher_name:
 # el comando es: "flutter pub run flutter_launcher_icons:main"
 flutter_icons:
   android: true
-  ios: true
   image_path: "Appicon/icon.png"
 
 dev_dependencies:
@@ -55,7 +53,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-   - lib/bible/
+    - lib/bibles/RVR60/
 
   fonts:
     - family:  CustomIcons

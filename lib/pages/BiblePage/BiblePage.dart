@@ -1,23 +1,20 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yhwh/data/Define.dart';
 import 'package:yhwh/pages/BiblePage/BookSelection.dart';
 import 'package:yhwh/pages/BiblePage/HighlightPage.dart';
-import 'package:yhwh/pages/BiblePage/SecondaryBookSelection.dart';
 import 'package:yhwh/pages/BiblePage/StylePage.dart';
-import 'package:yhwh/ui_widgets/ScrollableListEdited/scrollable_positioned_list.dart';
 import 'package:yhwh/ui_widgets/chapter_footer.dart';
 import 'BookViewer.dart';
 
 
 class BiblePage extends StatefulWidget {
   BiblePage({
-    this.scrollController
+    this.autoScrollController
   });
 
-  final ScrollController scrollController;
+  final AutoScrollController autoScrollController;
 
   @override
   _BiblePageState createState() => _BiblePageState();
@@ -28,7 +25,6 @@ class _BiblePageState extends State<BiblePage> {
   int bookNumber = 0;
   int chapterNumber = 0;
   int verseNumber = 0;
-  ItemScrollController itemScrollController = ItemScrollController();
 
 
   @override
@@ -56,14 +52,13 @@ class _BiblePageState extends State<BiblePage> {
         chapterNumber = chapter;
         verseNumber = verse;
       
-        itemScrollController.jumpTo(index: verse - 1);
+        widget.autoScrollController.scrollToIndex(verse - 1, preferPosition: AutoScrollPosition.begin);
       });
     });
   }
 
   void nextChapter(){
-    widget.scrollController.jumpTo(0);
-    itemScrollController.jumpTo(index: 0);
+    widget.autoScrollController.animateTo(0, duration: Duration(milliseconds: 500), curve: Curves.easeOut);
     
     SharedPreferences.getInstance().then((preferences){
       if (chapterNumber < namesAndChapters[bookNumber - 1][1]) {
@@ -91,9 +86,7 @@ class _BiblePageState extends State<BiblePage> {
   }
 
   void previousChapter(){
-    widget.scrollController.jumpTo(0);
-    itemScrollController.jumpTo(index: 0);
-    // widget.scrollController.jumpTo(widget.scrollController.offset - 73);
+    widget.autoScrollController.animateTo(0, duration: Duration(milliseconds: 500), curve: Curves.easeOut);
 
     SharedPreferences.getInstance().then((preferences){
       if (chapterNumber > 1) {
@@ -130,7 +123,6 @@ class _BiblePageState extends State<BiblePage> {
       return Center(child: CircularProgressIndicator());
 
     return Scaffold(
-      // extendBodyBehindAppBar: true,
       extendBody: true,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Padding(
@@ -155,11 +147,20 @@ class _BiblePageState extends State<BiblePage> {
                 ]
               ),
 
-              child: InkWell(
-                borderRadius: BorderRadius.circular(100),
-                child: Icon(Icons.keyboard_arrow_left, color: Theme.of(context).textTheme.bodyText1.color),
-                onTap: previousChapter,
-              )
+              child: MaterialButton(
+                elevation: 0,
+                onPressed: previousChapter,
+                color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
+                textColor: Colors.white,
+
+                child: Icon(
+                  Icons.keyboard_arrow_left,
+                  color: Theme.of(context).textTheme.bodyText1.color,
+                  size: 24,
+                ),
+                padding: EdgeInsets.all(0),
+                shape: CircleBorder(),
+              ),
             ),
 
             Expanded(child: SizedBox.fromSize()),
@@ -170,7 +171,6 @@ class _BiblePageState extends State<BiblePage> {
               width: 41.0,
               height: 41.0,
               decoration: BoxDecoration(
-                color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
                 borderRadius: BorderRadius.circular(100),
                 boxShadow: [
                   BoxShadow(
@@ -181,11 +181,20 @@ class _BiblePageState extends State<BiblePage> {
                 ]
               ),
 
-              child: InkWell(
-                borderRadius: BorderRadius.circular(100),
-                child: Icon(Icons.keyboard_arrow_right, color: Theme.of(context).textTheme.bodyText1.color,),
-                onTap: nextChapter,
-              )
+              child: MaterialButton(
+                elevation: 0,
+                onPressed: nextChapter,
+                color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
+                textColor: Colors.white,
+
+                child: Icon(
+                  Icons.keyboard_arrow_right,
+                  color: Theme.of(context).textTheme.bodyText1.color,
+                  size: 24,
+                ),
+                padding: EdgeInsets.all(0),
+                shape: CircleBorder(),
+              ),
             ),
 
           ],
@@ -206,7 +215,7 @@ class _BiblePageState extends State<BiblePage> {
                   RichText(
                     overflow: TextOverflow.ellipsis,
                     text: TextSpan(
-                      text: '${intToAbreviatura[bookNumber]} $chapterNumber',
+                      text: '${intToBook[bookNumber]} $chapterNumber',
                       style: Theme.of(context).textTheme.bodyText1.copyWith(
                         fontFamily: 'Roboto-Medium',
                         fontSize: 16.6,
@@ -234,76 +243,30 @@ class _BiblePageState extends State<BiblePage> {
 
             onLongPress: () {
 
-              showDialog(
+              // showDialog(
 
-                context: context,
-                child: Padding(
+              //   context: context,
+              //   child: Padding(
 
-                  padding: EdgeInsets.all(20),
+              //     padding: EdgeInsets.all(20),
 
-                  child: SecondaryBookSelectionPage(
-                    initialTab: 0,
-                  ),
-
-                )
-              );
+              //     child: SecondaryBookSelectionPage(
+              //       initialTab: 0,
+              //     )
+              //   )
+              // );
             },
             
           ),
-
-          InkWell(
-            borderRadius: BorderRadius.circular(10),
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
-              child: Row(
-                children: <Widget>[
-
-                  RichText(
-                    overflow: TextOverflow.ellipsis,
-                    text: TextSpan(
-                      text: 'RVR60',
-                      style: Theme.of(context).textTheme.bodyText1.copyWith(
-                        fontFamily: 'Roboto-Medium',
-                        fontSize: 16.6,
-                      ),
-                    )
-                  ),
-
-                  Icon(Icons.arrow_drop_down, color: Theme.of(context).iconTheme.color, size: 20,),
-                ],
-              ),
-            ),
-
-            onTap: () {},
-            onLongPress: () {},
-            
-          ),
           
-          Spacer(flex: 10,),
-
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 7),
-            child: InkWell(
-              child: Container(
-                child: Icon(Icons.color_lens, color: Theme.of(context).iconTheme.color, size: 21,),
-                width: 43,
-                height: 45,
-              ),
-              borderRadius: BorderRadius.circular(30),
-              onTap: () {},
-              onLongPress: () {},
-            ),
-          ),
-
           Spacer(),
 
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 7),
+            padding: EdgeInsets.symmetric(vertical: 3),
             child: InkWell(
               child: Container(
                 child: Icon(Icons.bookmark, color: Theme.of(context).iconTheme.color, size: 21,),
-                width: 43,
-                height: 45,
+                width: 50
               ),
               borderRadius: BorderRadius.circular(30),
               onTap: () {
@@ -313,14 +276,12 @@ class _BiblePageState extends State<BiblePage> {
             ),
           ),
 
-          Spacer(),
-
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 7),
+            padding: EdgeInsets.symmetric(vertical: 3),
             child: InkWell(
               child: Container(
                 child: Icon(Icons.settings, color: Theme.of(context).iconTheme.color, size: 21,),
-                width: 43,
+                width: 50
               ),
               borderRadius: BorderRadius.circular(30),
               onTap: () {
@@ -330,7 +291,7 @@ class _BiblePageState extends State<BiblePage> {
             ),
           ),
 
-          SizedBox(width: 5)
+          SizedBox(width: 5),
 
         ],
       ),
@@ -340,8 +301,7 @@ class _BiblePageState extends State<BiblePage> {
         chapterNumber: chapterNumber,
         verseNumber: verseNumber,
         chapterFooter: ChapterFooter(),
-        itemScrollController: itemScrollController,
-        scrollController: widget.scrollController,
+        autoScrollController: widget.autoScrollController,
       ),
     );
   }

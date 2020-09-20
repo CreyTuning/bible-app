@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:wakelock/wakelock.dart';
 import 'package:yhwh/pages/BiblePage/BiblePage.dart';
 
 class PageSelector extends StatelessWidget{
-  PageSelector({@required this.index, this.scrollController});
+  PageSelector({@required this.index, this.autoScrollController});
 
   final int index;
-  final ScrollController scrollController;
+  final AutoScrollController autoScrollController;
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +22,7 @@ class PageSelector extends StatelessWidget{
         break;
       case 1:
         Wakelock.enable();
-        page = BiblePage(
-          scrollController: scrollController,
-        );
+        page = BiblePage(autoScrollController: autoScrollController);
         break;
       case 2:
         Wakelock.disable();
