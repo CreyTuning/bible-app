@@ -33,19 +33,37 @@ class MainPageState extends State<MainPage> {
       body: PageSelector(index: tabIndex, autoScrollController: autoScrollController,),
 
       bottomNavigationBar: Container(
+        foregroundDecoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(
+              color: Theme.of(context).dividerColor,
+              width: 2
+            )
+          )
+        ),
+
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              blurRadius: 5
+              color: Colors.black.withOpacity(0.4),
+              blurRadius: 1,
+              spreadRadius: 1
             )
           ],
+
+          border: Border(
+            top: BorderSide(
+              color: Theme.of(context).dividerColor,
+              width: 2
+            )
+          )
         ),
 
         child: BottomNavigationBar(
           currentIndex: tabIndex,
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Theme.of(context).bottomAppBarColor,
+          elevation: Theme.of(context).bottomNavigationBarTheme.elevation,
+          type: Theme.of(context).bottomNavigationBarTheme.type,
+          backgroundColor: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
           selectedItemColor: Theme.of(context).textTheme.bodyText1.color,
           unselectedItemColor: Theme.of(context).textTheme.bodyText2.color,
 

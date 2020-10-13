@@ -72,7 +72,17 @@ class _BookSelectionPageState extends State<BookSelectionPage> with SingleTicker
         )),
         
         bottom: TabBar(
-          indicatorColor: Theme.of(context).textTheme.bodyText1.color,
+          labelStyle: Theme.of(context).textTheme.bodyText1.copyWith(
+            fontFamily: 'Roboto-Medium',
+            fontSize: 17
+          ),
+
+          unselectedLabelStyle: Theme.of(context).textTheme.bodyText1.copyWith(
+            fontFamily: 'Roboto-Medium',
+            fontSize: 17
+          ),
+
+          indicatorColor: Theme.of(context).accentColor,
           controller: tabController,
           tabs: [
             Tab(text: 'Libro'),
@@ -135,6 +145,7 @@ class _BookSelectionPageState extends State<BookSelectionPage> with SingleTicker
                               style: Theme.of(context).textTheme.button.copyWith(
                                 fontSize: 19,
                                 color: (item == chapter.value - 1) ? Theme.of(context).canvasColor : Theme.of(context).textTheme.bodyText1.color,
+                                fontFamily: 'Roboto-Medium'
                                 // fontWeight: FontWeight.bold
                               )
                             ),
@@ -187,7 +198,7 @@ class _BookSelectionPageState extends State<BookSelectionPage> with SingleTicker
                               style: Theme.of(context).textTheme.button.copyWith(
                                 fontSize: 19,
                                 color: (item == verse.value - 1) ? Theme.of(context).canvasColor : Theme.of(context).textTheme.bodyText1.color,
-                                // fontWeight: FontWeight.bold
+                                fontFamily: 'Roboto-Medium'
                               )
                             ),
                           ),
@@ -288,7 +299,7 @@ class _SelecionarLibroState extends State<SelecionarLibro>
                 filterSearchResults(value);
               },
 
-              cursorColor: Theme.of(context).accentColor,
+              cursorColor: Theme.of(context).textTheme.bodyText1.color,
               controller: editingController,
               decoration: InputDecoration(
                 
@@ -306,7 +317,7 @@ class _SelecionarLibroState extends State<SelecionarLibro>
                 alignLabelWithHint: true,
 
                 hintText: "Buscar...",
-                prefixIcon: Icon(Icons.search, color: Theme.of(context).iconTheme.color, size: 24,),
+                prefixIcon: Icon(Icons.search, color: Theme.of(context).textTheme.bodyText2.color, size: 24,),
               )
             ),
           ),
@@ -322,12 +333,21 @@ class _SelecionarLibroState extends State<SelecionarLibro>
 
                   return ListTile(
                     title: intToBook[widget.getReference()[0]] == items[index][1]
-                        ? Text(items[index][1], style: TextStyle(
-                      fontSize: 19,
-                      color: Theme.of(context).textTheme.bodyText1.color,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: Theme.of(context).textTheme.button.fontFamily,))
-                        : Text(items[index][1], style: Theme.of(context).textTheme.bodyText1),
+                        ? Text(items[index][1],
+                          style: TextStyle(
+                            fontSize: 19,
+                            color: Theme.of(context).textTheme.bodyText1.color,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Roboto-Medium'
+                          )
+                        )
+                        : Text(items[index][1], style: Theme.of(context).textTheme.bodyText1.copyWith(
+                          fontFamily: 'Roboto',
+                          fontSize: 19,
+                          color: Theme.of(context).textTheme.bodyText1.color
+                        )),
+
+                    // leading: intToBook[widget.getReference()[0]] == items[index][1] ? Icon(Icons.bookmark, color: Theme.of(context).textTheme.bodyText1.color,) : SizedBox(),
                       
 
                     onTap: () async

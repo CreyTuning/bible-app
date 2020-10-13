@@ -129,7 +129,7 @@ Map titles = {
       17: 'Carácter servicial de Rebeca',
       28: 'Rebeca confirma su elección',
       34: 'Mensaje del criado de Abraham',
-      50: 'Del YHWH ha salido esto',
+      50: 'Del Yahweh ha salido esto',
       61: 'Isaac y Rebeca se encuentran'
     },
 
@@ -595,7 +595,7 @@ Map titles = {
     5: {1: 'Los Diez Mandamientos'},
     6: {1: 'El mayor mandamiento'},
     7: {1: 'Un pueblo elegido'},
-    8: {1: 'Acuérdate de YHWH tu Dios'},
+    8: {1: 'Acuérdate de Yahweh tu Dios'},
     9: {1: 'No por tu justicia', 13: 'El becerro de oro'},
     10: {1: 'Nuevas tablas de piedra', 12: 'Circuncidad vuestro corazón'},
     11: {1: 'Ama y sirve al Señor'},
@@ -1399,7 +1399,7 @@ Map titles = {
       1: 'Oh Señor, libra mi alma\n#subtitle Al músico principal; en Neginot, sobre Seminit. Salmo de David.'
     },
     7: {
-      1: 'Dios mío, en ti he confiado\n#subtitle Sigaión de David, que cantó a YHWH acerca de las palabras de Cus hijo de Benjamín.'
+      1: 'Dios mío, en ti he confiado\n#subtitle Sigaión de David, que cantó a Yahweh acerca de las palabras de Cus hijo de Benjamín.'
     },
     8: {
       1: 'Cuán glorioso es tu nombre\n#subtitle Al músico principal; sobre Gitit. Salmo de David.'
@@ -1424,7 +1424,7 @@ Map titles = {
     16: {1: 'No dejarás mi alma en el infierno\n#subtitle Mictam de David.'},
     17: {1: 'Bajo la sombra de tus alas\n#subtitle Oración de David.'},
     18: {
-      1: 'Acción de gracias por la victoria\n#subtitle (2 S. 22.1-51)\n#subtitle Al músico principal. Salmo de David, siervo de YHWH, el cual dirigió a YHWH las palabras de este cántico el día que le libró YHWH de mano de todos sus enemigos, y de mano de Saúl. Entonces dijo:'
+      1: 'Acción de gracias por la victoria\n#subtitle (2 S. 22.1-51)\n#subtitle Al músico principal. Salmo de David, siervo de Yahweh, el cual dirigió a Yahweh las palabras de este cántico el día que le libró Yahweh de mano de todos sus enemigos, y de mano de Saúl. Entonces dijo:'
     },
     19: {
       1: 'La ley del Señor es perfecta\n#subtitle Al músico principal. Salmo de David.'
@@ -1438,7 +1438,7 @@ Map titles = {
     22: {
       1: '¿Por qué me has desamparado?\n#subtitle Al músico principal; sobre Ajelet-sahar. Salmo de David.'
     },
-    23: {1: 'YHWH es mi pastor\n#subtitle Salmo de David.'},
+    23: {1: 'Yahweh es mi pastor\n#subtitle Salmo de David.'},
     24: {1: 'El Rey de gloria\n#subtitle Salmo de David.'},
     25: {1: 'Enséñame tus sendas\n#subtitle Salmo de David.'},
     26: {1: 'Bendeciré al Señor\n#subtitle Salmo de David.'},
@@ -1454,7 +1454,7 @@ Map titles = {
     },
     33: {1: 'La misericordia del Señor'},
     34: {
-      1: 'Gustad y ved que es bueno YHWH\n#subtitle Salmo de David, cuando mudó su semblante delante de Abimelec, y él lo echó, y se fue.'
+      1: 'Gustad y ved que es bueno Yahweh\n#subtitle Salmo de David, cuando mudó su semblante delante de Abimelec, y él lo echó, y se fue.'
     },
     35: {1: 'Grande es el Señor\n#subtitle Salmo de David.'},
     36: {
@@ -1511,7 +1511,7 @@ Map titles = {
       1: 'El Señor sostiene mi vida\n#subtitle Al músico principal; en Neginot. Masquil de David, cuando vinieron los zifeos y dijeron a Saúl: ¿No está David escondido en nuestra tierra?'
     },
     55: {
-      1: 'Echa sobre YHWH tu carga\n#subtitle Al músico principal; en Neginot. Masquil de David.'
+      1: 'Echa sobre Yahweh tu carga\n#subtitle Al músico principal; en Neginot. Masquil de David.'
     },
     56: {
       1: 'En Dios he confiado\n#subtitle Al músico principal; sobre La paloma silenciosa en paraje muy distante. Mictam de David, cuando los filisteos le prendieron en Gat.'
@@ -1584,7 +1584,7 @@ Map titles = {
     82: {1: 'Librad al afligido y al necesitado\n#subtitle Salmo de Asaf.'},
     83: {1: 'Oh Dios, no guardes silencio\n#subtitle Cántico. Salmo de Asaf.'},
     84: {
-      1: 'Anhela mi alma los atrios de YHWH\n#subtitle Al músico principal; sobre Gitit. Salmo para los hijos de Coré.'
+      1: 'Anhela mi alma los atrios de Yahweh\n#subtitle Al músico principal; sobre Gitit. Salmo para los hijos de Coré.'
     },
     85: {
       1: '¿No volverás a darnos vida?\n#subtitle Al músico principal. Salmo para los hijos de Coré.'
@@ -1599,7 +1599,7 @@ Map titles = {
       1: 'Día y noche clamo delante de ti\n#subtitle Cántico. Salmo para los hijos de Coré. Al músico principal, para cantar sobre Mahalat. Masquil de Hemán ezraíta.'
     },
     89: {
-      1: 'Las misericordias de YHWH cantaré perpetuamente\n#subtitle Masquil de Etán ezraíta.'
+      1: 'Las misericordias de Yahweh cantaré perpetuamente\n#subtitle Masquil de Etán ezraíta.'
     },
     90: {
       1: '#title_big Libro IV: Salmos 90—106\nDesde el siglo y hasta el siglo\n#subtitle Oración de Moisés, varón de Dios.'
@@ -1609,12 +1609,12 @@ Map titles = {
       1: '¡Cuán grandes son tus obras!\n#subtitle Salmo. Cántico para el día de reposo.'
     },
     93: {1: 'El Señor reina'},
-    94: {1: 'No abandonará YHWH a su pueblo'},
+    94: {1: 'No abandonará Yahweh a su pueblo'},
     95: {1: 'Cantemos con júbilo'},
-    96: {1: 'Adorad a YHWH en la hermosura de la santidad'},
+    96: {1: 'Adorad a Yahweh en la hermosura de la santidad'},
     97: {1: 'El Señor reina'},
-    98: {1: 'Cantad a YHWH cántico nuevo\n#subtitle Salmo.'},
-    99: {1: 'YHWH nuestro Dios es santo'},
+    98: {1: 'Cantad a Yahweh cántico nuevo\n#subtitle Salmo.'},
+    99: {1: 'Yahweh nuestro Dios es santo'},
     100: {1: 'Para siempre es su misericordia\n#subtitle Salmo de alabanza'},
     101: {1: 'Andaré en integridad\n#subtitle Salmo de David.'},
     102: {
@@ -1632,13 +1632,13 @@ Map titles = {
       1: 'Ayúdame, oh Señor Dios mío\n#subtitle Al músico principal. Salmo de David.'
     },
     110: {1: 'Siéntate a mi diestra\n#subtitle Salmo de David.'},
-    111: {1: 'Grandes son las obras de YHWH\n#subtitle Aleluya.'},
+    111: {1: 'Grandes son las obras de Yahweh\n#subtitle Aleluya.'},
     112: {1: 'El justo no resbalará jamás\n#subtitle Aleluya.'},
-    113: {1: '¿Quién como YHWH nuestro Dios?\n#subtitle Aleluya.'},
+    113: {1: '¿Quién como Yahweh nuestro Dios?\n#subtitle Aleluya.'},
     114: {1: 'A la presencia de Dios tiembla la tierra'},
     115: {1: 'A tu nombre da gloria'},
     116: {1: 'Amo al Señor'},
-    117: {1: 'La fidelidad de YHWH es para siempre'},
+    117: {1: 'La fidelidad de Yahweh es para siempre'},
     118: {1: 'Para siempre es su misericordia'},
     119: {
       1: 'Lámpara es a mis pies tu palabra: Alef',
@@ -1664,34 +1664,34 @@ Map titles = {
       161: 'Sin',
       169: 'Tau'
     },
-    120: {1: 'Libra mi alma, oh YHWH\n#subtitle Cántico gradual.'},
+    120: {1: 'Libra mi alma, oh Yahweh\n#subtitle Cántico gradual.'},
     121: {1: 'Mi socorro viene del Señor\n#subtitle Cántico gradual.'},
     122: {1: 'Vamos a la casa del Señor\n#subtitle Cántico gradual; de David.'},
     123: {
       1: 'Nuestros ojos miran al Señor Nuestro Dios\n#subtitle Cántico gradual.'
     },
     124: {
-      1: 'Nuestro socorro está en el nombre de YHWH\n#subtitle Cántico gradual; de David.'
+      1: 'Nuestro socorro está en el nombre de Yahweh\n#subtitle Cántico gradual; de David.'
     },
     125: {
       1: 'El Señor está alrededor de su pueblo\n#subtitle Cántico gradual.'
     },
     126: {1: 'Haz volver nuestra cautividad\n#subtitle Cántico gradual.'},
-    127: {1: 'Si YHWH no edificare la casa\n#subtitle Cántico gradual.'},
+    127: {1: 'Si Yahweh no edificare la casa\n#subtitle Cántico gradual.'},
     128: {
       1: 'Bienaventurado todo el que teme al Señor\n#subtitle Cántico gradual.'
     },
     129: {
       1: 'Mucho me han angustiado desde mi juventud\n#subtitle Cántico gradual.'
     },
-    130: {1: 'Mi alma espera a YHWH\n#subtitle Cántico gradual.'},
+    130: {1: 'Mi alma espera a Yahweh\n#subtitle Cántico gradual.'},
     131: {1: 'He acallado mi alma\n#subtitle Cántico gradual; de David.'},
     132: {1: 'El Señor ha elegido a Sion\n#subtitle Cántico gradual.'},
     133: {
       1: 'Los hermanos juntos en armonía\n#subtitle Cántico gradual; de David.'
     },
     134: {1: 'Mirad, bendecid al Señor\n#subtitle Cántico gradual.'},
-    135: {1: 'Oh YHWH, eterno es tu nombre\n#subtitle Cántico gradual.'},
+    135: {1: 'Oh Yahweh, eterno es tu nombre\n#subtitle Cántico gradual.'},
     136: {1: 'Para siempre es su misericordia'},
     137: {1: '¿Cómo cantaremos la canción del Señor?'},
     138: {1: 'Te alabaré con todo mi corazón\n#subtitle Salmo de David.'},
@@ -1699,7 +1699,7 @@ Map titles = {
       1: 'Examíname, oh Dios, y conoce mi corazón\n#subtitle Al músico principal. Salmo de David.'
     },
     140: {
-      1: 'Líbrame, oh YHWH, del hombre malo\n#subtitle Al músico principal. Salmo de David.'
+      1: 'Líbrame, oh Yahweh, del hombre malo\n#subtitle Al músico principal. Salmo de David.'
     },
     141: {1: 'Escucha mi voz\n#subtitle Salmo de David.'},
     142: {
@@ -1710,56 +1710,125 @@ Map titles = {
     145: {1: 'Grande es el Señor\n#subtitle Salmo de alabanza; de David.'},
     146: {1: 'No confiéis en los príncipes\n#subtitle Aleluya.'},
     147: {1: 'Él sana a los quebrantados de corazón'},
-    148: {1: '¡Alabad el nombre de YHWH!\n#subtitle Aleluya.'},
+    148: {1: '¡Alabad el nombre de Yahweh!\n#subtitle Aleluya.'},
     149: {1: 'Cantad al Señor cántico nuevo\n#subtitle Aleluya.'},
     150: {1: 'Todo lo que respira alabe a Jah\n#subtitle Aleluya.'},
   },
   20: {
-    1: {},
-    2: {},
-    3: {},
-    4: {},
-    5: {},
-    6: {},
-    7: {},
-    8: {},
-    9: {},
-    10: {},
+    1: {
+      1 : 'El principio de la sabiduría',
+      8 : 'La seducción de los pecadores',
+      20 : 'La llamada de la sabiduría'
+    },
+    2: {
+      1 : 'El valor de la sabiduría'
+    },
+    3: {
+      1 : 'Confía en el Señor con todo tu corazón',
+      13 : 'Dichoso el que halla la sabiduría'
+    },
+    4: {
+      1 : 'La instrucción sabia de un padre'
+    },
+    5: {
+      1 : 'Advertencia contra el adulterio'
+    },
+    6: {
+      1 : 'Advertencias prácticas',
+      20 : 'Advertencia contra el adulterio'
+    },
+    7: {
+      1 : 'Advertencia contra la mujer adúltera'
+    },
+    8: {
+      1 : 'Las bendiciones de la sabiduría'
+    },
+    9: {
+      1 : 'El camino de la sabiduría',
+      13 : 'El camino de la tontedad'
+    },
+    10: {
+      1 : 'Contraste entre el justo y el malvado'
+    },
     11: {},
     12: {},
     13: {},
     14: {},
     15: {},
-    16: {},
+    16: {
+      1 : 'Proverbios sobre la vida y la conducta'
+    },
     17: {},
     18: {},
     19: {},
     20: {},
     21: {},
-    22: {},
+    22: {
+      17 : 'Las palabras de los sabios'
+    },
     23: {},
-    24: {},
-    25: {},
+    24: {
+      23 : 'Más dichos de los sabios'
+    },
+    25: {
+      1 : 'Más proverbios de Salomón'
+    },
     26: {},
     27: {},
     28: {},
     29: {},
-    30: {},
-    31: {},
+    30: {
+      1 : 'Las palabras de Agur'
+    },
+    31: {
+      1 : 'Las palabras del rey Lemuel',
+      10 : 'La mujer que teme al Señor'
+    },
   },
   21: {
-    1: {},
-    2: {},
-    3: {},
-    4: {},
-    5: {},
+    1: {
+      1 : 'Todo es vanidad',
+      12 : 'La vanidad de la sabiduría'
+    },
+    2: {
+      1 : 'La vanidad de los placeres',
+      12 : 'La vanidad de vivir sabiamente',
+      18 : 'La vanidad de los afanes'
+    },
+    3: {
+      1 : 'Todo tiene su tiempo',
+      9 : 'El trabajo encomendado por Dios',
+      16 : 'Del polvo al polvo'
+    },
+    4: {
+      1 : 'Maldad bajo el sol'
+    },
+    5: {
+      1 : 'Teme a Dios',
+      8 : 'La vanidad de la riqueza y el honor'
+    },
     6: {},
-    7: {},
-    8: {},
-    9: {},
+    7: {
+      1 : 'El contraste de la sabiduría y la necedad'
+    },
+    8: {
+      1 : 'Obedece la orden del rey',
+      10 : 'Les irá bien a los que a Dios temen',
+      14 : 'El hombre no puede alcanzar la obra de Dios'
+    },
+    9: {
+      1 : 'La muerte nos llega a todos',
+      7 : 'Goza de la vida con la mujer que amas',
+      11 : 'Sabiduría mejor que necedad'
+    },
     10: {},
-    11: {},
-    12: {},
+    11: {
+      1 : 'Echa tu pan sobre las aguas'
+    },
+    12: {
+      1 : 'Acuérdate de tu Creador en tu juventud',
+      9 : 'Teme a Dios y guarda sus mandamientos'
+    },
   },
   22: {
     1: {},

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yhwh/pages/BiblePage/BibleInformation.dart';
 
-class ChapterFooter extends StatelessWidget
+class HomeFooter extends StatelessWidget
 {
   @override
   Widget build(BuildContext context) {
@@ -12,7 +11,7 @@ class ChapterFooter extends StatelessWidget
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: RichText(
               text: TextSpan(
-                text: 'Reina Valera 1960 ©\nPronto el texto sera revisado y corregido para ofrecer una traducción sin errores y fiel a la Palabra de Dios.',
+                text: 'Aplicación desarrollada para el estudio bíblico, completamente libre y de código abierto para los que buscan el camino, la verdad y la vida.',
                 style: TextStyle(
                     fontSize: 15,
                     fontFamily: 'Baloo',
@@ -25,7 +24,7 @@ class ChapterFooter extends StatelessWidget
         ),
 
         FlatButton(
-          child: Text('Más información',
+          child: Text('Ministerio YHWH',
             style: TextStyle(
               fontSize: 14,
               fontFamily: 'Baloo',
@@ -33,18 +32,11 @@ class ChapterFooter extends StatelessWidget
               color: Theme.of(context).textTheme.bodyText1.color
             )
           ),
-          onPressed: (){
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => BibleInformation()
-              )
-            );
-          },
+          onPressed: null
         ),
 
         Container(
-          height: MediaQuery.of(context).size.height / 5
+          height: 125
         )
       ],
     );

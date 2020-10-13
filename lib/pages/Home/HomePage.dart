@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:yhwh/pages/PageSelector.dart';
+import 'package:flutter/services.dart';
+import 'package:yhwh/pages/Home/Schedule/ScheduleAllDays.dart';
+import 'package:yhwh/pages/Home/Schedule/ScheduleToday.dart';
+import 'package:yhwh/pages/Home/VerseOfTheDay/VerseOfTheDay.dart';
+import 'package:yhwh/ui_widgets/HomeFooter.dart';
+import 'package:yhwh/ui_widgets/SliverFloatingBarLocal.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -9,66 +14,145 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  @override
+  void initState() {
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: <Widget>[
+    
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark 
+    ));
 
-          Container(
-            alignment: Alignment.centerLeft,
-            padding: EdgeInsets.only(left: 16),
-            // height: 60,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('YHWH', 
-                  style: TextStyle(
-                    fontFamily: 'Londrina',
-                    fontSize: 25,
-                    letterSpacing: 2,
-                    color: Theme.of(context).iconTheme.color,
-                    height: 1.2
-                  ),
-                ),
+    
+    return Container(
+      color: Theme.of(context).backgroundColor,
+      child: SafeArea(
+        top: true,
+        child: Scaffold(
+          backgroundColor: Theme.of(context).backgroundColor,
+          body: Scrollbar(
+            child: CustomScrollView(
+            // controller: widget.autoScrollController,
+            slivers: [
+              SliverToBoxAdapter(
+                child: ScheduleAllDays(),
+              ),
 
-                Row(
+              SliverFloatingBarLocal(
+                backgroundColor: Theme.of(context).cardColor,
+                floating: true,
+                snap: true,
+                elevation: 3,
+
+                title: Row(
                   children: <Widget>[
-                    SizedBox(
-                      width: 1,
-                    ),
-                    Text('יהוה', 
-                      style: TextStyle(
-                        fontFamily: 'Tinos',
-                        fontSize: 14,
-                        letterSpacing: 2,
-                        color: Theme.of(context).iconTheme.color,
-                        height: 0.8,
-                        // fontWeight: FontWeight.w900
+
+                    Spacer(),
+
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Mi', 
+                            style: TextStyle(
+                              fontFamily: 'Baloo',
+                              fontSize: 20,
+                              color: Colors.blueAccent,
+                              height: 2,
+                              // fontWeight: FontWeight.bold,
+                              letterSpacing: 0.8
+                            ),
+                          ),
+
+                          TextSpan(
+                            text: 'nis', 
+                            style: TextStyle(
+                              fontFamily: 'Baloo',
+                              fontSize: 20,
+                              color: Colors.green,
+                              height: 2,
+                              // fontWeight: FontWeight.bold,
+                              letterSpacing: 0.8
+                            ),
+                          ),
+
+                          TextSpan(
+                            text: 'te', 
+                            style: TextStyle(
+                              fontFamily: 'Baloo',
+                              fontSize: 20,
+                              color: Colors.orangeAccent,
+                              height: 2,
+                              // fontWeight: FontWeight.bold,
+                              letterSpacing: 0.8
+                            ),
+                          ),
+
+                          TextSpan(
+                            text: 'rio', 
+                            style: TextStyle(
+                              fontFamily: 'Baloo',
+                              fontSize: 20,
+                              color: Colors.pinkAccent,
+                              height: 2,
+                              // fontWeight: FontWeight.bold,
+                              letterSpacing: 0.8
+                            ),
+                          ),
+
+                          TextSpan(
+                            text: ' YHWH', 
+                            style: TextStyle(
+                              fontFamily: 'Baloo',
+                              fontSize: 20,
+                              color: Theme.of(context).textTheme.bodyText1.color,
+                              height: 2,
+                              // fontWeight: FontWeight.bold,
+                              letterSpacing: 0.8
+                            ),
+                          )
+                        ]
                       ),
                     ),
+
+                    Spacer(),
+
+                    // InkWell(
+                    //   child: Container(
+                    //     child: Icon(Icons.cloud, color: Theme.of(context).textTheme.bodyText1.color, size: 21,),
+                    //     width: 40,
+                    //     height: 40,
+                    //   ),
+                    //   borderRadius: BorderRadius.circular(30),
+                    //   onTap: () {},
+                    //   onLongPress: () {},
+                    // ),
                   ],
                 ),
-              ],
-            )
-          ),
+              ),
 
-          Spacer(),
+              SliverToBoxAdapter(
+                child: ScheduleToday(),
+              ),
 
-          InkWell(
-            child: Container(
-              child: Icon(Icons.more_vert, color: Theme.of(context).iconTheme.color),
-              width: 60,
-            ),
-            borderRadius: BorderRadius.circular(30),
-            onTap: () {},
-            onLongPress: () {},
-          ),
-        ],
-      ),
+              SliverToBoxAdapter(
+                child: VerseOfTheDay(),
+              ),
 
-      body: EnDesarrollo(title: 'Inicio'),
-    );
+              SliverToBoxAdapter(
+                child: HomeFooter(),
+              )
+            ]
+          )
+        )
+      )
+    ));
+    
   }
 }

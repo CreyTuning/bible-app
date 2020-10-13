@@ -4,6 +4,8 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:wakelock/wakelock.dart';
 import 'package:yhwh/pages/BiblePage/BiblePage.dart';
 
+import 'Home/HomePage.dart';
+
 class PageSelector extends StatelessWidget{
   PageSelector({@required this.index, this.autoScrollController});
 
@@ -18,7 +20,7 @@ class PageSelector extends StatelessWidget{
     switch (index) {
       case 0:
         Wakelock.disable();
-        page = EnDesarrollo(title: 'Inicio');
+        page = HomePage();
         break;
       case 1:
         Wakelock.enable();

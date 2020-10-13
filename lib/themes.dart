@@ -29,11 +29,20 @@ class AppThemes
     primaryColor: Colors.white,
     fontFamily: 'Roboto',
     accentColor: Colors.blue,
-    backgroundColor: Color(0xffffffff),
+    backgroundColor: Color(0xfff4f4f4),
     canvasColor: Colors.white,
     brightness: Brightness.light,
     bottomAppBarColor: Colors.white,
     secondaryHeaderColor: Color(0xff414141),
+    dividerColor: Colors.white,
+
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      elevation: 0,
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: Colors.white,
+      selectedItemColor: Color(0xff202124),
+      unselectedItemColor: Color(0xff5f6368),
+    ),
 
     tabBarTheme: TabBarTheme(
       labelColor: Color(0xff263238),
@@ -63,8 +72,10 @@ class AppThemes
     ),
 
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: Colors.white
-    )
+      backgroundColor: Color(0xffffffff)
+    ),
+
+    cardColor: Colors.white
   );
 
 
@@ -72,12 +83,21 @@ class AppThemes
     primaryColor: Color(0xff252526),
     accentColorBrightness: Brightness.dark,
     fontFamily: 'Roboto',
-    accentColor: Colors.blue,
-    backgroundColor: Color(0xff1e1e1e),
-    canvasColor: Color(0xff1e1e1e),
+    accentColor: Color(0xff00af9c),
+    backgroundColor: Color(0xff202124),
+    canvasColor: Color(0xff202124),
     brightness: Brightness.dark,
     secondaryHeaderColor: Color(0xff252526),
-    bottomAppBarColor: Color(0xff252526),
+    bottomAppBarColor: Color(0xff303134),
+    dividerColor: Color(0xff5f6368),
+
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      elevation: 0,
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: Color(0xff202124),
+      selectedItemColor: Color(0xffe8eaed),
+      unselectedItemColor: Color(0xff9aa0a6),
+    ),
 
     tabBarTheme: TabBarTheme(
       labelColor: Color(0xfff0f2f3),
@@ -88,19 +108,19 @@ class AppThemes
 
     textTheme: TextTheme(
         button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Colors.white), //Color(0xfff0f2f3)),
-        bodyText1: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Colors.white), //Color(0xffd4d4d4)),
-        bodyText2: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff8f8f8f))
+        bodyText1: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xfff1f3f4)), //Color(0xffd4d4d4)),
+        bodyText2: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff9aa0a6))
 
     ),
 
     appBarTheme: AppBarTheme(
-      color: Color(0xff252526),
+      color: Color(0xff303134),
       brightness: Brightness.dark,
       iconTheme: IconThemeData(color: Colors.white), //Color(0xffd4d4d4)),
 
       textTheme: TextTheme(
-          headline6: TextStyle(fontSize: 20,fontFamily: 'Roboto', color: Color(0xfff0f2f3), fontWeight: FontWeight.bold),
-          button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xfff0f2f3))
+          headline6: TextStyle(fontSize: 20,fontFamily: 'Roboto', color: Color(0xffd6d8da), fontWeight: FontWeight.bold),
+          button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff444e53))
       )
     ),
 
@@ -109,9 +129,10 @@ class AppThemes
     ),
 
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: Color(0xff252526)
+      backgroundColor: Color(0xff3c4043)
     ),
 
+    cardColor: Color(0xff303134)
 
   );
 
@@ -122,12 +143,21 @@ class AppThemes
     accentColorBrightness: Brightness.dark,
     fontFamily: 'Roboto',
     accentColor: Colors.pinkAccent,
-    backgroundColor: Colors.black,
+    backgroundColor: Color(0xff000000),
     canvasColor: Colors.black,
     brightness: Brightness.dark,
 
     secondaryHeaderColor: Color(0xff121212),
     bottomAppBarColor: Color(0xff121212),
+    dividerColor: Color(0xff323232),
+
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      elevation: 0,
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: Colors.black,
+      selectedItemColor: Color(0xffe8eaed),
+      unselectedItemColor: Color(0xff9aa0a6),
+    ),
 
     tabBarTheme: TabBarTheme(
       labelColor: Color(0xfff0f2f3),
@@ -155,7 +185,9 @@ class AppThemes
     ),
 
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: Color(0xff121212)
-    )
+      backgroundColor: Color(0xff303030)
+    ),
+
+    cardColor: Color(0xff202020)
   );
 }

@@ -1,7 +1,7 @@
 import 'package:yhwh/pages/BiblePage/BibleInformation.dart';
 import 'package:yhwh/pages/BiblePage/BiblePage.dart';
 import 'package:flutter/material.dart';
-import 'package:yhwh/pages/BiblePage/StylePage.dart';
+import 'package:yhwh/pages/BiblePage/StylePage/StylePage.dart';
 
 
 final routes = {

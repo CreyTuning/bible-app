@@ -6,13 +6,13 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yhwh/icons/custom_icons_icons.dart';
 import 'package:yhwh/pages/BiblePage/BookViewerForStylePage.dart';
-import '../../themes.dart';
+import '../../../themes.dart';
 
 
 class StylePage extends StatefulWidget{
-  StylePage({this.setTextFormat});
+  StylePage({this.updateStateInBiblePage});
 
-  final Function(double, double, double) setTextFormat;
+  final Function updateStateInBiblePage;
 
   @override
   State<StatefulWidget> createState() => _StylePageState();
@@ -49,7 +49,7 @@ class _StylePageState extends State<StylePage>{
       preferences.setDouble('letterSeparation', letterSeparation);
     });
 
-    widget.setTextFormat(fontSize, height, letterSeparation);
+    widget.updateStateInBiblePage();
   }
 
   void plusFontSize(){
@@ -150,159 +150,7 @@ class _StylePageState extends State<StylePage>{
           children: [
             
             //Ajustes de lectura
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-
-                TopLabel(text: 'Vista previa de lectura'),
-                Divider(
-                  color: Colors.transparent,
-                  height: 5,
-                ),
-
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      // padding: EdgeInsets.symmetric(vertical: 5),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                          color: Theme.of(context).textTheme.bodyText1.color,
-                          width: 2
-                        )
-                      ),
-
-                      clipBehavior: Clip.antiAlias,
-
-                      child: BookViewerForStylePage(
-                        bookNumber: 1,
-                        chapterNumber: 1,
-                        chapterFooter: SizedBox(height: 20),
-                        verseNumber: 1,
-                        autoScrollController: AutoScrollController(),
-                        fontSize: fontSize,
-                        height: height,
-                        letterSeparation: letterSeparation,
-                      )
-                    ),
-                  ),
-                ),
-
-                
-                Padding(
-                  padding: EdgeInsets.only(bottom: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TopLabel(text: 'Preferencias de caracteres'),
-                      Divider(
-                        color: Colors.transparent,
-                        height: 5,
-                      ),
-                      
-                      Row(
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
-                            child: Center(
-                              child: Icon(Icons.format_size),
-                            ),
-                          ),
-                          
-                          Expanded(
-                            child: Slider(
-                              onChangeEnd: (value){
-                                saveAndUpdateValues();
-                              },
-
-                              activeColor: Theme.of(context).textTheme.bodyText1.color,
-                              inactiveColor: Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
-                              value: fontSize,
-                              min: 18,
-                              max: 30,
-                              divisions: 12,
-                              // label: 'Tamaño de letra: ${fontSize.round().toString()}',
-                              onChanged: (double value) {
-                                setState(() {
-                                  fontSize = value;
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      Row(
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
-                            child: Center(
-                              child: Icon(Icons.format_line_spacing),
-                            ),
-                          ),
-                          
-                          Expanded(
-                            child: Slider(
-                              onChangeEnd: (value){
-                                saveAndUpdateValues();
-                              },
-
-                              activeColor: Theme.of(context).textTheme.bodyText1.color,
-                              inactiveColor: Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
-                              value: height,
-                              min: 1.05,
-                              max: 3.05,
-                              divisions: 8,
-                              // label: 'Altura de linea: ${(height * 10).round()}',
-                              onChanged: (double value) {
-                                setState(() {
-                                  height = value;
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-
-
-                      Row(
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
-                            child: Center(
-                              child: Icon(CustomIcons.format_horizontal_align_center_expand),
-                            ),
-                          ),
-                          
-                          Expanded(
-                            child: Slider(
-                              onChangeEnd: (value){
-                                saveAndUpdateValues();
-                              },
-
-                              activeColor: Theme.of(context).textTheme.bodyText1.color,
-                              inactiveColor: Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
-                              value: letterSeparation,
-                              min: -1.5,
-                              max: 5,
-                              divisions: 13,
-                              // label: 'Separación de letras: ${(letterSeparation * 10).round()}',
-                              onChanged: (double value) {
-                                setState(() {
-                                  letterSeparation = value;
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                )
-
-              ],
-            ),
+            Container(),
 
             
             // Colores personalizados
@@ -362,10 +210,6 @@ class _StylePageState extends State<StylePage>{
 
                     },
                   ) : SizedBox(),
-
-
-                  TopLabel(text: 'Color del resaltador'),
-                  ColorSelector()
 
                 ],
               ),
@@ -468,7 +312,7 @@ class TopLabel extends StatelessWidget {
         text,
         style: Theme.of(context).textTheme.bodyText1.copyWith(
           fontSize: 14,
-          color: Theme.of(context).textTheme.bodyText2.color
+          fontWeight: FontWeight.bold
         )
       ),
     );

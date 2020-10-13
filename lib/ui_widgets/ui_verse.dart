@@ -56,7 +56,7 @@ class _UiVerseState extends State<UiVerse>{
   {
     List<Widget> content = <Widget>[
       Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         child: RichText(
           softWrap: true,
           overflow: TextOverflow.visible,
@@ -87,8 +87,16 @@ class _UiVerseState extends State<UiVerse>{
               TextSpan(
                 text: this.widget.text.toString(),
                 style: TextStyle(
-                  backgroundColor: (widget.highlight) ? Colors.pinkAccent : Colors.transparent,
-                  color: (widget.highlight) ? Colors.white : Theme.of(context).textTheme.bodyText1.color,
+                  backgroundColor: (widget.highlight)
+                    ? Theme.of(context).brightness == Brightness.dark
+                      ? Color(0xff00af9c).withOpacity(0.5)
+                      : Colors.pink
+                    : Colors.transparent,
+                  color: (widget.highlight)
+                    ? Theme.of(context).brightness == Brightness.dark
+                      ? Theme.of(context).textTheme.bodyText1.color
+                      : Colors.white
+                    : Theme.of(context).textTheme.bodyText1.color
                 )
               ),
             ]
@@ -109,7 +117,7 @@ class _UiVerseState extends State<UiVerse>{
 
       split.forEach((element)
       {
-        if(element.split(' ')[0] == '#title_big')
+        if(element.split(' ')[0] == '#title_big') 
         {
           widgets.add(
             Container(
@@ -230,39 +238,6 @@ class _UiVerseState extends State<UiVerse>{
       ),
 
       onDoubleTap: (){
-
-        // Scaffold.of(context).removeCurrentSnackBar();
-
-        // Scaffold.of(context).showSnackBar(
-        //   SnackBar(
-        //     duration: Duration(seconds: 2),
-        //     backgroundColor: (widget.highlight) ? Colors.red : Colors.blue,
-
-        //     behavior: SnackBarBehavior.fixed,
-            
-        //     content: Row(
-        //       children: <Widget>[
-        //         Text(
-        //           (widget.highlight) ? 'Se quito de resaltados y favoritos.' : 'Resaltado y agregado a favoritos.',
-                
-        //           style: Theme.of(context).textTheme.bodyText1.copyWith(
-        //             fontSize: 16,
-        //             fontFamily: 'Baloo',
-        //             color: Colors.white
-        //           )
-        //         ),
-
-        //         Spacer(),
-
-        //         Icon(
-        //           (widget.highlight) ? Icons.delete : Icons.check,
-        //           color: Colors.white
-        //         )
-        //       ],
-        //     )
-        //   ),
-        // );
-
         if(!widget.highlight){
           widget.highlightVerse('${widget.bookNumber}:${widget.chapterNumber}:${widget.verseNumber}');
         } else{

@@ -129,19 +129,33 @@ class _BookViewerState extends State<BookViewer> {
           // Agregar pie de pagina
           content.add(widget.chapterFooter);
 
-          return Scrollbar(
-            child: ListView.builder(
-              itemCount: content.length,
-              controller: widget.autoScrollController,
-              itemBuilder: (context, index) {
-                return AutoScrollTag(
-                  key: ValueKey(index),
-                  controller: widget.autoScrollController,
-                  index: index,
-                  child: content[index]
-                );
-              },
+          return SliverList(
+            delegate: SliverChildBuilderDelegate((context, index)
+            {
+              return AutoScrollTag(
+                key: ValueKey(index),
+                controller: widget.autoScrollController,
+                index: index,
+                child: content[index]
+              );
+            },
+
+            childCount: content.length,
+
+
             ),
+
+            // cacheExtent: 180,
+            // itemCount: content.length,
+            // controller: widget.autoScrollController,
+            // itemBuilder: (context, index) {
+            //   return AutoScrollTag(
+            //     key: ValueKey(index),
+            //     controller: widget.autoScrollController,
+            //     index: index,
+            //     child: content[index]
+            //   );
+            // },
           );
 
           // return NewScrollablePositionedList.builder(
@@ -154,8 +168,13 @@ class _BookViewerState extends State<BookViewer> {
           // );
         }
 
-        else return Center(
-          child: CircularProgressIndicator()
+        else return SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 155),
+            child: Center(
+              child: CircularProgressIndicator()
+            ),
+          )
         );
       },
     );
