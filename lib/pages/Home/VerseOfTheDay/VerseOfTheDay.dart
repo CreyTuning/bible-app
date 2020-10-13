@@ -43,7 +43,7 @@ class _VerseOfTheDayState extends State<VerseOfTheDay> {
     {
       data = preferences.getString('dailyVerseMonthData') ?? '{"information" : {"year" : "0", "month" : "0"}}';
 
-      // Descargar la nueva data
+      // Descargar la nueva data 
       if(data == '{"information" : {"year" : "0", "month" : "0"}}' || json.decode(data)['information']['year'] != dateTime.year || json.decode(data)['information']['month'] != dateTime.month){
         http.read('https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/daily_verse/${dateTime.year}/${dateTime.month}.json').then((response){
           String text = json.decode(response)['verses']['${dateTime.year.toString().substring(2)}_${dateTime.month}_${dateTime.day}'];
