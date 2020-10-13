@@ -37,7 +37,7 @@ class MainPageState extends State<MainPage> {
           border: Border(
             top: BorderSide(
               color: Theme.of(context).dividerColor,
-              width: 2
+              width: 1.5
             )
           )
         ),
@@ -51,12 +51,12 @@ class MainPageState extends State<MainPage> {
             )
           ],
 
-          border: Border(
-            top: BorderSide(
-              color: Theme.of(context).dividerColor,
-              width: 2
-            )
-          )
+          // border: Border(
+          //   top: BorderSide(
+          //     color: Theme.of(context).dividerColor,
+          //     width: 2
+          //   )
+          // )
         ),
 
         child: BottomNavigationBar(

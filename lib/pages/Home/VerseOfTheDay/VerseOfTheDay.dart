@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yhwh/data/Define.dart';
 import 'package:http/http.dart' as http;
 
@@ -19,7 +20,8 @@ class _VerseOfTheDayState extends State<VerseOfTheDay> {
   int book = 0;
   int chapter = 0;
   int verse = 0;
-  String verseOfTheDay = 'Cargando...';
+  String verseReference = 'Cargando...';
+  String data = '';
 
   Future getVerse(int book, int chapter, int verse) async {
 
@@ -37,23 +39,39 @@ class _VerseOfTheDayState extends State<VerseOfTheDay> {
 
     dateTime = DateTime.now();
 
-    http.read('https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/daily_verse/${dateTime.year.toString().substring(2)}_${dateTime.month}.json').then((response){
-      
-      String text = json.decode(response)['${dateTime.year.toString().substring(2)}_${dateTime.month}_${dateTime.day}'];
+    SharedPreferences.getInstance().then((preferences)
+    {
+      data = preferences.getString('dailyVerseMonthData') ?? '{"information" : {"year" : "0", "month" : "0"}}';
 
-      setState(() {
-        book = int.parse(text.split(':')[0]);
-        chapter = int.parse(text.split(':')[1]);
-        verse = int.parse(text.split(':')[2]);
-        verseOfTheDay = '${intToBook[book]} $chapter:$verse';
-      });
+      // Descargar la nueva data
+      if(data == '{"information" : {"year" : "0", "month" : "0"}}' || json.decode(data)['information']['year'] != dateTime.year || json.decode(data)['information']['month'] != dateTime.month){
+        http.read('https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/daily_verse/${dateTime.year}/${dateTime.month}.json').then((response){
+          String text = json.decode(response)['verses']['${dateTime.year.toString().substring(2)}_${dateTime.month}_${dateTime.day}'];
+
+          setState(() {
+            book = int.parse(text.split(':')[0]);
+            chapter = int.parse(text.split(':')[1]);
+            verse = int.parse(text.split(':')[2]);
+            verseReference = '${intToBook[book]} $chapter:$verse';
+            data = response;
+          });
+
+          preferences.setString('dailyVerseMonthData', data);
+        });
+      }
+
+      // Usar la data existente para mostrar el versiculo del dia
+      else{
+        String text = json.decode(data)['verses']['${dateTime.year.toString().substring(2)}_${dateTime.month}_${dateTime.day}'];
+
+        setState(() {
+          book = int.parse(text.split(':')[0]);
+          chapter = int.parse(text.split(':')[1]);
+          verse = int.parse(text.split(':')[2]);
+          verseReference = '${intToBook[book]} $chapter:$verse';
+        });
+      }
     });
-
-
-    // verseOfTheDay = 'Jeremías 29:11';
-    // book = bookToInt[verseOfTheDay.split(' ')[0]];
-    // chapter = int.tryParse(verseOfTheDay.split(' ')[1].split(':')[0]);
-    // verse = int.tryParse(verseOfTheDay.split(':')[1]);
     
     super.initState();
   }
@@ -128,7 +146,7 @@ class _VerseOfTheDayState extends State<VerseOfTheDay> {
               child: RichText(
                 textAlign: TextAlign.right,
                 text: TextSpan(
-                  text: verseOfTheDay,
+                  text: verseReference,
                   style: Theme.of(context).textTheme.bodyText1.copyWith(
                     fontSize: 15,
                     height: 1,
