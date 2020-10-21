@@ -36,6 +36,7 @@ dependencies:
   floating_search_bar: ^0.3.0
   scroll_to_index: ^1.0.6
   github: ^6.0.0
+  connectivity: ^0.4.2
 
 # flutter pub run flutter_launcher_name:main
 flutter_launcher_name:

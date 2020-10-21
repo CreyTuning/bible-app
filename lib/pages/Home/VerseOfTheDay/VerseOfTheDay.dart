@@ -35,6 +35,19 @@ class _VerseOfTheDayState extends State<VerseOfTheDay> {
     }
   }
 
+  void setNewData(String newData){
+    setState(() {
+      String text = json.decode(newData)['verses']['${dateTime.year.toString().substring(2)}_${dateTime.month}_${dateTime.day}'];
+      setState(() {
+        book = int.parse(text.split(':')[0]);
+        chapter = int.parse(text.split(':')[1]);
+        verse = int.parse(text.split(':')[2]);
+        verseReference = '${intToBook[book]} $chapter:$verse';
+        data = newData;
+      });
+    });
+  }
+
   @override
   void initState() {
 
@@ -86,7 +99,7 @@ class _VerseOfTheDayState extends State<VerseOfTheDay> {
         elevation: 2,
         child: InkWell(
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => VerseOfTheDayInformation(data: data)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => VerseOfTheDayInformation(data: data, updateData: setNewData)));
           },
 
           borderRadius: BorderRadius.circular(4),
