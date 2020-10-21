@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yhwh/data/Define.dart';
 import 'package:http/http.dart' as http;
+import 'package:yhwh/pages/Home/VerseOfTheDay/VerseOfTheDayInformation.dart';
 
 class VerseOfTheDay extends StatefulWidget {
   VerseOfTheDay({Key key}) : super(key: key);
@@ -78,85 +79,95 @@ class _VerseOfTheDayState extends State<VerseOfTheDay> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      borderOnForeground: true,
-      elevation: 2,
-      child: AnimatedContainer(
-        duration: Duration(milliseconds: 300),
-        padding: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
+    return Hero(
+      tag: 'VerseOfTheDay',
+      child: Card(
+        borderOnForeground: true,
+        elevation: 2,
+        child: InkWell(
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => VerseOfTheDayInformation(data: data)));
+          },
 
-          children: [
-            Row(
+          borderRadius: BorderRadius.circular(4),
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 300),
+            padding: EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+
               children: [
-                RichText(
-                  text: TextSpan(
-                    text: 'Versículo del día',
-                    style: Theme.of(context).textTheme.bodyText1.copyWith(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold
-                    )
-                  )
+                Row(
+                  children: [
+                    RichText(
+                      text: TextSpan(
+                        text: 'Versículo del día',
+                        style: Theme.of(context).textTheme.bodyText1.copyWith(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold
+                        )
+                      )
+                    ),
+
+                    Spacer(),
+
+                    Icon(Icons.wb_sunny, color: Colors.amber),
+                  ],
                 ),
 
-                Spacer(),
+                SizedBox(height: 12,),
 
-                Icon(Icons.wb_sunny, color: Colors.amber),
-              ],
-            ),
+                FutureBuilder(
+                  future: getVerse(book, chapter, verse),
+                  initialData: 'Cargando...',
+                  builder: (context, snapshot) {
+                    if(snapshot.hasData)
+                    {
+                      return RichText(
+                        textAlign: TextAlign.left,
+                        text: TextSpan(
+                          text: snapshot.data,
+                          style: Theme.of(context).textTheme.bodyText1.copyWith(
+                            fontSize: 18,
+                            height: 1.2
+                          )
+                        )
+                      );
+                    }
 
-            SizedBox(height: 12,),
+                    return RichText(
+                      textAlign: TextAlign.left,
+                      text: TextSpan(
+                        text: 'Cargando...',
+                        style: Theme.of(context).textTheme.bodyText1.copyWith(
+                          fontSize: 18,
+                        )
+                      )
+                    );
+                  },
+                ),
 
-            FutureBuilder(
-              future: getVerse(book, chapter, verse),
-              initialData: 'Cargando...',
-              builder: (context, snapshot) {
-                if(snapshot.hasData)
-                {
-                  return RichText(
-                    textAlign: TextAlign.left,
+                SizedBox(height: 10,),
+
+                Container(
+                  width: double.infinity,
+                  child: RichText(
+                    textAlign: TextAlign.right,
                     text: TextSpan(
-                      text: snapshot.data,
+                      text: verseReference,
                       style: Theme.of(context).textTheme.bodyText1.copyWith(
-                        fontSize: 18,
-                        height: 1.2
+                        fontSize: 15,
+                        height: 1,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Bookerly'
                       )
                     )
-                  );
-                }
-
-                return RichText(
-                  textAlign: TextAlign.left,
-                  text: TextSpan(
-                    text: 'Cargando...',
-                    style: Theme.of(context).textTheme.bodyText1.copyWith(
-                      fontSize: 18,
-                    )
-                  )
-                );
-              },
-            ),
-
-            SizedBox(height: 10,),
-
-            Container(
-              width: double.infinity,
-              child: RichText(
-                textAlign: TextAlign.right,
-                text: TextSpan(
-                  text: verseReference,
-                  style: Theme.of(context).textTheme.bodyText1.copyWith(
-                    fontSize: 15,
-                    height: 1,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Bookerly'
-                  )
+                  ),
                 )
-              ),
-            )
-          ],
+              ],
+            ),
+          ),
         ),
       ),
     );

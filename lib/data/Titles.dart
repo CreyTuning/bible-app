@@ -1831,82 +1831,273 @@ Map titles = {
     },
   },
   22: {
-    1: {},
-    2: {},
-    3: {},
-    4: {},
-    5: {},
-    6: {},
-    7: {},
-    8: {},
+    1: {
+      2 : 'La novia confiesa su amor',
+      8 : 'Salomón y su novia se deleitan mutuamente'
+    },
+    2: {
+      8 : 'La novia enamorada de su amado'
+    },
+    3: {
+      1 : 'El sueño de la novia',
+      6 : 'Salomón llega para la boda'
+    },
+    4: {
+      1 : 'Salomón admira la belleza de su novia',
+      16 : 'Juntos en el jardín del amor'
+    },
+    5: {
+      2 : 'El novio busca a su amada',
+      10 : 'El novio alaba a su amada',
+    },
+    6: {
+      2 : 'Juntos en el jardín del amor',
+      4 : 'Salomón y su novia se deleitan mutuamente'
+    },
+    7: {
+      11 : 'La novia entrega su amor'
+    },
+    8: {
+      1 : 'Anhelo por su amado',
+      8 : 'Consejo final'
+    },
   },
   23: {
-    1: {},
-    2: {},
-    3: {},
-    4: {},
-    5: {},
-    6: {},
-    7: {},
-    8: {},
-    9: {},
-    10: {},
-    11: {},
-    12: {},
-    13: {},
-    14: {},
-    15: {},
+    1: {
+      2 : 'La maldad de Judá',
+      21 : 'La ciudad infiel'
+    },
+    2: {
+      1 : 'El monte de Jehová',
+      6 : 'El día del Señor'
+    },
+    3: {
+      1 : 'Sentencia sobre Judá y Jerusalén'
+    },
+    4: {
+      2 : 'El renuevo del Señor glorificado'
+    },
+    5: {
+      1 : 'Destruida la viña del Señor',
+      8 : '¡Ay de los malvados!'
+    },
+    6: {
+      1 : 'Isaías ve al Señor en una visión',
+      8 : 'Isaías recibe una comisión'
+    },
+    7: {
+      1 : 'Isaías enviado al rey Acaz',
+      10 : 'La señal de Emanuel'
+    },
+    8: {
+      1 : 'La venidera invasión asiria',
+      11 : 'Teme a Dios, espera en el Señor'
+    },
+    9: {
+      1 : 'Un niño nos ha nacido',
+      8 : 'Juicio sobre la arrogancia y la opresión'
+    },
+    10: {
+      5 : 'Sentencia sobre la arrogancia de Asiria',
+      20 : 'El remanente de Israel regresará'
+    },
+    11: {
+      1 : 'El reinado justo de la vara'
+    },
+    12: {
+      1 : 'Cántico de acción de gracias'
+    },
+    13: {
+      1 : 'El juicio de Babilonia'
+    },
+    14: {
+      1 : 'La restauración de Jacob',
+      3 : 'El remanente de Israel se burla de Babilonia',
+      24 : 'Profecía contra Asiria',
+      28 : 'Profecía contra los filisteos'
+    },
+    15: {
+      1 : 'Profecía contra Moab'
+    },
     16: {},
-    17: {},
-    18: {},
-    19: {},
-    20: {},
-    21: {},
-    22: {},
-    23: {},
-    24: {},
-    25: {},
-    26: {},
-    27: {},
-    28: {},
-    29: {},
-    30: {},
-    31: {},
-    32: {},
-    33: {},
-    34: {},
-    35: {},
-    36: {},
-    37: {},
-    38: {},
-    39: {},
-    40: {},
-    41: {},
-    42: {},
-    43: {},
-    44: {},
-    45: {},
-    46: {},
-    47: {},
-    48: {},
-    49: {},
-    50: {},
-    51: {},
-    52: {},
+    17: {
+      1 : 'Profecía contra Damasco'
+    },
+    18: {
+      1 : 'Profecía contra Cus'
+    },
+    19: {
+      1 : 'Profecía contra Egipto',
+      16 : 'Egipto, Asiria e Israel bendecidos'
+    },
+    20: {
+      1 : 'Una señal contra Egipto y Cus'
+    },
+    21: {
+      1 : 'Profecía sobre el desierto del mar',
+      11 : 'Profecía sobre Duma',
+      13 : 'Profecía sobre Arabia'
+    },
+    22: {
+      1 : 'Profecía sobre el valle de la visión',
+      15 : 'Sebna será sustituido por Eliaquim'
+    },
+    23: {
+      1 : 'Profecía sobre Tiro'
+    },
+    24: {
+      1 : 'El juicio de Jehová sobre la tierra'
+    },
+    25: {
+      1 : 'Dios destruirá la muerte para siempre'
+    },
+    26: {
+      1 : 'Cántico de confianza en la protección de Jehová'
+    },
+    27: {
+      1 : 'Liberación y regreso de Israel'
+    },
+    28: {
+      1 : 'Condenación de Efraín',
+      14 : 'Amonestación a Jerusalén'
+    },
+    29: {
+      1 : 'Ariel y sus enemigos',
+      9 : 'Ceguera e hipocresía de Israel',
+      17 : 'Redención de Israel'
+    },
+    30: {
+      1 : 'No desciendas a Egipto',
+      8 : 'Un pueblo rebelde',
+      18 : 'El Señor tendrá compasión',
+    },
+    31: {
+      1 : '¡Ay de los que descienden a Egipto!'
+    },
+    32: {
+      1 : 'Un rey reinará con justicia',
+      9 : 'Mujeres indolentes advertidas del desastre'
+    },
+    33: {
+      1 : 'Oh Señor, ten piedad de nosotros'
+    },
+    34: {
+      1 : 'El juicio de las naciones'
+    },
+    35: {
+      1 : 'Los rescatados regresarán'
+    },
+    36: {
+      1 : 'Senaquerib invade Judá'
+    },
+    37: {
+      1 : 'Ezequías busca la ayuda de Isaías',
+      14 : 'Ezequías le pide a Dios que lo sane',
+      21 : 'La caída de Senaquerib'
+    },
+    38: {
+      1 : 'Enfermedad y recuperación de Ezequías'
+    },
+    39: {
+      1 : 'Los enviados de Babilonia'
+    },
+    40: {
+      1 : 'Consuelo para el pueblo de Dios',
+      5 : 'La Palabra de Dios permanece para siempre',
+      9 : 'La grandeza de Dios'
+    },
+    41: {
+      1 : 'No temas, porque yo estoy contigo',
+      21 : 'La vanidad de los ídolos'
+    },
+    42: {
+      1 : 'El siervo escogido del Señor',
+      10 : 'Cantad al Señor un cántico nuevo',
+      18 : 'El fracaso de Israel para escuchar y ver'
+    },
+    43: {
+      1 : 'El único Salvador de Israel'
+    },
+    44: {
+      1 : 'Israel escogido por el Señor',
+      6 : 'Fuera de mí no hay dios',
+      9 : 'La locura de la idolatría',
+      21 : 'El Señor libra a Israel'
+    },
+    45: {
+      1 : 'Ciro, instrumento de Dios',
+      14 : 'El Señor, el único Salvador'
+    },
+    46: {
+      1 : 'Los ídolos de Babilonia y el único Dios verdadero'
+    },
+    47: {
+      1 : 'La humillación de Babilonia'
+    },
+    48: {
+      1 : 'Israel refinado para la gloria de Dios',
+      12 : 'El Señor llama a Israel'
+    },
+    49: {
+      1 : 'El siervo del Señor',
+      8 : 'La restauración de Israel'
+    },
+    50: {
+      1 : 'El pecado de Israel y la obediencia del siervo'
+    },
+    51: {
+      1 : 'Consuelo del Señor para Sion'
+    },
+    52: {
+      1 : 'El Señor viene a salvarnos',
+      13 : 'Traspasado por nuestras rebeliones'
+    },
     53: {},
-    54: {},
-    55: {},
-    56: {},
-    57: {},
-    58: {},
-    59: {},
-    60: {},
-    61: {},
-    62: {},
-    63: {},
+    54: {
+      1 : 'El pacto eterno de la paz'
+    },
+    55: {
+      1 : 'La compasión del Señor'
+    },
+    56: {
+      1 : 'Salvación para los extranjeros',
+      9 : 'Los líderes irresponsables de Israel'
+    },
+    57: {
+      1 : 'La vana idolatría de Israel',
+      14 : 'Consuelo para el contrito'
+    },
+    58: {
+      1 : 'Ayuno falso y genuino'
+    },
+    59: {
+      1 : 'Maldad y opresión',
+      14 : 'Juicio y redención'
+    },
+    60: {
+      1 : 'La gloria futura de Israel'
+    },
+    61: {
+      1 : 'El año de gracia del Señor'
+    },
+    62: {
+      1 : 'La salvación viene de Sion'
+    },
+    63: {
+      1 : 'El día de venganza del Señor',
+      7 : 'Se recuerda la misericordia de Dios.',
+      15 : 'Ruego de misericordia'
+    },
     64: {},
-    65: {},
-    66: {},
+    65: {
+      1 : 'Juicio y salvación',
+      17 : 'Nuevos cielos y una nueva tierra'
+    },
+    66: {
+      1 : 'Él pobre y humilde de espíritu',
+      7 : 'Alegraos con Jerusalén',
+      15 : 'Juicio final y la gloria del Señor'
+    },
   },
   24: {
     1: {},
