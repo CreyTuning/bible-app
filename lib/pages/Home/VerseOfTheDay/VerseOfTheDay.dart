@@ -92,94 +92,91 @@ class _VerseOfTheDayState extends State<VerseOfTheDay> {
 
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: 'VerseOfTheDay',
-      child: Card(
-        borderOnForeground: true,
-        elevation: 2,
-        child: InkWell(
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => VerseOfTheDayInformation(data: data, updateData: setNewData)));
-          },
+    return Card(
+      borderOnForeground: true,
+      elevation: 2,
+      child: InkWell(
+        onTap: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => VerseOfTheDayInformation(data: data, updateData: setNewData)));
+        },
 
-          borderRadius: BorderRadius.circular(4),
-          child: AnimatedContainer(
-            duration: Duration(milliseconds: 300),
-            padding: EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.max,
+        borderRadius: BorderRadius.circular(4),
+        child: AnimatedContainer(
+          duration: Duration(milliseconds: 300),
+          padding: EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
 
-              children: [
-                Row(
-                  children: [
-                    RichText(
-                      text: TextSpan(
-                        text: 'Versículo del día',
-                        style: Theme.of(context).textTheme.bodyText1.copyWith(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold
-                        )
-                      )
-                    ),
-
-                    Spacer(),
-
-                    Icon(Icons.wb_sunny, color: Colors.amber),
-                  ],
-                ),
-
-                SizedBox(height: 12,),
-
-                FutureBuilder(
-                  future: getVerse(book, chapter, verse),
-                  initialData: 'Cargando...',
-                  builder: (context, snapshot) {
-                    if(snapshot.hasData)
-                    {
-                      return RichText(
-                        textAlign: TextAlign.left,
-                        text: TextSpan(
-                          text: snapshot.data,
-                          style: Theme.of(context).textTheme.bodyText1.copyWith(
-                            fontSize: 18,
-                            height: 1.2
-                          )
-                        )
-                      );
-                    }
-
-                    return RichText(
-                      textAlign: TextAlign.left,
-                      text: TextSpan(
-                        text: 'Cargando...',
-                        style: Theme.of(context).textTheme.bodyText1.copyWith(
-                          fontSize: 18,
-                        )
-                      )
-                    );
-                  },
-                ),
-
-                SizedBox(height: 10,),
-
-                Container(
-                  width: double.infinity,
-                  child: RichText(
-                    textAlign: TextAlign.right,
+            children: [
+              Row(
+                children: [
+                  RichText(
                     text: TextSpan(
-                      text: verseReference,
+                      text: 'Versículo del día',
                       style: Theme.of(context).textTheme.bodyText1.copyWith(
-                        fontSize: 15,
-                        height: 1,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Bookerly'
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold
                       )
                     )
                   ),
-                )
-              ],
-            ),
+
+                  Spacer(),
+
+                  Icon(Icons.wb_sunny, color: Colors.amber),
+                ],
+              ),
+
+              SizedBox(height: 12,),
+
+              FutureBuilder(
+                future: getVerse(book, chapter, verse),
+                initialData: 'Cargando...',
+                builder: (context, snapshot) {
+                  if(snapshot.hasData)
+                  {
+                    return RichText(
+                      textAlign: TextAlign.left,
+                      text: TextSpan(
+                        text: snapshot.data,
+                        style: Theme.of(context).textTheme.bodyText1.copyWith(
+                          fontSize: 18,
+                          height: 1.2
+                        )
+                      )
+                    );
+                  }
+
+                  return RichText(
+                    textAlign: TextAlign.left,
+                    text: TextSpan(
+                      text: 'Cargando...',
+                      style: Theme.of(context).textTheme.bodyText1.copyWith(
+                        fontSize: 18,
+                      )
+                    )
+                  );
+                },
+              ),
+
+              SizedBox(height: 10,),
+
+              Container(
+                width: double.infinity,
+                child: RichText(
+                  textAlign: TextAlign.right,
+                  text: TextSpan(
+                    text: verseReference,
+                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                      fontSize: 15,
+                      height: 1,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Bookerly'
+                    )
+                  )
+                ),
+              )
+            ],
           ),
         ),
       ),

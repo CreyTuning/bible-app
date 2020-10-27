@@ -136,10 +136,6 @@ class _UiVerseState extends State<UiVerse>{
               ),
             ),
           );
-
-          // widgets.add(
-          //   Container(height: widget.height * 2)
-          // );
         }
 
         else if(element.split(' ')[0] == '#subtitle')
@@ -213,7 +209,7 @@ class _UiVerseState extends State<UiVerse>{
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 6.0, 0, 0),
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.max,

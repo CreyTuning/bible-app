@@ -31,12 +31,12 @@ dependencies:
   flutter_launcher_icons: "^0.7.3"
   shared_preferences: ^0.5.7+2
   flutter_launcher_name: "^0.0.1"
-  scrollable_positioned_list: ^0.1.6
   wakelock: ^0.1.4+2
   floating_search_bar: ^0.3.0
   scroll_to_index: ^1.0.6
   github: ^6.0.0
   connectivity: ^0.4.2
+  # flutter_local_notifications: ^3.0.1
 
 # flutter pub run flutter_launcher_name:main
 flutter_launcher_name:
@@ -61,14 +61,6 @@ flutter:
     - family:  CustomIcons
       fonts:
         - asset: lib/icons/CustomIcons.ttf
-
-    - family: Londrina
-      fonts:
-        - asset: lib/fonts/LondrinaSolid-Regular.ttf
-
-    - family: Tinos
-      fonts:
-        - asset: lib/fonts/Tinos-Bold.ttf
 
     - family: Roboto
       fonts:

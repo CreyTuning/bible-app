@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ class VerseOfTheDayInformation extends StatefulWidget {
 class _VerseOfTheDayInformationState extends State<VerseOfTheDayInformation> {
 
   String data = '{"information" : {"year" : "0", "month" : "0"}, "verses" : {"0_0_0" : "0:0:0"}}';
+  bool enabledRefreshButton = true;
 
   @override
   void initState() {
@@ -49,103 +51,163 @@ class _VerseOfTheDayInformationState extends State<VerseOfTheDayInformation> {
         actions: [
           Builder(
             builder: (context) {
-              return InkWell(
-                child: Container(
-                  child: Icon(Icons.refresh, color: Theme.of(context).iconTheme.color,),
+              if(enabledRefreshButton){
+                return IconButton(
+                  icon: Icon(Icons.refresh, color: enabledRefreshButton ? Theme.of(context).textTheme.bodyText1.color : Theme.of(context).textTheme.bodyText2.color),
+                  tooltip: 'Actualizar',
+                  onPressed: enabledRefreshButton ? () {
+                    SharedPreferences.getInstance().then((preferences)
+                    {
+                      // Descargar la nueva data 
+                      Connectivity().checkConnectivity().then((connectivityResult) {
+                        if (connectivityResult == ConnectivityResult.none) {
+                          // Mobile is not Connected to Internet
+
+                          setState(() {
+                            enabledRefreshButton = false;
+                          });
+
+                          Scaffold.of(context).showSnackBar(
+                            SnackBar(
+                              duration: Duration(seconds: 2),
+                              content: Text('Sin acceso a Internet', style: TextStyle(
+                                color: Colors.white
+                              )),
+                              backgroundColor: Colors.red,
+                            )
+                          );
+
+                          Timer(Duration(seconds: 2), (){
+                            setState(() {
+                              enabledRefreshButton = true;
+                            });
+                          });
+
+                        }
+                        else if (connectivityResult == ConnectivityResult.mobile) {
+                          // I am connected to a mobile network.
+
+                          setState(() {
+                            enabledRefreshButton = false;
+                          });
+
+                          Scaffold.of(context).showSnackBar(
+                            SnackBar(
+                              duration: Duration(seconds: 2),
+                              content: Text('Actualizando...', style: TextStyle(
+                                color: Colors.white
+                              )),
+                              backgroundColor: Colors.blue,
+                            )
+                          );
+
+                          try {
+                            http.read('https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/daily_verse/${DateTime.now().year}/${DateTime.now().month}.json').then((response)
+                            {
+                              setState(() {
+                                data = response;
+                                enabledRefreshButton = true;
+                              });
+
+                              widget.updateData(data);
+                              preferences.setString('dailyVerseMonthData', data);
+
+                              Scaffold.of(context).showSnackBar(
+                                SnackBar(
+                                  duration: Duration(seconds: 2),
+                                  content: Text('Información actualizada', style: TextStyle(
+                                    color: Colors.white
+                                  )),
+                                  backgroundColor: Colors.green,
+                                )
+                              );
+                            });
+                          } catch (e) {
+                            Scaffold.of(context).showSnackBar(
+                              SnackBar(
+                                duration: Duration(seconds: 2),
+                                content: Text('Mala conexión a internet', style: TextStyle(
+                                  color: Colors.white
+                                )),
+                                backgroundColor: Colors.red,
+                              )
+                            );
+
+                            setState(() {
+                              enabledRefreshButton = true;
+                            });
+                          }
+                        }
+                        else if (connectivityResult == ConnectivityResult.wifi) {
+                          // I am connected to a wifi network.
+
+                          setState(() {
+                            enabledRefreshButton = false;
+                          });
+
+                          Scaffold.of(context).showSnackBar(
+                            SnackBar(
+                              duration: Duration(seconds: 2),
+                              content: Text('Actualizando...', style: TextStyle(
+                                color: Colors.white
+                              )),
+                              backgroundColor: Colors.blue,
+                            )
+                          );
+
+                          try {
+                            http.read('https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/daily_verse/${DateTime.now().year}/${DateTime.now().month}.json').then((response)
+                            {
+                              setState(() {
+                                data = response;
+                                enabledRefreshButton = true;
+                              });
+
+                              widget.updateData(data);
+                              preferences.setString('dailyVerseMonthData', data);
+
+                              Scaffold.of(context).showSnackBar(
+                                SnackBar(
+                                  duration: Duration(seconds: 2),
+                                  content: Text('Información actualizada', style: TextStyle(
+                                    color: Colors.white
+                                  )),
+                                  backgroundColor: Colors.green,
+                                )
+                              );
+                            });
+                          } catch (e) {
+                            Scaffold.of(context).showSnackBar(
+                              SnackBar(
+                                duration: Duration(seconds: 2),
+                                content: Text('Mala conexión a internet', style: TextStyle(
+                                  color: Colors.white
+                                )),
+                                backgroundColor: Colors.red,
+                              )
+                            );
+
+                            setState(() {
+                              enabledRefreshButton = true;
+                            });
+                          }
+                        }
+                      });
+
+                    });
+                  } : null
+                );
+              }
+
+              else{
+                return Container(
                   width: 55,
                   height: 55,
-                ),
-                borderRadius: BorderRadius.circular(30),
-                onTap: () {
-                  SharedPreferences.getInstance().then((preferences)
-                  {
-                    // Descargar la nueva data 
-                    Connectivity().checkConnectivity().then((connectivityResult) {
-                      if (connectivityResult == ConnectivityResult.none) {
-                        // Mobile is not Connected to Internet
-
-                        Scaffold.of(context).showSnackBar(
-                          SnackBar(
-                            duration: Duration(seconds: 2),
-                            content: Text('Sin acceso a Internet', style: TextStyle(
-                              color: Colors.white
-                            )),
-                            backgroundColor: Colors.red,
-                          )
-                        );
-
-                      }
-                      else if (connectivityResult == ConnectivityResult.mobile) {
-                        // I am connected to a mobile network.
-
-                        Scaffold.of(context).showSnackBar(
-                          SnackBar(
-                            duration: Duration(seconds: 2),
-                            content: Text('Actualizando...', style: TextStyle(
-                              color: Colors.white
-                            )),
-                            backgroundColor: Colors.blue,
-                          )
-                        );
-
-                        http.read('https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/daily_verse/${DateTime.now().year}/${DateTime.now().month}.json').then((response)
-                        {
-                          setState(() {
-                            data = response;
-                          });
-
-                          widget.updateData(data);
-                          preferences.setString('dailyVerseMonthData', data);
-
-                          Scaffold.of(context).showSnackBar(
-                            SnackBar(
-                              duration: Duration(seconds: 2),
-                              content: Text('Información actualizada.', style: TextStyle(
-                                color: Colors.white
-                              )),
-                              backgroundColor: Colors.green,
-                            )
-                          );
-                        });
-                      }
-                      else if (connectivityResult == ConnectivityResult.wifi) {
-                        // I am connected to a wifi network.
-
-                        Scaffold.of(context).showSnackBar(
-                          SnackBar(
-                            duration: Duration(seconds: 2),
-                            content: Text('Actualizando...', style: TextStyle(
-                              color: Colors.white
-                            )),
-                            backgroundColor: Colors.blue,
-                          )
-                        );
-
-                        http.read('https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/daily_verse/${DateTime.now().year}/${DateTime.now().month}.json').then((response)
-                        {
-                          setState(() {
-                            data = response;
-                          });
-
-                          widget.updateData(data);
-                          preferences.setString('dailyVerseMonthData', data);
-
-                          Scaffold.of(context).showSnackBar(
-                            SnackBar(
-                              duration: Duration(seconds: 2),
-                              content: Text('Información actualizada.', style: TextStyle(
-                                color: Colors.white
-                              )),
-                              backgroundColor: Colors.green,
-                            )
-                          );
-                        });
-                      }
-                    });
-
-                  });
-                },
-              );
+                  padding: EdgeInsets.all(18),
+                  child: CircularProgressIndicator(),
+                );
+              }
+              
             },
           ),
         ],
@@ -194,6 +256,93 @@ class VerseListOfMonthState extends State<VerseListOfMonth> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20),
             child: CircularProgressIndicator(),
+          )
+        );
+      }
+
+      else if(int.parse(key.split('_')[2]) == DateTime.now().day){
+        verses.insert(0,
+          Card(
+            borderOnForeground: true,
+            elevation: 2,
+            child: AnimatedContainer(
+              duration: Duration(milliseconds: 300),
+              padding: EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
+
+                children: [
+                  Row(
+                    children: [
+                      RichText(
+                        text: TextSpan(
+                          text: 'Versículo del día',
+                          style: Theme.of(context).textTheme.bodyText1.copyWith(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold
+                          )
+                        )
+                      ),
+
+                      Spacer(),
+
+                      Icon(Icons.wb_sunny, color: Colors.amber),
+                    ],
+                  ),
+
+                  SizedBox(height: 12,),
+
+                  FutureBuilder(
+                    future: getVerse(int.parse(value.split(':')[0]), int.parse(value.split(':')[1]), int.parse(value.split(':')[2])),
+                    initialData: 'Cargando...',
+                    builder: (context, snapshot) {
+                      if(snapshot.hasData)
+                      {
+                        return RichText(
+                          textAlign: TextAlign.left,
+                          text: TextSpan(
+                            text: snapshot.data,
+                            style: Theme.of(context).textTheme.bodyText1.copyWith(
+                              fontSize: 18,
+                              height: 1.2
+                            )
+                          )
+                        );
+                      }
+
+                      return RichText(
+                        textAlign: TextAlign.left,
+                        text: TextSpan(
+                          text: 'Cargando...',
+                          style: Theme.of(context).textTheme.bodyText1.copyWith(
+                            fontSize: 18,
+                          )
+                        )
+                      );
+                    },
+                  ),
+
+                  SizedBox(height: 10,),
+
+                  Container(
+                    width: double.infinity,
+                    child: RichText(
+                      textAlign: TextAlign.right,
+                      text: TextSpan(
+                        text: '${intToBook[int.parse(value.split(':')[0])]} ${int.parse(value.split(':')[1])}:${int.parse(value.split(':')[2])}',
+                        style: Theme.of(context).textTheme.bodyText1.copyWith(
+                          fontSize: 15,
+                          height: 1,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Bookerly'
+                        )
+                      )
+                    ),
+                  )
+                ],
+              ),
+            ),
           )
         );
       }
@@ -255,7 +404,7 @@ class VerseListOfMonthState extends State<VerseListOfMonth> {
             },
             dense: true,
             leading: CircleAvatar(
-              backgroundColor: int.parse(key.split('_')[2]) == DateTime.now().day ? Colors.purple : Colors.indigo,
+              backgroundColor: Colors.purple[400],
               child: RichText(
                 overflow: TextOverflow.ellipsis,
                 text: TextSpan(

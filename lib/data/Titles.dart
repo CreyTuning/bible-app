@@ -2100,153 +2100,503 @@ Map titles = {
     },
   },
   24: {
-    1: {},
-    2: {},
-    3: {},
-    4: {},
-    5: {},
-    6: {},
-    7: {},
-    8: {},
+    1: {
+      4 : 'La llamada de Jeremías'
+    },
+    2: {
+      1 : 'Israel abandona al Señor'
+    },
+    3: {
+      6 : 'Israel debe arrepentirse de su deslealtad'
+    },
+    4: {
+      5 : 'Desastres procedentes del norte',
+      19 : 'Angustia por la desolación de Judá'
+    },
+    5: {
+      1 : 'Jerusalén rehúsa arrepentirse',
+      14 : 'El Señor proclama juicio'
+    },
+    6: {
+      1 : 'Desastre inminente para Jerusalén'
+    },
+    7: {
+      1 : 'Maldad en la tierra',
+      30 : 'El Valle de la Matanza'
+    },
+    8: {
+      4 : 'Pecado y traición',
+      18 : 'Jeremías llora por su pueblo'
+    },
     9: {},
-    10: {},
-    11: {},
-    12: {},
-    13: {},
-    14: {},
-    15: {},
-    16: {},
-    17: {},
-    18: {},
-    19: {},
-    20: {},
-    21: {},
-    22: {},
-    23: {},
-    24: {},
-    25: {},
-    26: {},
-    27: {},
-    28: {},
-    29: {},
-    30: {},
-    31: {},
-    32: {},
-    33: {},
-    34: {},
-    35: {},
-    36: {},
-    37: {},
-    38: {},
-    39: {},
-    40: {},
-    41: {},
-    42: {},
-    43: {},
-    44: {},
-    45: {},
-    46: {},
-    47: {},
-    48: {},
-    49: {},
-    50: {},
-    51: {},
-    52: {},
+    10: {
+      1 : 'Los ídolos y el Dios vivo'
+    },
+    11: {
+      1 : 'El pacto roto'
+    },
+    12: {
+      1 : 'Lamento de Jeremías',
+      5 : 'El Señor responde a Jeremías'
+    },
+    13: {
+      1 : 'El cinto arruinado',
+      12 : 'Las tinajas llenas de vino',
+      15 : 'Amenaza de exilio'
+    },
+    14: {
+      1 : 'Amenaza de exilio',
+      13 : 'Profetas mentirosos'
+    },
+    15: {
+      1 : 'Dios no tendrá compasión',
+      10 : 'Lamento de Jeremías'
+    },
+    16: {
+      1 : 'Espada, hambre y muerte',
+      14 : 'El Señor restaurará a Israel'
+    },
+    17: {
+      1 : 'El pecado de Judá',
+      14 : 'Jeremías ora por liberación',
+      19 : 'Santificad el día de reposo'
+    },
+    18: {
+      1 : 'El alfarero y el barro'
+    },
+    19: {
+      1 : 'La vasija quebrada'
+    },
+    20: {
+      1 : 'Jeremías maltratado por Pasur'
+    },
+    21: {
+      1 : 'Jerusalén caerá ante Nabucodonosor',
+      11 : 'Mensaje para la casa de David'
+    },
+    22: {
+      11 : 'Mensaje a los hijos de Josías'
+    },
+    23: {
+      1 : 'El renuevo justo',
+      9 : 'Profetas mentirosos'
+    },
+    24: {
+      1 : 'Los higos buenos y los higos malos'
+    },
+    25: {
+      1 : 'Setenta años de cautiverio',
+      15 : 'La copa del furor de Dios'
+    },
+    26: {
+      1 : 'Jeremías amenazado de muerte',
+      16 : 'Jeremías salvado de la muerte'
+    },
+    27: {
+      1 : 'El yugo de Nabucodonosor'
+    },
+    28: {
+      1 : 'El falso profeta Hananías'
+    },
+    29: {
+      1 : 'Carta de Jeremías a los exiliados',
+      24 : 'Falsa Profecía de Semaías'
+    },
+    30: {
+      1 : 'Restauración de Israel y Judá'
+    },
+    31: {
+      1 : 'El Señor tornará el duelo en regocijo',
+      31 : 'El nuevo pacto'
+    },
+    32: {
+      1 : 'Jeremías compra un campo durante el asedio',
+      16 : 'Jeremías ora por entendimiento',
+      36 : 'Ellos serán mi pueblo y yo seré su Dios'
+    },
+    33: {
+      1 : 'El Señor promete paz',
+      14 : 'El pacto eterno de Dios con David'
+    },
+    34: {
+      1 : 'Sedequías morirá en Babilonia'
+    },
+    35: {
+      1 : 'La obediencia de los recabitas'
+    },
+    36: {
+      1 : 'Joacim quema el rollo de Jeremías'
+    },
+    37: {
+      1 : 'Jeremías advierte a Sedequías',
+      11 : 'Jeremías encarcelado'
+    },
+    38: {
+      1 : 'Jeremías arrojado a una cisterna',
+      7 : 'Jeremías rescatado de la cisterna',
+      14 : 'Jeremías advierte de nuevo a Sedequías'
+    },
+    39: {
+      1 : 'La caída de Jerusalén',
+      11 : 'El Señor libera a Jeremías'
+    },
+    40: {
+      1 : 'Jeremías permanece en Judá'
+    },
+    41: {
+      1 : 'Gedalías asesinado'
+    },
+    42: {
+      1 : 'Advertencia en contra de ir a Egipto'
+    },
+    43: {
+      1 : 'Jeremías llevado a Egipto'
+    },
+    44: {
+      1 : 'Juicio contra la idolatría'
+    },
+    45: {
+      1 : 'Mensaje a Baruc'
+    },
+    46: {
+      1 : 'Juicio contra Egipto'
+    },
+    47: {
+      1 : 'Juicio contra los filisteos'
+    },
+    48: {
+      1 : 'Juicio contra Moab'
+    },
+    49: {
+      1 : 'Juicio contra Amón',
+      7 : 'Juicio contra Edom',
+      23 : 'Juicio contra Damasco',
+      28 : 'Juicio contra Cedar y Hazor',
+      34 : 'Juicio contra Elam'
+    },
+    50: {
+      1 : 'Juicio contra Babilonia'
+    },
+    51: {
+      1 : 'La destrucción total de Babilonia'
+    },
+    52: {
+      1 : 'Otor relato de la caída de Jerusalén',
+      12 : 'Arde el templo',
+      24 : 'El pueblo exiliado a Babilonia',
+      31 : 'Joaquín sale de la prisión'
+    },
   },
   25: {
-    1: {},
-    2: {},
-    3: {},
-    4: {},
-    5: {},
+    1: {
+      1 : '¡Cómo ha quedado sola la ciudad populosa! '
+    },
+    2: {
+      1 : 'Destruyó el Señor sin misericordia'
+    },
+    3: {
+      1 : 'Grande es tu fidelidad'
+    },
+    4: {
+      1 : 'Las piedras del santuario yacen esparcidas'
+    },
+    5: {
+      1 : 'Vuélvenos, oh Jehová, a ti'
+    },
   },
   26: {
-    1: {},
-    2: {},
-    3: {},
-    4: {},
-    5: {},
-    6: {},
-    7: {},
-    8: {},
-    9: {},
-    10: {},
-    11: {},
-    12: {},
-    13: {},
-    14: {},
-    15: {},
-    16: {},
-    17: {},
-    18: {},
-    19: {},
-    20: {},
-    21: {},
-    22: {},
-    23: {},
-    24: {},
-    25: {},
-    26: {},
-    27: {},
-    28: {},
-    29: {},
-    30: {},
-    31: {},
-    32: {},
-    33: {},
-    34: {},
-    35: {},
-    36: {},
-    37: {},
-    38: {},
-    39: {},
-    40: {},
-    41: {},
-    42: {},
-    43: {},
-    44: {},
-    45: {},
-    46: {},
-    47: {},
-    48: {},
+    1: {
+      1 : 'Ezequiel en Babilonia',
+      4 : 'La gloria del Señor'
+    },
+    2: {
+      1 : 'Llamada de Ezequiel'
+    },
+    3: {
+      16 : 'Un atalaya para Israel'
+    },
+    4: {
+      1 : 'Representación del asedio de Jerusalén'
+    },
+    5: {
+      1 : 'Jerusalén será destruida'
+    },
+    6: {
+      1 : 'Juicio contra la idolatría'
+    },
+    7: {
+      1 : 'El día de la ira del Señor'
+    },
+    8: {
+      1 : 'Abominaciones en el templo'
+    },
+    9: {
+      1 : 'Muerte de los idólatras'
+    },
+    10: {
+      1 : 'La gloria del Señor abandona el templo'
+    },
+    11: {
+      1 : 'Juicio contra los consejeros perversos',
+      14 : 'Nuevo corazón y espíritu para Israel'
+    },
+    12: {
+      1 : 'Representación del destierro de Judá'
+    },
+    13: {
+      1 : 'Condena de los falsos profetas'
+    },
+    14: {
+      1 : 'Condena de los ancianos idólatras',
+      12 : 'Jerusalén no será librada'
+    },
+    15: {
+      1 : 'Jerusalén, una vid inúti'
+    },
+    16: {
+      1 : 'La novia infiel del Señor',
+      59 : 'El pacto eterno de Dios'
+    },
+    17: {
+      1 : 'Parábola de las dos águilas y la vid'
+    },
+    18: {
+      1 : 'El alma que peque morirá'
+    },
+    19: {
+      1 : 'Lamento por los príncipes de Israel'
+    },
+    20: {
+      1 : 'Rebelión continua de Israel',
+      33 : 'El Señor restaurará a Israel'
+    },
+    21: {
+      1 : 'El Señor ha desenvainado su espada'
+    },
+    22: {
+      1 : 'Derramamiento de sangre de Israel'
+    },
+    23: {
+      1 : 'Ahola y Aholiba'
+    },
+    24: {
+      1 : 'El asedio de Jerusalén',
+      15 : 'Muere la esposa de Ezequiel'
+    },
+    25: {
+      1 : 'Profecía contra Amón',
+      8 : 'Profecía contra Moab y Seir',
+      12 : 'Profecía contra Edom',
+      15 : 'Profecía contra Filistea'
+    },
+    26: {
+      1 : 'Profecía contra Tiro'
+    },
+    27: {
+      1 : 'Lamento por Tiro'
+    },
+    28: {
+      1 : 'Profecía contra el príncipe de Tiro',
+      11 : 'Lamento por el rey de Tiro',
+      20 : 'Profecía contra Sidón',
+      25 : 'Israel reunido en seguridad'
+    },
+    29: {
+      1 : 'Profecía contra Egipto'
+    },
+    30: {
+      1 : 'Lamento por Egipto',
+      20 : 'Egipto caerán ante Babilonia'
+    },
+    31: {
+      1 : 'Faraón morirá'
+    },
+    32: {
+      1 : 'Lamento por Faraón y Egipto'
+    },
+    33: {
+      1 : 'Ezequiel, atalaya de Israel',
+      10 : '¿Por qué has de morir, Israel?',
+      21 : 'Jerusalén derribada'
+    },
+    34: {
+      1 : 'Profecía contra los pastores de Israel',
+      11 : 'El Señor Dios recogerá a sus ovejas',
+      25 : 'Pacto de paz del Señor'
+    },
+    35: {
+      1 : 'Profecía contra el monte Seir'
+    },
+    36: {
+      1 : 'Profecía sobre las montañas de Israel',
+      16 : 'El Señor santificará su gran nombre',
+      22 : 'Pondré dentro de vosotros mi Espíritu'
+    },
+    37: {
+      1 : 'El valle de los huesos secos',
+      15 : 'Yo seré su Dios y ellos serán mi pueblo'
+    },
+    38: {
+      1 : 'Profecía contra Gog'
+    },
+    39: {
+      25 : 'El Señor restaurará a Israel'
+    },
+    40: {
+      1 : 'Visión del nuevo templo',
+      5 : 'La puerta oriental que da al atrio exterior',
+      10 : 'El atrio exterior',
+      20 : 'La puerta norte',
+      24 : 'La puerta sur',
+      28 : 'El atrio interior',
+      44 : 'Las cámaras de los sacerdotes',
+      48 : 'El pórtico del templo'
+    },
+    41: {
+      1 : 'El interior del templo'
+    },
+    42: {
+      1 : 'Las cámaras del templo'
+    },
+    43: {
+      1 : 'La gloria del Señor llena el templo',
+      13 : 'El altar'
+    },
+    44: {
+      1 : 'La puerta del príncipe',
+      15 : 'Reglas para los sacerdotes levitas'
+    },
+    45: {
+      1 : 'La tierra consagrada',
+      7 : 'La porción para el Príncipe'
+    },
+    46: {
+      1 : 'El príncipe y las fiestas',
+      19 : 'Cocinas para las ofrendas'
+    },
+    47: {
+      1 : 'Agua fluye desde el templo',
+      13 : 'División de la tierra'
+    },
+    48: {
+      30 : 'Las puertas de la ciudad'
+    },
   },
   27: {
-    1: {},
-    2: {},
-    3: {},
-    4: {},
-    5: {},
-    6: {},
-    7: {},
-    8: {},
-    9: {},
-    10: {},
-    11: {},
-    12: {},
+    1: {
+      1 : 'Daniel llevado a Babilonia',
+      8 : 'La fidelidad de Daniel'
+    },
+    2: {
+      1 : 'El sueño de Nabucodonosor',
+      17 : 'Dios revela el sueño de Nabucodonosor',
+      31 : 'Daniel interpreta el sueño',
+      46 : 'Daniel engrandecido'
+    },
+    3: {
+      1 : 'La imagen de oro de Nabucodonosor',
+      8 : 'El horno de fuego'
+    },
+    4: {
+      1 : 'Nabucodonosor da gloria a Dios',
+      4 : 'Segundo sueño de Nabucodonosor',
+      19 : 'Daniel interpreta el segundo sueño',
+      28 : 'Humillación de Nabucodonosor',
+      34 : 'Nabucodonosor restaurado'
+    },
+    5: {
+      1 : 'La escritura en la pared',
+      13 : 'Daniel interpreta la escritura'
+    },
+    6: {
+      1 : 'Daniel y el foso de los leones'
+    },
+    7: {
+      1 : 'Visión de las cuatro bestias de Daniel',
+      9 : 'El Anciano de días reina',
+      13 : 'El Hijo del Hombre recibe el reino',
+      15 : 'Interpretación de la visión de Daniel'
+    },
+    8: {
+      1 : 'Visión de Daniel del carnero y el macho cabrío',
+      15 : 'La interpretación de la visión'
+    },
+    9: {
+      1 : 'Oración de Daniel por su pueblo',
+      20 : 'Gabriel trae una respuesta',
+      24 : 'Las setenta semanas'
+    },
+    10: {
+      1 : 'Aterradora visión de un hombre'
+    },
+    11: {
+      1 : 'Los reyes del Sur y del Norte'
+    },
+    12: {
+      1 : 'El tiempo del fin'
+    },
   },
   28: {
-    1: {},
-    2: {},
-    3: {},
-    4: {},
-    5: {},
-    6: {},
+    1: {
+      2 : 'Esposa e hijos de Oseas'
+    },
+    2: {
+      1 : 'Israel castigado por su infidelidad',
+      14 : 'La misericordia del Señor hacia Israel'
+    },
+    3: {
+      1 : 'Oseas redime su esposa'
+    },
+    4: {
+      1 : 'El Señor acusa a Israel'
+    },
+    5: {
+      1 : 'Castigo venidero para Israel y Judá'
+    },
+    6: {
+      1 : 'Israel y Judá no se arrepienten'
+    },
     7: {},
-    8: {},
-    9: {},
+    8: {
+      1 : 'Israel segará torbellinos'
+    },
+    9: {
+      1 : 'El Señor castigará a Israel'
+    },
     10: {},
-    11: {},
-    12: {},
-    13: {},
-    14: {},
+    11: {
+      1 : 'El amor de Dios hacia Israel'
+    },
+    12: {
+      2 : 'Dios acusa a Israel y Judá'
+    },
+    13: {
+      1 : 'Juicio divino implacable contra Israel'
+    },
+    14: {
+      1 : 'Súplica para regresar al Señor'
+    },
   },
   29: {
-    1: {},
-    2: {},
-    3: {},
+    1: {
+      2  : 'Una invasión de langostas',
+      13 : 'Exhortación al arrepentimiento'
+    },
+    2: {
+      1 : 'El día del Señor',
+      12 : 'Volvéos al Señor',
+      18 : 'El Señor tuvo piedad',
+      28 : 'El Señor derramará su Espíritu'
+    },
+    3: {
+      1 : 'El Señor juzga las naciones',
+      17 : 'El futuro glorioso de Judá'
+    },
   },
   30: {
-    1: {},
+    1: {
+      2 : 'Sentencia contra los vecinos de Israel'
+    },
     2: {},
     3: {},
     4: {},

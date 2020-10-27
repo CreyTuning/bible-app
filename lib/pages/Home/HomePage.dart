@@ -123,16 +123,6 @@ class _HomePageState extends State<HomePage> {
 
                     Spacer(),
 
-                    // InkWell(
-                    //   child: Container(
-                    //     child: Icon(Icons.cloud, color: Theme.of(context).textTheme.bodyText1.color, size: 21,),
-                    //     width: 40,
-                    //     height: 40,
-                    //   ),
-                    //   borderRadius: BorderRadius.circular(30),
-                    //   onTap: () {},
-                    //   onLongPress: () {},
-                    // ),
                   ],
                 ),
               ),
