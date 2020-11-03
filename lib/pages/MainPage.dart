@@ -80,7 +80,7 @@ class MainPageState extends State<MainPage> {
 
             BottomNavigationBarItem(
               icon: Icon(Icons.school),
-              title: Text('Aprender'),
+              title: Text('Conocer'),
             ),
 
             BottomNavigationBarItem(

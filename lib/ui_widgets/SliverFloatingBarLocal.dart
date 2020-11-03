@@ -389,6 +389,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
         ),
       ),
     );
+    
     return Container(child: floating ? _FloatingAppBar(child: appBar) : appBar);
   }
 }

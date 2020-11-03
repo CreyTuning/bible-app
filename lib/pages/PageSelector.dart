@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:wakelock/wakelock.dart';
+import 'package:yhwh/pages/AprenderPage/AprenderMain.dart';
 import 'package:yhwh/pages/BiblePage/BiblePage.dart';
 
 import 'Home/HomePage.dart';
@@ -28,7 +29,7 @@ class PageSelector extends StatelessWidget{
         break;
       case 2:
         Wakelock.disable();
-        page = EnDesarrollo(title: 'Estudio');
+        page = AprenderPage();
         break;
       case 3:
         Wakelock.disable();

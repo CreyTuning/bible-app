@@ -37,7 +37,7 @@ class _VerseOfTheDayState extends State<VerseOfTheDay> {
 
   void setNewData(String newData){
     setState(() {
-      String text = json.decode(newData)['verses']['${dateTime.year.toString().substring(2)}_${dateTime.month}_${dateTime.day}'];
+      String text = json.decode(newData)['verses']['${dateTime.year}_${dateTime.month}_${dateTime.day}'];
       setState(() {
         book = int.parse(text.split(':')[0]);
         chapter = int.parse(text.split(':')[1]);
@@ -60,7 +60,7 @@ class _VerseOfTheDayState extends State<VerseOfTheDay> {
       // Descargar la nueva data 
       if(data == '{"information" : {"year" : "0", "month" : "0"}}' || json.decode(data)['information']['year'] != dateTime.year || json.decode(data)['information']['month'] != dateTime.month){
         http.read('https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/daily_verse/${dateTime.year}/${dateTime.month}.json').then((response){
-          String text = json.decode(response)['verses']['${dateTime.year.toString().substring(2)}_${dateTime.month}_${dateTime.day}'];
+          String text = json.decode(response)['verses']['${dateTime.year.toString()}_${dateTime.month}_${dateTime.day}'];
 
           setState(() {
             book = int.parse(text.split(':')[0]);
@@ -76,7 +76,7 @@ class _VerseOfTheDayState extends State<VerseOfTheDay> {
 
       // Usar la data existente para mostrar el versiculo del dia
       else{
-        String text = json.decode(data)['verses']['${dateTime.year.toString().substring(2)}_${dateTime.month}_${dateTime.day}'];
+        String text = json.decode(data)['verses']['${dateTime.year}_${dateTime.month}_${dateTime.day}'];
 
         setState(() {
           book = int.parse(text.split(':')[0]);

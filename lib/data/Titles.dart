@@ -129,7 +129,7 @@ Map titles = {
       17: 'Carácter servicial de Rebeca',
       28: 'Rebeca confirma su elección',
       34: 'Mensaje del criado de Abraham',
-      50: 'Del Yahweh ha salido esto',
+      50: 'De Yahweh ha salido esto',
       61: 'Isaac y Rebeca se encuentran'
     },
 
@@ -2597,73 +2597,208 @@ Map titles = {
     1: {
       2 : 'Sentencia contra los vecinos de Israel'
     },
-    2: {},
-    3: {},
-    4: {},
-    5: {},
-    6: {},
-    7: {},
-    8: {},
-    9: {},
+    2: {
+      4 : 'Sentencia contra Judá',
+      6 : 'Sentencia contra Israel'
+    },
+    3: {
+      1 : 'La culpa y el castigo de Israel'
+    },
+    4: {
+      6 : 'Israel no ha vuelto al Señor'
+    },
+    5: {
+      1 : 'Buscad al Señor y vivir',
+      18 : 'Corra el juicio como las aguas'
+    },
+    6: {
+      1 : '¡Ay de los reposados en Sion!'
+    },
+    7: {
+      1 : 'Visiones de advertencia',
+      10 : 'Amós acusado'
+    },
+    8: {
+      1 : 'El día venidero de llanto amargo'
+    },
+    9: {
+      1 : 'La destrucción de Israel',
+      11 : 'La restauración de Israel'
+    },
   },
   31: {
-    1: {},
+    1: {
+      1 : 'Edom será humillado',
+      10 : 'La violencia de Edom contra Jacob',
+      15 : 'El día del Señor está cerca',
+      19 : 'El reino del Señor'
+    },
   },
   32: {
-    1: {},
-    2: {},
-    3: {},
-    4: {},
+    1: {
+      1 : 'Jonás huye de la presencia del Señor',
+      7 : 'Jonás arrojado al mar',
+      17 : 'Un gran pez se traga a Jonás'
+    },
+    2: {
+      1 : 'Oración de Jonás'
+    },
+    3: {
+      1 : 'Jonás va a Nínive',
+      6 : 'Los ninivitas se arrepienten'
+    },
+    4: {
+      1 : 'La ira de Jonás y la compasión del Señor'
+    },
   },
   33: {
-    1: {},
-    2: {},
-    3: {},
-    4: {},
-    5: {},
-    6: {},
-    7: {},
+    1: {
+      2 : 'La destrucción venidera'
+    },
+    2: {
+      1 : '¡Ay de los opresores!'
+    },
+    3: {
+      1 : 'Denuncia contra los gobernantes y los profetas'
+    },
+    4: {
+      1 : 'El monte del Señor',
+      6 : 'El Señor librará a Sion'
+    },
+    5: {
+      1 : 'El gobernante nacerá en Belén',
+      7 : 'Un remanente será librado'
+    },
+    6: {
+      1 : 'La acusación del Señor',
+      6 : '¿Qué pide Dios de ti?',
+      9 : 'La destrucción de los malvados'
+    },
+    7: {
+      1 : 'Esperaré al Dios de mi salvación',
+      18 : 'La misericordia de Dios'
+    },
   },
   34: {
-    1: {},
-    2: {},
-    3: {},
+    1: {
+      2 : 'Ira de Dios contra Nínive'
+    },
+    2: {
+      1 : 'La destrucción de Nínive'
+    },
+    3: {
+      1 : 'Ay de Nínive'
+    },
   },
   35: {
-    1: {},
-    2: {},
-    3: {},
+    1: {
+      1 : 'Queja de Habacuc',
+      5 : 'La respuesta del Señor',
+      12 : 'Segunda queja de Habacuc'
+    },
+    2: {
+      2 : 'El justo vivirá por su fe',
+      6 : '¡Ay de los caldeos!'
+    },
+    3: {
+      1 : 'Oración de Habacuc',
+      17 : 'Habacuc se regocija en el Señor'
+    },
   },
   36: {
-    1: {},
-    2: {},
-    3: {},
+    1: {
+      1 : 'El juicio venidero contra Judá',
+      7 : 'El día del Señor está cerca'
+    },
+    2: {
+      1 : 'Sentencia contra los enemigos de Judá'
+    },
+    3: {
+      1 : 'Sentencia contra Jerusalén y las naciones',
+      9 : 'La conversión de las naciones',
+      14 : 'La alegría y restauración de Israel'
+    },
   },
   37: {
-    1: {},
-    2: {},
+    1: {
+      1 : 'La orden de reconstruir el templo',
+      12 : 'El pueblo obedece al Señor'
+    },
+    2: {
+      1 : 'La gloria futura del templo',
+      10 : 'Bendiciones para un pueblo inmundo',
+      20 : 'Zorobabel escogido como anillo de sellar'
+    },
   },
   38: {
-    1: {},
-    2: {},
-    3: {},
-    4: {},
-    5: {},
-    6: {},
-    7: {},
-    8: {},
-    9: {},
-    10: {},
-    11: {},
-    12: {},
-    13: {},
-    14: {},
+    1: {
+      1 : 'Exhortación a volver al Señor',
+      7 : 'Visión de un jinete',
+      18 : 'Visión de unos cuernos y unos carpinteros'
+    },
+    2: {
+      1 : 'Visión de un hombre con un cordel de medir'
+    },
+    3: {
+      1 : 'Visión del sumo sacerdote Josué'
+    },
+    4: {
+      1 : 'Visión de un candelabro de oro'
+    },
+    5: {
+      1 : 'Visión de un rollo que vuela',
+      5 : 'Visión de una mujer en una cesta'
+    },
+    6: {
+      1 : 'Visión de cuatro carros de guerra',
+      9 : 'La corona y el templo'
+    },
+    7: {
+      1 : 'Exhortación a la justicia y la misericordia'
+    },
+    8: {
+      1 : 'Futuras paz y prosperidad en Sion'
+    },
+    9: {
+      1 : 'Sentencia contra los enemigos de Israel',
+      9 : 'El rey venidero de Sión',
+      14 : 'El Señor salvará a su pueblo'
+    },
+    10: {
+      1 : 'La restauración de Judá e Israel'
+    },
+    11: {
+      1 : 'Las ovejas destinadas a la matanza'
+    },
+    12: {
+      1 : 'El Señor dará salvación',
+      10 : 'Mirarán al que traspasaron'
+    },
+    13: {
+      2 : 'Quitaré la idolatría de la tierra',
+      7 : 'El pastor herido'
+    },
+    14: {
+      1 : 'La llegada del día del Señor'
+    },
   },
   39: {
-    1: {},
-    2: {},
-    3: {},
-    4: {},
+    1: {
+      2 : 'El amor de Dios a Israel',
+      6 : 'Las ofrendas contaminadas de los sacerdotes'
+    },
+    2: {
+      1 : 'El Señor reprende a los sacerdotes',
+      10 : 'Judá profanó el pacto',
+      17 : 'El mensajero del Señor'
+    },
+    3: {
+      6 : 'Roban a Dios',
+      16 : 'El libro de memoria'
+    },
+    4: {
+      1 : 'El gran día del Señor'
+    },
   },
   40: {
     1: {1: 'Genealogía de Jesucristo', 18: 'Nacimiento de Jesucristo'},
