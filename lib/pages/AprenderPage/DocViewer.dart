@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:http/http.dart' as http;
@@ -7,10 +5,12 @@ import 'package:http/http.dart' as http;
 class DocViewer extends StatefulWidget {
   DocViewer({
     this.link,
+    this.title,
     Key key
   }) : super(key: key);
 
   final String link;
+  final String title;
 
   @override
   _DocViewerState createState() => _DocViewerState();
@@ -34,7 +34,10 @@ class _DocViewerState extends State<DocViewer> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(title: Text('Lectura'),),
+      appBar: AppBar(title: Text('${widget.title}', style: TextStyle(
+        color: Theme.of(context).textTheme.bodyText1.color
+      ))),
+      
       body: data != '' ? Container(
         child: Scrollbar(
           child: Markdown(
@@ -43,39 +46,54 @@ class _DocViewerState extends State<DocViewer> {
             selectable: true,
             styleSheet: MarkdownStyleSheet(
               h1: Theme.of(context).textTheme.bodyText1.copyWith(
-                fontSize: 28
+                fontSize: 24,
+                height: 1.5
               ),
               h2: Theme.of(context).textTheme.bodyText1.copyWith(
-                fontSize: 26
+                fontSize: 22,
+                height: 1.5
               ),
               h3: Theme.of(context).textTheme.bodyText1.copyWith(
-                fontSize: 24
+                fontSize: 20,
+                height: 1.5
               ),
               h4: Theme.of(context).textTheme.bodyText1.copyWith(
-                fontSize: 22
+                fontSize: 18,
+                height: 1.5
               ),
               h5: Theme.of(context).textTheme.bodyText1.copyWith(
-                fontSize: 20
+                fontSize: 16,
+                height: 1.5
               ),
               h6: Theme.of(context).textTheme.bodyText1.copyWith(
-                fontSize: 18
+                fontSize: 14,
+                height: 1.5
               ),
 
               p: Theme.of(context).textTheme.bodyText1.copyWith(
-                fontSize: 16
-              ),
-
-              listBullet: Theme.of(context).textTheme.bodyText1.copyWith(
-                fontSize: 16
+                fontSize: 18,
+                height: 1.5
               ),
 
               blockquoteDecoration: BoxDecoration(
-                color: Theme.of(context).appBarTheme.color,
-                borderRadius: BorderRadius.circular(8)
+                color: Theme.of(context).textTheme.bodyText2.color.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(12),
               ),
 
-              blockSpacing: 12,
-              textScaleFactor: 1
+              blockquote: Theme.of(context).textTheme.bodyText1.copyWith(
+                fontSize: 18,
+                height: 1.5
+              ),
+
+              listBullet: Theme.of(context).textTheme.bodyText1.copyWith(
+                fontSize: 18,
+              ),
+
+              listIndent: 25,
+
+              blockquotePadding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+              blockSpacing: 15,
+              textScaleFactor: 1,
 
             ),
           ),
