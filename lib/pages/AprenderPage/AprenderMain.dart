@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:github/github.dart';
 import 'package:yhwh/pages/AprenderPage/DocViewer.dart';
+import 'package:yhwh/pages/BiblePage/StylePage/fontPreference.dart';
 import 'package:yhwh/ui_widgets/SliverFloatingBarLocal.dart';
 import 'package:http/http.dart' as http;
 
@@ -67,41 +68,37 @@ class _AprenderPageState extends State<AprenderPage> {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark 
-    ));
+    )); 
 
     return Container(
       color: Theme.of(context).canvasColor,
       child: SafeArea(
         top: true,
         child: Scaffold(
-          appBar: PreferredSize(
-            preferredSize: Size.fromHeight(120),
-            child: Container(
-              child: Padding(
-                padding: EdgeInsets.only(top: 8),
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12.0),
-                  child: SafeArea(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.4),
-                            blurRadius: 1,
-                            spreadRadius: 0
-                          )
-                        ],
-                      ),
+          body: docs_url == ''
+          
+          ? Container(
+            child: Center(
+              child: CircularProgressIndicator()
+            )
+          )
+          
+          : Scrollbar(
+            child: CustomScrollView(
+              // controller: widget.autoScrollController,
+              slivers: [
+                SliverFloatingBarLocal(
+                  backgroundColor: Theme.of(context).floatingActionButtonTheme.backgroundColor,
+                  floating: true,
+                  snap: true,
+                  elevation: 4,
 
-                      child: Material(
-                        color: Theme.of(context).appBarTheme.color,
-                        borderRadius: BorderRadius.circular(15.0),
-                        elevation: 3,
-                        child: ListTile(
-                          dense: true,
-                          trailing: IconButton(icon: Icon(Icons.cloud_download, color: Theme.of(context).textTheme.bodyText1.color), onPressed: (){}),
-                          title: InkWell(
+                  title: Row(
+                    children: [
+                      Expanded(
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(100),
+                          child: InkWell(
                             borderRadius: BorderRadius.circular(100),
                             onTap: (){},
                             child: Container(
@@ -119,167 +116,214 @@ class _AprenderPageState extends State<AprenderPage> {
                                 ],
                               ),
                             ),
-                          )
+                          ),
+
+                          onTap: () {},
+                          onLongPress: () {},
+                          
                         ),
                       ),
-                    ),
-                  ),
-                ),
-              ),
-            )
-          ),
+                      
+                      Container(
+                        height: 40,
+                        width: 40,
+                        child: PopupMenuButton(
+                          tooltip: 'Mas opciones',
+                          onSelected: (value) {
+                            switch (value) {
+                              case 1:
+                                break;
+                              case 2:
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => FontPreference(updateStateInBiblePage: (){})));
+                                break;
+                            }
+                          },
 
-          body: docs_url == ''
-          
-          ? Container(
-            child: Center(
-              child: CircularProgressIndicator()
-            )
-          )
-          
-          : FutureBuilder(
-            future: http.read(docs_url),
-            builder: (context, snapshot)
-            {
-              if(snapshot.hasData)
-              {
-                Map data = json.decode(snapshot.data);
-          
-                return ListView.builder(
-                  itemCount: data['tree'].length,
-                  itemBuilder: (context, index) {
+                          itemBuilder: (context) {
+                            return [
+                              PopupMenuItem(
+                                value: 1,
+                                child: Row(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(2, 2, 8, 2),
+                                      // child: Icon(Icons.folder_open),
+                                    ),
+                                    Text('Descargados')
+                                  ],
+                                )
+                              ),
 
-                    if(data['tree'][index]['type'] == 'blob')
-                    {
-                      return ListTile(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DocViewer(
-                                link: 'https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/docs/${data['tree'][index]['path']}',
-                                title: data['tree'][index]['path']
-                              )
-                            )
-                          );
-                        },
-
-                        leading: Icon(Icons.description),
-                        title: RichText(
-                          overflow: TextOverflow.ellipsis,
-                          text: TextSpan(
-                            text: data['tree'][index]['path'],
-                            style: Theme.of(context).textTheme.bodyText1.copyWith(
-                              fontSize: 18
-                            )
-                          ),
+                              PopupMenuItem(
+                                value: 2,
+                                child: Row(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(2, 2, 8, 2),
+                                      // child: Icon(Icons.settings),
+                                    ),
+                                    Text('Configuración')
+                                  ],
+                                )
+                              ),
+                            ];
+                          }
                         ),
+                      ),
+                    ],
+                  )
+                ),
 
-                        subtitle: RichText(
-                          overflow: TextOverflow.ellipsis,
-                          text: TextSpan(
-                            text: '${data['tree'][index]['size'] / 1000} Kb',
-                            style: Theme.of(context).textTheme.bodyText2.copyWith(
-                              fontSize: 16
-                            )
-                          ),
+                FutureBuilder(
+                  future: http.read(docs_url),
+                  builder: (context, snapshot)
+                  {
+                    if(snapshot.hasData)
+                    {
+                      Map data = json.decode(snapshot.data);
+                
+                      return SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                          (context, index) {
+                            // Si es un documento simple sin imagenes ni indice
+                            if(data['tree'][index]['type'] == 'blob')
+                            {
+                              return ListTile(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => DocViewer(
+                                        link: 'https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/docs/${data['tree'][index]['path']}',
+                                        title: data['tree'][index]['path']
+                                      )
+                                    )
+                                  );
+                                },
+
+                                leading: Icon(Icons.description),
+                                title: RichText(
+                                  overflow: TextOverflow.ellipsis,
+                                  text: TextSpan(
+                                    text: data['tree'][index]['path'],
+                                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                                      fontSize: 18
+                                    )
+                                  ),
+                                ),
+
+                                subtitle: RichText(
+                                  overflow: TextOverflow.ellipsis,
+                                  text: TextSpan(
+                                    text: '${data['tree'][index]['size'] / 1000} Kb',
+                                    style: Theme.of(context).textTheme.bodyText2.copyWith(
+                                      fontSize: 16
+                                    )
+                                  ),
+                                ),
+                              );
+                            }
+
+                            // Si es una carpeta con imagenes e indice
+                            else if(data['tree'][index]['type'] == 'tree'){
+
+                              return FutureBuilder(
+                                initialData: '',
+                                future: http.read('https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/docs/${data['tree'][index]['path']}/index.json'),
+                                builder: (context, snapshot)
+                                {
+                                  if(snapshot.hasData && snapshot.data != '') 
+                                  {
+                                    return ListTile(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => DocViewer(
+                                              link: 'https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/docs/${data['tree'][index]['path']}/document.md',
+                                              background_link: 'https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/docs/${data['tree'][index]['path']}/background.jpg',
+                                              title: jsonDecode(snapshot.data)['title']
+                                            )
+                                          )
+                                        );
+                                      },
+
+                                      leading: jsonDecode(snapshot.data)['icon'] == true
+                                      ? Container(
+                                        height: 40,
+                                        width: 40,
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(8.0),
+                                          child: Image.network('https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/docs/${data['tree'][index]['path']}/icon.jpg',),
+                                        ),
+                                      )
+                                      : Icon(Icons.description),
+
+
+                                      title: RichText(
+                                        overflow: TextOverflow.ellipsis,
+                                        text: TextSpan(
+                                          text: jsonDecode(snapshot.data)['title'],
+                                          style: Theme.of(context).textTheme.bodyText1.copyWith(
+                                            fontSize: 18
+                                          )
+                                        ),
+                                      ),
+
+                                      subtitle: RichText(
+                                        overflow: TextOverflow.ellipsis,
+                                        text: TextSpan(
+                                          text: jsonDecode(snapshot.data)['description'],
+                                          style: Theme.of(context).textTheme.bodyText2.copyWith(
+                                            fontSize: 16
+                                          )
+                                        ),
+                                      ),
+                                    );
+                                  }
+
+                                  else
+                                  {
+                                    return ListTile(
+                                      onTap: null,
+                                      // dense: true,
+                                      leading: Container(
+                                        height: 25,
+                                        width: 25,
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                      title: RichText(
+                                        overflow: TextOverflow.ellipsis,
+                                        text: TextSpan(
+                                          text: 'Cargando...',
+                                          style: Theme.of(context).textTheme.bodyText1.copyWith(
+                                            fontSize: 18
+                                          )
+                                        ),
+                                      )
+                                    );
+                                  }
+                                },
+                              ); 
+                            }
+                          },
+
+                          childCount: data['tree'].length,
                         ),
                       );
                     }
 
-                    else if(data['tree'][index]['type'] == 'tree'){
-
-                      return FutureBuilder(
-                        initialData: '',
-                        future: http.read('https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/docs/${data['tree'][index]['path']}/index.json'),
-                        builder: (context, snapshot)
-                        {
-                          if(snapshot.hasData && snapshot.data != '') 
-                          {
-                            print(jsonDecode(snapshot.data)['icon']);
-                            return ListTile(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => DocViewer(
-                                      link: 'https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/docs/${data['tree'][index]['path']}/document.md',
-                                      title: jsonDecode(snapshot.data)['title']
-                                    )
-                                  )
-                                );
-                              },
-
-                              leading: jsonDecode(snapshot.data)['icon'] == true
-                              ? Container(
-                                height: 40,
-                                width: 40,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Image.network('https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/docs/${data['tree'][index]['path']}/icon.jpg',),
-                                ),
-                              )
-                              : Icon(Icons.description),
-
-
-                              title: RichText(
-                                overflow: TextOverflow.ellipsis,
-                                text: TextSpan(
-                                  text: jsonDecode(snapshot.data)['title'],
-                                  style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                    fontSize: 18
-                                  )
-                                ),
-                              ),
-
-                              subtitle: RichText(
-                                overflow: TextOverflow.ellipsis,
-                                text: TextSpan(
-                                  text: jsonDecode(snapshot.data)['description'],
-                                  style: Theme.of(context).textTheme.bodyText2.copyWith(
-                                    fontSize: 16
-                                  )
-                                ),
-                              ),
-                            );
-                          }
-
-                          else
-                          {
-                            return ListTile(
-                              onTap: null,
-                              dense: true,
-                              leading: Container(
-                                height: 25,
-                                width: 25,
-                                child: CircularProgressIndicator(),
-                              ),
-                              title: RichText(
-                                overflow: TextOverflow.ellipsis,
-                                text: TextSpan(
-                                  text: 'Cargando...',
-                                  style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                    fontSize: 18
-                                  )
-                                ),
-                              )
-                            );
-                          }
-                        },
-                      ); 
+                    else{
+                      return SliverToBoxAdapter(
+                        child: Center(
+                          child: CircularProgressIndicator()
+                        )
+                      );
                     }
                   },
-                );
-              }
-
-              else{
-                return Container(
-                  child: Center(
-                    child: CircularProgressIndicator()
-                  )
-                );
-              }
-            },
+                )
+              ]
+            )
           )
         ),
       )

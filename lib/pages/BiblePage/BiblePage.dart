@@ -283,37 +283,52 @@ class _BiblePageState extends State<BiblePage> {
                         ),
                       ),
                       
-                      // Spacer(),
+                      Container(
+                        height: 40,
+                        width: 40,
+                        child: PopupMenuButton(
+                          tooltip: 'Mas opciones',
+                          onSelected: (value) {
+                            switch (value) {
+                              case 1:
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HighlightPage(setReference: setReference)));
+                                break;
+                              case 2:
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => FontPreference(updateStateInBiblePage: updateState)));
+                                break;
+                            }
+                          },
 
-                      InkWell(
-                        child: Container(
-                          child: Icon(Icons.folder, color: Theme.of(context).iconTheme.color, size: 21),
-                          width: 40,
-                          height: 40,
-                        ),
-                        borderRadius: BorderRadius.circular(30),
-                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HighlightPage(setReference: setReference)));
-                        },
-                      ),
+                          itemBuilder: (context) {
+                            return [
+                              PopupMenuItem(
+                                value: 1,
+                                child: Row(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(2, 2, 8, 2),
+                                      child: Icon(Icons.folder_open),
+                                    ),
+                                    Text('Resaltados')
+                                  ],
+                                )
+                              ),
 
-                      InkWell(
-                        child: Container(
-                          // child: Icon(Icons.font_download, color: Theme.of(context).iconTheme.color, size: 21,),
-                          child: Center(
-                            child: Text('Aa',
-                              style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                fontSize: 17
-                              )
-                            ),
-                          ),
-                          width: 40,
-                          height: 40,
+                              PopupMenuItem(
+                                value: 2,
+                                child: Row(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(2, 2, 8, 2),
+                                      child: Icon(Icons.settings),
+                                    ),
+                                    Text('Configuración')
+                                  ],
+                                )
+                              ),
+                            ];
+                          }
                         ),
-                        borderRadius: BorderRadius.circular(30),
-                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => FontPreference(updateStateInBiblePage: updateState))); //StylePage(updateStateInBiblePage: updateState)));
-                        },
                       ),
                     ],
                   )
