@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:github/github.dart';
+import 'package:yhwh/pages/AprenderPage/Classes/Explorer.dart';
 import 'package:yhwh/pages/AprenderPage/DocViewer.dart';
 import 'package:yhwh/pages/BiblePage/StylePage/fontPreference.dart';
 import 'package:yhwh/ui_widgets/SliverFloatingBarLocal.dart';
@@ -19,43 +20,16 @@ class AprenderPage extends StatefulWidget {
 class _AprenderPageState extends State<AprenderPage> {
 
   String testingData = '';
-  String docs_url = '';
-  String estudios_biblicos_url = '';
+  String docsUrl = '';
 
   @override
   void initState() {
     
     // Conseguir link de la carpeta 'docs' en la base de datos online.
-    http.read('https://api.github.com/repos/CreyTuning/DatabaseOfYhwh/git/trees/master').then((value) async {
-      if(value.contains('"docs"'))
-      {
-        await json.decode(value)['tree'].forEach((item){
-          if(item['path'] == 'docs'){
-            setState(() {
-              docs_url = item['url'];
-            });
-          }
-        });
-      }
-
-      else print('La base de datos no contiene la carpeta "docs".');
-
-    });
-
-    http.read('https://api.github.com/repos/CreyTuning/DatabaseOfYhwh/git/trees/master').then((value) async {
-      if(value.contains('"docs"'))
-      {
-        await json.decode(value)['tree'].forEach((item){
-          if(item['path'] == 'Estudios Biblicos'){
-            setState(() {
-              estudios_biblicos_url = item['url'];
-            });
-          }
-        });
-      }
-
-      else print('La base de datos no contiene la carpeta "Estudios Biblicos".');
-
+    Explorer.getRepository('CreyTuning', 'DatabaseOfYhwh', 'master').then((Tree repository){
+      setState(() {
+        docsUrl = repository.getTreeItemFromPath('docs').url;
+      });
     });
 
     super.initState();
@@ -75,7 +49,7 @@ class _AprenderPageState extends State<AprenderPage> {
       child: SafeArea(
         top: true,
         child: Scaffold(
-          body: docs_url == ''
+          body: docsUrl == ''
           
           ? Container(
             child: Center(
@@ -175,7 +149,7 @@ class _AprenderPageState extends State<AprenderPage> {
                 ),
 
                 FutureBuilder(
-                  future: http.read(docs_url),
+                  future: http.read(docsUrl),
                   builder: (context, snapshot)
                   {
                     if(snapshot.hasData)
@@ -240,21 +214,21 @@ class _AprenderPageState extends State<AprenderPage> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) => DocViewer(
-                                              link: 'https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/docs/${data['tree'][index]['path']}/document.md',
-                                              background_link: 'https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/docs/${data['tree'][index]['path']}/background.jpg',
+                                              link: 'https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/docs/${data['tree'][index]['path']}/${jsonDecode(snapshot.data)['path']}',
+                                              backgroundLink: 'https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/docs/${data['tree'][index]['path']}/${jsonDecode(snapshot.data)['background']}',
                                               title: jsonDecode(snapshot.data)['title']
                                             )
                                           )
                                         );
                                       },
 
-                                      leading: jsonDecode(snapshot.data)['icon'] == true
+                                      leading: jsonDecode(snapshot.data)['icon'] != null
                                       ? Container(
                                         height: 40,
                                         width: 40,
                                         child: ClipRRect(
                                           borderRadius: BorderRadius.circular(8.0),
-                                          child: Image.network('https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/docs/${data['tree'][index]['path']}/icon.jpg',),
+                                          child: Image.network('https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/docs/${data['tree'][index]['path']}/${jsonDecode(snapshot.data)['icon']}'),
                                         ),
                                       )
                                       : Icon(Icons.description),

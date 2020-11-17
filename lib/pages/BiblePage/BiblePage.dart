@@ -1,13 +1,12 @@
-import 'package:floating_search_bar/floating_search_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yhwh/data/Define.dart';
+import 'package:yhwh/pages/AprenderPage/Classes/Explorer.dart';
 import 'package:yhwh/pages/BiblePage/BookSelection.dart';
 import 'package:yhwh/pages/BiblePage/HighlightPage.dart';
-import 'package:yhwh/pages/BiblePage/StylePage/StylePage.dart';
 import 'package:yhwh/pages/BiblePage/StylePage/fontPreference.dart';
 import 'package:yhwh/ui_widgets/SliverFloatingBarLocal.dart';
 import 'package:yhwh/ui_widgets/chapter_footer.dart';
@@ -35,6 +34,14 @@ class _BiblePageState extends State<BiblePage> {
 
   @override
   void initState() {
+
+    // Explorer.getRepository('CreyTuning', 'DatabaseOfYhwh', 'master').then((Tree repository){
+    //   Explorer.getTreeFromUrl(repository.getTreeItemFromPath('docs').url).then((Tree docs){
+    //     Explorer.getBlobFromUrl(docs.getTreeItemFromPath("Joven conforme al corazon de Dios.md").url).then((Blob blob){
+    //       print(blob.url);
+    //     });
+    //   });
+    // });
 
     SharedPreferences.getInstance().then((preferences){
       setState(() {

@@ -8,12 +8,12 @@ class DocViewer extends StatefulWidget {
   DocViewer({
     this.link,
     this.title,
-    this.background_link,
+    this.backgroundLink,
     Key key
   }) : super(key: key);
 
   final String link;
-  final String background_link;
+  final String backgroundLink;
   final String title;
 
   @override
@@ -37,8 +37,6 @@ class _DocViewerState extends State<DocViewer> {
   @override
   Widget build(BuildContext context) {
 
-    print(widget.background_link);
-
     return Scaffold(
 
       appBar: AppBar(title: Text('${widget.title}', style: TextStyle(
@@ -54,7 +52,7 @@ class _DocViewerState extends State<DocViewer> {
                 constraints: BoxConstraints.expand(),
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: NetworkImage(widget.background_link),
+                    image: NetworkImage(widget.backgroundLink),
                     fit: BoxFit.cover,
                   )
                 )

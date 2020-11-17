@@ -28,7 +28,7 @@ class PageSelector extends StatelessWidget{
         page = BiblePage(autoScrollController: autoScrollController);
         break;
       case 2:
-        Wakelock.disable();
+        Wakelock.enable();
         page = AprenderPage();
         break;
       case 3:
