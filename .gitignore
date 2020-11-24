@@ -41,3 +41,7 @@ app.*.map.json
 
 # Exceptions to above rules.
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+
+# Exceptions to above BIBLE FILES.
+# lib/bibles/V1602P/
+# lib/bibles/RVC/

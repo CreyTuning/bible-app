@@ -303,3 +303,10 @@ Map<int, String> monthDayToString =
   11: "Noviembre",
   12: "Diciembre",
 };
+
+Map<String, String> versionToName =
+{
+  'RVR60' : "Reina Valera Revisada 1960",
+  'V1602P' : "Valera 1602 Purificada",
+  'RVC' : "Reina Valera Contemporánea",
+};

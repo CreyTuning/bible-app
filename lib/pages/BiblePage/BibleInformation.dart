@@ -4,6 +4,12 @@ import 'package:flutter/material.dart';
 
 class BibleInformation extends StatefulWidget {
   @override
+  BibleInformation({
+    this.title
+  });
+
+  final String title;
+
   _BibleInformationState createState() => _BibleInformationState();
 }
 
@@ -47,7 +53,7 @@ class _BibleInformationState extends State<BibleInformation>
                   SliverAppBar(
                     forceElevated: true,
                     floating: true,
-                    title: Text("Reina Valera 1960 ©"),
+                    title: Text("${widget.title} ©"),
                   ),
 
                   SliverList(

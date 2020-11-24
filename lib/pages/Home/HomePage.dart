@@ -44,88 +44,88 @@ class _HomePageState extends State<HomePage> {
                 child: ScheduleAllDays(),
               ),
 
-              SliverFloatingBarLocal(
-                backgroundColor: Theme.of(context).cardColor,
-                floating: true,
-                snap: true,
-                elevation: 3,
+              // SliverFloatingBarLocal(
+              //   backgroundColor: Theme.of(context).cardColor,
+              //   floating: true,
+              //   snap: true,
+              //   elevation: 3,
 
-                title: Row(
-                  children: <Widget>[
+              //   title: Row(
+              //     children: <Widget>[
 
-                    Spacer(),
+              //       Spacer(),
 
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: 'Mi', 
-                            style: TextStyle(
-                              fontFamily: 'Baloo',
-                              fontSize: 20,
-                              color: Colors.blueAccent,
-                              height: 2,
-                              // fontWeight: FontWeight.bold,
-                              letterSpacing: 0.8
-                            ),
-                          ),
+              //       RichText(
+              //         text: TextSpan(
+              //           children: [
+              //             TextSpan(
+              //               text: 'Mi', 
+              //               style: TextStyle(
+              //                 fontFamily: 'Baloo',
+              //                 fontSize: 20,
+              //                 color: Colors.blueAccent,
+              //                 height: 2,
+              //                 // fontWeight: FontWeight.bold,
+              //                 letterSpacing: 0.8
+              //               ),
+              //             ),
 
-                          TextSpan(
-                            text: 'nis', 
-                            style: TextStyle(
-                              fontFamily: 'Baloo',
-                              fontSize: 20,
-                              color: Colors.green,
-                              height: 2,
-                              // fontWeight: FontWeight.bold,
-                              letterSpacing: 0.8
-                            ),
-                          ),
+              //             TextSpan(
+              //               text: 'nis', 
+              //               style: TextStyle(
+              //                 fontFamily: 'Baloo',
+              //                 fontSize: 20,
+              //                 color: Colors.green,
+              //                 height: 2,
+              //                 // fontWeight: FontWeight.bold,
+              //                 letterSpacing: 0.8
+              //               ),
+              //             ),
 
-                          TextSpan(
-                            text: 'te', 
-                            style: TextStyle(
-                              fontFamily: 'Baloo',
-                              fontSize: 20,
-                              color: Colors.orangeAccent,
-                              height: 2,
-                              // fontWeight: FontWeight.bold,
-                              letterSpacing: 0.8
-                            ),
-                          ),
+              //             TextSpan(
+              //               text: 'te', 
+              //               style: TextStyle(
+              //                 fontFamily: 'Baloo',
+              //                 fontSize: 20,
+              //                 color: Colors.orangeAccent,
+              //                 height: 2,
+              //                 // fontWeight: FontWeight.bold,
+              //                 letterSpacing: 0.8
+              //               ),
+              //             ),
 
-                          TextSpan(
-                            text: 'rio', 
-                            style: TextStyle(
-                              fontFamily: 'Baloo',
-                              fontSize: 20,
-                              color: Colors.pinkAccent,
-                              height: 2,
-                              // fontWeight: FontWeight.bold,
-                              letterSpacing: 0.8
-                            ),
-                          ),
+              //             TextSpan(
+              //               text: 'rio', 
+              //               style: TextStyle(
+              //                 fontFamily: 'Baloo',
+              //                 fontSize: 20,
+              //                 color: Colors.pinkAccent,
+              //                 height: 2,
+              //                 // fontWeight: FontWeight.bold,
+              //                 letterSpacing: 0.8
+              //               ),
+              //             ),
 
-                          TextSpan(
-                            text: ' YHWH', 
-                            style: TextStyle(
-                              fontFamily: 'Baloo',
-                              fontSize: 20,
-                              color: Theme.of(context).textTheme.bodyText1.color,
-                              height: 2,
-                              // fontWeight: FontWeight.bold,
-                              letterSpacing: 0.8
-                            ),
-                          )
-                        ]
-                      ),
-                    ),
+              //             TextSpan(
+              //               text: ' YHWH', 
+              //               style: TextStyle(
+              //                 fontFamily: 'Baloo',
+              //                 fontSize: 20,
+              //                 color: Theme.of(context).textTheme.bodyText1.color,
+              //                 height: 2,
+              //                 // fontWeight: FontWeight.bold,
+              //                 letterSpacing: 0.8
+              //               ),
+              //             )
+              //           ]
+              //         ),
+              //       ),
 
-                    Spacer(),
+              //       Spacer(),
 
-                  ],
-                ),
-              ),
+              //     ],
+              //   ),
+              // ),
 
               SliverToBoxAdapter(
                 child: ScheduleToday(),

@@ -1,10 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:yhwh/pages/BiblePage/BibleInformation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:yhwh/data/Define.dart';
 
-class ChapterFooter extends StatelessWidget
-{
+
+class ChapterFooter extends StatefulWidget {
+  ChapterFooter({
+    Key key,
+    this.bibleVersion
+  }) : super(key: key);
+
+  final String bibleVersion;
+
+  @override
+  _ChapterFooterState createState() => _ChapterFooterState();
+}
+
+class _ChapterFooterState extends State<ChapterFooter> {
+
   @override
   Widget build(BuildContext context) {
+
+    if(widget.bibleVersion == null){
+      return Column(
+        children: <Widget>[
+          Divider(height: 25, color: Color(0x00)),
+          
+          Center(
+            child: CircularProgressIndicator(),
+          ),
+
+          Container(
+            height: MediaQuery.of(context).size.height / 5
+          )
+        ],
+      );
+    }
+
     return Column(
       children: <Widget>[
         Divider(height: 25, color: Color(0x00)),
@@ -12,7 +44,7 @@ class ChapterFooter extends StatelessWidget
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: RichText(
               text: TextSpan(
-                text: 'Reina Valera 1960 ©\nPronto el texto sera revisado y corregido para ofrecer una traducción sin errores y fiel a la Palabra de Dios.',
+                text: '${versionToName[widget.bibleVersion]} ©\nPronto el texto sera revisado y corregido para ofrecer una traducción sin errores y fiel a la Palabra de Dios.',
                 style: TextStyle(
                     fontSize: 15,
                     fontFamily: 'Baloo',
@@ -37,7 +69,9 @@ class ChapterFooter extends StatelessWidget
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => BibleInformation()
+                builder: (context) => BibleInformation(
+                  title: versionToName[widget.bibleVersion],
+                )
               )
             );
           },

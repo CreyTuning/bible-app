@@ -60,6 +60,14 @@ class Explorer {
     return blob;
   }
 
+  static String base64ToString(String base64){
+    return latin1.decode(
+      base64Decode(
+        base64.replaceAll('\n', '')
+      )
+    );
+  }
+
 }
 
 class Blob{

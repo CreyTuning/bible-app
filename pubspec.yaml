@@ -34,10 +34,11 @@ dependencies:
   wakelock: ^0.1.4+2
   floating_search_bar: ^0.3.0
   scroll_to_index: ^1.0.6
-  github: ^6.0.0
+  # github: ^6.0.0
   connectivity: ^0.4.2
   flutter_markdown: ^0.5.0
-  sync_http: ^0.2.0
+  http: ^0.12.2
+  # sync_http: ^0.2.0
   # flutter_local_notifications: ^3.0.1
 
 # flutter pub run flutter_launcher_name:main
@@ -57,7 +58,10 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - lib/bibles/
+    - lib/bibles/V1602P/
     - lib/bibles/RVR60/
+    - lib/bibles/RVC/
 
   fonts:
     - family:  CustomIcons

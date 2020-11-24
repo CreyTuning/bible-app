@@ -153,8 +153,13 @@ class _SliverFloatingBarLocalState extends State<SliverFloatingBarLocal>
 
   void _updateSnapConfiguration() {
     if (widget.snap && widget.floating) {
+
       _snapConfiguration = FloatingHeaderSnapConfiguration(
-        vsync: this,
+
+      );
+
+      _snapConfiguration = FloatingHeaderSnapConfiguration(
+        // vsync: this,
         curve: Curves.easeOut,
         duration: const Duration(milliseconds: 200),
       );

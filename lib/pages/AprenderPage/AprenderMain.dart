@@ -1,14 +1,15 @@
 import 'dart:convert';
-
+import 'UiExplorerCategory.dart';
+import 'package:floating_search_bar/floating_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:github/github.dart';
 import 'package:yhwh/pages/AprenderPage/Classes/Explorer.dart';
 import 'package:yhwh/pages/AprenderPage/DocViewer.dart';
 import 'package:yhwh/pages/BiblePage/StylePage/fontPreference.dart';
 import 'package:yhwh/ui_widgets/SliverFloatingBarLocal.dart';
 import 'package:http/http.dart' as http;
+
+import '../../ui_widgets/SliverFloatingBarLocal.dart';
 
 class AprenderPage extends StatefulWidget {
   AprenderPage({Key key}) : super(key: key);
@@ -21,14 +22,27 @@ class _AprenderPageState extends State<AprenderPage> {
 
   String testingData = '';
   String docsUrl = '';
+  String categoryUrl;
 
   @override
   void initState() {
+
+    // String content = 'ewogICAgInRpdGxlIiA6ICJFc3R1ZGlvcyBCaWJsaWNvcyBwb3IgQW5hIEIu\nIENvbnRyZXJhcyIsCiAgICAiZGVzY3JpcHRpb24iIDogIlVuIHNpdGlvIHBh\ncmEgZWwgZXN0dWRpbyBkZSBsYSBCaWJsaWEiLAogICAgCiAgICAiaWNvbiIg\nOiAiaW1nL2RhbmllbC5wbmciLAogICAgImJhY2tncm91bmQiIDogImltZy9k\nYW5pZWwucG5nIiwKICAgIAogICAgInR5cGUiIDogImNhdGVnb3J5Igp9\n'.replaceAll('\n', '');
+    // print(latin1.decode(base64Decode(content)));
     
     // Conseguir link de la carpeta 'docs' en la base de datos online.
+    // Explorer.getRepository('CreyTuning', 'DatabaseOfYhwh', 'master').then((Tree repository){
+    //   setState(() {
+    //     docsUrl = repository.getTreeItemFromPath('docs').url;
+    //   });
+    // });
+
+    // Conseguir link de una categoria
     Explorer.getRepository('CreyTuning', 'DatabaseOfYhwh', 'master').then((Tree repository){
-      setState(() {
-        docsUrl = repository.getTreeItemFromPath('docs').url;
+      Explorer.getTreeFromUrl(repository.getTreeItemFromPath('docs').url).then((Tree docs){
+        setState(() {
+          categoryUrl = docs.getTreeItemFromPath('Estudios Biblicos').url;
+        });
       });
     });
 
@@ -49,58 +63,53 @@ class _AprenderPageState extends State<AprenderPage> {
       child: SafeArea(
         top: true,
         child: Scaffold(
-          body: docsUrl == ''
-          
-          ? Container(
-            child: Center(
-              child: CircularProgressIndicator()
-            )
-          )
-          
-          : Scrollbar(
+          body: Scrollbar(
             child: CustomScrollView(
-              // controller: widget.autoScrollController,
+              
               slivers: [
-                SliverFloatingBarLocal(
-                  backgroundColor: Theme.of(context).floatingActionButtonTheme.backgroundColor,
+                SliverAppBar(
+                  backgroundColor: Theme.of(context).canvasColor,
                   floating: true,
                   snap: true,
-                  elevation: 4,
+                  elevation: 6,
+                  titleSpacing: 0,
+
+                  bottom: PreferredSize(
+                    child: Container(
+                      color: Theme.of(context).dividerColor,
+                      height: 1.5
+                    ),
+                    
+                    preferredSize: Size.fromHeight(0)
+                  ),
 
                   title: Row(
                     children: [
                       Expanded(
                         child: InkWell(
-                          borderRadius: BorderRadius.circular(100),
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(100),
-                            onTap: (){},
-                            child: Container(
-                              height: 40,
-                              child: Row(
-                                children: [
-                                  Icon(Icons.search, color: Theme.of(context).textTheme.bodyText1.color),
-                                  SizedBox(width: 12),
-                                  Text('Buscar...',
-                                    style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                      fontSize: 17,
-                                      color: Theme.of(context).textTheme.bodyText1.color.withOpacity(0.8)
-                                    )
+                          onTap: (){},
+                          child: Container(
+                            padding: EdgeInsets.only(left: 12),
+                            height: 55,
+                            child: Row(
+                              children: [
+                                Icon(Icons.search, color: Theme.of(context).textTheme.bodyText1.color),
+                                SizedBox(width: 12),
+                                Text('Buscar...',
+                                  style: Theme.of(context).textTheme.bodyText1.copyWith(
+                                    fontSize: 17,
+                                    color: Theme.of(context).textTheme.bodyText1.color.withOpacity(0.8)
                                   )
-                                ],
-                              ),
+                                )
+                              ],
                             ),
                           ),
-
-                          onTap: () {},
-                          onLongPress: () {},
-                          
                         ),
                       ),
                       
                       Container(
-                        height: 40,
-                        width: 40,
+                        height: 55,
+                        width: 55,
                         child: PopupMenuButton(
                           tooltip: 'Mas opciones',
                           onSelected: (value) {
@@ -108,7 +117,7 @@ class _AprenderPageState extends State<AprenderPage> {
                               case 1:
                                 break;
                               case 2:
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => FontPreference(updateStateInBiblePage: (){})));
+                                // Navigator.push(context, MaterialPageRoute(builder: (context) => FontPreference(updateStateInBiblePage: (){})));
                                 break;
                             }
                           },
@@ -147,155 +156,9 @@ class _AprenderPageState extends State<AprenderPage> {
                     ],
                   )
                 ),
-
-                FutureBuilder(
-                  future: http.read(docsUrl),
-                  builder: (context, snapshot)
-                  {
-                    if(snapshot.hasData)
-                    {
-                      Map data = json.decode(snapshot.data);
-                
-                      return SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                          (context, index) {
-                            // Si es un documento simple sin imagenes ni indice
-                            if(data['tree'][index]['type'] == 'blob')
-                            {
-                              return ListTile(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => DocViewer(
-                                        link: 'https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/docs/${data['tree'][index]['path']}',
-                                        title: data['tree'][index]['path']
-                                      )
-                                    )
-                                  );
-                                },
-
-                                leading: Icon(Icons.description),
-                                title: RichText(
-                                  overflow: TextOverflow.ellipsis,
-                                  text: TextSpan(
-                                    text: data['tree'][index]['path'],
-                                    style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                      fontSize: 18
-                                    )
-                                  ),
-                                ),
-
-                                subtitle: RichText(
-                                  overflow: TextOverflow.ellipsis,
-                                  text: TextSpan(
-                                    text: '${data['tree'][index]['size'] / 1000} Kb',
-                                    style: Theme.of(context).textTheme.bodyText2.copyWith(
-                                      fontSize: 16
-                                    )
-                                  ),
-                                ),
-                              );
-                            }
-
-                            // Si es una carpeta con imagenes e indice
-                            else if(data['tree'][index]['type'] == 'tree'){
-
-                              return FutureBuilder(
-                                initialData: '',
-                                future: http.read('https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/docs/${data['tree'][index]['path']}/index.json'),
-                                builder: (context, snapshot)
-                                {
-                                  if(snapshot.hasData && snapshot.data != '') 
-                                  {
-                                    return ListTile(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => DocViewer(
-                                              link: 'https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/docs/${data['tree'][index]['path']}/${jsonDecode(snapshot.data)['path']}',
-                                              backgroundLink: 'https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/docs/${data['tree'][index]['path']}/${jsonDecode(snapshot.data)['background']}',
-                                              title: jsonDecode(snapshot.data)['title']
-                                            )
-                                          )
-                                        );
-                                      },
-
-                                      leading: jsonDecode(snapshot.data)['icon'] != null
-                                      ? Container(
-                                        height: 40,
-                                        width: 40,
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(8.0),
-                                          child: Image.network('https://raw.githubusercontent.com/CreyTuning/DatabaseOfYhwh/master/docs/${data['tree'][index]['path']}/${jsonDecode(snapshot.data)['icon']}'),
-                                        ),
-                                      )
-                                      : Icon(Icons.description),
-
-
-                                      title: RichText(
-                                        overflow: TextOverflow.ellipsis,
-                                        text: TextSpan(
-                                          text: jsonDecode(snapshot.data)['title'],
-                                          style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                            fontSize: 18
-                                          )
-                                        ),
-                                      ),
-
-                                      subtitle: RichText(
-                                        overflow: TextOverflow.ellipsis,
-                                        text: TextSpan(
-                                          text: jsonDecode(snapshot.data)['description'],
-                                          style: Theme.of(context).textTheme.bodyText2.copyWith(
-                                            fontSize: 16
-                                          )
-                                        ),
-                                      ),
-                                    );
-                                  }
-
-                                  else
-                                  {
-                                    return ListTile(
-                                      onTap: null,
-                                      // dense: true,
-                                      leading: Container(
-                                        height: 25,
-                                        width: 25,
-                                        child: CircularProgressIndicator(),
-                                      ),
-                                      title: RichText(
-                                        overflow: TextOverflow.ellipsis,
-                                        text: TextSpan(
-                                          text: 'Cargando...',
-                                          style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                            fontSize: 18
-                                          )
-                                        ),
-                                      )
-                                    );
-                                  }
-                                },
-                              ); 
-                            }
-                          },
-
-                          childCount: data['tree'].length,
-                        ),
-                      );
-                    }
-
-                    else{
-                      return SliverToBoxAdapter(
-                        child: Center(
-                          child: CircularProgressIndicator()
-                        )
-                      );
-                    }
-                  },
-                )
+              
+                UiExplorerCategory(url: categoryUrl)
+              
               ]
             )
           )

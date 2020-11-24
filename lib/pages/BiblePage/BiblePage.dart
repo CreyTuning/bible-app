@@ -1,16 +1,17 @@
+import 'package:floating_search_bar/floating_search_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yhwh/data/Define.dart';
-import 'package:yhwh/pages/AprenderPage/Classes/Explorer.dart';
 import 'package:yhwh/pages/BiblePage/BookSelection.dart';
 import 'package:yhwh/pages/BiblePage/HighlightPage.dart';
 import 'package:yhwh/pages/BiblePage/StylePage/fontPreference.dart';
 import 'package:yhwh/ui_widgets/SliverFloatingBarLocal.dart';
 import 'package:yhwh/ui_widgets/chapter_footer.dart';
 import 'BookViewer.dart';
+import 'package:yhwh/pages/BiblePage/BibleVersionSelector.dart';
 
 
 class BiblePage extends StatefulWidget {
@@ -30,6 +31,7 @@ class _BiblePageState extends State<BiblePage> {
   int bookNumber = 0;
   int chapterNumber = 0;
   int verseNumber = 0;
+  String bibleVersion;
 
 
   @override
@@ -48,9 +50,16 @@ class _BiblePageState extends State<BiblePage> {
         bookNumber = preferences.getInt('bookNumber') ?? 1;
         chapterNumber = preferences.getInt('chapterNumber') ?? 1;
         verseNumber = preferences.getInt('verseNumber') ?? 1;
+        bibleVersion = preferences.getString('bibleVersion') ?? 'RVR60';
       });
     });
     super.initState();
+  }
+
+  void setBibleVersion(String newBibleVersion){
+    setState((){
+      bibleVersion = newBibleVersion;
+    });
   }
 
   void setReference(int book, int chapter, int verse){
@@ -240,104 +249,164 @@ class _BiblePageState extends State<BiblePage> {
             child: CustomScrollView(
               controller: widget.autoScrollController,
               slivers: [
-                SliverFloatingBarLocal(
-                  backgroundColor: Theme.of(context).floatingActionButtonTheme.backgroundColor,
+                SliverAppBar(
+                  backgroundColor: Theme.of(context).canvasColor,
                   floating: true,
                   snap: true,
-                  elevation: 4,
+                  elevation: 6,
+                  titleSpacing: 0,
+                  bottom: PreferredSize(
+                    child: Container(
+                      color: Theme.of(context).dividerColor,
+                      height: 1.5
+                    ),
+                    
+                    preferredSize: Size.fromHeight(0)
+                  ),
 
+                  actions: [
 
+                    // Container(
+                    //   height: 55,
+                    //   width: 55,
+                    //   child: IconButton(
+                    //     onPressed: (){
+                    //       Navigator.push(
+                    //         context,
+                    //         MaterialPageRoute(
+                    //           builder: (context) => BibleVersionSelector(
+                    //             setBibleVersion: setBibleVersion,
+                    //           )
+                    //         )
+                    //       );
+                    //     },
+                        
+                    //     icon: Icon(Icons.language),
+                    //     tooltip: 'Traducción',
+                    //   )
+                    // ),
 
-                  title: Row(
-                    children: [
-                      Expanded(
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(100),
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(6, 0, 0, 0),
-                            child: Container(
-                              height: 40,//double.infinity,
-                              alignment: Alignment.centerLeft,
-                              child: RichText(
-                                overflow: TextOverflow.ellipsis,
-                                text: TextSpan(
-                                  text: '${intToBook[bookNumber]} $chapterNumber',
-                                  style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                    fontFamily: 'Roboto-Medium',
-                                    fontSize: 16.6,
-                                    height: 1.4
+                    Container(
+                      height: 55,
+                      width: 55,
+                      child: PopupMenuButton(
+                        tooltip: 'Mas opciones',
+                        // icon: Icon(Icons.settings),
+                        onSelected: (value) {
+                          switch (value) {
+                            case 1:
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HighlightPage(setReference: setReference)));
+                              break;
+                            case 2:
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => FontPreference(updateStateInBiblePage: updateState)));
+                              break;
+                          }
+                        },
+
+                        itemBuilder: (context) {
+                          return [
+                            PopupMenuItem(
+                              value: 1,
+                              child: Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(2, 2, 8, 2),
+                                    child: Icon(Icons.folder_open),
                                   ),
-                                )
+                                  Text('Resaltados')
+                                ],
+                              )
+                            ),
+
+                            PopupMenuItem(
+                              value: 2,
+                              child: Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(2, 2, 8, 2),
+                                    child: Icon(Icons.settings),
+                                  ),
+                                  Text('Configuración')
+                                ],
+                              )
+                            ),
+                          ];
+                        }
+                      ),
+                    ),
+                  ],
+
+                  title: Container(
+                    // width: MediaQuery.of(context).size.width,
+                    height: 55,
+                    child: Row(
+                      children: [
+
+                        Expanded(
+                          child: InkWell(
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(12, 0, 0, 0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  RichText(
+                                    textAlign: TextAlign.left,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                    text: TextSpan(
+                                      text: '${intToBook[bookNumber]} $chapterNumber',
+                                      style: Theme.of(context).textTheme.bodyText1.copyWith(
+                                        fontFamily: 'Roboto-Medium',
+                                        fontSize: 16.6,
+                                      ),
+                                    )
+                                  ),
+
+                                  RichText(
+                                    overflow: TextOverflow.ellipsis,
+                                    text: TextSpan(
+                                      text: versionToName[bibleVersion],
+                                      style: Theme.of(context).textTheme.bodyText2.copyWith(
+                                        fontFamily: 'Roboto',
+                                        fontSize: 13,
+                                        color: Theme.of(context).textTheme.bodyText1.color
+                                      ),
+                                    ),
+                                  ),
+
+                                ],
                               ),
                             ),
+
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => BookSelectionPage(
+                                    initialTab: 0,
+                                    setReference: setReference,
+                                    getReference: getReference,
+                                  )
+                                )
+                              );
+                            },
+
+                            onLongPress: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => BibleVersionSelector(
+                                    setBibleVersion: setBibleVersion,
+                                  )
+                                )
+                              );
+                            },
+                            
                           ),
-
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => BookSelectionPage(
-                                  initialTab: 0,
-                                  setReference: setReference,
-                                  getReference: getReference,
-                                )
-                              )
-                            );
-                          },
-
-                          onLongPress: () {},
-                          
                         ),
-                      ),
-                      
-                      Container(
-                        height: 40,
-                        width: 40,
-                        child: PopupMenuButton(
-                          tooltip: 'Mas opciones',
-                          onSelected: (value) {
-                            switch (value) {
-                              case 1:
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => HighlightPage(setReference: setReference)));
-                                break;
-                              case 2:
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => FontPreference(updateStateInBiblePage: updateState)));
-                                break;
-                            }
-                          },
-
-                          itemBuilder: (context) {
-                            return [
-                              PopupMenuItem(
-                                value: 1,
-                                child: Row(
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(2, 2, 8, 2),
-                                      child: Icon(Icons.folder_open),
-                                    ),
-                                    Text('Resaltados')
-                                  ],
-                                )
-                              ),
-
-                              PopupMenuItem(
-                                value: 2,
-                                child: Row(
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(2, 2, 8, 2),
-                                      child: Icon(Icons.settings),
-                                    ),
-                                    Text('Configuración')
-                                  ],
-                                )
-                              ),
-                            ];
-                          }
-                        ),
-                      ),
-                    ],
+                      ],
+                    )
                   )
                 ),
 
@@ -345,8 +414,11 @@ class _BiblePageState extends State<BiblePage> {
                   bookNumber: bookNumber,
                   chapterNumber: chapterNumber,
                   verseNumber: verseNumber,
-                  chapterFooter: ChapterFooter(),
+                  chapterFooter: ChapterFooter(
+                    bibleVersion: bibleVersion,
+                  ),
                   autoScrollController: widget.autoScrollController,
+                  bibleVersion: bibleVersion,
                 ),
 
               ],

@@ -15,6 +15,7 @@ class BookViewer extends StatefulWidget {
     @required this.chapterFooter,
     @required this.verseNumber,
     @required this.autoScrollController,
+    @required this.bibleVersion
   });
   
   final Widget chapterFooter;
@@ -22,6 +23,7 @@ class BookViewer extends StatefulWidget {
   final int chapterNumber;
   final int verseNumber;
   final AutoScrollController autoScrollController;
+  final String bibleVersion;
   
   _BookViewerState createState() => _BookViewerState();
 }
@@ -36,7 +38,8 @@ class _BookViewerState extends State<BookViewer> {
 
 
   Future getChapter(int book, int chapter) async {
-    return json.decode(await rootBundle.loadString('lib/bibles/RVR60/${book}_$chapter.json'))['verses'];
+    return json.decode(await rootBundle.loadString('lib/bibles/${widget.bibleVersion}/${book}_$chapter.json'))['verses'];
+    // return json.decode(await rootBundle.loadString('lib/bibles/RVR60/${book}_$chapter.json'))['verses'];
   }
 
   void highlightVerse(String reference){
@@ -94,6 +97,17 @@ class _BookViewerState extends State<BookViewer> {
 
   @override
   Widget build(BuildContext context) {
+
+    if(widget.bibleVersion == null){
+      return SliverToBoxAdapter(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 155),
+          child: Center(
+            child: CircularProgressIndicator()
+          ),
+        )
+      );
+    }
     
     return FutureBuilder(
       future: getChapter(widget.bookNumber, widget.chapterNumber),
