@@ -1,21 +1,16 @@
-# ¡Bienvenido a la Biblia YHWH!
+# yhwh
 
-Aplicación dedicada a la lectura y estudio **bíblico** para todos los niveles de conocimiento y edades. Contiene diccionario, referencias cruzadas, comentarios y resaltado de versiculos que fortalecerán tu conocimiento.
+A new Flutter project.
 
-Es ofrecida totalmente gratis, sin restricciones y de código abierto por el **Ministerio YHWH**.
+## Getting Started
 
+This project is a starting point for a Flutter application.
 
-# Traducciones disponibles
+A few resources to get you started if this is your first Flutter project:
 
-Todos los textos han sido agregados con el fin de dar acceso mas amplio a distintas traducciones, pero el fin principal es ofrecer una traduccion completamente fiel a la **Palabra de Dios**.
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-- Reina Valera 1960 (RV60)
-- Valera 1602 Purificada (V1602P)
-- Sagradas Escrituras 1569 (SSEE)
-
-
-# Modo nocturno
-
-El modo nocturno ayuda a cuidar tu vista en lectura con poca iluminación.
-
-![Lectura del libro de los Salmos](https://github.com/CreyTuning/YHWH/blob/master/screenshots/screenshot_read.jpg)
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
