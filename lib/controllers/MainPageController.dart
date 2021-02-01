@@ -7,7 +7,6 @@ class MainPageController extends GetxController{
   
   int mainPagetabIndex = 0;
   GetStorage getStorage = GetStorage();
-  String themeName = 'light';
 
   @override
   void onInit() {
