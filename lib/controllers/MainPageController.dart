@@ -1,3 +1,4 @@
+
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:yhwh/classes/AppTheme.dart';
@@ -5,30 +6,32 @@ import 'package:yhwh/classes/AppTheme.dart';
 class MainPageController extends GetxController{
   
   int mainPagetabIndex = 0;
+  GetStorage getStorage = GetStorage();
+  String themeName = 'light';
 
   @override
   void onInit() {
-    mainPagetabIndex = GetStorage().read("mainPagetabIndex") ?? 0;
+    mainPagetabIndex = getStorage.read("mainPagetabIndex") ?? 0;
     super.onInit();
   }
 
   @override
-  void onReady() {
-    Get.changeTheme(AppTheme().getTheme(GetStorage().read("currentTheme") ?? 'light'));
+  void onReady() async {
+    Get.changeTheme(AppTheme.getTheme(getStorage.read("currentTheme") ?? 'light'));
     super.onReady();
   }
 
-  void bottomNavigationBarOnTap(int index){
+  void bottomNavigationBarOnTap(int index) async {
     this.mainPagetabIndex = index;
-    GetStorage().write("mainPagetabIndex", mainPagetabIndex);
+    getStorage.write("mainPagetabIndex", mainPagetabIndex);
     update();
   }
 
   void buttonOnPress(){
     String newTheme = AppTheme().getRandomTheme();
     
-    GetStorage().write("currentTheme", newTheme);
-    Get.changeTheme(AppTheme().getTheme(newTheme));
+    getStorage.write("currentTheme", newTheme);
+    Get.changeTheme(AppTheme.getTheme(newTheme));
   }
 
 }

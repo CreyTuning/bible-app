@@ -52,57 +52,77 @@ class Verse extends StatelessWidget {
       onLongPress: this.onLongPress,
       highlightColor: Colors.transparent,
       splashColor: Colors.transparent,
-      child: Container(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: RichText(
-            softWrap: true,
-            overflow: TextOverflow.visible,
-            textAlign: TextAlign.start,
+      child: Stack(
+        children: [
 
-            text: TextSpan(
-              style: TextStyle(
-                fontSize: this.fontSize,
-                color: this.colorText,
-                fontFamily: this.fontFamily,
-                height: this.fontHeight,
-                letterSpacing: this.fontLetterSeparation,
+          Positioned.fill(
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 1),
+              child: Container(
+                color: Colors.green,
               ),
-
-              children: [
-                TextSpan( // Numero de versiculo
-                  text: this.verseNumber.toString(),
-                  style: TextStyle(
-                    color: this.colorNumber,
-                    fontSize: this.fontSize - 7.0,
-                  )
-                ),
-
-                TextSpan(
-                  text: ' '
-                ),
-
-                TextSpan(
-                  text: this.text.toString(),
-                  style: TextStyle(
-                    backgroundColor: (this.highlight)
-                      ? Theme.of(context).brightness == Brightness.dark
-                        ? Color(0xff00af9c).withOpacity(0.5)
-                        : Colors.pink
-                      : Colors.transparent,
-                    color: (this.highlight)
-                      ? Theme.of(context).brightness == Brightness.dark
-                        ? Theme.of(context).textTheme.bodyText1.color
-                        : Colors.white
-                      : Theme.of(context).textTheme.bodyText1.color,
-                    decorationStyle: TextDecorationStyle.dotted,
-                    decoration: (this.selected) ? TextDecoration.underline : TextDecoration.none,
-                  )
-                ),
-              ]
             ),
           ),
-        ),
+
+          AnimatedPadding(
+            padding: (this.selected) ? EdgeInsets.only(left: 5) : EdgeInsets.zero,
+            duration: Duration(milliseconds: 150),
+            child: Container(
+              color: Theme.of(context).canvasColor,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                child: RichText(
+                  softWrap: true,
+                  overflow: TextOverflow.visible,
+                  textAlign: TextAlign.start,
+
+                  text: TextSpan(
+                    style: TextStyle(
+                      fontSize: this.fontSize,
+                      color: this.colorText,
+                      fontFamily: this.fontFamily,
+                      height: this.fontHeight,
+                      letterSpacing: this.fontLetterSeparation,
+                    ),
+
+                    children: [
+                      TextSpan( // Numero de versiculo
+                        text: this.verseNumber.toString(),
+                        style: TextStyle(
+                          fontWeight: (this.selected) ? FontWeight.bold : FontWeight.normal,
+                          color: this.colorNumber,
+                          fontSize: this.fontSize - 7.0,
+                        )
+                      ),
+
+                      TextSpan(
+                        text: ' '
+                      ),
+
+                      TextSpan(
+                        text: this.text.toString(),
+                        style: TextStyle(
+                          fontWeight: (this.selected) ? FontWeight.bold : FontWeight.normal,
+                          backgroundColor: (this.highlight)
+                            ? Theme.of(context).brightness == Brightness.dark
+                              ? Color(0xff00af9c).withOpacity(0.5)
+                              : Colors.pink
+                            : Colors.transparent,
+                          color: (this.highlight)
+                            ? Theme.of(context).brightness == Brightness.dark
+                              ? Theme.of(context).textTheme.bodyText1.color
+                              : Colors.white
+                            : Theme.of(context).textTheme.bodyText1.color,
+                          // decorationColor: Colors.pink
+                        )
+                      ),
+                    ]
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

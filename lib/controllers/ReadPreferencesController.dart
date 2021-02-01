@@ -6,12 +6,11 @@ import 'package:yhwh/controllers/BiblePageController.dart';
 class ReadPreferencesController extends GetxController{
 
   BiblePageController _biblePageController = Get.find();
+  GetStorage getStorage = GetStorage();
 
-  void setTheme(String themeName){
-    GetStorage getStorage = GetStorage();
-
-    getStorage.write("themeName", themeName);
-    Get.changeTheme(AppTheme().getTheme(themeName));
+  void setTheme(String themeName) {
+    getStorage.write('currentTheme', themeName);
+    Get.changeTheme(AppTheme.getTheme(themeName));
     Get.back();
   }
 
@@ -27,7 +26,7 @@ class ReadPreferencesController extends GetxController{
     }
 
     _biblePageController.update();
-    GetStorage().write("fontSize", _fontSize);
+    getStorage.write("fontSize", _fontSize);
   }
 
   void onFontHeightUpdate(double _fontHeight) {
@@ -42,7 +41,7 @@ class ReadPreferencesController extends GetxController{
     }
 
     _biblePageController.update();
-    GetStorage().write("fontHeight", _fontHeight);
+    getStorage.write("fontHeight", _fontHeight);
   }
 
   void onFontLetterSeparationUpdate(double _fontLetterSeparation) {
@@ -57,7 +56,7 @@ class ReadPreferencesController extends GetxController{
     }
 
     _biblePageController.update();
-    GetStorage().write("fontLetterSeparation", _fontLetterSeparation);
+    getStorage.write("fontLetterSeparation", _fontLetterSeparation);
   }
 
   void restoreSettingOnTap(){
@@ -73,8 +72,8 @@ class ReadPreferencesController extends GetxController{
 
     _biblePageController.update();
 
-    GetStorage().write("fontSize", _biblePageController.fontSize);
-    GetStorage().write("fontHeight", _biblePageController.fontHeight);
-    GetStorage().write("fontLetterSeparation", _biblePageController.fontLetterSeparation);
+    getStorage.write("fontSize", _biblePageController.fontSize);
+    getStorage.write("fontHeight", _biblePageController.fontHeight);
+    getStorage.write("fontLetterSeparation", _biblePageController.fontLetterSeparation);
   }
 }

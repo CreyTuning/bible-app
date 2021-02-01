@@ -163,7 +163,7 @@ class BiblePage extends StatelessWidget {
                             replacement: Container(),
                             child: animateDo.FadeIn(
                               child: Container(
-                                height: 55,
+                                height: 65,
                                 child: Row(
                                   children: [
 
@@ -213,13 +213,13 @@ class BiblePage extends StatelessWidget {
                                                   borderRadius: BorderRadius.circular(6),
                                                   border: Border.all(
                                                     color: Theme.of(context).textTheme.bodyText1.color,
-                                                    width: 1.4
+                                                    width: 1.6
                                                   )
                                                 ),
                                               ),
                                             ),
 
-                                            Text('2', textAlign: TextAlign.center,
+                                            Text('1', textAlign: TextAlign.center,
                                             style: Theme.of(context).textTheme.bodyText1.copyWith(
                                               fontSize: 10.5,
                                               height: 1.5,
@@ -237,10 +237,7 @@ class BiblePage extends StatelessWidget {
                                           borderRadius: BorderRadius.circular(6)
                                         ),
                                         tooltip: 'Opciones',
-                                        icon: Hero(
-                                          tag: 'account',
-                                          child: Icon(Icons.more_vert),
-                                        ),
+                                        icon: Icon(Icons.more_vert),
 
                                         onSelected: (value) {
                                           switch (value) {
@@ -307,14 +304,11 @@ class BiblePage extends StatelessWidget {
                                                   children: [
                                                     Padding(
                                                       padding: const EdgeInsets.symmetric(horizontal: 0),
-                                                      child: Hero(
-                                                        tag: 'account',
-                                                        child: CircleAvatar(
-                                                          backgroundColor: Theme.of(context).accentColor,
-                                                          child: Icon(
-                                                            Icons.person,
-                                                            color: Theme.of(context).canvasColor,
-                                                          ),
+                                                      child: CircleAvatar(
+                                                        backgroundColor: Theme.of(context).accentColor,
+                                                        child: Icon(
+                                                          Icons.person,
+                                                          color: Theme.of(context).canvasColor,
                                                         ),
                                                       ),
                                                     ),
@@ -353,7 +347,7 @@ class BiblePage extends StatelessWidget {
                                               child: Row(
                                                 children: <Widget>[
                                                   Padding(
-                                                    padding: const EdgeInsets.fromLTRB(2, 2, 8, 2),
+                                                    padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
                                                     child: Icon(FontAwesomeIcons.highlighter),
                                                   ),
                                                   Text('Resaltados')
@@ -366,7 +360,7 @@ class BiblePage extends StatelessWidget {
                                               child: Row(
                                                 children: <Widget>[
                                                   Padding(
-                                                    padding: const EdgeInsets.fromLTRB(2, 2, 8, 2),
+                                                    padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
                                                     child: Icon(FontAwesomeIcons.solidStickyNote),
                                                   ),
                                                   Text('Notas')
@@ -379,7 +373,7 @@ class BiblePage extends StatelessWidget {
                                               child: Row(
                                                 children: <Widget>[
                                                   Padding(
-                                                    padding: const EdgeInsets.fromLTRB(2, 2, 8, 2),
+                                                    padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
                                                     child: Icon(FontAwesomeIcons.bookReader),
                                                   ),
                                                   Text('Diario')
@@ -394,7 +388,7 @@ class BiblePage extends StatelessWidget {
                                               child: Row(
                                                 children: <Widget>[
                                                   Padding(
-                                                    padding: const EdgeInsets.fromLTRB(2, 2, 8, 2),
+                                                    padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
                                                     child: Icon(FontAwesomeIcons.wrench)
                                                   ),
                                                   Text('Preferencias')
@@ -418,7 +412,7 @@ class BiblePage extends StatelessWidget {
                             replacement: Container(),
                             child: animateDo.FadeIn(
                               child: Container(
-                                height: 55,
+                                height: 65,
                                 color: Theme.of(context).appBarTheme.color,
                                 child: Material(
                                   color: Colors.transparent,
@@ -453,11 +447,40 @@ class BiblePage extends StatelessWidget {
                                       ),
 
                                       IconButton(
+                                        tooltip: 'Agregar al diario',
+                                        icon: Icon(
+                                          FontAwesomeIcons.bookReader,
+                                          color: Theme.of(context).appBarTheme.iconTheme.color,
+                                          size: 18,
+                                        ),
+                                        onPressed: (){},
+                                      ),
+
+                                      IconButton(
+                                        tooltip: 'Crear nota',
+                                        icon: Icon(
+                                          FontAwesomeIcons.solidStickyNote,
+                                          color: Theme.of(context).appBarTheme.iconTheme.color,
+                                          size: 18,
+                                        ),
+                                        onPressed: (){},
+                                      ),
+
+                                      IconButton(
                                         tooltip: 'Resaltar',
                                         icon: Icon(
                                           FontAwesomeIcons.highlighter,
                                           color: Theme.of(context).appBarTheme.iconTheme.color,
                                           size: 18,
+                                        ),
+                                        onPressed: (){},
+                                      ),
+
+                                      IconButton(
+                                        tooltip: 'Menu',
+                                        icon: Icon(
+                                          Icons.more_vert,
+                                          color: Theme.of(context).appBarTheme.iconTheme.color,
                                         ),
                                         onPressed: (){},
                                       ),

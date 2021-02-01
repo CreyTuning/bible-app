@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class AppTheme
 {
-  ThemeData light = ThemeData(
+  static ThemeData light = ThemeData(
     primaryColor: Colors.white,
     fontFamily: 'Roboto',
     accentColor: Color(0xff414141),
@@ -57,7 +57,7 @@ class AppTheme
     cardColor: Colors.white
   );
 
-  ThemeData dark = ThemeData(
+  static ThemeData dark = ThemeData(
     primaryColor: Color(0xff252526),
     accentColorBrightness: Brightness.dark,
     fontFamily: 'Roboto',
@@ -92,7 +92,7 @@ class AppTheme
     ),
 
     appBarTheme: AppBarTheme(
-      color: Color(0xff303134),
+      color: Color(0xff202124),
       brightness: Brightness.dark,
       iconTheme: IconThemeData(color: Colors.white), //Color(0xffd4d4d4)),
 
@@ -114,7 +114,7 @@ class AppTheme
 
   );
 
-  ThemeData black = ThemeData(
+  static ThemeData black = ThemeData(
     primaryColor: Colors.black,
     accentColorBrightness: Brightness.dark,
     fontFamily: 'Roboto',
@@ -167,16 +167,16 @@ class AppTheme
     cardColor: Color(0xff202020)
   );
 
-  ThemeData getTheme(String themeName){
+  static ThemeData getTheme(String themeName){
     switch (themeName) {
       case "light":
-        return this.light;
+        return light;
         break;
       case "dark":
-        return this.dark;
+        return dark;
         break;
       case "black":
-        return this.black;
+        return black;
         break;
       default:
         return ThemeData.light();

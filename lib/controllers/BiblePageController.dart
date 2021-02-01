@@ -12,6 +12,8 @@ import 'package:yhwh/pages/ReferencesPage.dart';
 class BiblePageController extends GetxController {
 
   AutoScrollController autoScrollController;
+  GetStorage getStorage = GetStorage();
+
   int bookNumber = 1;
   int chapterNumber = 2;
   int verseNumber = 1;
@@ -26,20 +28,20 @@ class BiblePageController extends GetxController {
   double fontLetterSeparation = 0.0;
 
   @override
-  void onInit() {
+  void onInit() async {
     autoScrollController = AutoScrollController();
     super.onInit();
   }
 
   @override
   void onReady() {
-    bookNumber = GetStorage().read("bookNumber") ?? 1;
-    chapterNumber = GetStorage().read("chapterNumber") ?? 1;
-    verseNumber = GetStorage().read("verseNumber") ?? 1;
+    bookNumber = getStorage.read("bookNumber") ?? 1;
+    chapterNumber = getStorage.read("chapterNumber") ?? 1;
+    verseNumber = getStorage.read("verseNumber") ?? 1;
     
-    fontSize = GetStorage().read("fontSize") ?? 20.0;
-    fontHeight = GetStorage().read("fontHeight") ?? 1.8;
-    fontLetterSeparation = GetStorage().read("fontLetterSeparation") ?? 0;
+    fontSize = getStorage.read("fontSize") ?? 20.0;
+    fontHeight = getStorage.read("fontHeight") ?? 1.8;
+    fontLetterSeparation = getStorage.read("fontLetterSeparation") ?? 0;
     
     updateVerseList();
     update();
@@ -107,8 +109,8 @@ class BiblePageController extends GetxController {
     if (chapterNumber < namesAndChapters[bookNumber - 1][1]) {
       chapterNumber++;
       verseNumber = 1;
-      GetStorage().write("chapterNumber", chapterNumber);
-      GetStorage().write("verseNumber", verseNumber);
+      getStorage.write("chapterNumber", chapterNumber);
+      getStorage.write("verseNumber", verseNumber);
     }
 
     else if (chapterNumber == namesAndChapters[bookNumber - 1][1]) {
@@ -116,9 +118,9 @@ class BiblePageController extends GetxController {
         bookNumber += 1;
         chapterNumber = 1;
         verseNumber = 1;
-        GetStorage().write("bookNumber", bookNumber);
-        GetStorage().write("chapterNumber", chapterNumber);
-        GetStorage().write("verseNumber", verseNumber);
+        getStorage.write("bookNumber", bookNumber);
+        getStorage.write("chapterNumber", chapterNumber);
+        getStorage.write("verseNumber", verseNumber);
       }
     }
 
@@ -133,7 +135,7 @@ class BiblePageController extends GetxController {
     
     if (chapterNumber > 1) {
       chapterNumber--;
-      GetStorage().write("chapterNumber", chapterNumber);
+      getStorage.write("chapterNumber", chapterNumber);
     }
 
     else if (chapterNumber == 1)
@@ -142,8 +144,8 @@ class BiblePageController extends GetxController {
       {
         bookNumber -= 1;
         chapterNumber = namesAndChapters[bookNumber - 1][1];
-        GetStorage().write("bookNumber", bookNumber);
-        GetStorage().write("chapterNumber", chapterNumber);
+        getStorage.write("bookNumber", bookNumber);
+        getStorage.write("chapterNumber", chapterNumber);
       }
     }
 
@@ -161,9 +163,9 @@ class BiblePageController extends GetxController {
     this.bookNumber = bookNumber;
     this.chapterNumber = chapterNumber;
     this.verseNumber = verseNumber;
-    GetStorage().write("bookNumber", bookNumber);
-    GetStorage().write("chapterNumber", chapterNumber);
-    GetStorage().write("verseNumber", verseNumber);
+    getStorage.write("bookNumber", bookNumber);
+    getStorage.write("chapterNumber", chapterNumber);
+    getStorage.write("verseNumber", verseNumber);
 
     versesSelected = [];
     await updateVerseList();
