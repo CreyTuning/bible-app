@@ -213,7 +213,7 @@ class BiblePage extends StatelessWidget {
                                                   borderRadius: BorderRadius.circular(6),
                                                   border: Border.all(
                                                     color: Theme.of(context).textTheme.bodyText1.color,
-                                                    width: 1.6
+                                                    width: 2
                                                   )
                                                 ),
                                               ),
