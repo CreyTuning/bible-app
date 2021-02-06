@@ -122,7 +122,7 @@ class ReadPreferences extends StatelessWidget {
                               },
 
                               activeColor: Theme.of(context).textTheme.bodyText1.color,
-                              inactiveColor: Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
+                              inactiveColor: Theme.of(context).textTheme.bodyText1.color.withOpacity(0.2), //Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
                               value: biblePageController.fontSize, // AQUI
                               min: 18,
                               max: 30,
@@ -152,7 +152,7 @@ class ReadPreferences extends StatelessWidget {
                               },
 
                               activeColor: Theme.of(context).textTheme.bodyText1.color,
-                              inactiveColor: Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
+                              inactiveColor: Theme.of(context).textTheme.bodyText1.color.withOpacity(0.2), //Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
                               value: biblePageController.fontHeight,
                               min: 1.05,
                               max: 3.05,
@@ -183,7 +183,7 @@ class ReadPreferences extends StatelessWidget {
                               },
 
                               activeColor: Theme.of(context).textTheme.bodyText1.color,
-                              inactiveColor: Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
+                              inactiveColor: Theme.of(context).textTheme.bodyText1.color.withOpacity(0.2), //Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
                               value: biblePageController.fontLetterSeparation,
                               min: -1.5,
                               max: 5,
@@ -292,6 +292,93 @@ class ReadPreferences extends StatelessWidget {
                                                     readPreferencesController.setTheme('black');
                                                   },
                                                 ),
+
+                                                Divider(
+                                                  color: Theme.of(context).dividerColor,
+                                                ),
+
+                                                ListTile(
+                                                  title: Text('Space Cadet',
+                                                    style: Theme.of(context).textTheme.bodyText1,
+                                                  ),
+
+                                                  //leading: Icon(Icons.brightness_1, color: Color(0xff2b2d42)),
+                                                  leading: Stack(
+                                                    alignment: Alignment.center,
+                                                    children: [
+                                                      Icon(Icons.brightness_1, color: Theme.of(context).textTheme.bodyText1.color),
+                                                      
+                                                      Container(
+                                                      width: 15,
+                                                      height: 15,
+                                                      decoration: BoxDecoration(
+                                                        shape: BoxShape.circle, 
+                                                        color: Color(0xff2b2d42),
+                                                      ),
+                                                    ),
+                                                    ],
+                                                  ),
+
+                                                  onTap: (){
+                                                    readPreferencesController.setTheme('spaceCadet');
+                                                  },
+                                                ),
+
+                                                ListTile(
+                                                  title: Text('Charcoal',
+                                                    style: Theme.of(context).textTheme.bodyText1,
+                                                  ),
+
+                                                  //leading: Icon(Icons.brightness_1, color: Color(0xff2b2d42)),
+                                                  leading: Stack(
+                                                    alignment: Alignment.center,
+                                                    children: [
+                                                      Icon(Icons.brightness_1, color: Theme.of(context).textTheme.bodyText1.color),
+                                                      
+                                                      Container(
+                                                      width: 15,
+                                                      height: 15,
+                                                      decoration: BoxDecoration(
+                                                        shape: BoxShape.circle, 
+                                                        color: Color(0xff264653),
+                                                      ),
+                                                    ),
+                                                    ],
+                                                  ),
+
+                                                  onTap: (){
+                                                    readPreferencesController.setTheme('charcoal');
+                                                  },
+                                                ),
+
+                                                ListTile(
+                                                  title: Text('Pansy Purple',
+                                                    style: Theme.of(context).textTheme.bodyText1,
+                                                  ),
+
+                                                  //leading: Icon(Icons.brightness_1, color: Color(0xff2b2d42)),
+                                                  leading: Stack(
+                                                    alignment: Alignment.center,
+                                                    children: [
+                                                      Icon(Icons.brightness_1, color: Theme.of(context).textTheme.bodyText1.color),
+                                                      
+                                                      Container(
+                                                      width: 15,
+                                                      height: 15,
+                                                      decoration: BoxDecoration(
+                                                        shape: BoxShape.circle, 
+                                                        color: Color(0xff830b53),
+                                                      ),
+                                                    ),
+                                                    ],
+                                                  ),
+
+                                                  onTap: (){
+                                                    readPreferencesController.setTheme('pansyPurple');
+                                                  },
+                                                ),
+
+
                                               ],
                                             ),
                                           ),

@@ -25,12 +25,4 @@ class MainPageController extends GetxController{
     getStorage.write("mainPagetabIndex", mainPagetabIndex);
     update();
   }
-
-  void buttonOnPress(){
-    String newTheme = AppTheme().getRandomTheme();
-    
-    getStorage.write("currentTheme", newTheme);
-    Get.changeTheme(AppTheme.getTheme(newTheme));
-  }
-
 }

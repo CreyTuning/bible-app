@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class AppTheme
@@ -161,11 +159,184 @@ class AppTheme
     ),
 
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: Color(0xff303030)
+      backgroundColor: Color(0xff1f1f1f)
     ),
 
     cardColor: Color(0xff202020)
   );
+
+
+  static ThemeData spaceCadet = ThemeData(
+    primaryColor: Color(0xff2B2D42),
+    accentColorBrightness: Brightness.dark,
+    fontFamily: 'Roboto',
+    accentColor: Color(0xffd6d8da),
+    backgroundColor: Color(0xff2B2D42),
+    canvasColor: Color(0xff2B2D42),
+    brightness: Brightness.dark,
+    secondaryHeaderColor: Color(0xff2B2D42),
+    bottomAppBarColor: Color(0xff2B2D42),
+    dividerColor: Color(0xff8D99AE),
+
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      elevation: 0,
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: Color(0xff2B2D42),
+      selectedItemColor: Color(0xffEF233C),
+      unselectedItemColor: Color(0xffEDF2F4),
+    ),
+
+    tabBarTheme: TabBarTheme(
+      labelColor: Color(0xfff0f2f3),
+      labelStyle: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium'),
+      unselectedLabelStyle: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium'),
+      
+    ),
+
+    textTheme: TextTheme(
+        button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Colors.white), //Color(0xfff0f2f3)),
+        bodyText1: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xffEDF2F4)), //Color(0xffd4d4d4)),
+        bodyText2: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff8D99AE))
+
+    ),
+
+    appBarTheme: AppBarTheme(
+      color: Color(0xff2B2D42),
+      brightness: Brightness.dark,
+      iconTheme: IconThemeData(color: Colors.white), //Color(0xffd4d4d4)),
+
+      textTheme: TextTheme(
+          headline6: TextStyle(fontSize: 20,fontFamily: 'Roboto', color: Color(0xffd6d8da), fontWeight: FontWeight.bold),
+          button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff444e53))
+      )
+    ),
+
+    iconTheme: IconThemeData(
+      color: Colors.white, //Color(0xffd4d4d4),
+    ),
+
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: Color(0xff44485d)
+    ),
+
+    cardColor: Color(0xff44485d)
+
+  );
+
+  static ThemeData charcoal = ThemeData(
+    primaryColor: Color(0xff264653),
+    accentColorBrightness: Brightness.dark,
+    fontFamily: 'Roboto',
+    accentColor: Color(0xffd6d8da),
+    backgroundColor: Color(0xff264653),
+    canvasColor: Color(0xff264653),
+    brightness: Brightness.dark,
+    secondaryHeaderColor: Color(0xff264653),
+    bottomAppBarColor: Color(0xff264653),
+    dividerColor: Color(0xff8D99AE),
+
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      elevation: 0,
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: Color(0xff264653),
+      selectedItemColor: Color(0xffEF233C),
+      unselectedItemColor: Color(0xffEDF2F4),
+    ),
+
+    tabBarTheme: TabBarTheme(
+      labelColor: Color(0xfff0f2f3),
+      labelStyle: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium'),
+      unselectedLabelStyle: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium'),
+      
+    ),
+
+    textTheme: TextTheme(
+        button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Colors.white), //Color(0xfff0f2f3)),
+        bodyText1: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xffEDF2F4)), //Color(0xffd4d4d4)),
+        bodyText2: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff8D99AE))
+
+    ),
+
+    appBarTheme: AppBarTheme(
+      color: Color(0xff264653),
+      brightness: Brightness.dark,
+      iconTheme: IconThemeData(color: Colors.white), //Color(0xffd4d4d4)),
+
+      textTheme: TextTheme(
+          headline6: TextStyle(fontSize: 20,fontFamily: 'Roboto', color: Color(0xffd6d8da), fontWeight: FontWeight.bold),
+          button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff444e53))
+      )
+    ),
+
+    iconTheme: IconThemeData(
+      color: Colors.white, //Color(0xffd4d4d4),
+    ),
+
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: Color(0xff335f70)
+    ),
+
+    cardColor: Color(0xff335f70)
+
+  );
+
+  static ThemeData pansyPurple = ThemeData(
+    primaryColor: Color(0xff830b53),
+    accentColorBrightness: Brightness.dark,
+    fontFamily: 'Roboto',
+    accentColor: Color(0xffd6d8da),
+    backgroundColor: Color(0xff830b53),
+    canvasColor: Color(0xff830b53),
+    brightness: Brightness.dark,
+    secondaryHeaderColor: Color(0xff830b53),
+    bottomAppBarColor: Color(0xff830b53),
+    dividerColor: Color(0xffc285aa),
+
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      elevation: 0,
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: Color(0xff830b53),
+      selectedItemColor: Color(0xffEF233C),
+      unselectedItemColor: Color(0xffEDF2F4),
+    ),
+
+    tabBarTheme: TabBarTheme(
+      labelColor: Color(0xfff0f2f3),
+      labelStyle: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium'),
+      unselectedLabelStyle: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium'),
+      
+    ),
+
+    textTheme: TextTheme(
+        button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Colors.white), //Color(0xfff0f2f3)),
+        bodyText1: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Colors.white),
+        bodyText2: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xffc285aa))
+
+    ),
+
+    appBarTheme: AppBarTheme(
+      color: Color(0xff830b53),
+      brightness: Brightness.dark,
+      iconTheme: IconThemeData(color: Colors.white), //Color(0xffd4d4d4)),
+
+      textTheme: TextTheme(
+          headline6: TextStyle(fontSize: 20,fontFamily: 'Roboto', color: Color(0xffd6d8da), fontWeight: FontWeight.bold),
+          button: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff444e53))
+      )
+    ),
+
+    iconTheme: IconThemeData(
+      color: Colors.white, //Color(0xffd4d4d4),
+    ),
+
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: Color(0xffaa0e6b)
+    ),
+
+    cardColor: Color(0xffaa0e6b)
+
+  );
+
 
   static ThemeData getTheme(String themeName){
     switch (themeName) {
@@ -178,25 +349,19 @@ class AppTheme
       case "black":
         return black;
         break;
+
+      case "spaceCadet":
+        return spaceCadet;
+        break;
+      case "charcoal":
+        return charcoal;
+        break;
+      case "pansyPurple":
+        return pansyPurple;
+        break;
+
       default:
-        return ThemeData.light();
+        return light;
     }
   }
-
-  String getRandomTheme(){
-      switch (Random().nextInt(3)) {
-      case 0:
-        return "light";
-        break;
-      case 1:
-        return "dark";
-        break;
-      case 2:
-        return "black";
-        break;
-      default:
-        return "light";
-    }
-  }
-
 }

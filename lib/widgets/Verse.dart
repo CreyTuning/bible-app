@@ -60,16 +60,16 @@ class Verse extends StatelessWidget {
           Positioned.fill(
             child: AnimatedPadding(
               duration: Duration(milliseconds: 150),
-              padding: EdgeInsets.only(right: (this.selected) ? Get.size.width - 4 : Get.size.width),
+              padding: EdgeInsets.only(right: (this.selected) ? Get.size.width - 5 : Get.size.width),
               child: Container(
-                color: Colors.green,
+                color: Theme.of(context).textTheme.bodyText2.color,
               ),
             ),
           ),
 
           AnimatedPadding(
             duration: Duration(milliseconds: 150),
-            padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
+            padding: EdgeInsets.fromLTRB((this.selected) ? 17 : 12, 0, 12, 0),
             child: RichText(
               softWrap: true,
               overflow: TextOverflow.visible,
