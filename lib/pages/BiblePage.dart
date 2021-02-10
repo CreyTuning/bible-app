@@ -38,7 +38,7 @@ class BiblePage extends StatelessWidget {
       },
 
       child: animateDo.FadeIn(
-        duration: Duration(milliseconds: 300),
+        duration: Duration(milliseconds: 150),
         child: Container(
           color: Theme.of(context).canvasColor,
           child: SafeArea(

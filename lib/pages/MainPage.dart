@@ -20,7 +20,7 @@ class MainPage extends StatelessWidget {
               return BiblePage();
               break;
             default:
-              return animateDo.FadeIn(child: Center(child: Text("En desarrollo")), duration: Duration(milliseconds: 300),);
+              return animateDo.FadeIn(child: Center(child: Text("En desarrollo")), duration: Duration(milliseconds: 150),);
           }        
         },
       ),
