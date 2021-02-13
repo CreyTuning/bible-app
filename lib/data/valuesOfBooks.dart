@@ -66,3 +66,48 @@ List valuesOfBooks = [
   [25],
   [20, 29, 22, 11, 14, 17, 17, 13, 21, 11, 19, 17, 18, 20, 8, 21, 18, 24, 21, 15, 27, 21]
 ];
+
+int valuesOfBooksChapterAdjuster(int book, int chapter){
+
+  int returnValue = 0;
+
+  if(book >= 1 && book <= 66 && chapter >= 1 && chapter <= valuesOfBooks[book - 1].length){
+    returnValue = chapter;
+  }
+  
+  else if(book >= 1 && book <= 66 && chapter < 1 ){
+    returnValue = 1;
+  }
+
+  else if(book >= 1 && book <= 66 && chapter > valuesOfBooks[book - 1].length){
+    returnValue = valuesOfBooks[book - 1].length;
+  }
+
+  return returnValue;
+}
+
+int valuesOfBooksVerseAdjuster(int book, int chapter, int verse){
+
+  int returnValue = 0;
+
+  if(book >= 1 && book <= 66 && chapter >= 1 && chapter <= valuesOfBooks[book - 1].length){
+    if(verse >= 1 && verse <= valuesOfBooks[book - 1][chapter - 1]){
+      return returnValue = verse;
+    }
+
+    else if(verse < 1 ){
+      return returnValue = 1;
+    }
+
+    if(verse > valuesOfBooks[book - 1][chapter - 1]){
+      return returnValue = valuesOfBooks[book - 1][chapter - 1];
+    }
+  } 
+  
+  else {
+    print('valuesOfBooksVerseAdjuster [error]: book or chapter exception');
+    returnValue = 1;
+  }
+
+  return returnValue;
+}

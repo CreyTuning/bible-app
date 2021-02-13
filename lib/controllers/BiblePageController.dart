@@ -156,7 +156,7 @@ class BiblePageController extends GetxController {
   }
 
   void referenceButtonOnTap(){
-    Get.to(ReferencesPage(), transition: Transition.fadeIn, duration: Duration(milliseconds: 300), );
+    Get.to(ReferencesPage());
   }
 
   void setReference(int bookNumber, int chapterNumber, int verseNumber) async {

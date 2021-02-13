@@ -95,21 +95,17 @@ class ReferencesPage extends StatelessWidget {
                                   ),
                                 ),
 
-                                body: (referencesPageController.searchList.length == 0)
-                                ? Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(Icons.keyboard, size: 45, color: Theme.of(context).textTheme.bodyText2.color),
-                                      SizedBox(height: 4),
-                                      Text('¡Escribe para buscar!', style: Theme.of(context).textTheme.bodyText2.copyWith(fontSize: 18)),
-                                    ],
-                                  )
-                                )
-
-                                : ListView.builder(
+                                body: ListView.builder(
+                                  controller: referencesPageController.searchListScrollController,
                                   itemBuilder: (context, index) => ListTile(
-                                    title: Text(intToBook[referencesPageController.searchList[index]], style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 18))
+                                    title: Text(
+                                      '${intToBook[referencesPageController.searchList[index][0]]} ${referencesPageController.searchList[index][1]}:${referencesPageController.searchList[index][2]}', 
+                                      style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 18)
+                                    ),
+
+                                    onTap: (){
+                                      referencesPageController.searchListItemOnTap(index);
+                                    },
                                   ),
                                   
                                   itemCount: referencesPageController.searchList.length,
