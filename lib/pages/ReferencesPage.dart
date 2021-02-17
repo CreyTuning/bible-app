@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
@@ -64,7 +66,14 @@ class ReferencesPage extends StatelessWidget {
                                     ),
 
                                     cursorColor: Theme.of(context).textTheme.bodyText1.color,
+                                    cursorRadius: Radius.circular(8),
+
                                     autofocus: true,
+                                    keyboardType: TextInputType.text,
+                                    textInputAction: TextInputAction.search,
+                                    autocorrect: false,
+                                    onSubmitted: referencesPageController.searchTextFieldOnSubmitted,
+
 
                                     controller: referencesPageController.textEditingController,
                                     onChanged: referencesPageController.searchTextFieldOnChange,
@@ -99,12 +108,17 @@ class ReferencesPage extends StatelessWidget {
                                   itemBuilder: (context, index) => ListTile(
                                     title: Text(
                                       '${intToBook[referencesPageController.searchList[index][0]]} ${referencesPageController.searchList[index][1]}:${referencesPageController.searchList[index][2]}', 
-                                      style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 18)
+                                      style: Theme.of(context).textTheme.bodyText1.copyWith(
+                                        fontSize: 18,
+                                        fontWeight: index == 0 ? FontWeight.bold : FontWeight.normal
+                                      )
                                     ),
 
                                     onTap: (){
                                       referencesPageController.searchListItemOnTap(index);
                                     },
+
+                                    leading: Icon(Icons.search)
                                   ),
                                   
                                   itemCount: referencesPageController.searchList.length,

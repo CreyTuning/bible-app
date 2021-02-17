@@ -213,4 +213,12 @@ class ReferencesPageController extends GetxController {
     biblePageController.setReferenceSafeScroll(searchList[index][0], searchList[index][1], searchList[index][2]);
   }
 
+  void searchTextFieldOnSubmitted(String text){
+    if(searchList.length > 0){
+      BiblePageController biblePageController = Get.find();
+      Get.back();
+      Get.back();
+      biblePageController.setReferenceSafeScroll(searchList[0][0], searchList[0][1], searchList[0][2]);
+    }
+  }
 }
