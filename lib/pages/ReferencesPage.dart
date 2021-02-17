@@ -291,7 +291,7 @@ class ReferencesPage extends StatelessWidget {
                                 child: InkWell(
                                   customBorder: CircleBorder(),
                                   onTap: (){
-                                    controller.setReference(controller.bookNumber, controller.chapterNumber, index + 1);
+                                    controller.setReferenceSafeScroll(controller.bookNumber, controller.chapterNumber, index + 1);
                                     referencesPageController.verseListOnSelect(index);
                                     Get.back();
                                   },

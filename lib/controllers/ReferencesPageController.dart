@@ -210,8 +210,7 @@ class ReferencesPageController extends GetxController {
     BiblePageController biblePageController = Get.find();
     Get.back();
     Get.back();
-    biblePageController.setReference(searchList[index][0], searchList[index][1], searchList[index][2]);
-    biblePageController.setReference(searchList[index][0], searchList[index][1], searchList[index][2]);
+    biblePageController.setReferenceSafeScroll(searchList[index][0], searchList[index][1], searchList[index][2]);
   }
 
 }

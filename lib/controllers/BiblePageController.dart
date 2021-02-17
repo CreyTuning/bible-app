@@ -174,11 +174,6 @@ class BiblePageController extends GetxController {
   }
 
   void setReferenceSafeScroll(int bookNumber, int chapterNumber, int verseNumber) async{
-    autoScrollController.jumpTo(0);
-    versesSelected = [];
-    versesRawList = [];
-    update();
-
     this.bookNumber = bookNumber;
     this.chapterNumber = chapterNumber;
     this.verseNumber = verseNumber;
@@ -186,9 +181,11 @@ class BiblePageController extends GetxController {
     getStorage.write("chapterNumber", chapterNumber);
     getStorage.write("verseNumber", verseNumber);
 
+    versesSelected = [];
     await updateVerseList();
     update();
     
+    autoScrollController.scrollToIndex(verseNumber - 1, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
     autoScrollController.scrollToIndex(verseNumber - 1, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
   }
 }
