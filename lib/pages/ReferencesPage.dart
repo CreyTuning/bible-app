@@ -5,7 +5,6 @@ import 'package:yhwh/controllers/BiblePageController.dart';
 import 'package:yhwh/controllers/ReferencesPageController.dart';
 import 'package:yhwh/data/Define.dart';
 import 'package:yhwh/data/valuesOfBooks.dart';
-import 'package:animate_do/animate_do.dart' as animateDo;
 
 class ReferencesPage extends StatelessWidget {
   const ReferencesPage({Key key}) : super(key: key);

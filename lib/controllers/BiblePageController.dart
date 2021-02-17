@@ -69,7 +69,6 @@ class BiblePageController extends GetxController {
     }
   }
 
-
   void onVerseLongPress(int index){
     if(!selectionMode){
       selectionMode = true;
@@ -174,4 +173,22 @@ class BiblePageController extends GetxController {
     autoScrollController.scrollToIndex(verseNumber - 1, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
   }
 
+  void setReferenceSafeScroll(int bookNumber, int chapterNumber, int verseNumber) async{
+    autoScrollController.jumpTo(0);
+    versesSelected = [];
+    versesRawList = [];
+    update();
+
+    this.bookNumber = bookNumber;
+    this.chapterNumber = chapterNumber;
+    this.verseNumber = verseNumber;
+    getStorage.write("bookNumber", bookNumber);
+    getStorage.write("chapterNumber", chapterNumber);
+    getStorage.write("verseNumber", verseNumber);
+
+    await updateVerseList();
+    update();
+    
+    autoScrollController.scrollToIndex(verseNumber - 1, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
+  }
 }

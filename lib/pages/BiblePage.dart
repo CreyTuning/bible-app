@@ -216,7 +216,7 @@ class BiblePage extends StatelessWidget {
                                       ),
 
                                       IconButton(
-                                        tooltip: 'Pestañas',
+                                        tooltip: 'Marcadores',
                                         onPressed: (){},
                                         icon: Stack(
                                             alignment: Alignment.center,
