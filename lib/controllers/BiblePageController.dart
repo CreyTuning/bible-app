@@ -5,12 +5,15 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:yhwh/classes/VerseRaw.dart';
+import 'package:yhwh/controllers/HighlighterPageController.dart';
 import 'package:yhwh/data/Define.dart';
 import 'package:yhwh/data/valuesOfBooks.dart';
+import 'package:yhwh/models/highlighterItem.dart';
 import 'package:yhwh/pages/ReferencesPage.dart';
 
 class BiblePageController extends GetxController {
 
+  HighlighterPageController highlighterPageController = Get.put(HighlighterPageController());
   AutoScrollController autoScrollController;
   GetStorage getStorage = GetStorage();
 
@@ -188,4 +191,12 @@ class BiblePageController extends GetxController {
     autoScrollController.scrollToIndex(verseNumber - 1, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
     autoScrollController.scrollToIndex(verseNumber - 1, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
   }
+
+  void addToHighlighter() async {
+    highlighterPageController.data.insert(0, HighlighterItem(book: highlighterPageController.highlighterBox.length, chapter: 1, verses: [1, 2, 3], color: '#AAAAAA'));
+    await highlighterPageController.highlighterBox.put(highlighterPageController.highlighterBox.length, highlighterPageController.data.first);
+
+    cancelSelectionModeOnTap();
+  }
+
 }

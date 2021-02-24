@@ -6,6 +6,7 @@ import 'package:yhwh/controllers/BiblePageController.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:yhwh/controllers/MainPageController.dart';
 import 'package:yhwh/data/Define.dart';
+import 'package:yhwh/pages/HighlighterPage.dart';
 import 'package:yhwh/pages/ReadPreferences.dart';
 import 'package:yhwh/widgets/ChapterFooter.dart';
 import 'package:yhwh/widgets/Verse.dart';
@@ -259,19 +260,7 @@ class BiblePage extends StatelessWidget {
                                           onSelected: (value) {
                                             switch (value) {
                                               case 1:
-                                                Get.showSnackbar(
-                                                  GetBar(
-                                                    backgroundColor: Theme.of(context).textTheme.bodyText1.color,
-                                                    titleText: Text('Resaltados', style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                                      color: Theme.of(context).canvasColor
-                                                    )),
-                                                    messageText: Text('Esta función está en desarrollo.', style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                                      color: Theme.of(context).canvasColor
-                                                    )),
-                                                    icon: Icon(Icons.error, color: Theme.of(context).canvasColor),
-                                                    duration: Duration(seconds: 2),
-                                                  )
-                                                );
+                                                Get.to(HighlighterPage());
                                                 break;
                                               case 2:
                                                 Get.showSnackbar(
@@ -429,6 +418,7 @@ class BiblePage extends StatelessWidget {
                               replacement: Container(),
                               child: animateDo.FadeIn(
                                 child: Container(
+                                  padding: EdgeInsets.only(right: 4),
                                   height: 65,
                                   color: Theme.of(context).appBarTheme.color,
                                   child: Material(
@@ -490,7 +480,7 @@ class BiblePage extends StatelessWidget {
                                             color: Theme.of(context).appBarTheme.iconTheme.color,
                                             size: 18,
                                           ),
-                                          onPressed: (){},
+                                          onPressed: biblePageController.addToHighlighter,
                                         ),
 
                                         IconButton(
