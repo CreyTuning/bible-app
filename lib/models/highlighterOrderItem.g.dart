@@ -1,44 +1,38 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'highlighterItem.dart';
+part of 'highlighterOrderItem.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class HighlighterItemAdapter extends TypeAdapter<HighlighterItem> {
+class HighlighterOrderItemAdapter extends TypeAdapter<HighlighterOrderItem> {
   @override
-  final int typeId = 1;
+  final int typeId = 2;
 
   @override
-  HighlighterItem read(BinaryReader reader) {
+  HighlighterOrderItem read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return HighlighterItem(
+    return HighlighterOrderItem(
       id: fields[0] as String,
-      book: fields[2] as int,
-      chapter: fields[3] as int,
-      verses: (fields[4] as List)?.cast<int>(),
-      color: fields[1] as int,
+      book: fields[1] as int,
+      chapter: fields[2] as int,
     );
   }
 
   @override
-  void write(BinaryWriter writer, HighlighterItem obj) {
+  void write(BinaryWriter writer, HighlighterOrderItem obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.color)
-      ..writeByte(2)
       ..write(obj.book)
-      ..writeByte(3)
-      ..write(obj.chapter)
-      ..writeByte(4)
-      ..write(obj.verses);
+      ..writeByte(2)
+      ..write(obj.chapter);
   }
 
   @override
@@ -47,7 +41,7 @@ class HighlighterItemAdapter extends TypeAdapter<HighlighterItem> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is HighlighterItemAdapter &&
+      other is HighlighterOrderItemAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

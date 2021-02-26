@@ -1,45 +1,59 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:yhwh/controllers/BiblePageController.dart';
 import 'package:yhwh/models/highlighterItem.dart';
+import 'package:yhwh/models/highlighterOrderItem.dart';
 
 class HighlighterPageController extends GetxController{
   LazyBox highlighterBox;
+  LazyBox highlighterOrderBox;
   List<HighlighterItem> data = [];
 
   @override
   void onInit() async { 
     highlighterBox = await Hive.openLazyBox('highlighterBox');
-
-    for(int index = highlighterBox.length - 1; index >= 0; index--){
-      data.add(await highlighterBox.get(index));
-    }
-
-    update();
+    highlighterOrderBox = await Hive.openLazyBox('highlighterOrderBox');
     super.onInit();
   }
 
   @override
   void onReady() async {
+    await lazyAddMoreData();
     super.onReady();
   }
 
-  void addToList(){
-    data.insert(0, HighlighterItem(book: highlighterBox.length, chapter: 1, verses: [1, 2, 3], color: '#FFFFFF'));
-    highlighterBox.put(highlighterBox.length, data.first);
-    print(data);
-    update();
+  Future<void> lazyAddMoreData() async {
+    if(data.length < highlighterOrderBox.length){
+      int initialLength = data.length;
+
+      for(int i = initialLength; i < limitNumber(initialLength + 50, highlighterOrderBox.length); i++){
+        HighlighterOrderItem highlighterOrderItem = await highlighterOrderBox.getAt(highlighterOrderBox.length - 1 - i);
+        Map contentChapterList = await highlighterBox.get('${highlighterOrderItem.book}:${highlighterOrderItem.chapter}');
+        
+        data.add(contentChapterList[highlighterOrderItem.id]);
+      }
+
+      update();
+    }
   }
 
   void removeToList(){
     data.removeAt(0);
-    highlighterBox.delete(highlighterBox.length - 1);
+    // highlighterBox.delete(highlighterBox.length - 1);
     update();
   }
 
-  void clearList(){
+  void clearList() async {
     data.clear();
-    highlighterBox.clear();
+    await highlighterBox.clear();
+    await highlighterOrderBox.clear();
+
+    BiblePageController biblePageController = Get.find();
+    await biblePageController.updateVerseList();
+    biblePageController.update();
+
     update();
   }
+
+  int limitNumber(int number, int limit) => number <= limit ? number : limit;
 }

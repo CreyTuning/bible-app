@@ -511,7 +511,7 @@ class BiblePage extends StatelessWidget {
                               index: index,
 
                               child: Verse(
-                                highlight: false,
+                                highlight: biblePageController.versesRawList[index].highlight,
                                 selected: biblePageController.versesSelected.contains(index + 1),
                                 verseNumber: index + 1,
                                 title: null,

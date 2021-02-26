@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yhwh/controllers/HighlighterPageController.dart';
+import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 
 class HighlighterPage extends StatelessWidget {
 
@@ -30,7 +31,7 @@ class HighlighterPage extends StatelessWidget {
             FloatingActionButton(
               backgroundColor: Theme.of(context).floatingActionButtonTheme.backgroundColor,
               child: Icon(Icons.add, color: Theme.of(context).textTheme.bodyText1.color),
-              onPressed: highlighterPageController.addToList
+              onPressed: (){}
             ),
 
             SizedBox(height: 15),
@@ -60,10 +61,16 @@ class HighlighterPage extends StatelessWidget {
 
       body: GetBuilder<HighlighterPageController>(
         init: HighlighterPageController(),
-        builder: (highlighterPageController) => ListView.builder(
-          itemCount: highlighterPageController.data.length,
-          itemBuilder: (context, index) => ListTile(
-            title: Text(highlighterPageController.data[index].toString()),
+        builder: (highlighterPageController) => LazyLoadScrollView(
+          onEndOfPage: highlighterPageController.lazyAddMoreData,
+          isLoading: true,
+          child: ListView.builder(
+            itemCount: highlighterPageController.data.length,
+            itemBuilder: (context, index){
+              return ListTile(
+                title: Text('${highlighterPageController.data[index]}'),
+              );
+            }
           ),
         ),
       ),

@@ -3,19 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:hive/hive.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import 'package:uuid/uuid.dart';
 import 'package:yhwh/classes/VerseRaw.dart';
-import 'package:yhwh/controllers/HighlighterPageController.dart';
+import 'package:yhwh/classes/hiveManagers/HighlighterManager.dart';
 import 'package:yhwh/data/Define.dart';
 import 'package:yhwh/data/valuesOfBooks.dart';
 import 'package:yhwh/models/highlighterItem.dart';
 import 'package:yhwh/pages/ReferencesPage.dart';
 
 class BiblePageController extends GetxController {
-
-  HighlighterPageController highlighterPageController = Get.put(HighlighterPageController());
   AutoScrollController autoScrollController;
   GetStorage getStorage = GetStorage();
+  LazyBox highlighterBox;
+  LazyBox highlighterOrderBox;
 
   int bookNumber = 1;
   int chapterNumber = 2;
@@ -31,13 +33,13 @@ class BiblePageController extends GetxController {
   double fontLetterSeparation = 0.0;
 
   @override
-  void onInit() async {
+  void onInit() {
     autoScrollController = AutoScrollController();
     super.onInit();
   }
 
   @override
-  void onReady() {
+  void onReady() async {
     bookNumber = getStorage.read("bookNumber") ?? 1;
     chapterNumber = getStorage.read("chapterNumber") ?? 1;
     verseNumber = getStorage.read("verseNumber") ?? 1;
@@ -46,7 +48,7 @@ class BiblePageController extends GetxController {
     fontHeight = getStorage.read("fontHeight") ?? 1.8;
     fontLetterSeparation = getStorage.read("fontLetterSeparation") ?? 0;
     
-    updateVerseList();
+    await updateVerseList();
     update();
     super.onReady();
   }
@@ -67,8 +69,8 @@ class BiblePageController extends GetxController {
         selectionMode = false;
       }
       
+      versesSelected.sort();
       update();
-      print('versesSelected: $versesSelected');
     }
   }
 
@@ -89,15 +91,19 @@ class BiblePageController extends GetxController {
 
   Future<void> updateVerseList() async {
     List dataChapter = await jsonDecode(await rootBundle.loadString('lib/bibles/$bibleVersion/${bookNumber}_$chapterNumber.json'))['verses'];
+    List<int> highlightVerses = await HighlighterManager.getHighlightVersesInChapter(bookNumber, chapterNumber);
     versesRawList = [];
 
+    // Crear versiculos
     for (int index = 0; index < valuesOfBooks[bookNumber -1][chapterNumber - 1]; index++) {
       versesRawList.add(
         VerseRaw(
           text: dataChapter[index]["text"],
           fontSize: fontSize,
           fontHeight: fontHeight,
-          fontLetterSeparation: fontLetterSeparation
+          fontLetterSeparation: fontLetterSeparation,
+          highlight: highlightVerses.contains(index + 1) ? true : false,
+          colorHighlight: Colors.blue
         )
       );
     }
@@ -193,9 +199,24 @@ class BiblePageController extends GetxController {
   }
 
   void addToHighlighter() async {
-    highlighterPageController.data.insert(0, HighlighterItem(book: highlighterPageController.highlighterBox.length, chapter: 1, verses: [1, 2, 3], color: '#AAAAAA'));
-    await highlighterPageController.highlighterBox.put(highlighterPageController.highlighterBox.length, highlighterPageController.data.first);
+    var newHighlighterItem = HighlighterItem(
+      book: bookNumber,
+      chapter: chapterNumber,
+      id: Uuid().v1(),
+      color: Colors.red.value,
+      verses: versesSelected
+    );
 
+    // add to database
+    HighlighterManager.add(newHighlighterItem);
+
+    // update RawVerses
+    for(int verse in versesSelected){
+      versesRawList[verse - 1].highlight = true;
+      versesRawList[verse - 1].colorHighlight = Color(newHighlighterItem.color);
+    }
+
+    update();
     cancelSelectionModeOnTap();
   }
 
