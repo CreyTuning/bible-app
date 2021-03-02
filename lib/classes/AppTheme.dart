@@ -11,7 +11,7 @@ class AppTheme
     brightness: Brightness.light,
     bottomAppBarColor: Colors.white,
     secondaryHeaderColor: Color(0xff414141),
-    // dividerColor: Color(0xff5f6368),
+    dividerColor: Color(0x77777777),
 
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       elevation: 0,

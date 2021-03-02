@@ -12,6 +12,7 @@ import 'package:yhwh/data/Define.dart';
 import 'package:yhwh/data/valuesOfBooks.dart';
 import 'package:yhwh/models/highlighterItem.dart';
 import 'package:yhwh/pages/ReferencesPage.dart';
+import 'package:yhwh/data/Titles.dart';
 
 class BiblePageController extends GetxController {
   AutoScrollController autoScrollController;
@@ -99,11 +100,12 @@ class BiblePageController extends GetxController {
       versesRawList.add(
         VerseRaw(
           text: dataChapter[index]["text"],
+          title: titles[bookNumber][chapterNumber].containsKey(index + 1) == true ? titles[bookNumber][chapterNumber][index + 1] : null,
           fontSize: fontSize,
           fontHeight: fontHeight,
           fontLetterSeparation: fontLetterSeparation,
           highlight: highlightVerses.contains(index + 1) ? true : false,
-          colorHighlight: Colors.blue
+          colorHighlight: Colors.red
         )
       );
     }
