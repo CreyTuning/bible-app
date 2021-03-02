@@ -53,73 +53,148 @@ class Verse extends StatelessWidget {
       onLongPress: this.onLongPress,
       highlightColor: Colors.transparent,
       splashColor: Colors.transparent,
-      child: Stack(
-        alignment: Alignment.topLeft,
-        children: [
-
-          Positioned.fill(
-            child: AnimatedPadding(
+      child: IntrinsicHeight(
+        child: Row(
+          children: [
+            AnimatedContainer(
+              color: Theme.of(context).textTheme.bodyText2.color,
+              height: double.infinity,
+              width: this.selected ? 5 : 0,
               duration: Duration(milliseconds: 150),
-              padding: EdgeInsets.only(right: (this.selected) ? Get.size.width - 5 : Get.size.width),
-              child: Container(
-                color: Theme.of(context).textTheme.bodyText2.color,
-              ),
             ),
-          ),
 
-          AnimatedPadding(
-            duration: Duration(milliseconds: 150),
-            padding: EdgeInsets.fromLTRB((this.selected) ? 17 : 12, 0, 12, 0),
-            child: RichText(
-              softWrap: true,
-              overflow: TextOverflow.visible,
-              textAlign: TextAlign.start,
+            Flexible(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
+                child: RichText(
+                  softWrap: true,
+                  overflow: TextOverflow.visible,
+                  textAlign: TextAlign.start,
 
-              text: TextSpan(
-                style: TextStyle(
-                  fontSize: this.fontSize,
-                  color: this.colorText,
-                  fontFamily: this.fontFamily,
-                  height: this.fontHeight,
-                  letterSpacing: this.fontLetterSeparation,
+                  text: TextSpan(
+                    style: TextStyle(
+                      fontSize: this.fontSize,
+                      color: this.colorText,
+                      fontFamily: this.fontFamily,
+                      height: this.fontHeight,
+                      letterSpacing: this.fontLetterSeparation,
+                    ),
+
+                    children: [
+                      TextSpan( // Numero de versiculo
+                        text: this.verseNumber.toString(),
+                        style: TextStyle(
+                          fontWeight: (this.selected) ? FontWeight.bold : FontWeight.normal,
+                          color: this.colorNumber,
+                          fontSize: this.fontSize - 7.0,
+                        )
+                      ),
+
+                      TextSpan(
+                        text: ' '
+                      ),
+
+                      TextSpan(
+                        text: this.text.toString(),
+                        style: TextStyle(
+                          fontWeight: (this.selected) ? FontWeight.bold : FontWeight.normal,
+                          backgroundColor: (this.highlight)
+                            ? Theme.of(context).brightness == Brightness.dark
+                              ? Colors.pink
+                              : Colors.pink
+                            : Colors.transparent,
+                          color: (this.highlight)
+                            ? Theme.of(context).brightness == Brightness.dark
+                              ? Theme.of(context).textTheme.bodyText1.color
+                              : Colors.white
+                            : Theme.of(context).textTheme.bodyText1.color,
+                          // decorationColor: Colors.pink
+                        )
+                      ),
+                    ]
+                  ),
                 ),
-
-                children: [
-                  TextSpan( // Numero de versiculo
-                    text: this.verseNumber.toString(),
-                    style: TextStyle(
-                      fontWeight: (this.selected) ? FontWeight.bold : FontWeight.normal,
-                      color: this.colorNumber,
-                      fontSize: this.fontSize - 7.0,
-                    )
-                  ),
-
-                  TextSpan(
-                    text: ' '
-                  ),
-
-                  TextSpan(
-                    text: this.text.toString(),
-                    style: TextStyle(
-                      fontWeight: (this.selected) ? FontWeight.bold : FontWeight.normal,
-                      backgroundColor: (this.highlight)
-                        ? Theme.of(context).brightness == Brightness.dark
-                          ? Color(0xff00af9c).withOpacity(0.5)
-                          : Colors.pink
-                        : Colors.transparent,
-                      color: (this.highlight)
-                        ? Theme.of(context).brightness == Brightness.dark
-                          ? Theme.of(context).textTheme.bodyText1.color
-                          : Colors.white
-                        : Theme.of(context).textTheme.bodyText1.color,
-                      // decorationColor: Colors.pink
-                    )
-                  ),
-                ]
               ),
             ),
-          ),
-        ],
+
+            
+
+            
+            // Expanded(
+            //   child: Stack(
+            //     fit: StackFit.passthrough,
+            //     overflow: Overflow.clip,
+            //     alignment: Alignment.topLeft,
+                
+            //     children: [
+                  
+            //       AnimatedPositioned(
+            //         height: MediaQuery.of(context).size.height,
+            //         width: 5,
+            //         left: this.selected ? 0 : -5,
+            //         duration: Duration(milliseconds: 150),
+            //         child: Container(
+            //           color: Theme.of(context).textTheme.bodyText2.color,
+            //         ),
+            //       ),
+
+            //       AnimatedPadding(
+            //         duration: Duration(milliseconds: 150),
+            //         padding: EdgeInsets.fromLTRB((this.selected) ? 17 : 12, 0, 12, 0),
+            //         child: RichText(
+            //           softWrap: true,
+            //           overflow: TextOverflow.visible,
+            //           textAlign: TextAlign.start,
+
+            //           text: TextSpan(
+            //             style: TextStyle(
+            //               fontSize: this.fontSize,
+            //               color: this.colorText,
+            //               fontFamily: this.fontFamily,
+            //               height: this.fontHeight,
+            //               letterSpacing: this.fontLetterSeparation,
+            //             ),
+
+            //             children: [
+            //               TextSpan( // Numero de versiculo
+            //                 text: this.verseNumber.toString(),
+            //                 style: TextStyle(
+            //                   fontWeight: (this.selected) ? FontWeight.bold : FontWeight.normal,
+            //                   color: this.colorNumber,
+            //                   fontSize: this.fontSize - 7.0,
+            //                 )
+            //               ),
+
+            //               TextSpan(
+            //                 text: ' '
+            //               ),
+
+            //               TextSpan(
+            //                 text: this.text.toString(),
+            //                 style: TextStyle(
+            //                   fontWeight: (this.selected) ? FontWeight.bold : FontWeight.normal,
+            //                   backgroundColor: (this.highlight)
+            //                     ? Theme.of(context).brightness == Brightness.dark
+            //                       ? Colors.pink
+            //                       : Colors.pink
+            //                     : Colors.transparent,
+            //                   color: (this.highlight)
+            //                     ? Theme.of(context).brightness == Brightness.dark
+            //                       ? Theme.of(context).textTheme.bodyText1.color
+            //                       : Colors.white
+            //                     : Theme.of(context).textTheme.bodyText1.color,
+            //                   // decorationColor: Colors.pink
+            //                 )
+            //               ),
+            //             ]
+            //           ),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+          ],
+        ),
       ),
     );
   }
