@@ -13,6 +13,7 @@ import 'package:yhwh/data/valuesOfBooks.dart';
 import 'package:yhwh/models/highlighterItem.dart';
 import 'package:yhwh/pages/ReferencesPage.dart';
 import 'package:yhwh/data/Titles.dart';
+import 'package:yhwh/pages/VerseExplorer.dart';
 
 class BiblePageController extends GetxController {
   AutoScrollController autoScrollController;
@@ -72,6 +73,10 @@ class BiblePageController extends GetxController {
       
       versesSelected.sort();
       update();
+    }
+
+    else{
+      showVerseExplorer(book: bookNumber, chapter: chapterNumber, verse: index);
     }
   }
 
@@ -206,7 +211,8 @@ class BiblePageController extends GetxController {
       chapter: chapterNumber,
       id: Uuid().v1(),
       color: Colors.red.value,
-      verses: versesSelected
+      verses: versesSelected,
+      dateTime: DateTime.now()
     );
 
     // add to database
@@ -220,6 +226,13 @@ class BiblePageController extends GetxController {
 
     update();
     cancelSelectionModeOnTap();
+  }
+
+  void showVerseExplorer({int book, int chapter, int verse}){
+    Get.to(
+      VerseExplorer(),
+      arguments: [book, chapter, verse]
+    );
   }
 
 }

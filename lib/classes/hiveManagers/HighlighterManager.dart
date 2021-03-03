@@ -31,6 +31,25 @@ class HighlighterManager {
     return highlightVerses;
   }
 
+  static Future<Map<int, HighlighterItem>> getHighlightVersesInChapterWithData(int book, int chapter) async {
+    await checkBoxesState();
+
+    Map<int, HighlighterItem> highlightVerses = {};
+
+    // obtener versos resaltados
+    Map tempHil = await highlighterBox.get('$book:$chapter', defaultValue: {}) ?? {};
+    
+    // Agregar al mapa
+    tempHil.forEach((key, value) {
+      value.verses.forEach((verse){
+        highlightVerses[verse] = value;
+      });
+      // highlightVerses.addAll()
+    });
+
+    return highlightVerses;
+  }
+
   static Future<void> add(HighlighterItem highlighterItem) async {
     await checkBoxesState();
 
@@ -85,6 +104,7 @@ class HighlighterManager {
               chapter: value.chapter,
               color: value.color,
               id: value.id,
+              dateTime: value.dateTime,
               verses: []
             );
           }
