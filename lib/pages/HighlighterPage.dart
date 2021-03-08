@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yhwh/controllers/HighlighterPageController.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
+import 'package:yhwh/widgets/CardVerseHightlight.dart';
 
 class HighlighterPage extends StatelessWidget {
 
@@ -28,25 +29,6 @@ class HighlighterPage extends StatelessWidget {
         builder: (highlighterPageController) => Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            FloatingActionButton(
-              backgroundColor: Theme.of(context).floatingActionButtonTheme.backgroundColor,
-              child: Icon(Icons.add, color: Theme.of(context).textTheme.bodyText1.color),
-              onPressed: (){}
-            ),
-
-            SizedBox(height: 15),
-
-            MaterialButton(
-              height: 57,
-              elevation: 8,
-              color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
-              child: Icon(Icons.remove, color: Theme.of(context).textTheme.bodyText1.color),
-              shape: CircleBorder(),
-              onPressed: highlighterPageController.removeToList
-            ),
-
-            SizedBox(height: 15),
-
             MaterialButton(
               height: 57,
               elevation: 8,
@@ -64,11 +46,19 @@ class HighlighterPage extends StatelessWidget {
         builder: (highlighterPageController) => LazyLoadScrollView(
           onEndOfPage: highlighterPageController.lazyAddMoreData,
           isLoading: true,
-          child: ListView.builder(
+          child: ListView.separated(
             itemCount: highlighterPageController.data.length,
+            
+            separatorBuilder: (context, index) => Divider(
+              color: Theme.of(context).dividerColor,
+              height: 0,
+              indent: 73,
+              endIndent: 14,
+            ),
+            
             itemBuilder: (context, index){
-              return ListTile(
-                title: Text('${highlighterPageController.data[index]}'),
+              return CardVerseHightlight(
+                highlighterItem: highlighterPageController.data[index],
               );
             }
           ),
