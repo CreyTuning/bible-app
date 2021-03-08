@@ -243,239 +243,242 @@ class BiblePage extends StatelessWidget {
                             preferredSize: Size.fromHeight(0)
                           ),
 
-                          title: Stack(
-                            children: [
+                          title: Container(
+                            height: 65,
+                            child: Row(
+                              children: [
 
-                              Container(
-                                height: 65,
-                                child: Row(
-                                  children: [
-
-                                    Expanded(
-                                      child: Tooltip(
-                                        message: 'Referencias',
-                                        child: InkWell(
-                                          borderRadius: BorderRadius.only(topRight: Radius.circular(30), bottomRight: Radius.circular(30)),
-                                          child: Container(
-                                            height: 55,
-                                            alignment: Alignment.centerLeft,
-                                            child: Padding(
-                                              padding: EdgeInsets.fromLTRB(12, 0, 0, 0),
-                                              child: RichText(
-                                                textAlign: TextAlign.left,
-                                                overflow: TextOverflow.ellipsis,
-                                                maxLines: 1,
-                                                text: TextSpan(
-                                                  text: '${intToBook[biblePageController.bookNumber]} ${biblePageController.chapterNumber}',
-                                                  style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                                    fontFamily: 'Roboto-Medium',
-                                                    fontSize: 16.6,
-                                                  ),
-                                                )
+                                Expanded(
+                                  child: Tooltip(
+                                    message: 'Referencias',
+                                    child: InkWell(
+                                      borderRadius: BorderRadius.only(topRight: Radius.circular(30), bottomRight: Radius.circular(30)),
+                                      child: Container(
+                                        height: 55,
+                                        alignment: Alignment.centerLeft,
+                                        child: Padding(
+                                          padding: EdgeInsets.fromLTRB(12, 0, 0, 0),
+                                          child: RichText(
+                                            textAlign: TextAlign.left,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                            text: TextSpan(
+                                              text: '${intToBook[biblePageController.bookNumber]} ${biblePageController.chapterNumber}',
+                                              style: Theme.of(context).textTheme.bodyText1.copyWith(
+                                                fontFamily: 'Roboto-Medium',
+                                                fontSize: 16.6,
                                               ),
-                                            ),
+                                            )
                                           ),
-
-                                          onTap: biblePageController.referenceButtonOnTap,
-                                          
                                         ),
                                       ),
-                                    ),
 
-                                    IconButton(
-                                      tooltip: 'Marcadores',
-                                      onPressed: (){},
-                                      icon: Stack(
-                                          alignment: Alignment.center,
-                                          children: [
-                                            
-                                            Center(
-                                              child: Container(
-                                                height: 22,
-                                                width: 22,
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(6),
-                                                  border: Border.all(
-                                                    color: Theme.of(context).textTheme.bodyText1.color,
-                                                    width: 2
-                                                  )
-                                                ),
-                                              ),
+                                      onTap: biblePageController.referenceButtonOnTap,
+                                      
+                                    ),
+                                  ),
+                                ),
+
+                                IconButton(
+                                  tooltip: 'Marcadores',
+                                  onPressed: (){
+                                    /*
+                                      Recuerda agregar biblePageController.cancelSelectionModeOnTap(),
+                                      para evitar un posible bug al momento de entrar en modo
+                                      seleccion y presionar alguna otra funccion en pantalla.
+                                    */
+                                  },
+                                  icon: Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        
+                                        Center(
+                                          child: Container(
+                                            height: 22,
+                                            width: 22,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(6),
+                                              border: Border.all(
+                                                color: Theme.of(context).textTheme.bodyText1.color,
+                                                width: 2
+                                              )
                                             ),
-
-                                            Text('1', textAlign: TextAlign.center,
-                                            style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                              fontSize: 10.5,
-                                              height: 1.5,
-                                              fontWeight: FontWeight.bold
-                                            ))
-                                          ],
+                                          ),
                                         ),
+
+                                        Text('1', textAlign: TextAlign.center,
+                                        style: Theme.of(context).textTheme.bodyText1.copyWith(
+                                          fontSize: 10.5,
+                                          height: 1.5,
+                                          fontWeight: FontWeight.bold
+                                        ))
+                                      ],
                                     ),
+                                ),
 
-                                    Container(
-                                      height: 55,
-                                      width: 55,
-                                      child: PopupMenuButton(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(6)
-                                        ),
-                                        tooltip: 'Opciones',
-                                        icon: Icon(Icons.more_vert),
+                                Container(
+                                  height: 55,
+                                  width: 55,
+                                  child: PopupMenuButton(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(6)
+                                    ),
+                                    tooltip: 'Opciones',
+                                    icon: Icon(Icons.more_vert),
 
-                                        onSelected: (value) {
-                                          switch (value) {
-                                            case 1:
-                                              Get.to(HighlighterPage());
-                                              break;
-                                            case 2:
-                                              Get.showSnackbar(
-                                                GetBar(
-                                                  backgroundColor: Theme.of(context).textTheme.bodyText1.color,
-                                                  titleText: Text('Notas', style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                                    color: Theme.of(context).canvasColor
-                                                  )),
-                                                  messageText: Text('Esta función está en desarrollo.', style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                                    color: Theme.of(context).canvasColor
-                                                  )),
-                                                  icon: Icon(Icons.error, color: Theme.of(context).canvasColor),
-                                                  duration: Duration(seconds: 2),
-                                                )
-                                              );
-                                              break;
-                                            case 3:
-                                            Get.showSnackbar(
-                                                GetBar(
-                                                  backgroundColor: Theme.of(context).textTheme.bodyText1.color,
-                                                  titleText: Text('Diario', style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                                    color: Theme.of(context).canvasColor
-                                                  )),
-                                                  messageText: Text('Esta función está en desarrollo.', style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                                    color: Theme.of(context).canvasColor
-                                                  )),
-                                                  icon: Icon(Icons.error, color: Theme.of(context).canvasColor),
-                                                  duration: Duration(seconds: 2),
-                                                )
-                                              );
-                                              break;
-                                            case 4:
-                                              Get.to(ReadPreferences());
-                                              break;
-                                          }
-                                        },
+                                    onSelected: (value) {
+                                      switch (value) {
+                                        case 1:
+                                          Get.to(HighlighterPage());
+                                          break;
+                                        case 2:
+                                          Get.showSnackbar(
+                                            GetBar(
+                                              backgroundColor: Theme.of(context).textTheme.bodyText1.color,
+                                              titleText: Text('Notas', style: Theme.of(context).textTheme.bodyText1.copyWith(
+                                                color: Theme.of(context).canvasColor
+                                              )),
+                                              messageText: Text('Esta función está en desarrollo.', style: Theme.of(context).textTheme.bodyText1.copyWith(
+                                                color: Theme.of(context).canvasColor
+                                              )),
+                                              icon: Icon(Icons.error, color: Theme.of(context).canvasColor),
+                                              duration: Duration(seconds: 2),
+                                            )
+                                          );
+                                          break;
+                                        case 3:
+                                        Get.showSnackbar(
+                                            GetBar(
+                                              backgroundColor: Theme.of(context).textTheme.bodyText1.color,
+                                              titleText: Text('Diario', style: Theme.of(context).textTheme.bodyText1.copyWith(
+                                                color: Theme.of(context).canvasColor
+                                              )),
+                                              messageText: Text('Esta función está en desarrollo.', style: Theme.of(context).textTheme.bodyText1.copyWith(
+                                                color: Theme.of(context).canvasColor
+                                              )),
+                                              icon: Icon(Icons.error, color: Theme.of(context).canvasColor),
+                                              duration: Duration(seconds: 2),
+                                            )
+                                          );
+                                          break;
+                                        case 4:
+                                          Get.to(ReadPreferences());
+                                          break;
+                                      }
+                                    },
 
-                                        itemBuilder: (context) {
-                                          return <PopupMenuEntry<dynamic>>[
+                                    itemBuilder: (context) {
+                                      biblePageController.cancelSelectionModeOnTap();
 
-                                            PopupMenuItem(
-                                              enabled: false,
-                                              child: Container(
-                                                child: Row(
-                                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      return <PopupMenuEntry<dynamic>>[
+
+                                        PopupMenuItem(
+                                          enabled: false,
+                                          child: Container(
+                                            child: Row(
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.symmetric(horizontal: 0),
+                                                  child: CircleAvatar(
+                                                    backgroundColor: Theme.of(context).accentColor,
+                                                    child: Icon(
+                                                      Icons.person,
+                                                      color: Theme.of(context).canvasColor,
+                                                    ),
+                                                  ),
+                                                ),
+
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
-                                                    Padding(
-                                                      padding: const EdgeInsets.symmetric(horizontal: 0),
-                                                      child: CircleAvatar(
-                                                        backgroundColor: Theme.of(context).accentColor,
-                                                        child: Icon(
-                                                          Icons.person,
-                                                          color: Theme.of(context).canvasColor,
-                                                        ),
+                                                    Text(
+                                                      'Luis Romero',
+                                                      style: Theme.of(context).textTheme.bodyText1.copyWith(
+                                                        fontFamily: 'Roboto-Medium',
+                                                        fontSize: 16.6,
                                                       ),
                                                     ),
 
-                                                    Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                      children: [
-                                                        Text(
-                                                          'Luis Romero',
-                                                          style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                                            fontFamily: 'Roboto-Medium',
-                                                            fontSize: 16.6,
-                                                          ),
-                                                        ),
-
-                                                        Text(
-                                                          'Desconectado',
-                                                          style: Theme.of(context).textTheme.bodyText2.copyWith(
-                                                            fontFamily: 'Roboto-Medium',
-                                                            fontSize: 15,
-                                                          ),
-                                                        ),
+                                                    Text(
+                                                      'Desconectado',
+                                                      style: Theme.of(context).textTheme.bodyText2.copyWith(
+                                                        fontFamily: 'Roboto-Medium',
+                                                        fontSize: 15,
+                                                      ),
+                                                    ),
 
 
-                                                      ],  
-                                                    )
-                                                  ],
-                                                ),
+                                                  ],  
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+
+                                        PopupMenuDivider(),
+
+                                        PopupMenuItem(
+                                          value: 1,
+                                          child: Row(
+                                            children: <Widget>[
+                                              Padding(
+                                                padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
+                                                child: Icon(FontAwesomeIcons.highlighter),
                                               ),
-                                            ),
+                                              Text('Resaltados')
+                                            ],
+                                          )
+                                        ),
 
-                                            PopupMenuDivider(),
+                                        PopupMenuItem(
+                                          value: 2,
+                                          child: Row(
+                                            children: <Widget>[
+                                              Padding(
+                                                padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
+                                                child: Icon(FontAwesomeIcons.solidStickyNote),
+                                              ),
+                                              Text('Notas')
+                                            ],
+                                          )
+                                        ),
 
-                                            PopupMenuItem(
-                                              value: 1,
-                                              child: Row(
-                                                children: <Widget>[
-                                                  Padding(
-                                                    padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
-                                                    child: Icon(FontAwesomeIcons.highlighter),
-                                                  ),
-                                                  Text('Resaltados')
-                                                ],
-                                              )
-                                            ),
+                                        PopupMenuItem(
+                                          value: 3,
+                                          child: Row(
+                                            children: <Widget>[
+                                              Padding(
+                                                padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
+                                                child: Icon(FontAwesomeIcons.bookReader),
+                                              ),
+                                              Text('Diario')
+                                            ],
+                                          )
+                                        ),
 
-                                            PopupMenuItem(
-                                              value: 2,
-                                              child: Row(
-                                                children: <Widget>[
-                                                  Padding(
-                                                    padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
-                                                    child: Icon(FontAwesomeIcons.solidStickyNote),
-                                                  ),
-                                                  Text('Notas')
-                                                ],
-                                              )
-                                            ),
+                                        PopupMenuDivider(),
 
-                                            PopupMenuItem(
-                                              value: 3,
-                                              child: Row(
-                                                children: <Widget>[
-                                                  Padding(
-                                                    padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
-                                                    child: Icon(FontAwesomeIcons.bookReader),
-                                                  ),
-                                                  Text('Diario')
-                                                ],
-                                              )
-                                            ),
+                                        PopupMenuItem(
+                                          value: 4,
+                                          child: Row(
+                                            children: <Widget>[
+                                              Padding(
+                                                padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
+                                                child: Icon(FontAwesomeIcons.wrench)
+                                              ),
+                                              Text('Preferencias')
+                                            ],
+                                          )
+                                        ),
+                                      ];
+                                    }
+                                  ),
+                                ),
 
-                                            PopupMenuDivider(),
-
-                                            PopupMenuItem(
-                                              value: 4,
-                                              child: Row(
-                                                children: <Widget>[
-                                                  Padding(
-                                                    padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
-                                                    child: Icon(FontAwesomeIcons.wrench)
-                                                  ),
-                                                  Text('Preferencias')
-                                                ],
-                                              )
-                                            ),
-                                          ];
-                                        }
-                                      ),
-                                    ),
-
-                                  ],
-                                )
-                              ),
-                            ],
+                              ],
+                            )
                           )
                         ),
 

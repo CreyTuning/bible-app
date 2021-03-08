@@ -171,6 +171,7 @@ class BiblePageController extends GetxController {
   }
 
   void referenceButtonOnTap(){
+    cancelSelectionModeOnTap();
     Get.to(ReferencesPage());
   }
 
