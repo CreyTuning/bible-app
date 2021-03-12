@@ -37,7 +37,7 @@ class VerseExplorer extends StatelessWidget {
 
         body: ListView.separated(
           itemCount: verseExplorerController.content.length,
-          separatorBuilder: (context, index) => Divider(color: Theme.of(context).dividerColor, height: 0,),
+          separatorBuilder: (context, index) => Divider(color: Theme.of(context).dividerColor, height: 0),
           itemBuilder: (context, index) => verseExplorerController.content[index],
         )
       )

@@ -10,9 +10,11 @@ class CardVerseHightlight extends StatefulWidget {
   CardVerseHightlight({
     Key key,
     @required this.highlighterItem,
+    @required this.onTap
   }) : super(key: key);
 
   final HighlighterItem highlighterItem;
+  final Function onTap;
 
   @override
   _CardVerseHightlightState createState() => _CardVerseHightlightState();
@@ -26,39 +28,79 @@ class _CardVerseHightlightState extends State<CardVerseHightlight> {
       init: BiblePageController(),
       builder: (biblePageController) => Container(
         child: InkWell(
-          onTap: (){},
+          onTap: widget.onTap,
           
           child: ListTile(
-            leading: CircleAvatar(
-              backgroundColor: Color(widget.highlighterItem.color),
-            ),
-
-            trailing: RichText(
-              textAlign: TextAlign.right,
-              text: TextSpan(
-                style: Theme.of(context).textTheme.bodyText2.copyWith(
-                  fontSize: 15,
-                  // fontWeight: FontWeight.bold
-                ),
+            trailing: IntrinsicWidth(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  DateTime.now().day == widget.highlighterItem.dateTime.day ? TextSpan(text: 'Hoy, '): TextSpan(
-                    text: '${weekNumberToString[widget.highlighterItem.dateTime.weekday]}, '
+                  RichText(
+                    textAlign: TextAlign.left,
+                    text: TextSpan(
+                      style: Theme.of(context).textTheme.bodyText2.copyWith(
+                        fontSize: 15,
+                      ),
+                      children: [
+                        DateTime.now().day == widget.highlighterItem.dateTime.day ? TextSpan(text: 'Hoy, '): TextSpan(
+                          text: '${weekNumberToString[widget.highlighterItem.dateTime.weekday]}, '
+                        ),
+
+                        TextSpan(
+                          text: '${widget.highlighterItem.dateTime.day}'
+                        ),
+
+                        TextSpan(
+                          text: ' ${monthDayToString[widget.highlighterItem.dateTime.month]}'.substring(0, 4) + '.'
+                        ),
+
+                        DateTime.now().year == widget.highlighterItem.dateTime.year ? TextSpan(text: '') :
+                          TextSpan(
+                            text: ' ${widget.highlighterItem.dateTime.year}'
+                          )
+
+                      ]
+                    ),
                   ),
 
-                  TextSpan(
-                    text: '${widget.highlighterItem.dateTime.day}'
+                  SizedBox(
+                    height: 4,
                   ),
 
-                  TextSpan(
-                    text: ' ${monthDayToString[widget.highlighterItem.dateTime.month]}'.substring(0, 4) + '.'
-                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      RichText(
+                        textAlign: TextAlign.left,
+                        text: TextSpan(
+                          style: Theme.of(context).textTheme.bodyText2.copyWith(
+                            fontSize: 15,
+                          ),
+                          children: [
+                            TextSpan(
+                              text: 'Color: '
+                            ),
+                          ]
+                        ),
+                      ),
 
-                  DateTime.now().year == widget.highlighterItem.dateTime.year ? TextSpan(text: '') :
-                    TextSpan(
-                      text: ' ${widget.highlighterItem.dateTime.year}'
-                    )
-
-                ]
+                      Padding(
+                        padding: EdgeInsets.only(left: 2),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Color(widget.highlighterItem.color),
+                            borderRadius: BorderRadius.circular(3)
+                          ),
+                          width: 13,
+                          height: 13,
+                        ),
+                      ),
+                    ],
+                  )
+                ],
               ),
             ),
 
@@ -116,38 +158,24 @@ class _CardVerseHightlightState extends State<CardVerseHightlight> {
               )
             ),
 
-            title: Row(
-              children: <Widget>[
+            title: RichText(
+              overflow: TextOverflow.fade,
+              softWrap: false,
 
-                Flexible(
-                  fit: FlexFit.loose,
-                  child: RichText(
-                    overflow: TextOverflow.fade,
-                    softWrap: false,
-
-                    text: TextSpan(
-                      style: Theme.of(context).textTheme.bodyText1.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                      children: [
-                        TextSpan(
-                          text: '${intToBook[widget.highlighterItem.book]} ${widget.highlighterItem.chapter}',
-                        ),
-
-                        widget.highlighterItem.verses.length != 1 ? TextSpan(text: '') : TextSpan(
-                          text: ':${widget.highlighterItem.verses.first}',
-                        ),
-                      ]
-                    ),
+              text: TextSpan(
+                style: Theme.of(context).textTheme.bodyText1.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+                children: [
+                  TextSpan(
+                    text: '${intToBook[widget.highlighterItem.book]} ${widget.highlighterItem.chapter}',
                   ),
-                ),
 
-                SizedBox(
-                  width: 30,
-                ),
-
-                
-              ],
+                  widget.highlighterItem.verses.length != 1 ? TextSpan(text: '') : TextSpan(
+                    text: ':${widget.highlighterItem.verses.first}',
+                  ),
+                ]
+              ),
             ),
           )
         ),

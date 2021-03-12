@@ -36,6 +36,7 @@ dependencies:
   uuid: ^2.2.2
   lazy_load_scrollview: ^1.2.0
   animate_icons: ^1.0.2
+  flutter_sticky_header: ^0.5.0
 
 dev_dependencies:
   flutter_test:

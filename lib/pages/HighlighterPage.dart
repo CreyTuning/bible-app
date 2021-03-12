@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yhwh/controllers/HighlighterPageController.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
+import 'package:yhwh/pages/HighlighterViewerPage.dart';
 import 'package:yhwh/widgets/CardVerseHightlight.dart';
 
 class HighlighterPage extends StatelessWidget {
@@ -13,7 +14,13 @@ class HighlighterPage extends StatelessWidget {
         title: Text('Resaltados'),
         backgroundColor: Theme.of(context).canvasColor,
         elevation: 0,
-        // titleSpacing: 0,
+        
+        leading: IconButton(
+          tooltip: 'Volver',
+          icon: Icon(Icons.arrow_back, color: Theme.of(context).appBarTheme.iconTheme.color),
+          onPressed: Get.back,
+        ),
+
         bottom: PreferredSize(
           child: Container(
             color: Theme.of(context).dividerColor,
@@ -52,13 +59,16 @@ class HighlighterPage extends StatelessWidget {
             separatorBuilder: (context, index) => Divider(
               color: Theme.of(context).dividerColor,
               height: 0,
-              indent: 73,
-              endIndent: 14,
+              indent: 12,
+              endIndent: 12,
             ),
             
             itemBuilder: (context, index){
               return CardVerseHightlight(
                 highlighterItem: highlighterPageController.data[index],
+                onTap: (){
+                  Get.to(HighlighterViewerPage(), arguments: highlighterPageController.data[index]);
+                },
               );
             }
           ),
