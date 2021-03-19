@@ -7,6 +7,7 @@ import 'package:yhwh/models/highlighterOrderItem.dart';
 class HighlighterPageController extends GetxController{
   LazyBox highlighterBox;
   LazyBox highlighterOrderBox;
+  final int lazyListAddMoreItemCount = 18;
   List<HighlighterItem> data = [];
 
   @override
@@ -26,7 +27,7 @@ class HighlighterPageController extends GetxController{
     if(data.length < highlighterOrderBox.length){
       int initialLength = data.length;
 
-      for(int i = initialLength; i < limitNumber(initialLength + 50, highlighterOrderBox.length); i++){
+      for(int i = initialLength; i < limitNumber(initialLength + lazyListAddMoreItemCount, highlighterOrderBox.length); i++){
         HighlighterOrderItem highlighterOrderItem = await highlighterOrderBox.getAt(highlighterOrderBox.length - 1 - i);
         Map contentChapterList = await highlighterBox.get('${highlighterOrderItem.book}:${highlighterOrderItem.chapter}');
         

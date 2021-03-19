@@ -6,6 +6,7 @@ import 'package:yhwh/models/highlighterItem.dart';
 import 'package:yhwh/models/highlighterOrderItem.dart';
 import 'package:yhwh/pages/MainPage.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:path_provider/path_provider.dart';
 
 void main() async {
   // Init GetStorage

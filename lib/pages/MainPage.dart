@@ -41,7 +41,7 @@ class MainPage extends StatelessWidget {
             return BottomNavigationBar(
               currentIndex: _.mainPagetabIndex,
               elevation: Theme.of(context).bottomNavigationBarTheme.elevation,
-              type: Theme.of(context).bottomNavigationBarTheme.type,
+              type: BottomNavigationBarType.fixed,
               backgroundColor: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
               selectedItemColor: Theme.of(context).textTheme.bodyText1.color,
               unselectedItemColor: Theme.of(context).textTheme.bodyText2.color,

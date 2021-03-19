@@ -38,7 +38,7 @@ class HighlighterViewerPage extends StatelessWidget {
 
           leading: IconButton(
             tooltip: 'Volver',
-            icon: Icon(Icons.arrow_back, color: Theme.of(context).appBarTheme.iconTheme.color),
+            icon: Icon(Icons.arrow_back, color: Theme.of(context).textTheme.bodyText1.color),
             onPressed: Get.back,
           ),
 

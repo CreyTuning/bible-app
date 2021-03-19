@@ -27,7 +27,7 @@ class _SelectionAppbarState extends State<SelectionAppbar> {
           Expanded(
             child: Stack(
               fit: StackFit.passthrough,
-              overflow: Overflow.clip,
+              clipBehavior: Clip.antiAlias,
               children: [
                 widget.child,
 

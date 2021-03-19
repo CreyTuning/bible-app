@@ -20,6 +20,7 @@ class BiblePageController extends GetxController {
   GetStorage getStorage = GetStorage();
   LazyBox highlighterBox;
   LazyBox highlighterOrderBox;
+  bool isScreenReady = false;
 
   int bookNumber = 1;
   int chapterNumber = 2;
@@ -51,6 +52,7 @@ class BiblePageController extends GetxController {
     fontLetterSeparation = getStorage.read("fontLetterSeparation") ?? 0;
     
     await updateVerseList();
+    isScreenReady = true;
     update();
     super.onReady();
   }
@@ -97,7 +99,7 @@ class BiblePageController extends GetxController {
 
   Future<void> updateVerseList() async {
     List dataChapter = await jsonDecode(await rootBundle.loadString('lib/bibles/$bibleVersion/${bookNumber}_$chapterNumber.json'))['verses'];
-    List<int> highlightVerses = await HighlighterManager.getHighlightVersesInChapter(bookNumber, chapterNumber);
+    Map<int, HighlighterItem> highlightVerses = await HighlighterManager.getHighlightVersesInChapterWithData(bookNumber, chapterNumber);
     versesRawList = [];
 
     // Crear versiculos
@@ -109,8 +111,8 @@ class BiblePageController extends GetxController {
           fontSize: fontSize,
           fontHeight: fontHeight,
           fontLetterSeparation: fontLetterSeparation,
-          highlight: highlightVerses.contains(index + 1) ? true : false,
-          colorHighlight: Colors.red
+          highlight: highlightVerses.containsKey(index + 1) ? true : false,
+          colorHighlight: highlightVerses.containsKey(index + 1) ? Color(highlightVerses[index + 1].color) : Colors.transparent
         )
       );
     }
@@ -172,7 +174,7 @@ class BiblePageController extends GetxController {
 
   void referenceButtonOnTap(){
     cancelSelectionModeOnTap();
-    Get.to(ReferencesPage());
+    Get.to(()=> ReferencesPage());
   }
 
   void setReference(int bookNumber, int chapterNumber, int verseNumber) async {
@@ -206,12 +208,12 @@ class BiblePageController extends GetxController {
     autoScrollController.scrollToIndex(verseNumber - 1, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
   }
 
-  void addToHighlighter() async {
+  void addToHighlighter(Color color) async {
     var newHighlighterItem = HighlighterItem(
       book: bookNumber,
       chapter: chapterNumber,
       id: Uuid().v1(),
-      color: Colors.red.value,
+      color: color.value,
       verses: versesSelected,
       dateTime: DateTime.now()
     );
@@ -229,8 +231,22 @@ class BiblePageController extends GetxController {
     cancelSelectionModeOnTap();
   }
 
+  void removeFromHighlighter() {
+    
+    HighlighterManager.removeVersesInChapter(bookNumber, chapterNumber, versesSelected);
+
+    // update RawVerses
+    for(int verse in versesSelected){
+      versesRawList[verse - 1].highlight = false;
+      versesRawList[verse - 1].colorHighlight = Colors.transparent;
+    }
+
+    update();
+    cancelSelectionModeOnTap();
+  }
+
   void showVerseExplorer({int book, int chapter, int verse}){
-    Get.to(
+    Get.to(()=> 
       VerseExplorer(),
       arguments: [book, chapter, verse]
     );

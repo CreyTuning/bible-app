@@ -47,35 +47,35 @@ class Verse extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    return InkWell(
-      onTap: this.onTap,
-      onLongPress: this.onLongPress,
-      highlightColor: Colors.transparent,
-      splashColor: Colors.transparent,
-      child: IntrinsicHeight(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          
-          children: [
-            this.title == null ? SizedBox() : textToTitle(
-              context: context,
-              fontSize: this.fontSize,
-              height: this.fontHeight,
-              letterSeparation: this.fontLetterSeparation,
-              text: this.title
-            ),
+    return IntrinsicHeight(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        
+        children: [
+          this.title == null ? SizedBox() : textToTitle(
+            context: context,
+            fontSize: this.fontSize,
+            height: this.fontHeight,
+            letterSeparation: this.fontLetterSeparation,
+            text: this.title
+          ),
 
-            IntrinsicHeight(
-              child: Row(
-                children: [
-                  AnimatedContainer(
-                    color: Theme.of(context).textTheme.bodyText2.color,
-                    height: double.infinity,
-                    width: this.selected ? 5 : 0,
-                    duration: Duration(milliseconds: 150),
-                  ),
+          IntrinsicHeight(
+            child: Row(
+              children: [
+                AnimatedContainer(
+                  color: Theme.of(context).textTheme.bodyText2.color,
+                  height: double.infinity,
+                  width: this.selected ? 5 : 0,
+                  duration: Duration(milliseconds: 150),
+                ),
 
-                  Flexible(
+                Flexible(
+                  child: InkWell(
+                    onTap: this.onTap,
+                    onLongPress: this.onLongPress,
+                    highlightColor: Colors.transparent,
+                    splashColor: Colors.transparent,
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
                       child: RichText(
@@ -114,9 +114,9 @@ class Verse extends StatelessWidget {
                                   ? colorHighlight
                                   : Colors.transparent,
                                 color: (this.highlight)
-                                  ? Theme.of(context).brightness == Brightness.dark
+                                  ? Theme.of(context).brightness == Brightness.light
                                     ? Theme.of(context).textTheme.bodyText1.color
-                                    : Colors.white
+                                    : Theme.of(context).canvasColor
                                   : Theme.of(context).textTheme.bodyText1.color,
                                 // decorationColor: Colors.pink
                               )
@@ -126,11 +126,11 @@ class Verse extends StatelessWidget {
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

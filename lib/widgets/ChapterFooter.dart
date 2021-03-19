@@ -55,7 +55,7 @@ class _ChapterFooterState extends State<ChapterFooter> {
               )
           ),
 
-          FlatButton(
+          TextButton(
             child: Text('Más información',
               style: TextStyle(
                 fontSize: 14,

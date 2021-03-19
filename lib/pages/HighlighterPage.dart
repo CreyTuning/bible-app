@@ -17,7 +17,7 @@ class HighlighterPage extends StatelessWidget {
         
         leading: IconButton(
           tooltip: 'Volver',
-          icon: Icon(Icons.arrow_back, color: Theme.of(context).appBarTheme.iconTheme.color),
+          icon: Icon(Icons.arrow_back, color: Theme.of(context).textTheme.bodyText1.color),
           onPressed: Get.back,
         ),
 
@@ -53,24 +53,27 @@ class HighlighterPage extends StatelessWidget {
         builder: (highlighterPageController) => LazyLoadScrollView(
           onEndOfPage: highlighterPageController.lazyAddMoreData,
           isLoading: true,
-          child: ListView.separated(
-            itemCount: highlighterPageController.data.length,
-            
-            separatorBuilder: (context, index) => Divider(
-              color: Theme.of(context).dividerColor,
-              height: 0,
-              indent: 12,
-              endIndent: 12,
+          child: Scrollbar(
+            child: ListView.separated(
+              itemCount: highlighterPageController.data.length,
+              
+              separatorBuilder: (context, index) => Divider(
+                color: Theme.of(context).dividerColor,
+                height: 0,
+                thickness: 0,
+                indent: 12,
+                endIndent: 12,
+              ),
+              
+              itemBuilder: (context, index){
+                return CardVerseHightlight(
+                  highlighterItem: highlighterPageController.data[index],
+                  onTap: (){
+                    Get.to(()=> HighlighterViewerPage(), arguments: highlighterPageController.data[index]);
+                  },
+                );
+              }
             ),
-            
-            itemBuilder: (context, index){
-              return CardVerseHightlight(
-                highlighterItem: highlighterPageController.data[index],
-                onTap: (){
-                  Get.to(HighlighterViewerPage(), arguments: highlighterPageController.data[index]);
-                },
-              );
-            }
           ),
         ),
       ),

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 class AppTheme
 {
+
+  Color colorA = Color(0xff212121);
+
   static ThemeData light = ThemeData(
     primaryColor: Colors.white,
     fontFamily: 'Roboto',
@@ -111,6 +114,7 @@ class AppTheme
     cardColor: Color(0xff303134)
 
   );
+
 
   static ThemeData black = ThemeData(
     primaryColor: Colors.black,
@@ -337,6 +341,12 @@ class AppTheme
 
   );
 
+  static ThemeData createThemeData({
+    Color background
+    }){
+    return ThemeData.dark().copyWith(
+    );
+  }
 
   static ThemeData getTheme(String themeName){
     switch (themeName) {
