@@ -52,10 +52,10 @@ class HighlighterPage extends StatelessWidget {
         init: HighlighterPageController(),
         builder: (highlighterPageController) => LazyLoadScrollView(
           onEndOfPage: highlighterPageController.lazyAddMoreData,
-          isLoading: true,
           child: Scrollbar(
             child: ListView.separated(
               itemCount: highlighterPageController.data.length,
+              padding: EdgeInsets.only(bottom: 75),
               
               separatorBuilder: (context, index) => Divider(
                 color: Theme.of(context).dividerColor,

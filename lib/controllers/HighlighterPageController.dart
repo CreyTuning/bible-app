@@ -7,7 +7,7 @@ import 'package:yhwh/models/highlighterOrderItem.dart';
 class HighlighterPageController extends GetxController{
   LazyBox highlighterBox;
   LazyBox highlighterOrderBox;
-  final int lazyListAddMoreItemCount = 18;
+  final int lazyListAddMoreItemCount = 30;
   List<HighlighterItem> data = [];
 
   @override
@@ -39,7 +39,7 @@ class HighlighterPageController extends GetxController{
   }
 
   void removeToList(){
-    data.removeAt(0);
+    // data.removeAt(0);
     // highlighterBox.delete(highlighterBox.length - 1);
     update();
   }

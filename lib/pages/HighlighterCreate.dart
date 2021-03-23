@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yhwh/controllers/BiblePageController.dart';
-import 'package:yhwh/controllers/HihglighterCreateController.dart';
 
 class HihglighterCreate extends StatelessWidget {
   const HihglighterCreate({Key key}) : super(key: key);
@@ -20,9 +19,9 @@ class HihglighterCreate extends StatelessWidget {
       ),
 
       child: Scaffold(
-        backgroundColor: Theme.of(context).floatingActionButtonTheme.backgroundColor,
+        backgroundColor: Theme.of(context).canvasColor,
         appBar: AppBar(
-          backgroundColor: Theme.of(context).floatingActionButtonTheme.backgroundColor,
+          backgroundColor: Theme.of(context).canvasColor,
           elevation: 0,
           
           title: Text("Resaltar", style: Theme.of(context).textTheme.bodyText1.copyWith(
@@ -48,7 +47,7 @@ class HihglighterCreate extends StatelessWidget {
               children: [
 
                 Padding(
-                  padding: EdgeInsets.only(left: 6),
+                  padding: EdgeInsets.only(left: 5),
                   child: InkWell(
                     onTap: (){
                       biblePageController.removeFromHighlighter();
@@ -57,8 +56,8 @@ class HihglighterCreate extends StatelessWidget {
                     radius: 30,
                     borderRadius: BorderRadius.circular(5),
                     child: Container(
-                      height: 50,
-                      width: 50,
+                      height: 45,
+                      width: 45,
                       decoration: BoxDecoration(
                         color: Colors.transparent,
                         borderRadius: BorderRadius.circular(30),
@@ -74,7 +73,7 @@ class HihglighterCreate extends StatelessWidget {
                 ),
 
                 Padding(
-                  padding: EdgeInsets.only(left: 6),
+                  padding: EdgeInsets.only(left: 5),
                   child: InkWell(
                     onTap: (){
                       biblePageController.addToHighlighter(Color(0xff8ab4f8));
@@ -83,8 +82,8 @@ class HihglighterCreate extends StatelessWidget {
                     radius: 30,
                     borderRadius: BorderRadius.circular(5),
                     child: Container(
-                      height: 50,
-                      width: 50,
+                      height: 45,
+                      width: 45,
                       decoration: BoxDecoration(
                         color: Color(0xff8ab4f8),
                         borderRadius: BorderRadius.circular(30),
@@ -98,7 +97,7 @@ class HihglighterCreate extends StatelessWidget {
                 ),
 
                 Padding(
-                  padding: EdgeInsets.only(left: 6),
+                  padding: EdgeInsets.only(left: 5),
                   child: InkWell(
                     onTap: (){
                       biblePageController.addToHighlighter(Color(0xfff28b82));
@@ -107,8 +106,8 @@ class HihglighterCreate extends StatelessWidget {
                     radius: 30,
                     borderRadius: BorderRadius.circular(5),
                     child: Container(
-                      height: 50,
-                      width: 50,
+                      height: 45,
+                      width: 45,
                       decoration: BoxDecoration(
                         color: Color(0xfff28b82),
                         borderRadius: BorderRadius.circular(30),
@@ -122,7 +121,7 @@ class HihglighterCreate extends StatelessWidget {
                 ),
 
                 Padding(
-                  padding: EdgeInsets.only(left: 6),
+                  padding: EdgeInsets.only(left: 5),
                   child: InkWell(
                     onTap: (){
                       biblePageController.addToHighlighter(Color(0xfffdd663));
@@ -131,8 +130,8 @@ class HihglighterCreate extends StatelessWidget {
                     radius: 30,
                     borderRadius: BorderRadius.circular(5),
                     child: Container(
-                      height: 50,
-                      width: 50,
+                      height: 45,
+                      width: 45,
                       decoration: BoxDecoration(
                         color: Color(0xfffdd663),
                         borderRadius: BorderRadius.circular(30),
@@ -146,7 +145,7 @@ class HihglighterCreate extends StatelessWidget {
                 ),
 
                 Padding(
-                  padding: EdgeInsets.only(left: 6),
+                  padding: EdgeInsets.only(left: 5),
                   child: InkWell(
                     onTap: (){
                       biblePageController.addToHighlighter(Color(0xff81c995));
@@ -155,8 +154,8 @@ class HihglighterCreate extends StatelessWidget {
                     radius: 30,
                     borderRadius: BorderRadius.circular(5),
                     child: Container(
-                      height: 50,
-                      width: 50,
+                      height: 45,
+                      width: 45,
                       decoration: BoxDecoration(
                         color: Color(0xff81c995),
                         borderRadius: BorderRadius.circular(30),
@@ -170,7 +169,7 @@ class HihglighterCreate extends StatelessWidget {
                 ),
 
                 Padding(
-                  padding: EdgeInsets.only(left: 6),
+                  padding: EdgeInsets.only(left: 5),
                   child: InkWell(
                     onTap: (){
                       biblePageController.addToHighlighter(Color(0xffff8bcb));
@@ -179,8 +178,8 @@ class HihglighterCreate extends StatelessWidget {
                     radius: 30,
                     borderRadius: BorderRadius.circular(5),
                     child: Container(
-                      height: 50,
-                      width: 50,
+                      height: 45,
+                      width: 45,
                       decoration: BoxDecoration(
                         color: Color(0xffff8bcb),
                         borderRadius: BorderRadius.circular(30),
@@ -194,7 +193,7 @@ class HihglighterCreate extends StatelessWidget {
                 ),
 
                 Padding(
-                  padding: EdgeInsets.only(left: 6),
+                  padding: EdgeInsets.only(left: 5),
                   child: InkWell(
                     onTap: (){
                       biblePageController.addToHighlighter(Color(0xffd7aefb));
@@ -203,8 +202,8 @@ class HihglighterCreate extends StatelessWidget {
                     radius: 30,
                     borderRadius: BorderRadius.circular(5),
                     child: Container(
-                      height: 50,
-                      width: 50,
+                      height: 45,
+                      width: 45,
                       decoration: BoxDecoration(
                         color: Color(0xffd7aefb),
                         borderRadius: BorderRadius.circular(30),
@@ -218,7 +217,7 @@ class HihglighterCreate extends StatelessWidget {
                 ),
 
                 Padding(
-                  padding: EdgeInsets.only(left: 6),
+                  padding: EdgeInsets.only(left: 5),
                   child: InkWell(
                     onTap: (){
                       biblePageController.addToHighlighter(Color(0xff78d9ec));
@@ -227,8 +226,8 @@ class HihglighterCreate extends StatelessWidget {
                     radius: 30,
                     borderRadius: BorderRadius.circular(5),
                     child: Container(
-                      height: 50,
-                      width: 50,
+                      height: 45,
+                      width: 45,
                       decoration: BoxDecoration(
                         color: Color(0xff78d9ec),
                         borderRadius: BorderRadius.circular(30),

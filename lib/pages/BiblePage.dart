@@ -50,105 +50,78 @@ class BiblePage extends StatelessWidget {
               top: true,
               child: Scaffold(
                 floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-                floatingActionButton: Padding(
-                  padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      
-                      GetBuilder<BiblePageController>(
-                        init: BiblePageController(),
-                        builder: (biblePageController) =>  AnimatedOpacity(
+                floatingActionButton: GetBuilder<BiblePageController>(
+                    init: BiblePageController(),
+                    builder: (biblePageController) => Padding(
+                    padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        
+                        AnimatedOpacity(
                           opacity: (biblePageController.bookNumber == 1 && biblePageController.chapterNumber == 1) ? 0.0 : 1.0, // AQUIIIIIIIIIIIIIII
                           duration: Duration(milliseconds: 300),
                           child: Container(
-                            width: 41.0,
-                            height: 41.0,
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).cardColor,
-                              borderRadius: BorderRadius.circular(100),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.5),
-                                  blurRadius: 2,
-                                  offset: Offset.fromDirection(2, 2)
-                                ),
-                                
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.4),
-                                  blurRadius: 1,
-                                  spreadRadius: 0
-                                )
-                              ]
-                            ),
-
+                            width: 45.0,
+                            height: 45.0,
                             child: Tooltip(
                               message: 'Capitulo anterior',
                               child: MaterialButton(
-                                elevation: 0,
+                                elevation: 4,
                                 onPressed: biblePageController.previusChapter,
-                                color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
+                                color: Theme.of(context).canvasColor,
 
                                 child: Icon(
                                   Icons.keyboard_arrow_left,
-                                  color: Theme.of(context).textTheme.bodyText1.color,
+                                  color: Theme.of(context).iconTheme.color,
                                   size: 24,
                                 ),
                                 padding: EdgeInsets.all(0),
-                                shape: CircleBorder(),
+                                shape: CircleBorder(
+                                  side: BorderSide(
+                                    color: Theme.of(context).dividerColor,
+                                    width: 1.5
+                                  )
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
 
-                      Expanded(child: SizedBox.fromSize()),
+                        Expanded(child: SizedBox.fromSize()),
 
-                      GetBuilder<BiblePageController>(
-                        init: BiblePageController(),
-                        builder: (controller) => AnimatedOpacity(
-                          opacity: (controller.bookNumber == 66 && controller.chapterNumber == 22) ? 0.0 : 1.0, // AQUIIIIIIIIIIIIIIIIII
+                        AnimatedOpacity(
+                          opacity: (biblePageController.bookNumber == 66 && biblePageController.chapterNumber == 22) ? 0.0 : 1.0, // AQUIIIIIIIIIIIIIIIIII
                           duration: Duration(milliseconds: 300),
                           child: Container(
-                            width: 41.0,
-                            height: 41.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.5),
-                                  blurRadius: 2,
-                                  offset: Offset.fromDirection(1, 2)
-                                ),
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.4),
-                                  blurRadius: 1,
-                                  spreadRadius: 0
-                                )
-                              ]
-                            ),
-
+                            width: 45.0,
+                            height: 45.0,
                             child: Tooltip(
                               message: 'Capitulo siguiente',
                               child: MaterialButton(
-                                elevation: 0,
-                                onPressed: controller.nextChapter,
-                                color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
+                                elevation: 4,
+                                onPressed: biblePageController.nextChapter,
+                                color: Theme.of(context).canvasColor,
 
                                 child: Icon(
                                   Icons.keyboard_arrow_right,
-                                  color: Theme.of(context).textTheme.bodyText1.color,
+                                  color: Theme.of(context).iconTheme.color,
                                   size: 24,
                                 ),
                                 padding: EdgeInsets.all(0),
-                                shape: CircleBorder(),
+                                shape: CircleBorder(
+                                  side: BorderSide(
+                                    color: Theme.of(context).dividerColor,
+                                    width: 1.5
+                                  )
+                                ),
                               ),
                             ),
-                          )
+                          ),
                         ),
-                      ),
 
-                    ],
+                      ],
+                    ),
                   ),
                 ),
 
@@ -207,7 +180,7 @@ class BiblePage extends StatelessWidget {
 
                             Get.bottomSheet(
                               Container(
-                                height: 120,
+                                height: 115,
                                 child: BottomSheet(
                                   onClosing: (){},
                                   builder: (context) => HihglighterCreate(),
@@ -248,7 +221,7 @@ class BiblePage extends StatelessWidget {
                         slivers: [
                           // AppBar
                           SliverAppBar(
-                            backgroundColor: Theme.of(context).canvasColor,
+                            backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
                             floating: true,
                             snap: true,
                             primary: true,
@@ -319,7 +292,7 @@ class BiblePage extends StatelessWidget {
                                               decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.circular(6),
                                                 border: Border.all(
-                                                  color: Theme.of(context).textTheme.bodyText1.color,
+                                                  color: Theme.of(context).iconTheme.color,
                                                   width: 2
                                                 )
                                               ),
@@ -330,6 +303,7 @@ class BiblePage extends StatelessWidget {
                                           style: Theme.of(context).textTheme.bodyText1.copyWith(
                                             fontSize: 10.5,
                                             height: 1.5,
+                                            color: Theme.of(context).iconTheme.color,
                                             fontWeight: FontWeight.bold
                                           ))
                                         ],
@@ -344,7 +318,7 @@ class BiblePage extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(6)
                                       ),
                                       tooltip: 'Opciones',
-                                      icon: Icon(Icons.more_vert),
+                                      icon: Icon(Icons.more_vert, color: Theme.of(context).iconTheme.color),
 
                                       onSelected: (value) {
                                         switch (value) {
@@ -352,34 +326,8 @@ class BiblePage extends StatelessWidget {
                                             Get.to(()=> HighlighterPage());
                                             break;
                                           case 2:
-                                            Get.showSnackbar(
-                                              GetBar(
-                                                backgroundColor: Theme.of(context).textTheme.bodyText1.color,
-                                                titleText: Text('Notas', style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                                  color: Theme.of(context).canvasColor
-                                                )),
-                                                messageText: Text('Esta función está en desarrollo.', style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                                  color: Theme.of(context).canvasColor
-                                                )),
-                                                icon: Icon(Icons.error, color: Theme.of(context).canvasColor),
-                                                duration: Duration(seconds: 2),
-                                              )
-                                            );
                                             break;
                                           case 3:
-                                          Get.showSnackbar(
-                                              GetBar(
-                                                backgroundColor: Theme.of(context).textTheme.bodyText1.color,
-                                                titleText: Text('Diario', style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                                  color: Theme.of(context).canvasColor
-                                                )),
-                                                messageText: Text('Esta función está en desarrollo.', style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                                  color: Theme.of(context).canvasColor
-                                                )),
-                                                icon: Icon(Icons.error, color: Theme.of(context).canvasColor),
-                                                duration: Duration(seconds: 2),
-                                              )
-                                            );
                                             break;
                                           case 4:
                                             Get.to(()=> ReadPreferences());
@@ -445,7 +393,7 @@ class BiblePage extends StatelessWidget {
                                               children: <Widget>[
                                                 Padding(
                                                   padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
-                                                  child: Icon(FontAwesomeIcons.highlighter),
+                                                  child: Icon(FontAwesomeIcons.highlighter, color: Theme.of(context).iconTheme.color),
                                                 ),
                                                 Text('Resaltados')
                                               ],
@@ -458,7 +406,7 @@ class BiblePage extends StatelessWidget {
                                               children: <Widget>[
                                                 Padding(
                                                   padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
-                                                  child: Icon(FontAwesomeIcons.solidStickyNote),
+                                                  child: Icon(FontAwesomeIcons.solidStickyNote, color: Theme.of(context).iconTheme.color),
                                                 ),
                                                 Text('Notas')
                                               ],
@@ -471,7 +419,7 @@ class BiblePage extends StatelessWidget {
                                               children: <Widget>[
                                                 Padding(
                                                   padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
-                                                  child: Icon(FontAwesomeIcons.bookReader),
+                                                  child: Icon(FontAwesomeIcons.bookReader, color: Theme.of(context).iconTheme.color),
                                                 ),
                                                 Text('Diario')
                                               ],
@@ -486,7 +434,7 @@ class BiblePage extends StatelessWidget {
                                               children: <Widget>[
                                                 Padding(
                                                   padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
-                                                  child: Icon(FontAwesomeIcons.wrench)
+                                                  child: Icon(FontAwesomeIcons.wrench, color: Theme.of(context).iconTheme.color)
                                                 ),
                                                 Text('Preferencias')
                                               ],
