@@ -20,10 +20,8 @@ class HighlighterViewerController extends GetxController {
   }
 
   Future<void> initVerses() async {
-    List<String> chapterVerses = await BibleManager().getChapterVerses('RVR60', highlighterItem.book, highlighterItem.chapter);
-
     for(int number in highlighterItem.verses){
-      verses.add([number, chapterVerses[number - 1]]);
+      verses.add([number, await BibleManager().getVerse(book: highlighterItem.book, chapter: highlighterItem.chapter, verse: number)]);
     }
   }
 }

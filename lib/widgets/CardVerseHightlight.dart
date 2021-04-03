@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:yhwh/classes/BibleManager.dart';
 import 'package:yhwh/controllers/BiblePageController.dart';
 import 'package:yhwh/data/Define.dart';
 import 'package:yhwh/models/highlighterItem.dart';
-import 'dart:convert';
 
 class CardVerseHightlight extends StatefulWidget {
   CardVerseHightlight({
@@ -106,8 +105,8 @@ class _CardVerseHightlightState extends State<CardVerseHightlight> {
 
             subtitle: widget.highlighterItem.verses.length == 1
             ? FutureBuilder(
-              future: getVerse(
-                version: biblePageController.bibleVersion,
+              future: BibleManager().getVerse(
+                // version: biblePageController.bibleVersion,
                 book: widget.highlighterItem.book,
                 chapter: widget.highlighterItem.chapter,
                 verse: widget.highlighterItem.verses.first
@@ -115,6 +114,7 @@ class _CardVerseHightlightState extends State<CardVerseHightlight> {
               initialData: '...',
               builder: (context, rootBundleSnapshot){
                 if(rootBundleSnapshot.hasData){
+
                   return RichText(
                     overflow: TextOverflow.fade,
                     softWrap: false,
@@ -227,11 +227,5 @@ class _CardVerseHightlightState extends State<CardVerseHightlight> {
     }
 
     return formatedOutput;
-  }
-
-
-  Future<String> getVerse({String version, int book, int chapter, int verse}) async {
-    List dataChapter = await jsonDecode(await rootBundle.loadString('lib/bibles/$version/${book}_$chapter.json'))['verses'];
-    return dataChapter[verse - 1]["text"];
   }
 }

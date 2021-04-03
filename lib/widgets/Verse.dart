@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
+import 'package:simple_html_css/simple_html_css.dart';
 
 class Verse extends StatelessWidget {
   
@@ -78,13 +79,16 @@ class Verse extends StatelessWidget {
                     splashColor: Colors.transparent,
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
+                      
                       child: RichText(
                         softWrap: true,
                         overflow: TextOverflow.visible,
                         textAlign: TextAlign.start,
 
-                        text: TextSpan(
-                          style: TextStyle(
+                        text: HTML.toTextSpan(
+                          context,
+                          '<vn>$verseNumber&nbsp;</vn><ctn>${this.text.toString()}</ctn>'.replaceAll('<p style="text-align:center;">', '').replaceAll('</p>', '').replaceAll('<p style="text-align:right;">', '').replaceAll('<br />', '').replaceAll('*', '').replaceAll('Jehová', 'Yahweh'),
+                          defaultTextStyle: TextStyle(
                             fontSize: this.fontSize,
                             color: this.colorText,
                             fontFamily: this.fontFamily,
@@ -92,37 +96,91 @@ class Verse extends StatelessWidget {
                             letterSpacing: this.fontLetterSeparation,
                           ),
 
-                          children: [
-                            TextSpan( // Numero de versiculo
-                              text: this.verseNumber.toString(),
-                              style: TextStyle(
-                                fontWeight: (this.selected) ? FontWeight.bold : FontWeight.normal,
-                                color: this.colorNumber,
-                                fontSize: this.fontSize - 7.0,
-                              )
+                          overrideStyle: {
+
+                            'red' : TextStyle(
+                              color: (this.highlight)
+                                ? Theme.of(context).brightness == Brightness.light
+                                  ? Theme.of(context).textTheme.bodyText1.color
+                                  : Theme.of(context).canvasColor
+                                : Theme.of(context).brightness == Brightness.light ? Color(0xffe75649) : Color(0xffe06c75)
                             ),
 
-                            TextSpan(
-                              text: ' '
+                            'vn' : TextStyle(
+                              fontWeight: (this.selected) ? FontWeight.bold : FontWeight.normal,
+                              color: this.colorNumber,
+                              fontSize: this.fontSize - 7.0,
                             ),
 
-                            TextSpan(
-                              text: this.text.toString(),
-                              style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                backgroundColor: (this.highlight)
-                                  ? colorHighlight
-                                  : Colors.transparent,
-                                color: (this.highlight)
-                                  ? Theme.of(context).brightness == Brightness.light
-                                    ? Theme.of(context).textTheme.bodyText1.color
-                                    : Theme.of(context).canvasColor
-                                  : Theme.of(context).textTheme.bodyText1.color,
-                                // decorationColor: Colors.pink
-                              )
+                            'ctn' : TextStyle(
+                              fontWeight: FontWeight.normal,
+                              backgroundColor: (this.highlight)
+                                ? colorHighlight
+                                : Colors.transparent,
+                              color: (this.highlight)
+                                ? Theme.of(context).brightness == Brightness.light
+                                  ? Theme.of(context).textTheme.bodyText1.color
+                                  : Theme.of(context).canvasColor
+                                : Theme.of(context).textTheme.bodyText1.color,
                             ),
-                          ]
-                        ),
+
+                            'i' : TextStyle(
+                              fontWeight: FontWeight.normal,
+                              fontStyle: FontStyle.italic,
+                              // fontFamily: 'Times',
+                              fontSize: this.fontSize,
+                              backgroundColor: (this.highlight)
+                                ? colorHighlight
+                                : Colors.transparent,
+                              color: (this.highlight)
+                                ? Theme.of(context).brightness == Brightness.light
+                                  ? Theme.of(context).textTheme.bodyText1.color
+                                  : Theme.of(context).canvasColor
+                                : Theme.of(context).brightness == Brightness.light ? Color(0xffae7123) : Color(0xffe5c064)
+                            )
+                          }
+                        )
+
+                        // text: TextSpan(
+                        //   style: TextStyle(
+                        //     fontSize: this.fontSize,
+                        //     color: this.colorText,
+                        //     fontFamily: this.fontFamily,
+                        //     height: this.fontHeight,
+                        //     letterSpacing: this.fontLetterSeparation,
+                        //   ),
+
+                        //   children: [
+                        //     TextSpan( // Numero de versiculo
+                        //       text: this.verseNumber.toString(),
+                        //       style: TextStyle(
+                        //         fontWeight: (this.selected) ? FontWeight.bold : FontWeight.normal,
+                        //         color: this.colorNumber,
+                        //         fontSize: this.fontSize - 7.0,
+                        //       )
+                        //     ),
+
+                        //     TextSpan(
+                        //       text: ' '
+                        //     ),
+
+                        //     TextSpan(
+                        //       text: this.text.toString().replaceAll('<br />', '').replaceAll('</i>', '').replaceAll('<i>', '').replaceAll('<red>', '').replaceAll('</red>', '').replaceAll('*', ''),
+                        //       style: TextStyle(
+                        //         fontWeight: FontWeight.normal,
+                        //         backgroundColor: (this.highlight)
+                        //           ? colorHighlight
+                        //           : Colors.transparent,
+                        //         color: (this.highlight)
+                        //           ? Theme.of(context).brightness == Brightness.light
+                        //             ? Theme.of(context).textTheme.bodyText1.color
+                        //             : Theme.of(context).canvasColor
+                        //           : Theme.of(context).textTheme.bodyText1.color,
+                        //         // decorationColor: Colors.pink
+                        //       )
+                        //     ),
+                        //   ]
+                        // ),
                       ),
                     ),
                   ),

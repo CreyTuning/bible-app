@@ -1,11 +1,10 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hive/hive.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:uuid/uuid.dart';
+import 'package:yhwh/classes/BibleManager.dart';
 import 'package:yhwh/classes/VerseRaw.dart';
 import 'package:yhwh/classes/hiveManagers/HighlighterManager.dart';
 import 'package:yhwh/data/Define.dart';
@@ -26,6 +25,7 @@ class BiblePageController extends GetxController {
   int chapterNumber = 2;
   int verseNumber = 1;
   bool selectionMode = false;
+  double scrollOffset = 0;
 
   String bibleVersion = "RVR60";
   List<VerseRaw> versesRawList = [];
@@ -37,12 +37,14 @@ class BiblePageController extends GetxController {
 
   @override
   void onInit() {
-    autoScrollController = AutoScrollController();
     super.onInit();
   }
 
   @override
   void onReady() async {
+    scrollOffset = await getStorage.read('scrollOffset') ?? 0;
+    autoScrollController = AutoScrollController(initialScrollOffset: scrollOffset);
+
     bookNumber = getStorage.read("bookNumber") ?? 1;
     chapterNumber = getStorage.read("chapterNumber") ?? 1;
     verseNumber = getStorage.read("verseNumber") ?? 1;
@@ -50,11 +52,21 @@ class BiblePageController extends GetxController {
     fontSize = getStorage.read("fontSize") ?? 20.0;
     fontHeight = getStorage.read("fontHeight") ?? 1.8;
     fontLetterSeparation = getStorage.read("fontLetterSeparation") ?? 0;
-    
+
     await updateVerseList();
     isScreenReady = true;
     update();
     super.onReady();
+  }
+
+  bool scrollNotification(notification) {
+    if(notification is ScrollEndNotification){
+      // Save scroll offset
+      scrollOffset = autoScrollController.offset;
+      getStorage.write('scrollOffset', scrollOffset);
+    }
+
+    return true;
   }
 
   void onVerseTap(int index){
@@ -97,8 +109,32 @@ class BiblePageController extends GetxController {
     update();
   }
 
+  // Future<void> updateVerseList() async {
+  //   List dataChapter = await jsonDecode(await rootBundle.loadString('lib/bibles/$bibleVersion/${bookNumber}_$chapterNumber.json'))['verses'];
+  //   Map<int, HighlighterItem> highlightVerses = await HighlighterManager.getHighlightVersesInChapterWithData(bookNumber, chapterNumber);
+  //   versesRawList = [];
+
+  //   // Crear versiculos
+  //   for (int index = 0; index < valuesOfBooks[bookNumber -1][chapterNumber - 1]; index++) {
+  //     versesRawList.add(
+  //       VerseRaw(
+  //         text: dataChapter[index]["text"],
+  //         title: titles[bookNumber][chapterNumber].containsKey(index + 1) == true ? titles[bookNumber][chapterNumber][index + 1] : null,
+  //         fontSize: fontSize,
+  //         fontHeight: fontHeight,
+  //         fontLetterSeparation: fontLetterSeparation,
+  //         highlight: highlightVerses.containsKey(index + 1) ? true : false,
+  //         colorHighlight: highlightVerses.containsKey(index + 1) ? Color(highlightVerses[index + 1].color) : Colors.transparent
+  //       )
+  //     );
+  //   }
+
+  //   return;
+  // }
+
+
   Future<void> updateVerseList() async {
-    List dataChapter = await jsonDecode(await rootBundle.loadString('lib/bibles/$bibleVersion/${bookNumber}_$chapterNumber.json'))['verses'];
+    List<String> verses = await BibleManager().getChapter(book: bookNumber, chapter: chapterNumber);
     Map<int, HighlighterItem> highlightVerses = await HighlighterManager.getHighlightVersesInChapterWithData(bookNumber, chapterNumber);
     versesRawList = [];
 
@@ -106,7 +142,7 @@ class BiblePageController extends GetxController {
     for (int index = 0; index < valuesOfBooks[bookNumber -1][chapterNumber - 1]; index++) {
       versesRawList.add(
         VerseRaw(
-          text: dataChapter[index]["text"],
+          text: verses[index],
           title: titles[bookNumber][chapterNumber].containsKey(index + 1) == true ? titles[bookNumber][chapterNumber][index + 1] : null,
           fontSize: fontSize,
           fontHeight: fontHeight,
@@ -119,6 +155,7 @@ class BiblePageController extends GetxController {
 
     return;
   }
+
 
   void nextChapter() async {
     autoScrollController.animateTo(0, duration: Duration(milliseconds: 500), curve: Curves.easeOut);

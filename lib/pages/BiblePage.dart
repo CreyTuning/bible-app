@@ -50,18 +50,28 @@ class BiblePage extends StatelessWidget {
               top: true,
               child: Scaffold(
                 floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+                
                 floatingActionButton: GetBuilder<BiblePageController>(
+                    id: 'floatingActionButton',
                     init: BiblePageController(),
                     builder: (biblePageController) => Padding(
                     padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      
                       children: <Widget>[
-                        
-                        AnimatedOpacity(
-                          opacity: (biblePageController.bookNumber == 1 && biblePageController.chapterNumber == 1) ? 0.0 : 1.0, // AQUIIIIIIIIIIIIIII
+                        //Genera efecto de movimiento en el Floating Button                        
+                        AnimatedPadding(
+                          padding: EdgeInsets.symmetric(horizontal: (biblePageController.bookNumber == 1 && biblePageController.chapterNumber == 1) ? 2 : 0),
                           duration: Duration(milliseconds: 300),
-                          child: Container(
+                          curve: Curves.easeInOut,
+                        ),
+
+                        AnimatedSwitcher(
+                          duration: Duration(milliseconds: 300),
+                          switchInCurve: Curves.easeInOut,
+                          switchOutCurve: Curves.easeInOut,
+                          child: (biblePageController.bookNumber == 1 && biblePageController.chapterNumber == 1) ? SizedBox() : Container(
                             width: 45.0,
                             height: 45.0,
                             child: Tooltip(
@@ -85,15 +95,16 @@ class BiblePage extends StatelessWidget {
                                 ),
                               ),
                             ),
-                          ),
+                          )
                         ),
 
                         Expanded(child: SizedBox.fromSize()),
 
-                        AnimatedOpacity(
-                          opacity: (biblePageController.bookNumber == 66 && biblePageController.chapterNumber == 22) ? 0.0 : 1.0, // AQUIIIIIIIIIIIIIIIIII
+                        AnimatedSwitcher(
                           duration: Duration(milliseconds: 300),
-                          child: Container(
+                          switchInCurve: Curves.easeInOut,
+                          switchOutCurve: Curves.easeInOut,
+                          child: (biblePageController.bookNumber == 66 && biblePageController.chapterNumber == 22) ? SizedBox() : Container(
                             width: 45.0,
                             height: 45.0,
                             child: Tooltip(
@@ -120,6 +131,12 @@ class BiblePage extends StatelessWidget {
                           ),
                         ),
 
+                        //Genera efecto de movimiento en el Floating Button
+                        AnimatedPadding(
+                          padding: EdgeInsets.symmetric(horizontal: (biblePageController.bookNumber == 66 && biblePageController.chapterNumber == 22) ? 2 : 0),
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        ),
                       ],
                     ),
                   ),
@@ -215,284 +232,288 @@ class BiblePage extends StatelessWidget {
                       )
                     ),
 
-                    child: Scrollbar(
-                      child: CustomScrollView(
-                        controller: biblePageController.autoScrollController,
-                        slivers: [
-                          // AppBar
-                          SliverAppBar(
-                            backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-                            floating: true,
-                            snap: true,
-                            primary: true,
-                            elevation: 0,
-                            titleSpacing: 0,
-                            bottom: PreferredSize(
-                              child: Container(
-                                color: Theme.of(context).dividerColor,
-                                height: 1.5
+                    child: NotificationListener<ScrollNotification>(
+                      onNotification: biblePageController.scrollNotification,
+                      child: RawScrollbar(
+                        thumbColor: Theme.of(context).textTheme.bodyText1.color.withOpacity(0.4),
+                        child: CustomScrollView(
+                          controller: biblePageController.autoScrollController,
+                          slivers: [
+                            // AppBar
+                            SliverAppBar(
+                              backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+                              floating: true,
+                              snap: true,
+                              primary: true,
+                              elevation: 0,
+                              titleSpacing: 0,
+                              bottom: PreferredSize(
+                                child: Container(
+                                  color: Theme.of(context).dividerColor,
+                                  height: 1.5
+                                ),
+                                
+                                preferredSize: Size.fromHeight(0)
                               ),
-                              
-                              preferredSize: Size.fromHeight(0)
-                            ),
 
-                            title: Container(
-                              height: 65,
-                              child: Row(
-                                children: [
+                              title: Container(
+                                height: 65,
+                                child: Row(
+                                  children: [
 
-                                  Expanded(
-                                    child: Tooltip(
-                                      message: 'Referencias',
-                                      child: InkWell(
-                                        borderRadius: BorderRadius.only(topRight: Radius.circular(30), bottomRight: Radius.circular(30)),
-                                        child: Container(
-                                          height: 55,
-                                          alignment: Alignment.centerLeft,
-                                          child: Padding(
-                                            padding: EdgeInsets.fromLTRB(12, 0, 0, 0),
-                                            child: RichText(
-                                              textAlign: TextAlign.left,
-                                              overflow: TextOverflow.ellipsis,
-                                              maxLines: 1,
-                                              text: TextSpan(
-                                                text: '${intToBook[biblePageController.bookNumber]} ${biblePageController.chapterNumber}',
-                                                style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                                  fontFamily: 'Roboto-Medium',
-                                                  fontSize: 16.6,
-                                                ),
-                                              )
-                                            ),
-                                          ),
-                                        ),
-
-                                        onTap: biblePageController.referenceButtonOnTap,
-                                        
-                                      ),
-                                    ),
-                                  ),
-
-                                  IconButton(
-                                    tooltip: 'Marcadores',
-                                    onPressed: (){
-                                      /*
-                                        Recuerda agregar biblePageController.cancelSelectionModeOnTap(),
-                                        para evitar un posible bug al momento de entrar en modo
-                                        seleccion y presionar alguna otra funccion en pantalla.
-                                      */
-                                    },
-                                    icon: Stack(
-                                        alignment: Alignment.center,
-                                        children: [
-                                          
-                                          Center(
-                                            child: Container(
-                                              height: 22,
-                                              width: 22,
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(6),
-                                                border: Border.all(
-                                                  color: Theme.of(context).iconTheme.color,
-                                                  width: 2
+                                    Expanded(
+                                      child: Tooltip(
+                                        message: 'Referencias',
+                                        child: InkWell(
+                                          borderRadius: BorderRadius.only(topRight: Radius.circular(30), bottomRight: Radius.circular(30)),
+                                          child: Container(
+                                            height: 55,
+                                            alignment: Alignment.centerLeft,
+                                            child: Padding(
+                                              padding: EdgeInsets.fromLTRB(12, 0, 0, 0),
+                                              child: RichText(
+                                                textAlign: TextAlign.left,
+                                                overflow: TextOverflow.ellipsis,
+                                                maxLines: 1,
+                                                text: TextSpan(
+                                                  text: '${intToBook[biblePageController.bookNumber]} ${biblePageController.chapterNumber}',
+                                                  style: Theme.of(context).textTheme.bodyText1.copyWith(
+                                                    fontFamily: 'Roboto-Medium',
+                                                    fontSize: 16.6,
+                                                  ),
                                                 )
                                               ),
                                             ),
                                           ),
 
-                                          Text('1', textAlign: TextAlign.center,
-                                          style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                            fontSize: 10.5,
-                                            height: 1.5,
-                                            color: Theme.of(context).iconTheme.color,
-                                            fontWeight: FontWeight.bold
-                                          ))
-                                        ],
+                                          onTap: biblePageController.referenceButtonOnTap,
+                                          
+                                        ),
                                       ),
-                                  ),
+                                    ),
 
-                                  Container(
-                                    height: 55,
-                                    width: 55,
-                                    child: PopupMenuButton(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(6)
-                                      ),
-                                      tooltip: 'Opciones',
-                                      icon: Icon(Icons.more_vert, color: Theme.of(context).iconTheme.color),
-
-                                      onSelected: (value) {
-                                        switch (value) {
-                                          case 1:
-                                            Get.to(()=> HighlighterPage());
-                                            break;
-                                          case 2:
-                                            break;
-                                          case 3:
-                                            break;
-                                          case 4:
-                                            Get.to(()=> ReadPreferences());
-                                            break;
-                                        }
+                                    IconButton(
+                                      tooltip: 'Marcadores',
+                                      onPressed: (){
+                                        /*
+                                          Recuerda agregar biblePageController.cancelSelectionModeOnTap(),
+                                          para evitar un posible bug al momento de entrar en modo
+                                          seleccion y presionar alguna otra funccion en pantalla.
+                                        */
                                       },
-
-                                      itemBuilder: (context) {
-                                        biblePageController.cancelSelectionModeOnTap();
-
-                                        return <PopupMenuEntry<dynamic>>[
-
-                                          PopupMenuItem(
-                                            enabled: false,
-                                            child: Container(
-                                              child: Row(
-                                                crossAxisAlignment: CrossAxisAlignment.center,
-                                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                children: [
-                                                  Padding(
-                                                    padding: const EdgeInsets.symmetric(horizontal: 0),
-                                                    child: CircleAvatar(
-                                                      backgroundColor: Theme.of(context).accentColor,
-                                                      child: Icon(
-                                                        Icons.person,
-                                                        color: Theme.of(context).canvasColor,
-                                                      ),
-                                                    ),
-                                                  ),
-
-                                                  Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      Text(
-                                                        'Luis Romero',
-                                                        style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                                          fontFamily: 'Roboto-Medium',
-                                                          fontSize: 16.6,
-                                                        ),
-                                                      ),
-
-                                                      Text(
-                                                        'Desconectado',
-                                                        style: Theme.of(context).textTheme.bodyText2.copyWith(
-                                                          fontFamily: 'Roboto-Medium',
-                                                          fontSize: 15,
-                                                        ),
-                                                      ),
-
-
-                                                    ],  
+                                      icon: Stack(
+                                          alignment: Alignment.center,
+                                          children: [
+                                            
+                                            Center(
+                                              child: Container(
+                                                height: 22,
+                                                width: 22,
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(6),
+                                                  border: Border.all(
+                                                    color: Theme.of(context).iconTheme.color,
+                                                    width: 2
                                                   )
-                                                ],
+                                                ),
                                               ),
                                             ),
-                                          ),
 
-                                          PopupMenuDivider(),
-
-                                          PopupMenuItem(
-                                            value: 1,
-                                            child: Row(
-                                              children: <Widget>[
-                                                Padding(
-                                                  padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
-                                                  child: Icon(FontAwesomeIcons.highlighter, color: Theme.of(context).iconTheme.color),
-                                                ),
-                                                Text('Resaltados')
-                                              ],
-                                            )
-                                          ),
-
-                                          PopupMenuItem(
-                                            value: 2,
-                                            child: Row(
-                                              children: <Widget>[
-                                                Padding(
-                                                  padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
-                                                  child: Icon(FontAwesomeIcons.solidStickyNote, color: Theme.of(context).iconTheme.color),
-                                                ),
-                                                Text('Notas')
-                                              ],
-                                            )
-                                          ),
-
-                                          PopupMenuItem(
-                                            value: 3,
-                                            child: Row(
-                                              children: <Widget>[
-                                                Padding(
-                                                  padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
-                                                  child: Icon(FontAwesomeIcons.bookReader, color: Theme.of(context).iconTheme.color),
-                                                ),
-                                                Text('Diario')
-                                              ],
-                                            )
-                                          ),
-
-                                          PopupMenuDivider(),
-
-                                          PopupMenuItem(
-                                            value: 4,
-                                            child: Row(
-                                              children: <Widget>[
-                                                Padding(
-                                                  padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
-                                                  child: Icon(FontAwesomeIcons.wrench, color: Theme.of(context).iconTheme.color)
-                                                ),
-                                                Text('Preferencias')
-                                              ],
-                                            )
-                                          ),
-                                        ];
-                                      }
+                                            Text('1', textAlign: TextAlign.center,
+                                            style: Theme.of(context).textTheme.bodyText1.copyWith(
+                                              fontSize: 10.5,
+                                              height: 1.5,
+                                              color: Theme.of(context).iconTheme.color,
+                                              fontWeight: FontWeight.bold
+                                            ))
+                                          ],
+                                        ),
                                     ),
-                                  ),
 
-                                ],
+                                    Container(
+                                      height: 55,
+                                      width: 55,
+                                      child: PopupMenuButton(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(6)
+                                        ),
+                                        tooltip: 'Opciones',
+                                        icon: Icon(Icons.more_vert, color: Theme.of(context).iconTheme.color),
+
+                                        onSelected: (value) {
+                                          switch (value) {
+                                            case 1:
+                                              Get.to(()=> HighlighterPage());
+                                              break;
+                                            case 2:
+                                              break;
+                                            case 3:
+                                              break;
+                                            case 4:
+                                              Get.to(()=> ReadPreferences());
+                                              break;
+                                          }
+                                        },
+
+                                        itemBuilder: (context) {
+                                          biblePageController.cancelSelectionModeOnTap();
+
+                                          return <PopupMenuEntry<dynamic>>[
+
+                                            PopupMenuItem(
+                                              enabled: false,
+                                              child: Container(
+                                                child: Row(
+                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                  children: [
+                                                    Padding(
+                                                      padding: const EdgeInsets.symmetric(horizontal: 0),
+                                                      child: CircleAvatar(
+                                                        backgroundColor: Theme.of(context).accentColor,
+                                                        child: Icon(
+                                                          Icons.person,
+                                                          color: Theme.of(context).canvasColor,
+                                                        ),
+                                                      ),
+                                                    ),
+
+                                                    Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          'Luis Romero',
+                                                          style: Theme.of(context).textTheme.bodyText1.copyWith(
+                                                            fontFamily: 'Roboto-Medium',
+                                                            fontSize: 16.6,
+                                                          ),
+                                                        ),
+
+                                                        Text(
+                                                          'Desconectado',
+                                                          style: Theme.of(context).textTheme.bodyText2.copyWith(
+                                                            fontFamily: 'Roboto-Medium',
+                                                            fontSize: 15,
+                                                          ),
+                                                        ),
+
+
+                                                      ],  
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+
+                                            PopupMenuDivider(),
+
+                                            PopupMenuItem(
+                                              value: 1,
+                                              child: Row(
+                                                children: <Widget>[
+                                                  Padding(
+                                                    padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
+                                                    child: Icon(FontAwesomeIcons.highlighter, color: Theme.of(context).iconTheme.color),
+                                                  ),
+                                                  Text('Resaltados')
+                                                ],
+                                              )
+                                            ),
+
+                                            PopupMenuItem(
+                                              value: 2,
+                                              child: Row(
+                                                children: <Widget>[
+                                                  Padding(
+                                                    padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
+                                                    child: Icon(FontAwesomeIcons.solidStickyNote, color: Theme.of(context).iconTheme.color),
+                                                  ),
+                                                  Text('Notas')
+                                                ],
+                                              )
+                                            ),
+
+                                            PopupMenuItem(
+                                              value: 3,
+                                              child: Row(
+                                                children: <Widget>[
+                                                  Padding(
+                                                    padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
+                                                    child: Icon(FontAwesomeIcons.bookReader, color: Theme.of(context).iconTheme.color),
+                                                  ),
+                                                  Text('Diario')
+                                                ],
+                                              )
+                                            ),
+
+                                            PopupMenuDivider(),
+
+                                            PopupMenuItem(
+                                              value: 4,
+                                              child: Row(
+                                                children: <Widget>[
+                                                  Padding(
+                                                    padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
+                                                    child: Icon(FontAwesomeIcons.wrench, color: Theme.of(context).iconTheme.color)
+                                                  ),
+                                                  Text('Preferencias')
+                                                ],
+                                              )
+                                            ),
+                                          ];
+                                        }
+                                      ),
+                                    ),
+
+                                  ],
+                                )
                               )
-                            )
-                          ),
-
-                          // Verses list
-                          SliverList(
-                            delegate: SliverChildBuilderDelegate(
-                              (BuildContext buildContext, int index){
-                                return AutoScrollTag(
-                                  key: ValueKey(index),
-                                  controller: biblePageController.autoScrollController,
-                                  index: index,
-
-                                  child: Verse(
-                                    highlight: biblePageController.versesRawList[index].highlight,
-                                    selected: biblePageController.versesSelected.contains(index + 1),
-                                    verseNumber: index + 1,
-                                    title: biblePageController.versesRawList[index].title,
-                                    text: biblePageController.versesRawList[index].text,
-                                    colorHighlight: biblePageController.versesRawList[index].colorHighlight,
-                                    colorNumber: Theme.of(context).textTheme.bodyText2.color,
-                                    colorText: Theme.of(context).textTheme.bodyText1.color,
-                                    fontSize: biblePageController.fontSize,
-                                    fontHeight: biblePageController.fontHeight,
-                                    fontLetterSeparation: biblePageController.fontLetterSeparation,
-
-                                    onTap: ( ) {
-                                      biblePageController.onVerseTap(index + 1);
-                                    },
-
-                                    onLongPress: (){
-                                      biblePageController.onVerseLongPress(index + 1);
-                                    },
-                                  )
-                                );
-                              },
-
-                              childCount: biblePageController.versesRawList.length,
                             ),
-                          ),
 
-                          // Chapter footer
-                          ChapterFooter(
-                            bibleVersion: biblePageController.bibleVersion,
-                          )
+                            // Verses list
+                            SliverList(
+                              delegate: SliverChildBuilderDelegate(
+                                (BuildContext buildContext, int index){
+                                  return AutoScrollTag(
+                                    key: ValueKey(index),
+                                    controller: biblePageController.autoScrollController,
+                                    index: index,
 
-                        ],
+                                    child: Verse(
+                                      highlight: biblePageController.versesRawList[index].highlight,
+                                      selected: biblePageController.versesSelected.contains(index + 1),
+                                      verseNumber: index + 1,
+                                      title: biblePageController.versesRawList[index].title,
+                                      text: biblePageController.versesRawList[index].text,
+                                      colorHighlight: biblePageController.versesRawList[index].colorHighlight,
+                                      colorNumber: Theme.of(context).textTheme.bodyText2.color,
+                                      colorText: Theme.of(context).textTheme.bodyText1.color,
+                                      fontSize: biblePageController.fontSize,
+                                      fontHeight: biblePageController.fontHeight,
+                                      fontLetterSeparation: biblePageController.fontLetterSeparation,
+
+                                      onTap: ( ) {
+                                        biblePageController.onVerseTap(index + 1);
+                                      },
+
+                                      onLongPress: (){
+                                        biblePageController.onVerseLongPress(index + 1);
+                                      },
+                                    )
+                                  );
+                                },
+
+                                childCount: biblePageController.versesRawList.length,
+                              ),
+                            ),
+
+                            // Chapter footer
+                            ChapterFooter(
+                              bibleVersion: biblePageController.bibleVersion,
+                            )
+
+                          ],
+                        ),
                       ),
                     ),
                   )
