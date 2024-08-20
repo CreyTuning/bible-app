@@ -1,8 +1,6 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/services.dart';
-import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:yhwh/bibles/rvr60.dart';
 import 'package:yhwh/data/valuesOfBooks.dart';
 
 class BibleManager{
@@ -22,20 +20,14 @@ class BibleManager{
 
   Future<List<String>> getChapter({int book, int chapter}) async {
     List<String> output = [];
-    Directory dir = await getExternalStorageDirectory();
-    LazyBox box = await Hive.openLazyBox('rvr60', path: dir.path);
 
-    for(int i = 0; i < valuesOfBooks[book - 1][chapter - 1]; i++){
-      output.add(await box.get('$book:$chapter:${i + 1}'));
-    }
+    for(int i = 0; i < valuesOfBooks[book - 1][chapter - 1]; i++)
+      output.add(rvr60['$book:$chapter:${i + 1}']);
 
     return output;
   }
 
   Future<String> getVerse({int book, int chapter, int verse}) async {
-    Directory dir = await getExternalStorageDirectory();
-    LazyBox box = await Hive.openLazyBox('rvr60', path: dir.path);
-
-    return await box.get('$book:$chapter:$verse');
+    return rvr60['$book:$chapter:$verse'];
   }
 }

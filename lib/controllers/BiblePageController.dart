@@ -1,9 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:uuid/uuid.dart';
+import 'package:yhwh/bibles/rvr60.dart';
 import 'package:yhwh/classes/BibleManager.dart';
 import 'package:yhwh/classes/VerseRaw.dart';
 import 'package:yhwh/classes/hiveManagers/HighlighterManager.dart';
@@ -13,6 +18,7 @@ import 'package:yhwh/models/highlighterItem.dart';
 import 'package:yhwh/pages/ReferencesPage.dart';
 import 'package:yhwh/data/Titles.dart';
 import 'package:yhwh/pages/VerseExplorer.dart';
+
 
 class BiblePageController extends GetxController {
   AutoScrollController autoScrollController;
@@ -287,6 +293,10 @@ class BiblePageController extends GetxController {
       VerseExplorer(),
       arguments: [book, chapter, verse]
     );
+  }
+
+  void TESTER(){
+    print(rvr60['22:1:1']);
   }
 
 }

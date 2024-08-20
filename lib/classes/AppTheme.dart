@@ -181,8 +181,8 @@ class AppTheme
       elevation: 0,
       type: BottomNavigationBarType.fixed,
       backgroundColor: Color(0xff2B2D42),
-      selectedItemColor: Color(0xffEF233C),
-      unselectedItemColor: Color(0xffEDF2F4),
+      selectedItemColor: Color(0xffe8eaed),
+      unselectedItemColor: Color(0xbee8eaed),
     ),
 
     tabBarTheme: TabBarTheme(
@@ -238,8 +238,8 @@ class AppTheme
       elevation: 0,
       type: BottomNavigationBarType.fixed,
       backgroundColor: Color(0xff264653),
-      selectedItemColor: Color(0xffEF233C),
-      unselectedItemColor: Color(0xffEDF2F4),
+      selectedItemColor: Color(0xffe8eaed),
+      unselectedItemColor: Color(0xbee8eaed),
     ),
 
     tabBarTheme: TabBarTheme(
@@ -295,8 +295,8 @@ class AppTheme
       elevation: 0,
       type: BottomNavigationBarType.fixed,
       backgroundColor: Color(0xff830b53),
-      selectedItemColor: Color(0xffEF233C),
-      unselectedItemColor: Color(0xffEDF2F4),
+      selectedItemColor: Color(0xffe8eaed),
+      unselectedItemColor: Color(0xbee8eaed),
     ),
 
     tabBarTheme: TabBarTheme(
