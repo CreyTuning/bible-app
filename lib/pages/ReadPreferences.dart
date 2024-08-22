@@ -14,7 +14,12 @@ class ReadPreferences extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Theme.of(context).canvasColor,
-        title: Text('Ajustes de fuentes'),
+        title: Text('Ajustes de fuentes', 
+          style: Theme.of(context).textTheme.bodyText1.copyWith(
+            fontSize: 21,
+            fontWeight: FontWeight.bold
+          )
+        ),
 
         leading: IconButton(
           tooltip: 'Volver',

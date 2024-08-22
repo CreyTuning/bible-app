@@ -11,7 +11,7 @@ class HighlighterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Resaltados'),
+        title: Text('Favoritos'),
         backgroundColor: Theme.of(context).canvasColor,
         elevation: 0,
         
