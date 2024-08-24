@@ -87,7 +87,7 @@ class Verse extends StatelessWidget {
 
                         text: HTML.toTextSpan(
                           context,
-                          '<vn>$verseNumber&nbsp;</vn><ctn>${this.text.toString()}</ctn>'.replaceAll('<p style="text-align:center;">', '').replaceAll('</p>', '').replaceAll('<p style="text-align:right;">', '').replaceAll('<br />', '').replaceAll('*', '').replaceAll('Jehová', 'Yahweh'),
+                          '<vn>$verseNumber&nbsp;</vn><ctn>${this.text.toString()}</ctn>'.replaceAll('<p style="text-align:center;">', '').replaceAll('</p>', '').replaceAll('<p style="text-align:right;">', '').replaceAll('<br />', '').replaceAll('*', ''),//.replaceAll('Jehová', 'Yahweh'),
                           defaultTextStyle: TextStyle(
                             fontSize: this.fontSize,
                             color: this.colorText,

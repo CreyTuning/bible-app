@@ -58,14 +58,14 @@ Map<String, int> bookToInt =
   "Tito": 56,
   "Filemón": 57,
   "Hebreos": 58,
-  "Jacobo": 59,
+  "Santiago": 59,
   "1 Pedro": 60,
   "2 Pedro": 61,
   "1 Juan": 62,
   "2 Juan": 63,
   "3 Juan": 64,
   "Judas": 65,
-  "Revelación" : 66
+  "Apocalipsis" : 66
 };
 
 Map<int, String> intToBook =
@@ -128,14 +128,14 @@ Map<int, String> intToBook =
   56: "Tito",
   57: "Filemón",
   58: "Hebreos",
-  59: "Jacobo",
+  59: "Santiago",
   60: "1 Pedro",
   61: "2 Pedro",
   62: "1 Juan",
   63: "2 Juan",
   64: "3 Juan",
   65: "Judas",
-  66: "Revelación"
+  66: "Apocalipsis"
 };
 
 Map<int, String> intToAbreviatura =
@@ -198,14 +198,14 @@ Map<int, String> intToAbreviatura =
   56: "Tit.",
   57: "Flm.",
   58: "Heb.",
-  59: "Jac.",
+  59: "Stg.",
   60: "1 P.",
   61: "2 P.",
   62: "1 Jn.",
   63: "2 Jn.",
   64: "3 Jn.",
   65: "Jud.",
-  66: "Rev."
+  66: "Ap."
 };
 
 List namesAndChapters = const [
@@ -267,14 +267,14 @@ List namesAndChapters = const [
   ["Tito", 3],
   ["Filemón", 1],
   ["Hebreos", 13],
-  ["Jacobo", 5],
+  ["Santiago", 5],
   ["1 Pedro", 5],
   ["2 Pedro", 3],
   ["1 Juan", 5],
   ["2 Juan", 1],
   ["3 Juan", 1],
   ["Judas", 1],
-  ["Revelación", 22]
+  ["Apocalipsis", 22]
 ];
 
 Map<int, String> weekNumberToString =

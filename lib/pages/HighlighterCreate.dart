@@ -24,7 +24,7 @@ class HihglighterCreate extends StatelessWidget {
           backgroundColor: Theme.of(context).canvasColor,
           elevation: 0,
           
-          title: Text("Resaltar", style: Theme.of(context).textTheme.bodyText1.copyWith(
+          title: Text("Color de resaltado", style: Theme.of(context).textTheme.bodyText1.copyWith(
             fontSize: 21,
             fontWeight: FontWeight.bold
           )),

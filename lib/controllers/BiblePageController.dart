@@ -96,7 +96,7 @@ class BiblePageController extends GetxController {
     }
 
     else{
-      showVerseExplorer(book: bookNumber, chapter: chapterNumber, verse: index);
+      // showVerseExplorer(book: bookNumber, chapter: chapterNumber, verse: index);
     }
   }
 

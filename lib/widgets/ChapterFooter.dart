@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yhwh/data/Define.dart';
 
-
 class ChapterFooter extends StatefulWidget {
   ChapterFooter({
     Key key,
@@ -64,7 +63,7 @@ class _ChapterFooterState extends State<ChapterFooter> {
                 color: Theme.of(context).textTheme.bodyText1.color
               )
             ),
-            onPressed: (){},
+            onPressed: null,
           ),
 
           Container(

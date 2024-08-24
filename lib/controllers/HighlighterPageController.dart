@@ -7,7 +7,7 @@ import 'package:yhwh/models/highlighterOrderItem.dart';
 class HighlighterPageController extends GetxController{
   LazyBox highlighterBox;
   LazyBox highlighterOrderBox;
-  final int lazyListAddMoreItemCount = 30;
+  final int lazyListAddMoreItemCount = 20;
   List<HighlighterItem> data = [];
 
   @override

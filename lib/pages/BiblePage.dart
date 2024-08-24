@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -76,22 +78,28 @@ class BiblePage extends StatelessWidget {
                             height: 45.0,
                             child: Tooltip(
                               message: 'Capitulo anterior',
-                              child: MaterialButton(
-                                elevation: 4,
-                                onPressed: biblePageController.previusChapter,
-                                color: Theme.of(context).canvasColor,
-
-                                child: Icon(
-                                  Icons.keyboard_arrow_left,
-                                  color: Theme.of(context).iconTheme.color,
-                                  size: 24,
-                                ),
-                                padding: EdgeInsets.all(0),
-                                shape: CircleBorder(
-                                  side: BorderSide(
-                                    color: Theme.of(context).dividerColor,
-                                    width: 1.5
-                                  )
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(300.0),
+                                child: BackdropFilter(
+                                  filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+                                  child: MaterialButton(
+                                    elevation: 0,
+                                    onPressed: biblePageController.previusChapter,
+                                    color: Theme.of(context).canvasColor.withOpacity(0.2),
+                                
+                                    child: Icon(
+                                      Icons.keyboard_arrow_left,
+                                      color: Theme.of(context).iconTheme.color,
+                                      size: 24,
+                                    ),
+                                    padding: EdgeInsets.all(0),
+                                    shape: CircleBorder(
+                                      side: BorderSide(
+                                        color: Theme.of(context).dividerColor,
+                                        width: 1.5
+                                      )
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
@@ -109,22 +117,28 @@ class BiblePage extends StatelessWidget {
                             height: 45.0,
                             child: Tooltip(
                               message: 'Capitulo siguiente',
-                              child: MaterialButton(
-                                elevation: 4,
-                                onPressed: biblePageController.nextChapter,
-                                color: Theme.of(context).canvasColor,
-
-                                child: Icon(
-                                  Icons.keyboard_arrow_right,
-                                  color: Theme.of(context).iconTheme.color,
-                                  size: 24,
-                                ),
-                                padding: EdgeInsets.all(0),
-                                shape: CircleBorder(
-                                  side: BorderSide(
-                                    color: Theme.of(context).dividerColor,
-                                    width: 1.5
-                                  )
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(300.0),
+                                child: BackdropFilter(
+                                  filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+                                  child: MaterialButton(
+                                    elevation: 0,
+                                    onPressed: biblePageController.nextChapter,
+                                    color: Theme.of(context).canvasColor.withOpacity(0.2),
+                                                              
+                                    child: Icon(
+                                      Icons.keyboard_arrow_right,
+                                      color: Theme.of(context).iconTheme.color,
+                                      size: 24,
+                                    ),
+                                    padding: EdgeInsets.all(0),
+                                    shape: CircleBorder(
+                                      side: BorderSide(
+                                        color: Theme.of(context).dividerColor,
+                                        width: 1.5
+                                      )
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
@@ -187,7 +201,7 @@ class BiblePage extends StatelessWidget {
                         // ),
 
                         Padding(
-                          padding: const EdgeInsets.only(right: 5),
+                          padding: const EdgeInsets.only(right: 10),
                           child: InkWell(
                             borderRadius: BorderRadius.all(Radius.circular(12)),
                             child: Container(
@@ -200,10 +214,11 @@ class BiblePage extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
                                   text: TextSpan(
-                                    text: 'Guardar',
+                                    text: 'Resaltar',
                                     style: Theme.of(context).textTheme.bodyText1.copyWith(
                                       fontFamily: 'Roboto-Medium',
-                                      fontSize: 22,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold
                                     ),
                                   )
                                 ),
@@ -248,7 +263,7 @@ class BiblePage extends StatelessWidget {
                           slivers: [
                             // AppBar
                             SliverAppBar(
-                              backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+                              backgroundColor: Theme.of(context).appBarTheme.backgroundColor.withOpacity(0.2),
                               floating: false,
                               snap: false,
                               primary: true,
@@ -264,11 +279,20 @@ class BiblePage extends StatelessWidget {
                                 preferredSize: Size.fromHeight(0)
                               ),
 
+                              flexibleSpace: ClipRRect(
+                                child: BackdropFilter(
+                                  filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24),
+                                  child: Container(
+                                    color: Colors.transparent,
+                                  ),
+                                ),
+                              ),
+                              
                               title: Container(
                                 height: 65,
                                 child: Row(
                                   children: [
-
+                              
                                     Expanded(
                                       child: Tooltip(
                                         message: 'Referencias',
@@ -287,57 +311,20 @@ class BiblePage extends StatelessWidget {
                                                   text: '${intToBook[biblePageController.bookNumber]} ${biblePageController.chapterNumber}',
                                                   style: Theme.of(context).textTheme.bodyText1.copyWith(
                                                     fontFamily: 'Roboto-Medium',
-                                                    fontSize: 22,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 18,
                                                   ),
                                                 )
                                               ),
                                             ),
                                           ),
-
+                              
                                           onTap: biblePageController.referenceButtonOnTap,
                                           
                                         ),
                                       ),
                                     ),
-
-                                    // IconButton(
-                                    //   tooltip: 'Marcadores',
-                                    //   onPressed: (){
-                                    //     /*
-                                    //       Recuerda agregar biblePageController.cancelSelectionModeOnTap(),
-                                    //       para evitar un posible bug al momento de entrar en modo
-                                    //       seleccion y presionar alguna otra funccion en pantalla.
-                                    //     */
-                                    //   },
-                                    //   icon: Stack(
-                                    //       alignment: Alignment.center,
-                                    //       children: [
-                                            
-                                    //         Center(
-                                    //           child: Container(
-                                    //             height: 22,
-                                    //             width: 22,
-                                    //             decoration: BoxDecoration(
-                                    //               borderRadius: BorderRadius.circular(6),
-                                    //               border: Border.all(
-                                    //                 color: Theme.of(context).iconTheme.color,
-                                    //                 width: 2
-                                    //               )
-                                    //             ),
-                                    //           ),
-                                    //         ),
-
-                                    //         Text('1', textAlign: TextAlign.center,
-                                    //         style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                    //           fontSize: 10.5,
-                                    //           height: 1.5,
-                                    //           color: Theme.of(context).iconTheme.color,
-                                    //           fontWeight: FontWeight.bold
-                                    //         ))
-                                    //       ],
-                                    //     ),
-                                    // ),
-
+                            
                                     IconButton(
                                       tooltip: 'Favoritos',
                                       onPressed: (){
@@ -349,10 +336,12 @@ class BiblePage extends StatelessWidget {
                                           seleccion y presionar alguna otra funccion en pantalla.
                                         */
                                       },
-                                      icon: Icon(Icons.favorite_outline_rounded),
-                                      iconSize: 30,
+                                      icon: Icon(FontAwesomeIcons.highlighter),
+                                      iconSize: 20,
                                     ),
-
+                            
+                                    Container(width: 5,),
+                              
                                     IconButton(
                                       tooltip: 'Ajustes',
                                       onPressed: (){
@@ -364,147 +353,11 @@ class BiblePage extends StatelessWidget {
                                           seleccion y presionar alguna otra funccion en pantalla.
                                         */
                                       },
-                                      icon: Icon(Icons.settings_outlined),
-                                      iconSize: 30,
+                                      icon: Icon(FontAwesomeIcons.textHeight),
+                                      iconSize: 20,
                                     ),
-
-                                    Container(width: 5,)
-
-                                    // Container(
-                                    //   height: 55,
-                                    //   width: 55,
-                                    //   child: PopupMenuButton(
-                                    //     shape: RoundedRectangleBorder(
-                                    //       borderRadius: BorderRadius.circular(6)
-                                    //     ),
-                                    //     tooltip: 'Opciones',
-                                    //     icon: Icon(Icons.more_vert, color: Theme.of(context).iconTheme.color),
-
-                                    //     onSelected: (value) {
-                                    //       switch (value) {
-                                    //         case 1:
-                                    //           Get.to(()=> HighlighterPage());
-                                    //           break;
-                                    //         case 2:
-                                    //           break;
-                                    //         case 3:
-                                    //           break;
-                                    //         case 4:
-                                    //           Get.to(()=> ReadPreferences());
-                                    //           break;
-                                    //       }
-                                    //     },
-
-                                    //     itemBuilder: (context) {
-                                    //       biblePageController.cancelSelectionModeOnTap();
-
-                                    //       return <PopupMenuEntry<dynamic>>[
-
-                                    //         PopupMenuItem(
-                                    //           enabled: false,
-                                    //           child: Container(
-                                    //             child: Row(
-                                    //               crossAxisAlignment: CrossAxisAlignment.center,
-                                    //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    //               children: [
-                                    //                 Padding(
-                                    //                   padding: const EdgeInsets.symmetric(horizontal: 0),
-                                    //                   child: CircleAvatar(
-                                    //                     backgroundColor: Theme.of(context).accentColor,
-                                    //                     child: Icon(
-                                    //                       Icons.person,
-                                    //                       color: Theme.of(context).canvasColor,
-                                    //                     ),
-                                    //                   ),
-                                    //                 ),
-
-                                    //                 Column(
-                                    //                   crossAxisAlignment: CrossAxisAlignment.start,
-                                    //                   children: [
-                                    //                     Text(
-                                    //                       'Luis Romero',
-                                    //                       style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                    //                         fontFamily: 'Roboto-Medium',
-                                    //                         fontSize: 16.6,
-                                    //                       ),
-                                    //                     ),
-
-                                    //                     Text(
-                                    //                       'Desconectado',
-                                    //                       style: Theme.of(context).textTheme.bodyText2.copyWith(
-                                    //                         fontFamily: 'Roboto-Medium',
-                                    //                         fontSize: 15,
-                                    //                       ),
-                                    //                     ),
-
-
-                                    //                   ],  
-                                    //                 )
-                                    //               ],
-                                    //             ),
-                                    //           ),
-                                    //         ),
-
-                                    //         PopupMenuDivider(),
-
-                                    //         PopupMenuItem(
-                                    //           value: 1,
-                                    //           child: Row(
-                                    //             children: <Widget>[
-                                    //               Padding(
-                                    //                 padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
-                                    //                 child: Icon(FontAwesomeIcons.highlighter, color: Theme.of(context).iconTheme.color),
-                                    //               ),
-                                    //               Text('Resaltados')
-                                    //             ],
-                                    //           )
-                                    //         ),
-
-                                    //         PopupMenuItem(
-                                    //           value: 2,
-                                    //           child: Row(
-                                    //             children: <Widget>[
-                                    //               Padding(
-                                    //                 padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
-                                    //                 child: Icon(FontAwesomeIcons.solidStickyNote, color: Theme.of(context).iconTheme.color),
-                                    //               ),
-                                    //               Text('Notas')
-                                    //             ],
-                                    //           )
-                                    //         ),
-
-                                    //         PopupMenuItem(
-                                    //           value: 3,
-                                    //           child: Row(
-                                    //             children: <Widget>[
-                                    //               Padding(
-                                    //                 padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
-                                    //                 child: Icon(FontAwesomeIcons.bookReader, color: Theme.of(context).iconTheme.color),
-                                    //               ),
-                                    //               Text('Diario')
-                                    //             ],
-                                    //           )
-                                    //         ),
-
-                                    //         PopupMenuDivider(),
-
-                                    //         PopupMenuItem(
-                                    //           value: 4,
-                                    //           child: Row(
-                                    //             children: <Widget>[
-                                    //               Padding(
-                                    //                 padding: const EdgeInsets.fromLTRB(2, 2, 12, 2),
-                                    //                 child: Icon(FontAwesomeIcons.wrench, color: Theme.of(context).iconTheme.color)
-                                    //               ),
-                                    //               Text('Preferencias')
-                                    //             ],
-                                    //           )
-                                    //         ),
-                                    //       ];
-                                    //     }
-                                    //   ),
-                                    // ),
-
+                              
+                                    Container(width: 10,)
                                   ],
                                 )
                               )
