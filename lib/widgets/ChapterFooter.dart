@@ -42,7 +42,7 @@ class _ChapterFooterState extends State<ChapterFooter> {
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: RichText(
                 text: TextSpan(
-                  text: '${versionToName[widget.bibleVersion]} ©\nPronto el texto sera revisado y corregido para ofrecer una traducción sin errores y fiel a la Palabra de Dios.',
+                  text: 'Antiguo y Nuevo Testamento\nAntigua Versión de Casiodoro de Reina (1569)\nRevisada por Cipriano de Valera (1602)\nOtra revisiones: 1862, 1909 y 1960\nEl tipo de traducción es de equivalencia formal.',
                   style: TextStyle(
                       fontSize: 15,
                       fontFamily: 'Baloo',
@@ -55,7 +55,7 @@ class _ChapterFooterState extends State<ChapterFooter> {
           ),
 
           TextButton(
-            child: Text('Más información',
+            child: Text('${versionToName[widget.bibleVersion]} ©',
               style: TextStyle(
                 fontSize: 14,
                 fontFamily: 'Baloo',

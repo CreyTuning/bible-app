@@ -22,6 +22,7 @@ void main() async {
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
     home: MainPage(),
+    themeMode: ThemeMode.light,
     theme: AppTheme.light,
     darkTheme: AppTheme.dark,
     builder: (context, child) => ScrollConfiguration(behavior: _MyBehavior(), child: child), // remove the glow effect.

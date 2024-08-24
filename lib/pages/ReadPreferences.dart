@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:yhwh/classes/AppTheme.dart';
 import 'package:yhwh/controllers/BiblePageController.dart';
 import 'package:yhwh/controllers/ReadPreferencesController.dart';
 import 'package:yhwh/widgets/Verse.dart';
@@ -272,6 +274,13 @@ class ReadPreferences extends StatelessWidget {
 
                                                   leading: Icon(Icons.brightness_5),
                                                   onTap: (){
+                                                    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+                                                      statusBarColor: Colors.transparent,
+                                                      statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark ,
+                                                      systemNavigationBarIconBrightness: Brightness.dark,
+                                                      systemNavigationBarColor: AppTheme.light.canvasColor
+                                                    ));
+                                                    
                                                     readPreferencesController.setTheme('light');
                                                   },
                                                 ),
@@ -283,6 +292,13 @@ class ReadPreferences extends StatelessWidget {
 
                                                   leading: Icon(Icons.brightness_3),
                                                   onTap: (){
+                                                    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+                                                      statusBarColor: Colors.transparent,
+                                                      statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark ,
+                                                      systemNavigationBarIconBrightness: Brightness.light,
+                                                      systemNavigationBarColor: AppTheme.dark.canvasColor
+                                                    ));
+                                                    
                                                     readPreferencesController.setTheme('dark');
                                                   },
                                                 ),
@@ -294,6 +310,13 @@ class ReadPreferences extends StatelessWidget {
 
                                                   leading: Icon(Icons.brightness_1),
                                                   onTap: (){
+                                                    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+                                                      statusBarColor: Colors.transparent,
+                                                      statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark ,
+                                                      systemNavigationBarIconBrightness: Brightness.light,
+                                                      systemNavigationBarColor: AppTheme.black.canvasColor
+                                                    ));
+                                                    
                                                     readPreferencesController.setTheme('black');
                                                   },
                                                 ),
@@ -325,6 +348,13 @@ class ReadPreferences extends StatelessWidget {
                                                   ),
 
                                                   onTap: (){
+                                                    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+                                                      statusBarColor: Colors.transparent,
+                                                      statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark ,
+                                                      systemNavigationBarIconBrightness: Brightness.light,
+                                                      systemNavigationBarColor: AppTheme.spaceCadet.canvasColor
+                                                    ));
+                                                    
                                                     readPreferencesController.setTheme('spaceCadet');
                                                   },
                                                 ),
@@ -352,6 +382,13 @@ class ReadPreferences extends StatelessWidget {
                                                   ),
 
                                                   onTap: (){
+                                                    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+                                                      statusBarColor: Colors.transparent,
+                                                      statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark ,
+                                                      systemNavigationBarIconBrightness: Brightness.light,
+                                                      systemNavigationBarColor: AppTheme.charcoal.canvasColor
+                                                    ));
+                                                    
                                                     readPreferencesController.setTheme('charcoal');
                                                   },
                                                 ),
@@ -379,6 +416,13 @@ class ReadPreferences extends StatelessWidget {
                                                   ),
 
                                                   onTap: (){
+                                                    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+                                                      statusBarColor: Colors.transparent,
+                                                      statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark ,
+                                                      systemNavigationBarIconBrightness: Brightness.light,
+                                                      systemNavigationBarColor: AppTheme.pansyPurple.canvasColor
+                                                    ));
+                                                    
                                                     readPreferencesController.setTheme('pansyPurple');
                                                   },
                                                 ),
