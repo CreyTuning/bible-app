@@ -32,8 +32,8 @@ class _SelectionAppbarState extends State<SelectionAppbar> {
                 widget.child,
 
                 AnimatedPositioned(
-                  top: widget.visible ? 0 : -56,
-                  height: 56,
+                  top: widget.visible ? 0 : -80,
+                  height: 80,
                   width: constraints.maxWidth,
                   duration: Duration(milliseconds: 300),
                   curve: Curves.easeOut,

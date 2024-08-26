@@ -42,7 +42,7 @@ class _ChapterFooterState extends State<ChapterFooter> {
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: RichText(
                 text: TextSpan(
-                  text: 'Antiguo y Nuevo Testamento\nAntigua Versión de Casiodoro de Reina (1569)\nRevisada por Cipriano de Valera (1602)\nOtra revisiones: 1862, 1909 y 1960\nEl tipo de traducción es de equivalencia formal.',
+                  text: 'Antiguo y Nuevo Testamento\nAntigua Versión de Casiodoro de Reina (1569)\nRevisada por Cipriano de Valera (1602)\nOtra revisiones: 1862, 1909 y 1960',
                   style: TextStyle(
                       fontSize: 15,
                       fontFamily: 'Baloo',

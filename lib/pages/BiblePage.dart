@@ -158,145 +158,52 @@ class BiblePage extends StatelessWidget {
 
               body: GetBuilder<BiblePageController>(
                 init: BiblePageController(),
-                builder: (biblePageController) => SelectionAppbar(
-                  visible: biblePageController.selectionMode,
-                  appbar: AppBar(
-                    backgroundColor: Theme.of(context).canvasColor,
-                    titleSpacing: 0,
-                    elevation: 0,
-                    bottom: PreferredSize(
-                      child: Container(
-                        color: Theme.of(context).dividerColor,
-                        height: 1.5
-                      ),
-                      
-                      preferredSize: Size.fromHeight(0)
-                    ),
+                builder: (biblePageController) => NotificationListener<ScrollNotification>(
+                  onNotification: biblePageController.scrollNotification,
+                  child: RawScrollbar(
+                    thumbColor: Theme.of(context).textTheme.bodyText1.color.withOpacity(0.4),
+                    child: CustomScrollView(
+                      controller: biblePageController.autoScrollController,
+                      slivers: [
+                        // AppBar
+                        SliverAppBar(
+                          backgroundColor: Theme.of(context).appBarTheme.backgroundColor.withOpacity(0.2),
+                          floating: false,
+                          snap: false,
+                          primary: true,
+                          pinned: true,
+                          elevation: 0,
+                          titleSpacing: 0,
+                          bottom: PreferredSize(
+                            child: Container(
+                              color: Theme.of(context).dividerColor,
+                              height: 1.5
+                            ),
+                            
+                            preferredSize: Size.fromHeight(0)
+                          ),
 
-                    leading: IconButton(
-                      tooltip: 'Cancelar',
-                      icon: Icon(Icons.arrow_back, color: Theme.of(context).textTheme.bodyText1.color),
-                      onPressed: biblePageController.cancelSelectionModeOnTap,
-                    ),
-
-                    actions: [
-                      // IconButton(
-                      //   tooltip: 'Agregar al diario',
-                      //   icon: Icon(
-                      //     FontAwesomeIcons.bookReader,
-                      //     color: Theme.of(context).textTheme.bodyText1.color,
-                      //     size: 18,
-                      //   ),
-                      //   onPressed: (){},
-                      // ),
-
-                      // IconButton(
-                      //   tooltip: 'Crear nota',
-                      //   icon: Icon(
-                      //     FontAwesomeIcons.solidStickyNote,
-                      //     color: Theme.of(context).textTheme.bodyText1.color,
-                      //     size: 18,
-                      //   ),
-                      //   onPressed: (){},
-                      // ),
-
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: InkWell(
-                          borderRadius: BorderRadius.all(Radius.circular(12)),
-                          child: Container(
-                            height: 55,
-                            alignment: Alignment.centerLeft,
-                            child: Padding(
-                              padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
-                              child: RichText(
-                                textAlign: TextAlign.left,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                                text: TextSpan(
-                                  text: 'Resaltar',
-                                  style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                    fontFamily: 'Roboto-Medium',
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold
-                                  ),
-                                )
+                          flexibleSpace: ClipRRect(
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(
+                                sigmaX: 24,
+                                sigmaY: 24,
+                                tileMode: TileMode.mirror
+                              ),
+                              child: Container(
+                                color: Colors.transparent,
                               ),
                             ),
                           ),
-
-                          onTap: (){
-                            Get.bottomSheet(
-                              Container(
-                                height: 115,
-                                child: BottomSheet(
-                                  onClosing: (){},
-                                  builder: (context) => HihglighterCreate(),
-                                  enableDrag: false,
-                                ),
-                              ),
-
-                              enableDrag: true,
-                              isDismissible: true,
-                              isScrollControlled: false,
-                            );
-                          }
-                        ),
-                      ),
-                    ],
-
-                    title: Text(
-                      '${biblePageController.versesSelected.length}',
-                      style: Theme.of(context).textTheme.bodyText1.copyWith(
-                        fontFamily: 'Roboto-Medium',
-                        fontSize: 22,
-                      )
-                    )
-                  ),
-
-                  child: NotificationListener<ScrollNotification>(
-                    onNotification: biblePageController.scrollNotification,
-                    child: RawScrollbar(
-                      thumbColor: Theme.of(context).textTheme.bodyText1.color.withOpacity(0.4),
-                      child: CustomScrollView(
-                        controller: biblePageController.autoScrollController,
-                        slivers: [
-                          // AppBar
-                          SliverAppBar(
-                            backgroundColor: Theme.of(context).appBarTheme.backgroundColor.withOpacity(0.2),
-                            floating: false,
-                            snap: false,
-                            primary: true,
-                            pinned: true,
-                            elevation: 0,
-                            titleSpacing: 0,
-                            bottom: PreferredSize(
-                              child: Container(
-                                color: Theme.of(context).dividerColor,
-                                height: 1.5
-                              ),
-                              
-                              preferredSize: Size.fromHeight(0)
-                            ),
-
-                            flexibleSpace: ClipRRect(
-                              child: BackdropFilter(
-                                filter: ImageFilter.blur(
-                                  sigmaX: 24,
-                                  sigmaY: 24,
-                                  tileMode: TileMode.mirror
-                                ),
-                                child: Container(
-                                  color: Colors.transparent,
-                                ),
-                              ),
-                            ),
-                            
-                            title: Container(
+                          
+                          title: AnimatedCrossFade(
+                            sizeCurve: Curves.easeInOut,
+                            duration: Duration(milliseconds: 300),
+                            crossFadeState: biblePageController.selectionMode == false ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+                            firstChild: Container(
                               height: 65,
                               child: Row(
                                 children: [
-                            
                                   Expanded(
                                     child: Tooltip(
                                       message: 'Referencias',
@@ -328,9 +235,9 @@ class BiblePage extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                          
+                                                    
                                   IconButton(
-                                    tooltip: 'Favoritos',
+                                    tooltip: 'Resaltados',
                                     onPressed: (){
                                       biblePageController.cancelSelectionModeOnTap();
                                       Get.to(()=> HighlighterPage());
@@ -340,14 +247,14 @@ class BiblePage extends StatelessWidget {
                                         seleccion y presionar alguna otra funccion en pantalla.
                                       */
                                     },
-                                    icon: Icon(Icons.bookmarks_outlined),
-                                    iconSize: 26,
+                                    icon: Icon(FontAwesomeIcons.highlighter),
+                                    iconSize: 22,
                                   ),
-                          
+                                                    
                                   Container(width: 5,),
                             
                                   IconButton(
-                                    tooltip: 'Ajustes',
+                                    tooltip: 'Ajustes visuales',
                                     onPressed: (){
                                       biblePageController.cancelSelectionModeOnTap();
                                       Get.to(()=> ReadPreferences());
@@ -357,63 +264,83 @@ class BiblePage extends StatelessWidget {
                                         seleccion y presionar alguna otra funccion en pantalla.
                                       */
                                     },
-                                    icon: Icon(Icons.format_size_rounded),
-                                    iconSize: 30,
+                                    icon: Icon(FontAwesomeIcons.bars),
+                                    iconSize: 22,
                                   ),
                             
                                   Container(width: 10,)
                                 ],
                               )
-                            )
-                          ),
-
-                          // Verses list
-                          SliverList(
-                            delegate: SliverChildBuilderDelegate(
-                              (BuildContext buildContext, int index){
-                                return AutoScrollTag(
-                                  key: ValueKey(index),
-                                  controller: biblePageController.autoScrollController,
-                                  index: index,
-
-                                  child: Verse(
-                                    highlight: biblePageController.versesRawList[index].highlight,
-                                    selected: biblePageController.versesSelected.contains(index + 1),
-                                    verseNumber: index + 1,
-                                    title: biblePageController.versesRawList[index].title,
-                                    text: biblePageController.versesRawList[index].text,
-                                    colorHighlight: biblePageController.versesRawList[index].colorHighlight,
-                                    colorNumber: Theme.of(context).textTheme.bodyText2.color,
-                                    colorText: Theme.of(context).textTheme.bodyText1.color,
-                                    fontSize: biblePageController.fontSize,
-                                    fontHeight: biblePageController.fontHeight,
-                                    fontLetterSeparation: biblePageController.fontLetterSeparation,
-
-                                    onTap: ( ) {
-                                      biblePageController.onVerseTap(index + 1);
-                                    },
-
-                                    onLongPress: (){
-                                      biblePageController.onVerseLongPress(index + 1);
-                                    },
-                                  )
-                                );
-                              },
-
-                              childCount: biblePageController.versesRawList.length,
                             ),
-                          ),
 
-                          // Chapter footer
-                          ChapterFooter(
-                            bibleVersion: biblePageController.bibleVersion,
+                            secondChild: Container(
+                              height: 90,
+                              child: Row(
+                                children: [
+                                  IconButton(
+                                    tooltip: 'Cancelar',
+                                    icon: Icon(Icons.arrow_back),
+                                    iconSize: 30,
+                                    onPressed: biblePageController.cancelSelectionModeOnTap,
+                                  ),
+                            
+                                  Expanded(
+                                    child: HihglighterCreate()
+                                  ),
+                            
+                                  // Container(width: 12,)
+                                ],
+                              )
+                            ),
                           )
+                        ),
 
-                        ],
-                      ),
+                        // Verses list
+                        SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                            (BuildContext buildContext, int index){
+                              return AutoScrollTag(
+                                key: ValueKey(index),
+                                controller: biblePageController.autoScrollController,
+                                index: index,
+
+                                child: Verse(
+                                  highlight: biblePageController.versesRawList[index].highlight,
+                                  selected: biblePageController.versesSelected.contains(index + 1),
+                                  verseNumber: index + 1,
+                                  title: biblePageController.versesRawList[index].title,
+                                  text: biblePageController.versesRawList[index].text,
+                                  colorHighlight: biblePageController.versesRawList[index].colorHighlight,
+                                  colorNumber: Theme.of(context).textTheme.bodyText2.color,
+                                  colorText: Theme.of(context).textTheme.bodyText1.color,
+                                  fontSize: biblePageController.fontSize,
+                                  fontHeight: biblePageController.fontHeight,
+                                  fontLetterSeparation: biblePageController.fontLetterSeparation,
+
+                                  onTap: ( ) {
+                                    biblePageController.onVerseTap(index + 1);
+                                  },
+
+                                  onLongPress: (){
+                                    biblePageController.onVerseLongPress(index + 1);
+                                  },
+                                )
+                              );
+                            },
+
+                            childCount: biblePageController.versesRawList.length,
+                          ),
+                        ),
+
+                        // Chapter footer
+                        ChapterFooter(
+                          bibleVersion: biblePageController.bibleVersion,
+                        )
+
+                      ],
                     ),
                   ),
-                )
+                ),
               ),
             ),
           ),
