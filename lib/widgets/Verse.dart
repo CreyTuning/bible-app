@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:simple_html_css/simple_html_css.dart';
+import 'package:yhwh/classes/BibleManager.dart';
+import 'package:yhwh/controllers/BiblePageController.dart';
+import 'package:yhwh/data/Define.dart';
 
 class Verse extends StatelessWidget {
   
@@ -31,7 +35,7 @@ class Verse extends StatelessWidget {
     @required this.title,
     @required this.highlight,
 
-    this.fontFamily = 'Roboto',
+    this.fontFamily = 'Nunito',
     this.fontSize = 20.0,
     this.fontHeight  = 1.8,
     this.fontLetterSeparation = 0,
@@ -140,47 +144,6 @@ class Verse extends StatelessWidget {
                             )
                           }
                         )
-
-                        // text: TextSpan(
-                        //   style: TextStyle(
-                        //     fontSize: this.fontSize,
-                        //     color: this.colorText,
-                        //     fontFamily: this.fontFamily,
-                        //     height: this.fontHeight,
-                        //     letterSpacing: this.fontLetterSeparation,
-                        //   ),
-
-                        //   children: [
-                        //     TextSpan( // Numero de versiculo
-                        //       text: this.verseNumber.toString(),
-                        //       style: TextStyle(
-                        //         fontWeight: (this.selected) ? FontWeight.bold : FontWeight.normal,
-                        //         color: this.colorNumber,
-                        //         fontSize: this.fontSize - 7.0,
-                        //       )
-                        //     ),
-
-                        //     TextSpan(
-                        //       text: ' '
-                        //     ),
-
-                        //     TextSpan(
-                        //       text: this.text.toString().replaceAll('<br />', '').replaceAll('</i>', '').replaceAll('<i>', '').replaceAll('<red>', '').replaceAll('</red>', '').replaceAll('*', ''),
-                        //       style: TextStyle(
-                        //         fontWeight: FontWeight.normal,
-                        //         backgroundColor: (this.highlight)
-                        //           ? colorHighlight
-                        //           : Colors.transparent,
-                        //         color: (this.highlight)
-                        //           ? Theme.of(context).brightness == Brightness.light
-                        //             ? Theme.of(context).textTheme.bodyText1.color
-                        //             : Theme.of(context).canvasColor
-                        //           : Theme.of(context).textTheme.bodyText1.color,
-                        //         // decorationColor: Colors.pink
-                        //       )
-                        //     ),
-                        //   ]
-                        // ),
                       ),
                     ),
                   ),
@@ -206,9 +169,11 @@ class Verse extends StatelessWidget {
           Container(
             width: double.infinity,
             child: RichText(
+              textAlign: TextAlign.center,
               text: TextSpan(
                 text: element.replaceAll('#title_big ', ''),
                 style: Theme.of(context).textTheme.bodyText1.copyWith(
+                  fontFamily: "Nunito",
                   fontWeight: FontWeight.bold,
                   height: height,
                   fontSize: fontSize + 5,
@@ -226,15 +191,97 @@ class Verse extends StatelessWidget {
           Container(
             width: double.infinity,
             child: RichText(
+              textAlign: TextAlign.center,
               text: TextSpan(
                 text: element.replaceAll('#subtitle ', ''),
                 style: Theme.of(context).textTheme.bodyText1.copyWith(
-                  fontFamily: 'Roboto-Italic',
+                  fontFamily: 'Nunito',
                   fontStyle: FontStyle.italic,
                   height: height,
                   fontSize: fontSize,
                   letterSpacing: letterSeparation,
                 ),
+              ),
+            ),
+          ),
+        );
+
+        widgets.add(
+          Container(height: height * 10)
+        );
+      }
+
+      else if(element.split(' ')[0] == '#reference')
+      {
+        List<String> references = [];
+        String temp = element;
+
+        // encontrar referencias y guardar en una lista
+        while(temp.contains('<x>')){
+          int start = temp.indexOf('<x>');
+          int end = temp.indexOf('</x>');
+
+          references.add(temp.substring(start + 3, end));
+          temp = temp.substring(end + 1);
+        }
+
+        // remplazar numero por nombre del libro
+        for(var ref in references){
+          List<String> split = ref.split(':');
+          element = element.replaceFirst('<x>$ref', '<x>${intToAbreviatura[int.parse(split[0])]} ${ref.substring(ref.indexOf(':') + 1)}');
+        }
+
+        // remplazar etiquetas <x> por <a> que son links html
+        for(var ref in references){
+          element = element.replaceFirst('<x>', '<a href="$ref">');
+          element = element.replaceFirst('</x>', '</a>');
+        }
+
+        print(element);
+
+        widgets.add(
+          Container(
+            width: double.infinity,
+            child: RichText(
+              textAlign: TextAlign.center,
+              text: HTML.toTextSpan(
+                context,
+                element.replaceAll('#reference ', ''),
+                defaultTextStyle: Theme.of(context).textTheme.bodyText1.copyWith(
+                  fontFamily: 'Nunito',
+                  // fontStyle: FontStyle.italic,
+                  fontWeight: FontWeight.normal,
+                  height: height,
+                  fontSize: fontSize - 2,
+                  letterSpacing: letterSeparation,
+                ),
+
+                overrideStyle: {
+                  'a' : Theme.of(context).textTheme.bodyText1.copyWith(
+                    fontFamily: 'Nunito',
+                    // fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.normal,
+                    height: height,
+                    fontSize: fontSize - 2,
+                    letterSpacing: letterSeparation,
+                    color: Color(0xff8ab4f8)
+                  ),
+                },
+
+                // CUANDO SE HACE CLICK EN LA REFERENCIA DE LOS SUBTITULOS
+                linksCallback: (link) {
+                  BiblePageController _biblePageController = Get.find();
+
+                  List<String> split = link.toString().split(':');
+                  int book = int.parse(split[0]);
+                  int chapter = (split.length >= 2) ? int.parse(split[1]) : 1;
+                  int verse = (split.length >= 3) ? int.parse(split[2].split('-')[0]) : 1;
+                  // se hace una doble busqueda para evitar que el scroll no alcance el objetivo
+                  _biblePageController.setReference(book, chapter, verse);
+                  _biblePageController.update();
+                  _biblePageController.setReference(book, chapter, verse);
+                  _biblePageController.update();
+                },
               ),
             ),
           ),
@@ -268,14 +315,19 @@ class Verse extends StatelessWidget {
 
       else{
         widgets.add(
-          RichText(
-            text: TextSpan(
-              text: element,
-              style: Theme.of(context).textTheme.bodyText1.copyWith(
-                fontWeight: FontWeight.bold,
-                height: height,
-                fontSize: fontSize,
-                letterSpacing: letterSeparation
+          Container(
+            width: double.infinity,
+            child: RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                text: element,
+                style: Theme.of(context).textTheme.bodyText1.copyWith(
+                  fontFamily: "Nunito",
+                  fontWeight: FontWeight.bold,
+                  height: height,
+                  fontSize: fontSize + 2,
+                  letterSpacing: letterSeparation
+                ),
               ),
             ),
           ),

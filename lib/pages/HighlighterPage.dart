@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:yhwh/controllers/HighlighterPageController.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
@@ -9,6 +10,14 @@ class HighlighterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark ,
+      systemNavigationBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark,
+      systemNavigationBarColor: Theme.of(context).canvasColor
+    ));
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Resaltados',

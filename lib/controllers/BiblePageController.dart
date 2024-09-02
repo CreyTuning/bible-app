@@ -8,7 +8,8 @@ import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:uuid/uuid.dart';
-import 'package:yhwh/bibles/rvr60.dart';
+import 'package:yhwh/bibles/RVR60/rvr60_titles.dart';
+import 'package:yhwh/bibles/RVR60/rvr60_verses.dart';
 import 'package:yhwh/classes/BibleManager.dart';
 import 'package:yhwh/classes/VerseRaw.dart';
 import 'package:yhwh/classes/hiveManagers/HighlighterManager.dart';
@@ -115,30 +116,6 @@ class BiblePageController extends GetxController {
     update();
   }
 
-  // Future<void> updateVerseList() async {
-  //   List dataChapter = await jsonDecode(await rootBundle.loadString('lib/bibles/$bibleVersion/${bookNumber}_$chapterNumber.json'))['verses'];
-  //   Map<int, HighlighterItem> highlightVerses = await HighlighterManager.getHighlightVersesInChapterWithData(bookNumber, chapterNumber);
-  //   versesRawList = [];
-
-  //   // Crear versiculos
-  //   for (int index = 0; index < valuesOfBooks[bookNumber -1][chapterNumber - 1]; index++) {
-  //     versesRawList.add(
-  //       VerseRaw(
-  //         text: dataChapter[index]["text"],
-  //         title: titles[bookNumber][chapterNumber].containsKey(index + 1) == true ? titles[bookNumber][chapterNumber][index + 1] : null,
-  //         fontSize: fontSize,
-  //         fontHeight: fontHeight,
-  //         fontLetterSeparation: fontLetterSeparation,
-  //         highlight: highlightVerses.containsKey(index + 1) ? true : false,
-  //         colorHighlight: highlightVerses.containsKey(index + 1) ? Color(highlightVerses[index + 1].color) : Colors.transparent
-  //       )
-  //     );
-  //   }
-
-  //   return;
-  // }
-
-
   Future<void> updateVerseList() async {
     List<String> verses = await BibleManager().getChapter(book: bookNumber, chapter: chapterNumber);
     Map<int, HighlighterItem> highlightVerses = await HighlighterManager.getHighlightVersesInChapterWithData(bookNumber, chapterNumber);
@@ -149,7 +126,8 @@ class BiblePageController extends GetxController {
       versesRawList.add(
         VerseRaw(
           text: verses[index],
-          title: titles[bookNumber][chapterNumber].containsKey(index + 1) == true ? titles[bookNumber][chapterNumber][index + 1] : null,
+          // se debe cambiar la forma en la que se obotiene el titulo para solo usar un mapa con el formato '[book]:[chapter]:[verse]' como un id de tipo string
+          title: rvr60_titles.containsKey('$bookNumber:$chapterNumber:${index + 1}') == true ? rvr60_titles['$bookNumber:$chapterNumber:${index + 1}'] : null,
           fontSize: fontSize,
           fontHeight: fontHeight,
           fontLetterSeparation: fontLetterSeparation,
@@ -295,8 +273,15 @@ class BiblePageController extends GetxController {
     );
   }
 
+  // void showVerseExplorer({int book, int chapter, int verse}){
+  //   Get.to(()=> 
+  //     VerseExplorer(),
+  //     arguments: [book, chapter, verse]
+  //   );
+  // }
+
   void TESTER(){
-    print(rvr60['22:1:1']);
+    // nothing
   }
 
 }

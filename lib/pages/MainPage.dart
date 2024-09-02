@@ -1,22 +1,27 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:yhwh/controllers/MainPageController.dart';
 import 'package:yhwh/pages/BiblePage.dart';
 import 'package:animate_do/animate_do.dart' as animateDo;
 import 'package:yhwh/pages/ContactPage.dart';
-import 'package:yhwh/widgets/Verse.dart';
 
 
 class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark ,
+      systemNavigationBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark,
+      systemNavigationBarColor: Theme.of(context).canvasColor
+    ));
+
     return Scaffold(
       extendBody: true,
+      extendBodyBehindAppBar: true,
 
       body: GetBuilder<MainPageController>(
         init: MainPageController(),

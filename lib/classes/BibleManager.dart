@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:yhwh/bibles/rvr60.dart';
+import 'package:yhwh/bibles/RVR60/rvr60_verses.dart';
 import 'package:yhwh/data/valuesOfBooks.dart';
 
 class BibleManager{
@@ -22,12 +22,12 @@ class BibleManager{
     List<String> output = [];
 
     for(int i = 0; i < valuesOfBooks[book - 1][chapter - 1]; i++)
-      output.add(rvr60['$book:$chapter:${i + 1}']);
+      output.add(rvr60_verses['$book:$chapter:${i + 1}']);
 
     return output;
   }
 
   Future<String> getVerse({int book, int chapter, int verse}) async {
-    return rvr60['$book:$chapter:$verse'];
+    return rvr60_verses['$book:$chapter:$verse'];
   }
 }

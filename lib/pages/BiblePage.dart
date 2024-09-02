@@ -12,7 +12,6 @@ import 'package:yhwh/pages/HighlighterCreate.dart';
 import 'package:yhwh/pages/HighlighterPage.dart';
 import 'package:yhwh/pages/ReadPreferences.dart';
 import 'package:yhwh/widgets/ChapterFooter.dart';
-import 'package:yhwh/widgets/SelectionAppbar.dart';
 import 'package:yhwh/widgets/Verse.dart';
 import 'package:animate_do/animate_do.dart' as animateDo;
 
@@ -49,7 +48,7 @@ class BiblePage extends StatelessWidget {
         child: animateDo.FadeIn(
           duration: Duration(milliseconds: 150),
           child: Container(
-            color: Theme.of(context).canvasColor,
+            // color: Theme.of(context).canvasColor,
             child: Scaffold(
               floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
               
@@ -168,9 +167,10 @@ class BiblePage extends StatelessWidget {
                         // AppBar
                         SliverAppBar(
                           backgroundColor: Theme.of(context).appBarTheme.backgroundColor.withOpacity(0.2),
-                          floating: false,
-                          snap: false,
                           primary: true,
+                          floating: false,
+                          // snap: false,
+                          // primary: true,
                           pinned: true,
                           elevation: 0,
                           titleSpacing: 0,
@@ -304,26 +304,29 @@ class BiblePage extends StatelessWidget {
                                 controller: biblePageController.autoScrollController,
                                 index: index,
 
-                                child: Verse(
-                                  highlight: biblePageController.versesRawList[index].highlight,
-                                  selected: biblePageController.versesSelected.contains(index + 1),
-                                  verseNumber: index + 1,
-                                  title: biblePageController.versesRawList[index].title,
-                                  text: biblePageController.versesRawList[index].text,
-                                  colorHighlight: biblePageController.versesRawList[index].colorHighlight,
-                                  colorNumber: Theme.of(context).textTheme.bodyText2.color,
-                                  colorText: Theme.of(context).textTheme.bodyText1.color,
-                                  fontSize: biblePageController.fontSize,
-                                  fontHeight: biblePageController.fontHeight,
-                                  fontLetterSeparation: biblePageController.fontLetterSeparation,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                                  child: Verse(
+                                    highlight: biblePageController.versesRawList[index].highlight,
+                                    selected: biblePageController.versesSelected.contains(index + 1),
+                                    verseNumber: index + 1,
+                                    title: biblePageController.versesRawList[index].title,
+                                    text: biblePageController.versesRawList[index].text,
+                                    colorHighlight: biblePageController.versesRawList[index].colorHighlight,
+                                    colorNumber: Theme.of(context).textTheme.bodyText2.color,
+                                    colorText: Theme.of(context).textTheme.bodyText1.color,
+                                    fontSize: biblePageController.fontSize,
+                                    fontHeight: biblePageController.fontHeight,
+                                    fontLetterSeparation: biblePageController.fontLetterSeparation,
 
-                                  onTap: ( ) {
-                                    biblePageController.onVerseTap(index + 1);
-                                  },
+                                    onTap: ( ) {
+                                      biblePageController.onVerseTap(index + 1);
+                                    },
 
-                                  onLongPress: (){
-                                    biblePageController.onVerseLongPress(index + 1);
-                                  },
+                                    onLongPress: (){
+                                      biblePageController.onVerseLongPress(index + 1);
+                                    },
+                                  ),
                                 )
                               );
                             },
@@ -347,8 +350,5 @@ class BiblePage extends StatelessWidget {
         ),
       ),
     );
-    
-    
-    
   }
 }
