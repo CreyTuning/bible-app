@@ -41,6 +41,7 @@ class BiblePageController extends GetxController {
   double fontSize = 20.0;
   double fontHeight = 1.8;
   double fontLetterSeparation = 0.0;
+  String fontFamily = "Nunito";
 
   @override
   void onInit() {

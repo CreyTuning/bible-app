@@ -305,7 +305,7 @@ class BiblePage extends StatelessWidget {
                                 index: index,
 
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                                  padding: const EdgeInsets.symmetric(horizontal: 25),
                                   child: Verse(
                                     highlight: biblePageController.versesRawList[index].highlight,
                                     selected: biblePageController.versesSelected.contains(index + 1),
@@ -318,6 +318,7 @@ class BiblePage extends StatelessWidget {
                                     fontSize: biblePageController.fontSize,
                                     fontHeight: biblePageController.fontHeight,
                                     fontLetterSeparation: biblePageController.fontLetterSeparation,
+                                    fontFamily: biblePageController.fontFamily,
 
                                     onTap: ( ) {
                                       biblePageController.onVerseTap(index + 1);

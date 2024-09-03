@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:simple_html_css/simple_html_css.dart';
-import 'package:yhwh/classes/BibleManager.dart';
 import 'package:yhwh/controllers/BiblePageController.dart';
 import 'package:yhwh/data/Define.dart';
 
@@ -34,8 +33,8 @@ class Verse extends StatelessWidget {
     @required this.text,
     @required this.title,
     @required this.highlight,
+    @required this.fontFamily,
 
-    this.fontFamily = 'Nunito',
     this.fontSize = 20.0,
     this.fontHeight  = 1.8,
     this.fontLetterSeparation = 0,
@@ -131,7 +130,6 @@ class Verse extends StatelessWidget {
                             'i' : TextStyle(
                               fontWeight: FontWeight.normal,
                               fontStyle: FontStyle.italic,
-                              // fontFamily: 'Times',
                               fontSize: this.fontSize,
                               backgroundColor: (this.highlight)
                                 ? colorHighlight
@@ -173,10 +171,10 @@ class Verse extends StatelessWidget {
               text: TextSpan(
                 text: element.replaceAll('#title_big ', ''),
                 style: Theme.of(context).textTheme.bodyText1.copyWith(
-                  fontFamily: "Nunito",
+                  fontFamily: this.fontFamily,
                   fontWeight: FontWeight.bold,
                   height: height,
-                  fontSize: fontSize + 5,
+                  fontSize: fontSize + 10,
                   letterSpacing: letterSeparation
                 ),
               ),
@@ -191,11 +189,11 @@ class Verse extends StatelessWidget {
           Container(
             width: double.infinity,
             child: RichText(
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.left,
               text: TextSpan(
                 text: element.replaceAll('#subtitle ', ''),
                 style: Theme.of(context).textTheme.bodyText1.copyWith(
-                  fontFamily: 'Nunito',
+                  fontFamily: this.fontFamily,
                   fontStyle: FontStyle.italic,
                   height: height,
                   fontSize: fontSize,
@@ -206,9 +204,9 @@ class Verse extends StatelessWidget {
           ),
         );
 
-        widgets.add(
-          Container(height: height * 10)
-        );
+        // widgets.add(
+        //   Container(height: height * 10)
+        // );
       }
 
       else if(element.split(' ')[0] == '#reference')
@@ -243,28 +241,27 @@ class Verse extends StatelessWidget {
           Container(
             width: double.infinity,
             child: RichText(
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.left,
               text: HTML.toTextSpan(
                 context,
                 element.replaceAll('#reference ', ''),
                 defaultTextStyle: Theme.of(context).textTheme.bodyText1.copyWith(
-                  fontFamily: 'Nunito',
-                  // fontStyle: FontStyle.italic,
+                  fontFamily: this.fontFamily,
                   fontWeight: FontWeight.normal,
                   height: height,
-                  fontSize: fontSize - 2,
+                  fontSize: fontSize - 3,
+                  fontStyle: FontStyle.italic,
                   letterSpacing: letterSeparation,
                 ),
 
                 overrideStyle: {
                   'a' : Theme.of(context).textTheme.bodyText1.copyWith(
-                    fontFamily: 'Nunito',
-                    // fontStyle: FontStyle.italic,
-                    fontWeight: FontWeight.normal,
+                    fontFamily: this.fontFamily,
+                    fontWeight: FontWeight.bold,
                     height: height,
-                    fontSize: fontSize - 2,
+                    fontSize: fontSize - 3,
+                    fontStyle: FontStyle.italic,
                     letterSpacing: letterSeparation,
-                    color: Color(0xff8ab4f8)
                   ),
                 },
 
@@ -287,9 +284,9 @@ class Verse extends StatelessWidget {
           ),
         );
 
-        widgets.add(
-          Container(height: height * 10)
-        );
+        // widgets.add(
+        //   Container(height: height * 10)
+        // );
       }
 
       else if(element.split(' ')[0] == '#center')
@@ -298,7 +295,7 @@ class Verse extends StatelessWidget {
           Container(
             width: double.infinity,
             child: RichText(
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.left,
               text: TextSpan(
                 text: element.replaceAll('#center ', ''),
                 style: Theme.of(context).textTheme.bodyText1.copyWith(
@@ -318,14 +315,15 @@ class Verse extends StatelessWidget {
           Container(
             width: double.infinity,
             child: RichText(
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.left,
               text: TextSpan(
                 text: element,
                 style: Theme.of(context).textTheme.bodyText1.copyWith(
-                  fontFamily: "Nunito",
-                  fontWeight: FontWeight.bold,
+                  fontFamily: this.fontFamily,
+                  fontWeight: FontWeight.w900,
+                  fontStyle: FontStyle.italic,
                   height: height,
-                  fontSize: fontSize + 2,
+                  fontSize: fontSize,
                   letterSpacing: letterSeparation
                 ),
               ),
@@ -336,7 +334,7 @@ class Verse extends StatelessWidget {
     });
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 6.0, 0, 0),
+      padding: EdgeInsets.fromLTRB(0, (this.verseNumber != 1) ? this.fontHeight + 30 : this.fontHeight + 8, 0, 0),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Column(
