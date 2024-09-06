@@ -235,8 +235,8 @@ class Verse extends StatelessWidget {
           element = element.replaceFirst('</x>', '</a>');
         }
 
-        print(element);
 
+        // agregar el widget
         widgets.add(
           Container(
             width: double.infinity,
