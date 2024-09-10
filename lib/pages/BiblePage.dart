@@ -319,6 +319,7 @@ class BiblePage extends StatelessWidget {
                                     fontHeight: biblePageController.fontHeight,
                                     fontLetterSeparation: biblePageController.fontLetterSeparation,
                                     fontFamily: biblePageController.fontFamily,
+                                    isFirstVerseShowed: (index == 0) ? true : false,
 
                                     onTap: ( ) {
                                       biblePageController.onVerseTap(index + 1);
@@ -326,6 +327,10 @@ class BiblePage extends StatelessWidget {
 
                                     onLongPress: (){
                                       biblePageController.onVerseLongPress(index + 1);
+                                    },
+
+                                    onReferenceTap: (int book, int chapter, int verse_from, int verse_to){
+                                      biblePageController.onReferenceTap(book: book, chapter: chapter, verse_from: verse_from, verse_to: verse_to);
                                     },
                                   ),
                                 )

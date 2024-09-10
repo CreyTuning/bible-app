@@ -13,6 +13,7 @@ import 'package:yhwh/bibles/RVR60/rvr60_verses.dart';
 import 'package:yhwh/classes/BibleManager.dart';
 import 'package:yhwh/classes/VerseRaw.dart';
 import 'package:yhwh/classes/hiveManagers/HighlighterManager.dart';
+import 'package:yhwh/controllers/BiblePageController.dart';
 import 'package:yhwh/data/Define.dart';
 import 'package:yhwh/data/valuesOfBooks.dart';
 import 'package:yhwh/models/highlighterItem.dart';
@@ -22,7 +23,7 @@ import 'package:yhwh/pages/VerseExplorer.dart';
 import 'package:yhwh/widgets/FloatingBible.dart';
 
 
-class BiblePageController extends GetxController {
+class FloatingBibleController extends GetxController {
   AutoScrollController autoScrollController;
   GetStorage getStorage = GetStorage();
   LazyBox highlighterBox;
@@ -32,6 +33,7 @@ class BiblePageController extends GetxController {
   int bookNumber = 1;
   int chapterNumber = 2;
   int verseNumber = 1;
+  int verseNumber_to = 1;
   bool selectionMode = false;
   double scrollOffset = 0;
 
@@ -51,12 +53,17 @@ class BiblePageController extends GetxController {
 
   @override
   void onReady() async {
-    scrollOffset = await getStorage.read('scrollOffset') ?? 0;
+    // scrollOffset = await getStorage.read('scrollOffset') ?? 0;
     autoScrollController = AutoScrollController(initialScrollOffset: scrollOffset);
 
     bookNumber = getStorage.read("bookNumber") ?? 1;
     chapterNumber = getStorage.read("chapterNumber") ?? 1;
     verseNumber = getStorage.read("verseNumber") ?? 1;
+
+    bookNumber = Get.arguments['book'];
+    chapterNumber = Get.arguments['chapter'];
+    verseNumber = Get.arguments['verse_from'];
+    verseNumber_to = Get.arguments['verse_to'];
     
     fontSize = getStorage.read("fontSize") ?? 20.0;
     fontHeight = getStorage.read("fontHeight") ?? 1.8;
@@ -125,18 +132,21 @@ class BiblePageController extends GetxController {
 
     // Crear versiculos
     for (int index = 0; index < valuesOfBooks[bookNumber -1][chapterNumber - 1]; index++) {
-      versesRawList.add(
-        VerseRaw(
-          text: verses[index],
-          // se debe cambiar la forma en la que se obotiene el titulo para solo usar un mapa con el formato '[book]:[chapter]:[verse]' como un id de tipo string
-          title: rvr60_titles.containsKey('$bookNumber:$chapterNumber:${index + 1}') == true ? rvr60_titles['$bookNumber:$chapterNumber:${index + 1}'] : null,
-          fontSize: fontSize,
-          fontHeight: fontHeight,
-          fontLetterSeparation: fontLetterSeparation,
-          highlight: highlightVerses.containsKey(index + 1) ? true : false,
-          colorHighlight: highlightVerses.containsKey(index + 1) ? Color(highlightVerses[index + 1].color) : Colors.transparent
-        )
-      );
+      if(index + 1 >= verseNumber && index + 1 <= verseNumber_to){
+        versesRawList.add(
+          VerseRaw(
+            text: verses[index],
+            verseNumber: index + 1,
+            // se debe cambiar la forma en la que se obotiene el titulo para solo usar un mapa con el formato '[book]:[chapter]:[verse]' como un id de tipo string
+            title: rvr60_titles.containsKey('$bookNumber:$chapterNumber:${index + 1}') == true ? rvr60_titles['$bookNumber:$chapterNumber:${index + 1}'] : null,
+            fontSize: fontSize,
+            fontHeight: fontHeight,
+            fontLetterSeparation: fontLetterSeparation,
+            highlight: highlightVerses.containsKey(index + 1) ? true : false,
+            colorHighlight: highlightVerses.containsKey(index + 1) ? Color(highlightVerses[index + 1].color) : Colors.transparent
+          )
+        );
+      }
     }
 
     return;
@@ -276,22 +286,12 @@ class BiblePageController extends GetxController {
   }
 
   void onReferenceTap({int book, int chapter, int verse_from, int verse_to}){
-    Get.dialog(
-      FloatingBible(),
-      barrierColor: Colors.transparent,
-      useSafeArea: true,
-      barrierDismissible: true,
-      arguments: {
-        'book': book,
-        'chapter': chapter,
-        'verse_from': verse_from,
-        'verse_to': verse_to
-      }
-    );
+    print(Get.arguments['book']);
+    Get.dialog(FloatingBible());
   }
 
-  void TESTER(){
-    // nothing
+  void ShowInBiblePage(){
+    BiblePageController _biblePageController = Get.find();
   }
 
 }

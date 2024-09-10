@@ -4,6 +4,7 @@ import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:simple_html_css/simple_html_css.dart';
 import 'package:yhwh/controllers/BiblePageController.dart';
 import 'package:yhwh/data/Define.dart';
+import 'package:yhwh/widgets/FloatingBible.dart';
 
 class Verse extends StatelessWidget {
   
@@ -26,6 +27,11 @@ class Verse extends StatelessWidget {
 
   final Callback onTap;
   final Callback onLongPress;
+  final Function onReferenceTap;
+
+  // sirver para gestionar el padding del titulo
+  // cuando es el primer vesiculo mostrado en pantalla
+  final bool isFirstVerseShowed;
   
   const Verse({
     Key key,
@@ -34,6 +40,7 @@ class Verse extends StatelessWidget {
     @required this.title,
     @required this.highlight,
     @required this.fontFamily,
+    @required this.isFirstVerseShowed,
 
     this.fontSize = 20.0,
     this.fontHeight  = 1.8,
@@ -45,7 +52,8 @@ class Verse extends StatelessWidget {
     this.selected = false,
 
     this.onTap,
-    this.onLongPress
+    this.onLongPress,
+    this.onReferenceTap
   }) : super(key: key);
 
   @override
@@ -267,17 +275,19 @@ class Verse extends StatelessWidget {
 
                 // CUANDO SE HACE CLICK EN LA REFERENCIA DE LOS SUBTITULOS
                 linksCallback: (link) {
-                  BiblePageController _biblePageController = Get.find();
 
                   List<String> split = link.toString().split(':');
                   int book = int.parse(split[0]);
                   int chapter = (split.length >= 2) ? int.parse(split[1]) : 1;
-                  int verse = (split.length >= 3) ? int.parse(split[2].split('-')[0]) : 1;
-                  // se hace una doble busqueda para evitar que el scroll no alcance el objetivo
-                  _biblePageController.setReference(book, chapter, verse);
-                  _biblePageController.update();
-                  _biblePageController.setReference(book, chapter, verse);
-                  _biblePageController.update();
+                  int verse_from = (split.length >= 3) ? int.parse(split[2].split('-')[0]) : 1;
+                  int verse_to = (split.length >= 3) ? int.parse(split[2].split('-')[1]) : 1;
+
+                  // BiblePageController _biblePageController = Get.find();
+                  // _biblePageController.onReferenceTap(book: book, chapter: chapter, verse_from: verse_from, verse_to: verse_to);
+
+                  this.onReferenceTap(book, chapter, verse_from, verse_to);
+
+                  // Get.dialog(FloatingBible(), barrierColor: Colors.transparent);
                 },
               ),
             ),
@@ -334,7 +344,7 @@ class Verse extends StatelessWidget {
     });
 
     return Padding(
-      padding: EdgeInsets.fromLTRB(0, (this.verseNumber != 1) ? this.fontHeight + 30 : this.fontHeight + 8, 0, 0),
+      padding: EdgeInsets.fromLTRB(0, (this.isFirstVerseShowed == false) ? this.fontHeight + 30 : this.fontHeight + 8, 0, 0),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Column(
