@@ -247,8 +247,8 @@ class BiblePage extends StatelessWidget {
                                         seleccion y presionar alguna otra funccion en pantalla.
                                       */
                                     },
-                                    icon: Icon(FontAwesomeIcons.highlighter),
-                                    iconSize: 22,
+                                    icon: Icon(Icons.bookmark_outline_rounded),
+                                    iconSize: 30,
                                   ),
                                                     
                                   Container(width: 5,),
@@ -264,8 +264,8 @@ class BiblePage extends StatelessWidget {
                                         seleccion y presionar alguna otra funccion en pantalla.
                                       */
                                     },
-                                    icon: Icon(FontAwesomeIcons.bars),
-                                    iconSize: 22,
+                                    icon: Icon(Icons.palette_outlined),
+                                    iconSize: 30,
                                   ),
                             
                                   Container(width: 10,)

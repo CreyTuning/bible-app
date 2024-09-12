@@ -1,15 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:uuid/uuid.dart';
 import 'package:yhwh/bibles/RVR60/rvr60_titles.dart';
-import 'package:yhwh/bibles/RVR60/rvr60_verses.dart';
 import 'package:yhwh/classes/BibleManager.dart';
 import 'package:yhwh/classes/VerseRaw.dart';
 import 'package:yhwh/classes/hiveManagers/HighlighterManager.dart';
@@ -18,7 +13,6 @@ import 'package:yhwh/data/Define.dart';
 import 'package:yhwh/data/valuesOfBooks.dart';
 import 'package:yhwh/models/highlighterItem.dart';
 import 'package:yhwh/pages/ReferencesPage.dart';
-import 'package:yhwh/data/Titles.dart';
 import 'package:yhwh/pages/VerseExplorer.dart';
 import 'package:yhwh/widgets/FloatingBible.dart';
 
@@ -31,7 +25,7 @@ class FloatingBibleController extends GetxController {
   bool isScreenReady = false;
 
   int bookNumber = 1;
-  int chapterNumber = 2;
+  int chapterNumber = 1;
   int verseNumber = 1;
   int verseNumber_to = 1;
   bool selectionMode = false;
@@ -46,6 +40,11 @@ class FloatingBibleController extends GetxController {
   double fontLetterSeparation = 0.0;
   String fontFamily = "Nunito";
 
+  double padding_width_landscape =  (Get.width * 0.15);
+  double padding_height_landscape = Get.height * 0.05 + (Get.width * 0.1);
+  double padding_width_portrait =  (Get.width * 0.05);
+  double padding_height_portrait = (Get.height * 0.1) + (Get.width * 0.1);
+
   @override
   void onInit() {
     super.onInit();
@@ -56,18 +55,23 @@ class FloatingBibleController extends GetxController {
     // scrollOffset = await getStorage.read('scrollOffset') ?? 0;
     autoScrollController = AutoScrollController(initialScrollOffset: scrollOffset);
 
-    bookNumber = getStorage.read("bookNumber") ?? 1;
-    chapterNumber = getStorage.read("chapterNumber") ?? 1;
-    verseNumber = getStorage.read("verseNumber") ?? 1;
-
     bookNumber = Get.arguments['book'];
     chapterNumber = Get.arguments['chapter'];
     verseNumber = Get.arguments['verse_from'];
     verseNumber_to = Get.arguments['verse_to'];
+
+    if(chapterNumber == 0) chapterNumber = 1;
+    if(verseNumber == 0) verseNumber = 1;
+    if(verseNumber_to == 0) verseNumber_to = valuesOfBooks[bookNumber - 1][chapterNumber - 1];
     
     fontSize = getStorage.read("fontSize") ?? 20.0;
     fontHeight = getStorage.read("fontHeight") ?? 1.8;
     fontLetterSeparation = getStorage.read("fontLetterSeparation") ?? 0;
+
+    padding_width_landscape = Get.width * 0.15;
+    padding_height_landscape = Get.height * 0.05;
+    padding_width_portrait = Get.width * 0.05;
+    padding_height_portrait = Get.height * 0.1;
 
     await updateVerseList();
     isScreenReady = true;

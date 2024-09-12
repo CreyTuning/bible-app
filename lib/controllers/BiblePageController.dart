@@ -286,7 +286,9 @@ class BiblePageController extends GetxController {
         'chapter': chapter,
         'verse_from': verse_from,
         'verse_to': verse_to
-      }
+      },
+      transitionDuration: Duration(milliseconds: 300),
+      transitionCurve: Curves.easeInOut
     );
   }
 

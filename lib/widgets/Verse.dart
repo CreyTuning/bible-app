@@ -278,9 +278,9 @@ class Verse extends StatelessWidget {
 
                   List<String> split = link.toString().split(':');
                   int book = int.parse(split[0]);
-                  int chapter = (split.length >= 2) ? int.parse(split[1]) : 1;
-                  int verse_from = (split.length >= 3) ? int.parse(split[2].split('-')[0]) : 1;
-                  int verse_to = (split.length >= 3) ? int.parse(split[2].split('-')[1]) : 1;
+                  int chapter = (split.length >= 2) ? int.parse(split[1]) : 0;
+                  int verse_from = (split.length >= 3) ? int.parse(split[2].split('-')[0]) : 0;
+                  int verse_to = (split.length >= 3) ? int.parse(split[2].split('-')[1]) : 0;
 
                   // BiblePageController _biblePageController = Get.find();
                   // _biblePageController.onReferenceTap(book: book, chapter: chapter, verse_from: verse_from, verse_to: verse_to);
