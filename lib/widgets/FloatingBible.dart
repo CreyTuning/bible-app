@@ -44,6 +44,7 @@ class FloatingBible extends StatelessWidget {
                         builder: (floatingBibleController) => NotificationListener<ScrollNotification>(
                           onNotification: floatingBibleController.scrollNotification,
                           child: RawScrollbar(
+                            controller: floatingBibleController.autoScrollController,
                             thumbColor: Theme.of(context).textTheme.bodyText1.color.withOpacity(0.4),
                             child: CustomScrollView(
                               controller: floatingBibleController.autoScrollController,
@@ -121,22 +122,18 @@ class FloatingBible extends StatelessWidget {
                                             ),
                                           ),
                                     
-                                          // IconButton(
-                                          //   tooltip: 'Abrir en la biblia',
-                                          //   onPressed: (){
-                                          //     floatingBibleController.cancelSelectionModeOnTap();
-                                          //     // Get.to(()=> ReadPreferences());
-                                          //     /*
-                                          //       Recuerda agregar floatingBibleController.cancelSelectionModeOnTap(),
-                                          //       para evitar un posible bug al momento de entrar en modo
-                                          //       seleccion y presionar alguna otra funccion en pantalla.
-                                          //     */
-                                          //   },
-                                          //   icon: Icon(Icons.open_in_new_rounded),
-                                          //   // iconSize: 25,
-                                          // ),
+                                          IconButton(
+                                            tooltip: 'Abrir en la biblia',
+                                            onPressed: (){
+                                              floatingBibleController.cancelSelectionModeOnTap();
+                                              floatingBibleController.ShowInBiblePage();
+                                              Get.back();
+                                            },
+                                            icon: Icon(Icons.open_in_new_rounded),
+                                            // iconSize: 25,
+                                          ),
                                     
-                                          // Container(width: 5),
+                                          Container(width: 5),
       
                                           IconButton(
                                             tooltip: 'Cerrar',
@@ -151,7 +148,7 @@ class FloatingBible extends StatelessWidget {
                                               */
                                             },
                                             icon: Icon(Icons.close_rounded),
-                                            // iconSize: 25,
+                                            iconSize: 27,
                                           ),
                                     
                                           Container(width: 5,)
@@ -207,15 +204,19 @@ class FloatingBible extends StatelessWidget {
                                             fontFamily: floatingBibleController.fontFamily,
                                             isFirstVerseShowed: (index == 0) ? true : false,
                             
-                                            onTap: ( ) {
-                                              floatingBibleController.onVerseTap(index + 1);
-                                            },
+                                            onTap: null,
+                                            // ( ) {
+                                            //   floatingBibleController.onVerseTap(index + 1);
+                                            // },
                             
-                                            onLongPress: (){
-                                              floatingBibleController.onVerseLongPress(index + 1);
-                                            },
+                                            onLongPress: null,
+                                            // (){
+                                            //   floatingBibleController.onVerseLongPress(index + 1);
+                                            // },
       
-                                            onReferenceTap: (){},
+                                            onReferenceTap: (int book, int chapter, int verse_from, int verse_to){
+                                              floatingBibleController.setReference(book, chapter, verse_from, verse_to);
+                                            },
                                           ),
                                         )
                                       );

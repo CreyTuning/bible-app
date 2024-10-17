@@ -160,6 +160,7 @@ class BiblePage extends StatelessWidget {
                 builder: (biblePageController) => NotificationListener<ScrollNotification>(
                   onNotification: biblePageController.scrollNotification,
                   child: RawScrollbar(
+                    controller: biblePageController.autoScrollController,
                     thumbColor: Theme.of(context).textTheme.bodyText1.color.withOpacity(0.4),
                     child: CustomScrollView(
                       controller: biblePageController.autoScrollController,
@@ -203,39 +204,11 @@ class BiblePage extends StatelessWidget {
                             firstChild: Container(
                               height: 65,
                               child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Tooltip(
-                                      message: 'Referencias',
-                                      child: InkWell(
-                                        borderRadius: BorderRadius.only(topRight: Radius.circular(30), bottomRight: Radius.circular(30)),
-                                        child: Container(
-                                          height: 55,
-                                          alignment: Alignment.centerLeft,
-                                          child: Padding(
-                                            padding: EdgeInsets.fromLTRB(12, 0, 0, 0),
-                                            child: RichText(
-                                              textAlign: TextAlign.left,
-                                              overflow: TextOverflow.ellipsis,
-                                              maxLines: 1,
-                                              text: TextSpan(
-                                                text: '${intToBook[biblePageController.bookNumber]} ${biblePageController.chapterNumber}',
-                                                style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                                  fontFamily: 'Roboto-Medium',
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 18,
-                                                ),
-                                              )
-                                            ),
-                                          ),
-                                        ),
-                            
-                                        onTap: biblePageController.referenceButtonOnTap,
-                                        
-                                      ),
-                                    ),
-                                  ),
-                                                    
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [      
+                                  Spacer(flex: 1),
+
                                   IconButton(
                                     tooltip: 'Resaltados',
                                     onPressed: (){
@@ -248,10 +221,42 @@ class BiblePage extends StatelessWidget {
                                       */
                                     },
                                     icon: Icon(Icons.bookmark_outline_rounded),
-                                    iconSize: 30,
+                                    iconSize: 26,
                                   ),
-                                                    
-                                  Container(width: 5,),
+
+                                  Spacer(flex: 10),
+
+                                  Tooltip(
+                                    message: 'Referencias',
+                                    child: InkWell(
+                                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                                      child: Container(
+                                        height: 55,
+                                        alignment: Alignment.center,
+                                        child: Padding(
+                                          padding: EdgeInsets.fromLTRB(24, 0, 24, 0),
+                                          child: RichText(
+                                            textAlign: TextAlign.left,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                            text: TextSpan(
+                                              text: '${intToBook[biblePageController.bookNumber]} ${biblePageController.chapterNumber}',
+                                              style: Theme.of(context).textTheme.bodyText1.copyWith(
+                                                fontFamily: 'Roboto-Medium',
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18,
+                                              ),
+                                            )
+                                          ),
+                                        ),
+                                      ),
+                            
+                                      onTap: biblePageController.referenceButtonOnTap,
+                                      
+                                    ),
+                                  ),
+
+                                  Spacer(flex: 10),
                             
                                   IconButton(
                                     tooltip: 'Ajustes visuales',
@@ -264,11 +269,11 @@ class BiblePage extends StatelessWidget {
                                         seleccion y presionar alguna otra funccion en pantalla.
                                       */
                                     },
-                                    icon: Icon(Icons.palette_outlined),
-                                    iconSize: 30,
+                                    icon: Icon(Icons.format_size_outlined),
+                                    iconSize: 26,
                                   ),
                             
-                                  Container(width: 10,)
+                                  Spacer(flex: 1),
                                 ],
                               )
                             ),

@@ -214,19 +214,22 @@ class FloatingBibleController extends GetxController {
     Get.to(()=> ReferencesPage());
   }
 
-  void setReference(int bookNumber, int chapterNumber, int verseNumber) async {
+  void setReference(int bookNumber, int chapterNumber, int verseNumber, int verseNumber_to) async {
     this.bookNumber = bookNumber;
     this.chapterNumber = chapterNumber;
     this.verseNumber = verseNumber;
+    this.verseNumber_to = verseNumber_to;
+
     getStorage.write("bookNumber", bookNumber);
     getStorage.write("chapterNumber", chapterNumber);
     getStorage.write("verseNumber", verseNumber);
+    getStorage.write("verseNumber_to", verseNumber_to);
 
     versesSelected = [];
     await updateVerseList();
     update();
     
-    autoScrollController.scrollToIndex(verseNumber - 1, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
+    autoScrollController.scrollToIndex(0, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
   }
 
   void setReferenceSafeScroll(int bookNumber, int chapterNumber, int verseNumber) async{
@@ -296,6 +299,7 @@ class FloatingBibleController extends GetxController {
 
   void ShowInBiblePage(){
     BiblePageController _biblePageController = Get.find();
+    _biblePageController.setReferenceSafeScroll(this.bookNumber, this.chapterNumber, this.verseNumber);
   }
 
 }

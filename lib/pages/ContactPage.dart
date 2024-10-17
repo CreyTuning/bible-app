@@ -133,7 +133,7 @@ class _ContactPageState extends State<ContactPage> {
                     ),
 
                     TextButton(
-                      child: Text('Version: 1.0.0',
+                      child: Text('Version: 0.1.1 beta',
                         style: TextStyle(
                           fontSize: 14,
                           fontFamily: 'Baloo',
