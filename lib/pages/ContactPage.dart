@@ -68,7 +68,7 @@ class _ContactPageState extends State<ContactPage> {
                 ),
     
                 InkWell(
-                  onTap: () => launch('https://github.com/llromerorr'),
+                  onTap: () => launch('https://github.com/llromerorr/yhwh/releases'),
                   child: Container(
                     height: 50,
                     child: Row(
@@ -133,7 +133,7 @@ class _ContactPageState extends State<ContactPage> {
                     ),
 
                     TextButton(
-                      child: Text('Version: 0.1.1 beta',
+                      child: Text('Version: 0.1.2 beta',
                         style: TextStyle(
                           fontSize: 14,
                           fontFamily: 'Baloo',
