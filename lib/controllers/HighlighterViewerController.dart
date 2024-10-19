@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:yhwh/classes/BibleManager.dart';
+import 'package:yhwh/controllers/BiblePageController.dart';
 import 'package:yhwh/models/highlighterItem.dart';
 
 class HighlighterViewerController extends GetxController {
@@ -23,5 +24,13 @@ class HighlighterViewerController extends GetxController {
     for(int number in highlighterItem.verses){
       verses.add([number, await BibleManager().getVerse(book: highlighterItem.book, chapter: highlighterItem.chapter, verse: number)]);
     }
+  }
+
+  void showInBible(){
+    BiblePageController _biblePageController = Get.find();
+    _biblePageController.cancelSelectionModeOnTap();
+    Get.back();
+    Get.back();
+    _biblePageController.setReferenceSafeScroll(highlighterItem.book, highlighterItem.chapter, highlighterItem.verses.first);
   }
 }

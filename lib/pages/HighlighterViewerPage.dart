@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:yhwh/controllers/BiblePageController.dart';
 import 'package:yhwh/controllers/HighlighterViewerController.dart';
 import 'package:yhwh/data/Define.dart';
 import 'package:yhwh/data/Titles.dart';
@@ -49,6 +50,15 @@ class HighlighterViewerPage extends StatelessWidget {
             icon: Icon(Icons.arrow_back, color: Theme.of(context).textTheme.bodyText1.color),
             onPressed: Get.back,
           ),
+
+          actions: [
+            IconButton(
+              tooltip: 'Abrir en la biblia',
+              onPressed: highlighterViewerController.showInBible,
+              icon: Icon(Icons.open_in_new_rounded),
+              // iconSize: 25,
+            ),
+          ],
 
           bottom: PreferredSize(
             child: Container(

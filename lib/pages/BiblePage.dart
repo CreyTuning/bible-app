@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:yhwh/controllers/BiblePageController.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:yhwh/controllers/MainPageController.dart';
+import 'package:yhwh/controllers/ReadPreferencesController.dart';
 import 'package:yhwh/data/Define.dart';
 import 'package:yhwh/pages/HighlighterCreate.dart';
 import 'package:yhwh/pages/HighlighterPage.dart';
@@ -261,15 +262,54 @@ class BiblePage extends StatelessWidget {
                                   IconButton(
                                     tooltip: 'Ajustes visuales',
                                     onPressed: (){
-                                      biblePageController.cancelSelectionModeOnTap();
-                                      Get.to(()=> ReadPreferences());
-                                      /*
-                                        Recuerda agregar biblePageController.cancelSelectionModeOnTap(),
-                                        para evitar un posible bug al momento de entrar en modo
-                                        seleccion y presionar alguna otra funccion en pantalla.
-                                      */
+
+                                      // ReadPreferencesController _readPreferencesController = Get.put(ReadPreferencesController());
+
+                                      showModalBottomSheet(
+                                        context: context,
+                                        isScrollControlled: true,
+                                        constraints: BoxConstraints(
+                                          maxHeight: 212
+                                        ),
+                                        backgroundColor: Colors.transparent,
+                                        barrierColor: Colors.transparent,
+                                        builder: (context) => StatefulBuilder(
+                                          builder: (context, setState) => Padding(
+                                            padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
+                                            child: BottomSheet(
+                                              backgroundColor: Colors.transparent,
+                                              enableDrag: false,
+                                              onClosing: (){},
+                                              builder: (context) => ReadPreferences(),
+                                            ),
+                                          )
+                                        ),
+                                      );
+
+
+
+                                      // Get.bottomSheet(
+                                      //   StatefulBuilder(builder: (context, setState) => BottomSheet(
+                                      //     backgroundColor: Colors.transparent,
+                                      //     enableDrag: false,
+                                      //     onClosing: (){},
+                                      //     builder: (context) => ReadPreferences(),
+
+
+                                      //   )),
+                                        
+                                      //   barrierColor: Colors.transparent,
+                                      //   backgroundColor: Colors.transparent,
+                                      //   elevation: 0,
+                                      //   enterBottomSheetDuration: Duration(milliseconds: 300),
+                                      //   persistent: true,
+                                      //   enableDrag: true,
+                                      // );
+
+                                      // biblePageController.cancelSelectionModeOnTap();
+                                      // Get.to(()=> ReadPreferences());
                                     },
-                                    icon: Icon(Icons.format_size_outlined),
+                                    icon: Icon(Icons.format_size),
                                     iconSize: 26,
                                   ),
                             
