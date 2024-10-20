@@ -161,6 +161,9 @@ class BiblePage extends StatelessWidget {
                 builder: (biblePageController) => NotificationListener<ScrollNotification>(
                   onNotification: biblePageController.scrollNotification,
                   child: RawScrollbar(
+                    interactive: true,
+                    radius: Radius.circular(30),
+                    timeToFade: Duration(seconds: 2),
                     controller: biblePageController.autoScrollController,
                     thumbColor: Theme.of(context).textTheme.bodyText1.color.withOpacity(0.4),
                     child: CustomScrollView(
@@ -269,13 +272,14 @@ class BiblePage extends StatelessWidget {
                                         context: context,
                                         isScrollControlled: true,
                                         constraints: BoxConstraints(
-                                          maxHeight: 212
+                                          maxHeight: 243,
+                                          minHeight: Get.size.height / 4,
                                         ),
                                         backgroundColor: Colors.transparent,
                                         barrierColor: Colors.transparent,
                                         builder: (context) => StatefulBuilder(
                                           builder: (context, setState) => Padding(
-                                            padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
+                                            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                                             child: BottomSheet(
                                               backgroundColor: Colors.transparent,
                                               enableDrag: false,

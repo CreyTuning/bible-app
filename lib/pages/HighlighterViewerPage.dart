@@ -70,23 +70,34 @@ class HighlighterViewerPage extends StatelessWidget {
           ),
         ),
 
-        body: Scrollbar(
-          child: ListView.builder(
-            padding: EdgeInsets.only(bottom: 75),
-            itemBuilder: (context, index) => Padding(
-              padding: EdgeInsets.only(top: (index > 0) ? highlighterViewerController.verses[index][0] != highlighterViewerController.verses[index - 1][0] + 1 ? 12.0 : 0.0 : 0.0),
-              child: Verse(
-                highlight: false,
-                verseNumber: highlighterViewerController.verses[index][0],
-                text: highlighterViewerController.verses[index][1],
-                title: titles[highlighterViewerController.highlighterItem.book][highlighterViewerController.highlighterItem.chapter].containsKey(highlighterViewerController.verses[index][0]) == true ? titles[highlighterViewerController.highlighterItem.book][highlighterViewerController.highlighterItem.chapter][highlighterViewerController.verses[index][0]] : null,
-                colorNumber: Theme.of(context).textTheme.bodyText2.color,
-                colorText: Theme.of(context).textTheme.bodyText1.color,
+        body: GetBuilder<BiblePageController>(
+          init: BiblePageController(),
+          builder: (biblePageController) => Scrollbar(
+            child: ListView.builder(
+              padding: EdgeInsets.only(bottom: 75),
+              itemBuilder: (context, index) => Padding(
+                padding: EdgeInsets.only(top: (index > 0) ? highlighterViewerController.verses[index][0] != highlighterViewerController.verses[index - 1][0] + 1 ? 12.0 : 0.0 : 0.0),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: Verse(
+                    highlight: false,
+                    verseNumber: highlighterViewerController.verses[index][0],
+                    text: highlighterViewerController.verses[index][1],
+                    title: titles[highlighterViewerController.highlighterItem.book][highlighterViewerController.highlighterItem.chapter].containsKey(highlighterViewerController.verses[index][0]) == true ? titles[highlighterViewerController.highlighterItem.book][highlighterViewerController.highlighterItem.chapter][highlighterViewerController.verses[index][0]] : null,
+                    colorNumber: Theme.of(context).textTheme.bodyText2.color,
+                    colorText: Theme.of(context).textTheme.bodyText1.color,
+                    fontSize: biblePageController.fontSize,
+                    fontHeight: biblePageController.fontHeight,
+                    fontLetterSeparation: biblePageController.fontLetterSeparation,
+                    fontFamily: biblePageController.fontFamily,
+                    isFirstVerseShowed: (index == 0) ? true : false,
+                  ),
+                ),
               ),
-            ),
-
-            itemCount: highlighterViewerController.verses.length,
-          )
+        
+              itemCount: highlighterViewerController.verses.length,
+            )
+          ),
         )
       ),
     );
