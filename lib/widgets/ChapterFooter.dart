@@ -3,8 +3,8 @@ import 'package:yhwh/data/Define.dart';
 
 class ChapterFooter extends StatefulWidget {
   ChapterFooter({
-    Key key,
-    this.bibleVersion
+    Key? key,
+    required this.bibleVersion
   }) : super(key: key);
 
   final String bibleVersion;
@@ -18,22 +18,6 @@ class _ChapterFooterState extends State<ChapterFooter> {
   @override
   Widget build(BuildContext context) {
 
-    if(widget.bibleVersion == null){
-      return Column(
-        children: <Widget>[
-          Divider(height: 25, color: Color(0x00)),
-          
-          Center(
-            child: CircularProgressIndicator(),
-          ),
-
-          Container(
-            height: MediaQuery.of(context).size.height / 5
-          )
-        ],
-      );
-    }
-
     return SliverToBoxAdapter(
       child: Column(
         children: <Widget>[
@@ -46,7 +30,7 @@ class _ChapterFooterState extends State<ChapterFooter> {
                   style: TextStyle(
                       fontSize: 15,
                       fontFamily: 'Baloo',
-                      color: Theme.of(context).textTheme.bodyText2.color,
+                      color: Theme.of(context).textTheme.bodyMedium!.color,
                       height: 1.2
                   )
                 ),
@@ -60,7 +44,7 @@ class _ChapterFooterState extends State<ChapterFooter> {
                 fontSize: 14,
                 fontFamily: 'Baloo',
                 fontWeight: FontWeight.bold,
-                color: Theme.of(context).textTheme.bodyText1.color
+                color: Theme.of(context).textTheme.bodyLarge!.color
               )
             ),
             onPressed: null,

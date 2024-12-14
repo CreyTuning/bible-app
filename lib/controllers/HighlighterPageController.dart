@@ -5,8 +5,8 @@ import 'package:yhwh/models/highlighterItem.dart';
 import 'package:yhwh/models/highlighterOrderItem.dart';
 
 class HighlighterPageController extends GetxController{
-  LazyBox highlighterBox;
-  LazyBox highlighterOrderBox;
+  LazyBox? highlighterBox;
+  LazyBox? highlighterOrderBox;
   final int lazyListAddMoreItemCount = 20;
   List<HighlighterItem> data = [];
 
@@ -24,12 +24,12 @@ class HighlighterPageController extends GetxController{
   }
 
   Future<void> lazyAddMoreData() async {
-    if(data.length < highlighterOrderBox.length){
+    if(data.length < highlighterOrderBox!.length){
       int initialLength = data.length;
 
-      for(int i = initialLength; i < limitNumber(initialLength + lazyListAddMoreItemCount, highlighterOrderBox.length); i++){
-        HighlighterOrderItem highlighterOrderItem = await highlighterOrderBox.getAt(highlighterOrderBox.length - 1 - i);
-        Map contentChapterList = await highlighterBox.get('${highlighterOrderItem.book}:${highlighterOrderItem.chapter}');
+      for(int i = initialLength; i < limitNumber(initialLength + lazyListAddMoreItemCount, highlighterOrderBox!.length); i++){
+        HighlighterOrderItem highlighterOrderItem = await highlighterOrderBox!.getAt(highlighterOrderBox!.length - 1 - i);
+        Map contentChapterList = await highlighterBox!.get('${highlighterOrderItem.book}:${highlighterOrderItem.chapter}');
         
         data.add(contentChapterList[highlighterOrderItem.id]);
       }
@@ -46,8 +46,8 @@ class HighlighterPageController extends GetxController{
 
   void clearList() async {
     data.clear();
-    await highlighterBox.clear();
-    await highlighterOrderBox.clear();
+    await highlighterBox!.clear();
+    await highlighterOrderBox!.clear();
 
     BiblePageController biblePageController = Get.find();
     await biblePageController.updateVerseList();

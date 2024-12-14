@@ -1,16 +1,15 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:yhwh/classes/AppTheme.dart';
 import 'package:yhwh/controllers/BiblePageController.dart';
 import 'package:yhwh/controllers/ReadPreferencesController.dart';
-import 'package:yhwh/widgets/Verse.dart';
+import 'package:yhwh/data/Themes.dart';
 
 class ReadPreferences extends StatelessWidget {
-  const ReadPreferences({Key key}) : super(key: key);
+  const ReadPreferences({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +28,7 @@ class ReadPreferences extends StatelessWidget {
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24, tileMode: TileMode.mirror),
           child: Scaffold(
-            backgroundColor: Theme.of(context).canvasColor.withOpacity(0.4),
+            backgroundColor: Theme.of(context).canvasColor.withValues(alpha: 0.4),
             // appBar: AppBar(
             //   elevation: 0,
             //   backgroundColor: Colors.transparent,
@@ -79,7 +78,7 @@ class ReadPreferences extends StatelessWidget {
                           width: 60,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
-                            color: Theme.of(context).textTheme.bodyText1.color.withOpacity(0.5)
+                            color: Theme.of(context).textTheme.bodyLarge!.color!.withValues(alpha: 0.5)
                           ),
                         ),
                       ),
@@ -100,8 +99,8 @@ class ReadPreferences extends StatelessWidget {
                               readPreferencesController.onFontSizeChangeEnd(value);
                             },
 
-                            activeColor: Theme.of(context).textTheme.bodyText1.color,
-                            inactiveColor: Theme.of(context).textTheme.bodyText1.color.withOpacity(0.2), //Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
+                            activeColor: Theme.of(context).textTheme.bodyLarge!.color,
+                            inactiveColor: Theme.of(context).textTheme.bodyLarge!.color!.withValues(alpha: 0.2), //Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
                             value: biblePageController.fontSize, // AQUI
                             min: 18,
                             max: 30,
@@ -130,8 +129,8 @@ class ReadPreferences extends StatelessWidget {
                               readPreferencesController.onFontHeightChangeEnd(value);
                             },
 
-                            activeColor: Theme.of(context).textTheme.bodyText1.color,
-                            inactiveColor: Theme.of(context).textTheme.bodyText1.color.withOpacity(0.2), //Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
+                            activeColor: Theme.of(context).textTheme.bodyLarge!.color,
+                            inactiveColor: Theme.of(context).textTheme.bodyLarge!.color!.withValues(alpha: 0.2), //Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
                             value: biblePageController.fontHeight,
                             min: 1.05,
                             max: 3.05,
@@ -161,8 +160,8 @@ class ReadPreferences extends StatelessWidget {
                               readPreferencesController.onFontLetterSeparationChangeEnd(value);
                             },
 
-                            activeColor: Theme.of(context).textTheme.bodyText1.color,
-                            inactiveColor: Theme.of(context).textTheme.bodyText1.color.withOpacity(0.2), //Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
+                            activeColor: Theme.of(context).textTheme.bodyLarge!.color,
+                            inactiveColor: Theme.of(context).textTheme.bodyLarge!.color!.withValues(alpha: 0.2), //Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
                             value: biblePageController.fontLetterSeparation,
                             min: -1.5,
                             max: 5,
@@ -179,20 +178,17 @@ class ReadPreferences extends StatelessWidget {
                     ListTile(
                       title: Row(
                         children: [
-                          Icon(FontAwesomeIcons.palette, color: Theme.of(context).textTheme.bodyText1.color),
+                          Icon(FontAwesomeIcons.palette, color: Theme.of(context).textTheme.bodyLarge!.color),
                           
                           SizedBox(width: 25),
 
                           Text('Temas de colores',
-                            style: Theme.of(context).textTheme.bodyText1.copyWith(
+                            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                               // fontWeight: FontWeight.bold,
                               fontFamily: 'Roboto-Medium',
                             ),
                           ),
                         ]
-                        
-                        
-                        
                       ),
 
                       onTap: (){
@@ -209,16 +205,16 @@ class ReadPreferences extends StatelessWidget {
                                 ),
                                 
                                 child: Scaffold(
-                                  backgroundColor: Colors.transparent,
+                                  backgroundColor: Theme.of(context).canvasColor,
                                   
                                   appBar: AppBar(
-                                    backgroundColor: Colors.transparent,
+                                    backgroundColor: Theme.of(context).canvasColor,
                                     elevation: 0,
                                     title: Text('Temas de colores'),
 
                                     leading: IconButton(
                                       tooltip: 'Volver',
-                                      icon: Icon(Icons.arrow_back, color: Theme.of(context).textTheme.bodyText1.color),
+                                      icon: Icon(Icons.arrow_back, color: Theme.of(context).textTheme.bodyLarge!.color),
                                       onPressed: Get.back,
                                     ),
 
@@ -237,170 +233,40 @@ class ReadPreferences extends StatelessWidget {
                                     builder: (readPreferencesController) => Column(
                                       children: [
                                         Expanded(
-                                          child: ListView(
-                                            children: [
-                                              ListTile(
-                                                title: Text('Claro',
-                                                  style: Theme.of(context).textTheme.bodyText1,
-                                                ),
-
-                                                leading: Icon(Icons.brightness_5),
-                                                onTap: (){
-                                                  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-                                                    statusBarColor: Colors.transparent,
-                                                    statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark ,
-                                                    systemNavigationBarIconBrightness: Brightness.dark,
-                                                    systemNavigationBarColor: AppTheme.light.canvasColor
-                                                  ));
-                                                  
-                                                  readPreferencesController.setTheme('light');
-                                                },
-                                              ),
-
-                                              ListTile(
-                                                title: Text('Oscuro',
-                                                  style: Theme.of(context).textTheme.bodyText1,
-                                                ),
-
-                                                leading: Icon(Icons.brightness_3),
-                                                onTap: (){
-                                                  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-                                                    statusBarColor: Colors.transparent,
-                                                    statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark ,
-                                                    systemNavigationBarIconBrightness: Brightness.light,
-                                                    systemNavigationBarColor: AppTheme.dark.canvasColor
-                                                  ));
-                                                  
-                                                  readPreferencesController.setTheme('dark');
-                                                },
-                                              ),
-
-                                              ListTile(
-                                                title: Text('Negro',
-                                                  style: Theme.of(context).textTheme.bodyText1,
-                                                ),
-
-                                                leading: Icon(Icons.brightness_1),
-                                                onTap: (){
-                                                  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-                                                    statusBarColor: Colors.transparent,
-                                                    statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark ,
-                                                    systemNavigationBarIconBrightness: Brightness.light,
-                                                    systemNavigationBarColor: AppTheme.black.canvasColor
-                                                  ));
-                                                  
-                                                  readPreferencesController.setTheme('black');
-                                                },
-                                              ),
-
-                                              Divider(
-                                                color: Theme.of(context).dividerColor,
-                                              ),
-
-                                              ListTile(
-                                                title: Text('Space Cadet',
-                                                  style: Theme.of(context).textTheme.bodyText1,
-                                                ),
-
-                                                //leading: Icon(Icons.brightness_1, color: Color(0xff2b2d42)),
+                                          child: ListView.builder(
+                                            itemCount: themes.length,
+                                            itemBuilder: (BuildContext context, int index) {
+                                              return ListTile(
+                                                title: Text('${themes.keys.elementAt(index)}'),
                                                 leading: Stack(
                                                   alignment: Alignment.center,
                                                   children: [
-                                                    Icon(Icons.brightness_1, color: Theme.of(context).textTheme.bodyText1.color),
-                                                    
                                                     Container(
-                                                    width: 15,
-                                                    height: 15,
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle, 
-                                                      color: Color(0xff2b2d42),
+                                                      height: 38,
+                                                      width: 38,
+                                                      decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        color: Theme.of(context).textTheme.bodyLarge!.color!.withValues(alpha: 0.9),
+                                                      ),
                                                     ),
-                                                  ),
+                                          
+                                                    IconButton(
+                                                      icon: Icon(Icons.circle),
+                                                      iconSize: 40,
+                                                      color: AppTheme.getTheme(themes.keys.elementAt(index)).canvasColor,
+                                                      onPressed: (){
+                                                        // biblePageController.addToHighlighter(Color(colors[index]));
+                                                        // Get.back();
+                                                      },
+                                                    ),
                                                   ],
                                                 ),
 
                                                 onTap: (){
-                                                  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-                                                    statusBarColor: Colors.transparent,
-                                                    statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark ,
-                                                    systemNavigationBarIconBrightness: Brightness.light,
-                                                    systemNavigationBarColor: AppTheme.spaceCadet.canvasColor
-                                                  ));
-                                                  
-                                                  readPreferencesController.setTheme('spaceCadet');
+                                                  readPreferencesController.setTheme(themes.keys.elementAt(index));
                                                 },
-                                              ),
-
-                                              ListTile(
-                                                title: Text('Charcoal',
-                                                  style: Theme.of(context).textTheme.bodyText1,
-                                                ),
-
-                                                //leading: Icon(Icons.brightness_1, color: Color(0xff2b2d42)),
-                                                leading: Stack(
-                                                  alignment: Alignment.center,
-                                                  children: [
-                                                    Icon(Icons.brightness_1, color: Theme.of(context).textTheme.bodyText1.color),
-                                                    
-                                                    Container(
-                                                    width: 15,
-                                                    height: 15,
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle, 
-                                                      color: Color(0xff264653),
-                                                    ),
-                                                  ),
-                                                  ],
-                                                ),
-
-                                                onTap: (){
-                                                  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-                                                    statusBarColor: Colors.transparent,
-                                                    statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark ,
-                                                    systemNavigationBarIconBrightness: Brightness.light,
-                                                    systemNavigationBarColor: AppTheme.charcoal.canvasColor
-                                                  ));
-                                                  
-                                                  readPreferencesController.setTheme('charcoal');
-                                                },
-                                              ),
-
-                                              ListTile(
-                                                title: Text('Pansy Purple',
-                                                  style: Theme.of(context).textTheme.bodyText1,
-                                                ),
-
-                                                //leading: Icon(Icons.brightness_1, color: Color(0xff2b2d42)),
-                                                leading: Stack(
-                                                  alignment: Alignment.center,
-                                                  children: [
-                                                    Icon(Icons.brightness_1, color: Theme.of(context).textTheme.bodyText1.color),
-                                                    
-                                                    Container(
-                                                    width: 15,
-                                                    height: 15,
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle, 
-                                                      color: Color(0xff830b53),
-                                                    ),
-                                                  ),
-                                                  ],
-                                                ),
-
-                                                onTap: (){
-                                                  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-                                                    statusBarColor: Colors.transparent,
-                                                    statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark ,
-                                                    systemNavigationBarIconBrightness: Brightness.light,
-                                                    systemNavigationBarColor: AppTheme.pansyPurple.canvasColor
-                                                  ));
-                                                  
-                                                  readPreferencesController.setTheme('pansyPurple');
-                                                },
-                                              ),
-
-
-                                            ],
+                                              );
+                                            },
                                           ),
                                         ),
 

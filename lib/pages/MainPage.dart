@@ -11,13 +11,16 @@ import 'package:yhwh/pages/ContactPage.dart';
 class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark ,
       systemNavigationBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark,
-      systemNavigationBarColor: Theme.of(context).canvasColor
+      systemNavigationBarColor: Colors.transparent,
+      systemNavigationBarContrastEnforced: false
     ));
+
 
     return Scaffold(
       extendBody: true,
@@ -29,7 +32,6 @@ class MainPage extends StatelessWidget {
           switch (controller.mainPagetabIndex) {
             case 0:
               return BiblePage();
-              break;
             case 1:
               return ContactPage();
             default:
@@ -46,7 +48,7 @@ class MainPage extends StatelessWidget {
             foregroundDecoration: BoxDecoration(
               border: Border(
                 top: BorderSide(
-                  color: Theme.of(context).dividerColor,
+                  color: Theme.of(context).dividerColor.withValues(alpha: 0.7),
                   width: 1.5
                 )
               )
@@ -59,9 +61,9 @@ class MainPage extends StatelessWidget {
                   currentIndex: _.mainPagetabIndex,
                   elevation: 0,
                   type: BottomNavigationBarType.fixed,
-                  backgroundColor: Theme.of(context).bottomNavigationBarTheme.backgroundColor.withOpacity(0.5),
-                  selectedItemColor: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
-                  unselectedItemColor: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+                  backgroundColor: Theme.of(context).canvasColor.withValues(alpha: 0.8),
+                  selectedItemColor: Theme.of(context).indicatorColor.withValues(alpha: 0.9),
+                  unselectedItemColor: Theme.of(context).indicatorColor.withValues(alpha: 0.6),
               
                   items: [
                     BottomNavigationBarItem(

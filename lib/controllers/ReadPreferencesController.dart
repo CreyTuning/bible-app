@@ -1,5 +1,3 @@
-import 'package:flutter/animation.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:yhwh/classes/AppTheme.dart';

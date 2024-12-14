@@ -20,7 +20,7 @@ class HighlighterItemAdapter extends TypeAdapter<HighlighterItem> {
       id: fields[0] as String,
       book: fields[2] as int,
       chapter: fields[3] as int,
-      verses: (fields[4] as List)?.cast<int>(),
+      verses: (fields[4] as List).cast<int>(),
       color: fields[1] as int,
       dateTime: fields[5] as DateTime,
     );

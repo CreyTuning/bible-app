@@ -4,7 +4,7 @@ import 'package:yhwh/controllers/BiblePageController.dart';
 import 'package:yhwh/models/highlighterItem.dart';
 
 class HighlighterViewerController extends GetxController {
-  HighlighterItem highlighterItem;
+  HighlighterItem? highlighterItem;
   List<List> verses = [];
 
   @override
@@ -21,8 +21,8 @@ class HighlighterViewerController extends GetxController {
   }
 
   Future<void> initVerses() async {
-    for(int number in highlighterItem.verses){
-      verses.add([number, await BibleManager().getVerse(book: highlighterItem.book, chapter: highlighterItem.chapter, verse: number)]);
+    for(int number in highlighterItem!.verses){
+      verses.add([number, await BibleManager().getVerse(book: highlighterItem!.book, chapter: highlighterItem!.chapter, verse: number)]);
     }
   }
 
@@ -31,6 +31,6 @@ class HighlighterViewerController extends GetxController {
     _biblePageController.cancelSelectionModeOnTap();
     Get.back();
     Get.back();
-    _biblePageController.setReferenceSafeScroll(highlighterItem.book, highlighterItem.chapter, highlighterItem.verses.first);
+    _biblePageController.setReferenceSafeScroll(highlighterItem!.book, highlighterItem!.chapter, highlighterItem!.verses.first);
   }
 }

@@ -1,35 +1,35 @@
 import 'package:flutter/material.dart';
 
 class VerseRaw {
-  int verseNumber;
+  int? verseNumber;
   
-  String title;
-  String text;  
+  String? title;
+  String? text;  
 
-  String fontFamily;
-  double fontSize;
-  double fontHeight;
-  double fontLetterSeparation;
+  String? fontFamily;
+  double? fontSize;
+  double? fontHeight;
+  double? fontLetterSeparation;
 
-  Color colorText;
-  Color colorNumber;
-  Color colorHighlight;
+  Color? colorText;
+  Color? colorNumber;
+  Color? colorHighlight;
 
-  bool highlight;
-  bool selected;
+  bool? highlight;
+  bool? selected;
 
   VerseRaw({
-    this.verseNumber,
-    this.title,
-    this.text,
-    this.fontFamily,
-    this.fontSize,
-    this.fontHeight,
-    this.fontLetterSeparation,
-    this.colorText,
-    this.colorNumber,
-    this.colorHighlight,
-    this.highlight,
-    this.selected
+    required this.verseNumber,
+    required this.title,
+    required this.text,
+    required this.fontFamily,
+    required this.fontSize,
+    required this.fontHeight,
+    required this.fontLetterSeparation,
+    required this.colorText,
+    required this.colorNumber,
+    required this.colorHighlight,
+    required this.highlight,
+    required this.selected
   });
 }

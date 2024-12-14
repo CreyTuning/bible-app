@@ -13,15 +13,14 @@ import 'package:yhwh/data/Define.dart';
 import 'package:yhwh/data/valuesOfBooks.dart';
 import 'package:yhwh/models/highlighterItem.dart';
 import 'package:yhwh/pages/ReferencesPage.dart';
-import 'package:yhwh/pages/VerseExplorer.dart';
 import 'package:yhwh/widgets/FloatingBible.dart';
 
 
 class FloatingBibleController extends GetxController {
-  AutoScrollController autoScrollController;
+  AutoScrollController? autoScrollController;
   GetStorage getStorage = GetStorage();
-  LazyBox highlighterBox;
-  LazyBox highlighterOrderBox;
+  LazyBox? highlighterBox;
+  LazyBox? highlighterOrderBox;
   bool isScreenReady = false;
 
   int bookNumber = 1;
@@ -82,7 +81,7 @@ class FloatingBibleController extends GetxController {
   bool scrollNotification(notification) {
     if(notification is ScrollEndNotification){
       // Save scroll offset
-      scrollOffset = autoScrollController.offset;
+      scrollOffset = autoScrollController!.offset;
       getStorage.write('scrollOffset', scrollOffset);
     }
 
@@ -141,13 +140,17 @@ class FloatingBibleController extends GetxController {
           VerseRaw(
             text: verses[index],
             verseNumber: index + 1,
+            colorNumber: Colors.transparent,
+            colorText: Colors.transparent,
+            fontFamily: "",
+            selected: false,
             // se debe cambiar la forma en la que se obotiene el titulo para solo usar un mapa con el formato '[book]:[chapter]:[verse]' como un id de tipo string
             title: rvr60_titles.containsKey('$bookNumber:$chapterNumber:${index + 1}') == true ? rvr60_titles['$bookNumber:$chapterNumber:${index + 1}'] : null,
             fontSize: fontSize,
             fontHeight: fontHeight,
             fontLetterSeparation: fontLetterSeparation,
             highlight: highlightVerses.containsKey(index + 1) ? true : false,
-            colorHighlight: highlightVerses.containsKey(index + 1) ? Color(highlightVerses[index + 1].color) : Colors.transparent
+            colorHighlight: highlightVerses.containsKey(index + 1) ? Color(highlightVerses[index + 1]!.color) : Colors.transparent
           )
         );
       }
@@ -158,7 +161,7 @@ class FloatingBibleController extends GetxController {
 
 
   void nextChapter() async {
-    autoScrollController.animateTo(0, duration: Duration(milliseconds: 500), curve: Curves.easeOut);
+    autoScrollController!.animateTo(0, duration: Duration(milliseconds: 500), curve: Curves.easeOut);
 
     if (chapterNumber < namesAndChapters[bookNumber - 1][1]) {
       chapterNumber++;
@@ -185,7 +188,7 @@ class FloatingBibleController extends GetxController {
   }
 
   void previusChapter() async {
-    autoScrollController.animateTo(0, duration: Duration(milliseconds: 500), curve: Curves.easeOut);
+    autoScrollController!.animateTo(0, duration: Duration(milliseconds: 500), curve: Curves.easeOut);
     
     if (chapterNumber > 1) {
       chapterNumber--;
@@ -229,7 +232,7 @@ class FloatingBibleController extends GetxController {
     await updateVerseList();
     update();
     
-    autoScrollController.scrollToIndex(0, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
+    autoScrollController!.scrollToIndex(0, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
   }
 
   void setReferenceSafeScroll(int bookNumber, int chapterNumber, int verseNumber) async{
@@ -244,8 +247,8 @@ class FloatingBibleController extends GetxController {
     await updateVerseList();
     update();
     
-    autoScrollController.scrollToIndex(verseNumber - 1, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
-    autoScrollController.scrollToIndex(verseNumber - 1, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
+    autoScrollController!.scrollToIndex(verseNumber - 1, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
+    autoScrollController!.scrollToIndex(verseNumber - 1, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
   }
 
   void addToHighlighter(Color color) async {
@@ -285,14 +288,14 @@ class FloatingBibleController extends GetxController {
     cancelSelectionModeOnTap();
   }
 
-  void showVerseExplorer({int book, int chapter, int verse}){
-    Get.to(()=> 
-      VerseExplorer(),
-      arguments: [book, chapter, verse]
-    );
-  }
+  // void showVerseExplorer({int? book, int? chapter, int? verse}){
+  //   Get.to(()=> 
+  //     VerseExplorer(),
+  //     arguments: [book, chapter, verse]
+  //   );
+  // }
 
-  void onReferenceTap({int book, int chapter, int verse_from, int verse_to}){
+  void onReferenceTap({int? book, int? chapter, int? verse_from, int? verse_to}){
     print(Get.arguments['book']);
     Get.dialog(FloatingBible());
   }

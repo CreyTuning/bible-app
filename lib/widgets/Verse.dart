@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:simple_html_css/simple_html_css.dart';
-import 'package:yhwh/controllers/BiblePageController.dart';
 import 'package:yhwh/data/Define.dart';
-import 'package:yhwh/widgets/FloatingBible.dart';
 
 class Verse extends StatelessWidget {
   
@@ -25,22 +22,22 @@ class Verse extends StatelessWidget {
   final bool highlight;
   final bool selected;
 
-  final Callback onTap;
-  final Callback onLongPress;
-  final Function onReferenceTap;
+  final Callback? onTap;
+  final Callback? onLongPress;
+  final Function? onReferenceTap;
 
   // sirver para gestionar el padding del titulo
   // cuando es el primer vesiculo mostrado en pantalla
   final bool isFirstVerseShowed;
   
   const Verse({
-    Key key,
-    @required this.verseNumber,
-    @required this.text,
-    @required this.title,
-    @required this.highlight,
-    @required this.fontFamily,
-    @required this.isFirstVerseShowed,
+    Key? key,
+    required this.verseNumber,
+    required this.text,
+    required this.title,
+    required this.highlight,
+    required this.fontFamily,
+    required this.isFirstVerseShowed,
 
     this.fontSize = 20.0,
     this.fontHeight  = 1.8,
@@ -64,7 +61,7 @@ class Verse extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         
         children: [
-          this.title == null ? SizedBox() : textToTitle(
+          this.title == "" ? SizedBox() : textToTitle(
             context: context,
             fontSize: this.fontSize,
             height: this.fontHeight,
@@ -76,18 +73,17 @@ class Verse extends StatelessWidget {
             child: Row(
               children: [
                 AnimatedContainer(
-                  color: Theme.of(context).textTheme.bodyText2.color,
+                  color: Theme.of(context).textTheme.bodyMedium!.color,
                   height: double.infinity,
                   width: this.selected ? 5 : 0,
                   duration: Duration(milliseconds: 150),
                 ),
 
                 Flexible(
-                  child: InkWell(
+                  child: GestureDetector(
                     onTap: this.onTap,
                     onLongPress: this.onLongPress,
-                    highlightColor: Colors.transparent,
-                    splashColor: Colors.transparent,
+                    
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
                       
@@ -112,7 +108,7 @@ class Verse extends StatelessWidget {
                             'red' : TextStyle(
                               color: (this.highlight)
                                 ? Theme.of(context).brightness == Brightness.light
-                                  ? Theme.of(context).textTheme.bodyText1.color
+                                  ? Theme.of(context).textTheme.bodyLarge!.color
                                   : Theme.of(context).canvasColor
                                 : Theme.of(context).brightness == Brightness.light ? Color(0xffe75649) : Color(0xffe06c75)
                             ),
@@ -130,9 +126,9 @@ class Verse extends StatelessWidget {
                                 : Colors.transparent,
                               color: (this.highlight)
                                 ? Theme.of(context).brightness == Brightness.light
-                                  ? Theme.of(context).textTheme.bodyText1.color
+                                  ? Theme.of(context).textTheme.bodyLarge!.color
                                   : Theme.of(context).canvasColor
-                                : Theme.of(context).textTheme.bodyText1.color,
+                                : Theme.of(context).textTheme.bodyLarge!.color,
                             ),
 
                             'i' : TextStyle(
@@ -144,7 +140,7 @@ class Verse extends StatelessWidget {
                                 : Colors.transparent,
                               color: (this.highlight)
                                 ? Theme.of(context).brightness == Brightness.light
-                                  ? Theme.of(context).textTheme.bodyText1.color
+                                  ? Theme.of(context).textTheme.bodyLarge!.color
                                   : Theme.of(context).canvasColor
                                 : Theme.of(context).brightness == Brightness.light ? Color(0xffae7123) : Color(0xffe5c064)
                             )
@@ -162,8 +158,8 @@ class Verse extends StatelessWidget {
     );
   }
 
-  Widget textToTitle({BuildContext context, String text, double height, double fontSize, double letterSeparation}){
-    List<String> split = text.split('\n');
+  Widget textToTitle({BuildContext? context, String? text, double? height, double? fontSize, double? letterSeparation}){
+    List<String> split = text!.split('\n');
     List<Widget> widgets = [];
 
 
@@ -178,11 +174,11 @@ class Verse extends StatelessWidget {
               textAlign: TextAlign.center,
               text: TextSpan(
                 text: element.replaceAll('#title_big ', ''),
-                style: Theme.of(context).textTheme.bodyText1.copyWith(
+                style: Theme.of(context!).textTheme.bodyLarge!.copyWith(
                   fontFamily: this.fontFamily,
                   fontWeight: FontWeight.bold,
                   height: height,
-                  fontSize: fontSize + 10,
+                  fontSize: fontSize! + 10,
                   letterSpacing: letterSeparation
                 ),
               ),
@@ -200,7 +196,7 @@ class Verse extends StatelessWidget {
               textAlign: TextAlign.left,
               text: TextSpan(
                 text: element.replaceAll('#subtitle ', ''),
-                style: Theme.of(context).textTheme.bodyText1.copyWith(
+                style: Theme.of(context!).textTheme.bodyLarge!.copyWith(
                   fontFamily: this.fontFamily,
                   fontStyle: FontStyle.italic,
                   height: height,
@@ -251,19 +247,19 @@ class Verse extends StatelessWidget {
             child: RichText(
               textAlign: TextAlign.left,
               text: HTML.toTextSpan(
-                context,
+                context!,
                 element.replaceAll('#reference ', ''),
-                defaultTextStyle: Theme.of(context).textTheme.bodyText1.copyWith(
+                defaultTextStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
                   fontFamily: this.fontFamily,
                   fontWeight: FontWeight.normal,
                   height: height,
-                  fontSize: fontSize - 3,
+                  fontSize: fontSize! - 3,
                   fontStyle: FontStyle.italic,
                   letterSpacing: letterSeparation,
                 ),
 
                 overrideStyle: {
-                  'a' : Theme.of(context).textTheme.bodyText1.copyWith(
+                  'a' : Theme.of(context).textTheme.bodyLarge!.copyWith(
                     fontFamily: this.fontFamily,
                     fontWeight: FontWeight.bold,
                     height: height,
@@ -285,7 +281,7 @@ class Verse extends StatelessWidget {
                   // BiblePageController _biblePageController = Get.find();
                   // _biblePageController.onReferenceTap(book: book, chapter: chapter, verse_from: verse_from, verse_to: verse_to);
 
-                  this.onReferenceTap(book, chapter, verse_from, verse_to);
+                  this.onReferenceTap!(book, chapter, verse_from, verse_to);
 
                   // Get.dialog(FloatingBible(), barrierColor: Colors.transparent);
                 },
@@ -308,7 +304,7 @@ class Verse extends StatelessWidget {
               textAlign: TextAlign.left,
               text: TextSpan(
                 text: element.replaceAll('#center ', ''),
-                style: Theme.of(context).textTheme.bodyText1.copyWith(
+                style: Theme.of(context!).textTheme.bodyLarge!.copyWith(
                   fontWeight: FontWeight.bold,
                   height: height,
                   fontSize: fontSize,
@@ -328,7 +324,7 @@ class Verse extends StatelessWidget {
               textAlign: TextAlign.left,
               text: TextSpan(
                 text: element,
-                style: Theme.of(context).textTheme.bodyText1.copyWith(
+                style: Theme.of(context!).textTheme.bodyLarge!.copyWith(
                   fontFamily: this.fontFamily,
                   fontWeight: FontWeight.w900,
                   fontStyle: FontStyle.italic,

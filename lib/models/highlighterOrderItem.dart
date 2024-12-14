@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
 import 'package:yhwh/data/Define.dart';
 
@@ -10,7 +9,7 @@ part 'highlighterOrderItem.g.dart';
   @HiveField(1) int book;
   @HiveField(2) int chapter;
 
-  HighlighterOrderItem({@required this.id, @required this.book, @required this.chapter});
+  HighlighterOrderItem({required this.id, required this.book, required this.chapter});
 
   @override
   String toString() {

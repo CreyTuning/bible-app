@@ -1,15 +1,12 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:uuid/uuid.dart';
 import 'package:yhwh/bibles/RVR60/rvr60_titles.dart';
-import 'package:yhwh/bibles/RVR60/rvr60_verses.dart';
 import 'package:yhwh/classes/BibleManager.dart';
 import 'package:yhwh/classes/VerseRaw.dart';
 import 'package:yhwh/classes/hiveManagers/HighlighterManager.dart';
@@ -17,16 +14,14 @@ import 'package:yhwh/data/Define.dart';
 import 'package:yhwh/data/valuesOfBooks.dart';
 import 'package:yhwh/models/highlighterItem.dart';
 import 'package:yhwh/pages/ReferencesPage.dart';
-import 'package:yhwh/data/Titles.dart';
-import 'package:yhwh/pages/VerseExplorer.dart';
 import 'package:yhwh/widgets/FloatingBible.dart';
 
 
 class BiblePageController extends GetxController {
-  AutoScrollController autoScrollController;
+  AutoScrollController? autoScrollController;
   GetStorage getStorage = GetStorage();
-  LazyBox highlighterBox;
-  LazyBox highlighterOrderBox;
+  LazyBox? highlighterBox;
+  LazyBox? highlighterOrderBox;
   bool isScreenReady = false;
 
   int bookNumber = 1;
@@ -71,7 +66,7 @@ class BiblePageController extends GetxController {
   bool scrollNotification(notification) {
     if(notification is ScrollEndNotification){
       // Save scroll offset
-      scrollOffset = autoScrollController.offset;
+      scrollOffset = autoScrollController!.offset;
       getStorage.write('scrollOffset', scrollOffset);
     }
 
@@ -104,6 +99,8 @@ class BiblePageController extends GetxController {
   }
 
   void onVerseLongPress(int index){
+    HapticFeedback.vibrate();
+    
     if(!selectionMode){
       selectionMode = true;
       onVerseTap(index);
@@ -127,14 +124,19 @@ class BiblePageController extends GetxController {
     for (int index = 0; index < valuesOfBooks[bookNumber -1][chapterNumber - 1]; index++) {
       versesRawList.add(
         VerseRaw(
+          verseNumber: index + 1,
+          selected: false,
+          colorNumber: Colors.transparent,
+          colorText: Colors.transparent,
+          fontFamily: "",
           text: verses[index],
           // se debe cambiar la forma en la que se obotiene el titulo para solo usar un mapa con el formato '[book]:[chapter]:[verse]' como un id de tipo string
-          title: rvr60_titles.containsKey('$bookNumber:$chapterNumber:${index + 1}') == true ? rvr60_titles['$bookNumber:$chapterNumber:${index + 1}'] : null,
+          title: rvr60_titles.containsKey('$bookNumber:$chapterNumber:${index + 1}') == true ? rvr60_titles['$bookNumber:$chapterNumber:${index + 1}'] : "",
           fontSize: fontSize,
           fontHeight: fontHeight,
           fontLetterSeparation: fontLetterSeparation,
           highlight: highlightVerses.containsKey(index + 1) ? true : false,
-          colorHighlight: highlightVerses.containsKey(index + 1) ? Color(highlightVerses[index + 1].color) : Colors.transparent
+          colorHighlight: highlightVerses.containsKey(index + 1) ? Color(highlightVerses[index + 1]!.color) : Colors.transparent
         )
       );
     }
@@ -144,7 +146,7 @@ class BiblePageController extends GetxController {
 
 
   void nextChapter() async {
-    autoScrollController.animateTo(0, duration: Duration(milliseconds: 500), curve: Curves.easeOut);
+    autoScrollController!.animateTo(0, duration: Duration(milliseconds: 500), curve: Curves.easeOut);
 
     if (chapterNumber < namesAndChapters[bookNumber - 1][1]) {
       chapterNumber++;
@@ -171,7 +173,7 @@ class BiblePageController extends GetxController {
   }
 
   void previusChapter() async {
-    autoScrollController.animateTo(0, duration: Duration(milliseconds: 500), curve: Curves.easeOut);
+    autoScrollController!.animateTo(0, duration: Duration(milliseconds: 500), curve: Curves.easeOut);
     
     if (chapterNumber > 1) {
       chapterNumber--;
@@ -212,7 +214,7 @@ class BiblePageController extends GetxController {
     await updateVerseList();
     update();
     
-    autoScrollController.scrollToIndex(verseNumber - 1, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
+    autoScrollController!.scrollToIndex(verseNumber - 1, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
   }
 
   void setReferenceSafeScroll(int bookNumber, int chapterNumber, int verseNumber) async{
@@ -227,8 +229,8 @@ class BiblePageController extends GetxController {
     await updateVerseList();
     update();
     
-    autoScrollController.scrollToIndex(verseNumber - 1, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
-    autoScrollController.scrollToIndex(verseNumber - 1, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
+    autoScrollController!.scrollToIndex(verseNumber - 1, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
+    autoScrollController!.scrollToIndex(verseNumber - 1, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
   }
 
   void addToHighlighter(Color color) async {
@@ -268,14 +270,14 @@ class BiblePageController extends GetxController {
     cancelSelectionModeOnTap();
   }
 
-  void showVerseExplorer({int book, int chapter, int verse}){
-    Get.to(()=> 
-      VerseExplorer(),
-      arguments: [book, chapter, verse]
-    );
-  }
+  // void showVerseExplorer({int? book, int? chapter, int? verse}){
+  //   Get.to(()=> 
+  //     VerseExplorer(),
+  //     arguments: [book, chapter, verse]
+  //   );
+  // }
 
-  void onReferenceTap({int book, int chapter, int verse_from, int verse_to}){
+  void onReferenceTap({int? book, int? chapter, int? verse_from, int? verse_to}){
     Get.dialog(
       FloatingBible(),
       barrierColor: Colors.transparent,

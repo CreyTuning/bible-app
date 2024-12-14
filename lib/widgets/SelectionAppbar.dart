@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class SelectionAppbar extends StatefulWidget {
   SelectionAppbar({
-    Key key,
-    @required this.child,
-    @required this.appbar,
-    @required this.visible
+    Key? key,
+    required this.child,
+    required this.appbar,
+    required this.visible
   }) : super(key: key);
 
   final Widget child;

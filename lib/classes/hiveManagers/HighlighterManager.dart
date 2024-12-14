@@ -3,8 +3,8 @@ import 'package:yhwh/models/highlighterItem.dart';
 import 'package:yhwh/models/highlighterOrderItem.dart';
 
 class HighlighterManager {
-  static LazyBox highlighterBox;
-  static LazyBox highlighterOrderBox;
+  static LazyBox? highlighterBox;
+  static LazyBox? highlighterOrderBox;
 
   static Future<void> initBoxes() async {
     highlighterBox = await Hive.openLazyBox('highlighterBox');
@@ -25,7 +25,7 @@ class HighlighterManager {
     List<int> highlightVerses = [];
 
     // obtener versos resaltados
-    Map tempHil = await highlighterBox.get('$book:$chapter', defaultValue: {}) ?? {};
+    Map tempHil = await highlighterBox!.get('$book:$chapter', defaultValue: {}) ?? {};
     tempHil.forEach((key, value) => highlightVerses.addAll(value.verses));
 
     return highlightVerses;
@@ -37,7 +37,7 @@ class HighlighterManager {
     Map<int, HighlighterItem> highlightVerses = {};
 
     // obtener versos resaltados
-    Map tempHil = await highlighterBox.get('$book:$chapter', defaultValue: {}) ?? {};
+    Map tempHil = await highlighterBox!.get('$book:$chapter', defaultValue: {}) ?? {};
     
     // Agregar al mapa
     tempHil.forEach((key, value) {
@@ -53,8 +53,8 @@ class HighlighterManager {
   static Future<void> add(HighlighterItem highlighterItem) async {
     await checkBoxesState();
 
-    if(highlighterBox.containsKey('${highlighterItem.book}:${highlighterItem.chapter}')) {
-      Map contentChapterList = await highlighterBox.get('${highlighterItem.book}:${highlighterItem.chapter}');
+    if(highlighterBox!.containsKey('${highlighterItem.book}:${highlighterItem.chapter}')) {
+      Map contentChapterList = await highlighterBox!.get('${highlighterItem.book}:${highlighterItem.chapter}');
       
       // Verificar si existen versiculos que sobreescribir y hacerlo
       bool existToRemove = false;
@@ -72,15 +72,15 @@ class HighlighterManager {
       
       // Agregar nuevos versiculos
       contentChapterList[highlighterItem.id] = highlighterItem;
-      await highlighterBox.put('${highlighterItem.book}:${highlighterItem.chapter}', contentChapterList);
+      await highlighterBox!.put('${highlighterItem.book}:${highlighterItem.chapter}', contentChapterList);
     }
     
     else {
-      await highlighterBox.put('${highlighterItem.book}:${highlighterItem.chapter}', {highlighterItem.id : highlighterItem});
+      await highlighterBox!.put('${highlighterItem.book}:${highlighterItem.chapter}', {highlighterItem.id : highlighterItem});
     }
 
     // Agregar al highlighterOrderBox [Esto no puede ir antes de removeVersesInChapter()]
-    await highlighterOrderBox.add(HighlighterOrderItem(
+    await highlighterOrderBox!.add(HighlighterOrderItem(
       book: highlighterItem.book,
       chapter: highlighterItem.chapter,
       id: highlighterItem.id
@@ -88,7 +88,7 @@ class HighlighterManager {
   }
 
   static Future<Map> removeVersesInChapter(int book, int chapter, List<int> versesToRemove) async {
-    Map contentChapterList = await highlighterBox.get('$book:$chapter');
+    Map contentChapterList = await highlighterBox!.get('$book:$chapter');
     Map newMap = {};
     
     // Borrar versos
@@ -115,22 +115,22 @@ class HighlighterManager {
     });
 
     // Guardar el nuevo mapa
-    await  highlighterBox.put('$book:$chapter', newMap);
+    await  highlighterBox!.put('$book:$chapter', newMap);
 
     // lIMPIAR KEYS NULAS EN CASO DE EXISTIR
-    for(var key in highlighterOrderBox.keys){
+    for(var key in highlighterOrderBox!.keys){
         
-      HighlighterOrderItem highlighterOrderItem = await highlighterOrderBox.get(key);
+      HighlighterOrderItem highlighterOrderItem = await highlighterOrderBox!.get(key);
 
-      if(!highlighterBox.containsKey('${highlighterOrderItem.book}:${highlighterOrderItem.chapter}')){
-        await highlighterOrderBox.delete(key);
+      if(!highlighterBox!.containsKey('${highlighterOrderItem.book}:${highlighterOrderItem.chapter}')){
+        await highlighterOrderBox!.delete(key);
       }
       
       else {  
-        Map tempContent = await highlighterBox.get('${highlighterOrderItem.book}:${highlighterOrderItem.chapter}');
+        Map tempContent = await highlighterBox!.get('${highlighterOrderItem.book}:${highlighterOrderItem.chapter}');
 
         if(!tempContent.containsKey(highlighterOrderItem.id)){
-          await highlighterOrderBox.delete(key);
+          await highlighterOrderBox!.delete(key);
         }
       }
     }

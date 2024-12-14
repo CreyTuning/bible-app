@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:yhwh/controllers/BiblePageController.dart';
 
 class HihglighterCreate extends StatelessWidget {
-  const HihglighterCreate({Key key}) : super(key: key);
+  const HihglighterCreate({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class HihglighterCreate extends StatelessWidget {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: Theme.of(context).textTheme.bodyText1.color.withOpacity(0.9),
+                          color: Theme.of(context).textTheme.bodyLarge!.color!.withValues(alpha: 0.9),
                           width: 2.0,
                         ),
                       ),
@@ -51,8 +51,8 @@ class HihglighterCreate extends StatelessWidget {
                       icon: Icon(Icons.delete_outlined),
                       iconSize: 25,
                       tooltip: 'Eliminar relsaltado',
-                      color: Theme.of(context).textTheme.bodyText1.color,
-                      disabledColor: Theme.of(context).textTheme.bodyText1.color,
+                      color: Theme.of(context).textTheme.bodyLarge!.color,
+                      disabledColor: Theme.of(context).textTheme.bodyLarge!.color,
                       onPressed: (){
                         biblePageController.removeFromHighlighter();
                         biblePageController.cancelSelectionModeOnTap();
@@ -105,7 +105,7 @@ class HihglighterCreate extends StatelessWidget {
                     width: 38,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Theme.of(context).textTheme.bodyText1.color.withOpacity(0.9),
+                      color: Theme.of(context).textTheme.bodyLarge!.color!.withValues(alpha: 0.9),
                     ),
                   ),
         
@@ -123,6 +123,7 @@ class HihglighterCreate extends StatelessWidget {
             }
         
             return widget;
+            return null;
           }
         );
       },

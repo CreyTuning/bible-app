@@ -45,13 +45,13 @@ class FloatingBible extends StatelessWidget {
                           onNotification: floatingBibleController.scrollNotification,
                           child: RawScrollbar(
                             controller: floatingBibleController.autoScrollController,
-                            thumbColor: Theme.of(context).textTheme.bodyText1.color.withOpacity(0.4),
+                            thumbColor: Theme.of(context).textTheme.bodyLarge!.color!.withValues(alpha: 0.4),
                             child: CustomScrollView(
                               controller: floatingBibleController.autoScrollController,
                               slivers: [
                                 // AppBar
                                 SliverAppBar(
-                                  backgroundColor: Theme.of(context).appBarTheme.backgroundColor.withOpacity(0.2),
+                                  backgroundColor: Theme.of(context).appBarTheme.backgroundColor!.withValues(alpha: 0.2),
                                   primary: true,
                                   floating: false,
                                   automaticallyImplyLeading: false,
@@ -106,7 +106,7 @@ class FloatingBible extends StatelessWidget {
                                                       maxLines: 1,
                                                       text: TextSpan(
                                                         text: '${intToAbreviatura[floatingBibleController.bookNumber]} ${floatingBibleController.chapterNumber}:${floatingBibleController.verseNumber}-${floatingBibleController.verseNumber_to}',
-                                                        style: Theme.of(context).textTheme.bodyText1.copyWith(
+                                                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                                                           fontFamily: 'Roboto-Medium',
                                                           fontWeight: FontWeight.bold,
                                                           fontSize: 18,
@@ -184,36 +184,25 @@ class FloatingBible extends StatelessWidget {
                                     (BuildContext buildContext, int index){
                                       return AutoScrollTag(
                                         key: ValueKey(index),
-                                        controller: floatingBibleController.autoScrollController,
+                                        controller: floatingBibleController.autoScrollController!,
                                         index: index,
                             
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(horizontal: 15),
                                           child: Verse(
-                                            highlight: floatingBibleController.versesRawList[index].highlight,
+                                            highlight: floatingBibleController.versesRawList[index].highlight!,
                                             selected: floatingBibleController.versesSelected.contains(index + 1),
-                                            verseNumber: floatingBibleController.versesRawList[index].verseNumber,
-                                            title: floatingBibleController.versesRawList[index].title,
-                                            text: floatingBibleController.versesRawList[index].text,
-                                            colorHighlight: floatingBibleController.versesRawList[index].colorHighlight,
-                                            colorNumber: Theme.of(context).textTheme.bodyText2.color,
-                                            colorText: Theme.of(context).textTheme.bodyText1.color,
+                                            verseNumber: floatingBibleController.versesRawList[index].verseNumber!,
+                                            title: floatingBibleController.versesRawList[index].title!,
+                                            text: floatingBibleController.versesRawList[index].text!,
+                                            colorHighlight: floatingBibleController.versesRawList[index].colorHighlight!,
+                                            colorNumber: Theme.of(context).textTheme.bodyMedium!.color!,
+                                            colorText: Theme.of(context).textTheme.bodyLarge!.color!,
                                             fontSize: floatingBibleController.fontSize,
                                             fontHeight: floatingBibleController.fontHeight,
                                             fontLetterSeparation: floatingBibleController.fontLetterSeparation,
                                             fontFamily: floatingBibleController.fontFamily,
                                             isFirstVerseShowed: (index == 0) ? true : false,
-                            
-                                            onTap: null,
-                                            // ( ) {
-                                            //   floatingBibleController.onVerseTap(index + 1);
-                                            // },
-                            
-                                            onLongPress: null,
-                                            // (){
-                                            //   floatingBibleController.onVerseLongPress(index + 1);
-                                            // },
-      
                                             onReferenceTap: (int book, int chapter, int verse_from, int verse_to){
                                               floatingBibleController.setReference(book, chapter, verse_from, verse_to);
                                             },

@@ -10,18 +10,12 @@ class HighlighterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark ,
-      systemNavigationBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark,
-      systemNavigationBarColor: Theme.of(context).canvasColor
-    ));
-
     return Scaffold(
+      backgroundColor: Theme.of(context).canvasColor,
       appBar: AppBar(
+        scrolledUnderElevation: 0,
         title: Text('Resaltados',
-          style: Theme.of(context).textTheme.bodyText1.copyWith(
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
             fontSize: 21,
             fontWeight: FontWeight.bold
           )
@@ -31,13 +25,13 @@ class HighlighterPage extends StatelessWidget {
         
         leading: IconButton(
           tooltip: 'Volver',
-          icon: Icon(Icons.arrow_back, color: Theme.of(context).textTheme.bodyText1.color),
+          icon: Icon(Icons.arrow_back, color: Theme.of(context).textTheme.bodyLarge!.color),
           onPressed: Get.back,
         ),
 
         bottom: PreferredSize(
           child: Container(
-            color: Theme.of(context).dividerColor,
+            color: Theme.of(context).dividerColor.withValues(alpha: 0.8),
             height: 1.5
           ),
           
@@ -45,48 +39,51 @@ class HighlighterPage extends StatelessWidget {
         ),
       ),
 
-      floatingActionButton: GetBuilder<HighlighterPageController>(
-        init: HighlighterPageController(),
-        builder: (highlighterPageController) => Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            MaterialButton(
-              height: 57,
-              elevation: 8,
-              color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
-              child: Icon(Icons.delete, color: Theme.of(context).textTheme.bodyText1.color),
-              shape: CircleBorder(),
-              onPressed: highlighterPageController.clearList
-            ),
-          ],
-        )
-      ),
+      // floatingActionButton: GetBuilder<HighlighterPageController>(
+      //   init: HighlighterPageController(),
+      //   builder: (highlighterPageController) => Column(
+      //     mainAxisSize: MainAxisSize.min,
+      //     children: [
+      //       MaterialButton(
+      //         height: 57,
+      //         elevation: 8,
+      //         color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
+      //         child: Icon(Icons.delete, color: Theme.of(context).textTheme.bodyLarge!.color),
+      //         shape: CircleBorder(),
+      //         onPressed: highlighterPageController.clearList
+      //       ),
+      //     ],
+      //   )
+      // ),
 
       body: GetBuilder<HighlighterPageController>(
         init: HighlighterPageController(),
         builder: (highlighterPageController) => LazyLoadScrollView(
           onEndOfPage: highlighterPageController.lazyAddMoreData,
-          child: Scrollbar(
-            child: ListView.separated(
-              itemCount: highlighterPageController.data.length,
-              padding: EdgeInsets.only(bottom: 75),
-              
-              separatorBuilder: (context, index) => Divider(
-                color: Theme.of(context).dividerColor,
-                height: 0,
-                thickness: 0,
-                indent: 12,
-                endIndent: 12,
+          child: Padding(
+            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewPadding.bottom),
+            child: Scrollbar(
+              child: ListView.separated(
+                itemCount: highlighterPageController.data.length,
+                padding: EdgeInsets.only(bottom: 75),
+                
+                separatorBuilder: (context, index) => Divider(
+                  color: Theme.of(context).dividerColor,
+                  height: 0,
+                  thickness: 0,
+                  indent: 12,
+                  endIndent: 12,
+                ),
+                
+                itemBuilder: (context, index){
+                  return CardVerseHightlight(
+                    highlighterItem: highlighterPageController.data[index],
+                    onTap: (){
+                      Get.to(()=> HighlighterViewerPage(), arguments: highlighterPageController.data[index]);
+                    },
+                  );
+                }
               ),
-              
-              itemBuilder: (context, index){
-                return CardVerseHightlight(
-                  highlighterItem: highlighterPageController.data[index],
-                  onTap: (){
-                    Get.to(()=> HighlighterViewerPage(), arguments: highlighterPageController.data[index]);
-                  },
-                );
-              }
             ),
           ),
         ),

@@ -8,18 +8,18 @@ import 'package:yhwh/data/valuesOfBooks.dart';
 import 'package:get_storage/get_storage.dart';
 
 class ReferencesPageController extends GetxController {
-  PageController pageController;
-  AutoScrollController bookAutoScrollController;
-  AutoScrollController chapterAutoScrollController;
-  AutoScrollController verseAutoScrollController;
+  PageController? pageController;
+  AutoScrollController? bookAutoScrollController;
+  AutoScrollController? chapterAutoScrollController;
+  AutoScrollController? verseAutoScrollController;
   double buttonHeight = 60.0;
   int scrollItemDistance = 6;
 
   // Search view
   GetStorage getStorage = GetStorage();
   List<List<int>> searchList = [];
-  TextEditingController textEditingController;
-  ScrollController searchListScrollController;
+  TextEditingController? textEditingController;
+  ScrollController? searchListScrollController;
 
   @override
   void onInit() {
@@ -35,27 +35,27 @@ class ReferencesPageController extends GetxController {
   @override
   void onReady() {
     BiblePageController biblePageController = Get.find();
-    bookAutoScrollController.scrollToIndex(biblePageController.bookNumber - 1, preferPosition: AutoScrollPosition.middle);
-    chapterAutoScrollController.scrollToIndex(biblePageController.chapterNumber - 1, preferPosition: AutoScrollPosition.middle);
-    verseAutoScrollController.scrollToIndex(biblePageController.verseNumber - 1, preferPosition: AutoScrollPosition.middle);
+    bookAutoScrollController!.scrollToIndex(biblePageController.bookNumber - 1, preferPosition: AutoScrollPosition.middle);
+    chapterAutoScrollController!.scrollToIndex(biblePageController.chapterNumber - 1, preferPosition: AutoScrollPosition.middle);
+    verseAutoScrollController!.scrollToIndex(biblePageController.verseNumber - 1, preferPosition: AutoScrollPosition.middle);
     
     // get text from box and update search list
-    textEditingController.text = getStorage.read("referencesPageSearchViewTextFieldControllerText") ?? '';
-    updateSearchListFromText(textEditingController.text);
+    textEditingController!.text = getStorage.read("referencesPageSearchViewTextFieldControllerText") ?? '';
+    updateSearchListFromText(textEditingController!.text);
     
     super.onReady();
   }
 
   void bookListOnSelect(int index){
-    bookAutoScrollController.scrollToIndex(index, preferPosition: AutoScrollPosition.middle);
+    bookAutoScrollController!.scrollToIndex(index, preferPosition: AutoScrollPosition.middle);
   }
 
   void chapterListOnSelect(int index){
-    chapterAutoScrollController.scrollToIndex(index, preferPosition: AutoScrollPosition.middle);
+    chapterAutoScrollController!.scrollToIndex(index, preferPosition: AutoScrollPosition.middle);
   }
 
   void verseListOnSelect(int index){
-    verseAutoScrollController.scrollToIndex(index, preferPosition: AutoScrollPosition.middle);
+    verseAutoScrollController!.scrollToIndex(index, preferPosition: AutoScrollPosition.middle);
   }
 
   void updateSearchListFromText(String text){
@@ -77,7 +77,7 @@ class ReferencesPageController extends GetxController {
         // LIBRO + CHAPTER
         if(split.length == 2 && split[0].isAlphabetOnly && split[1].isNum){
           for(int i = 0; i < 66; i++){
-            if(removeDiacritics(intToBook[i + 1]).isCaseInsensitiveContains(removeDiacritics(split[0])) || removeDiacritics(intToAbreviatura[i + 1]).isCaseInsensitiveContains(removeDiacritics(split[0]))){
+            if(removeDiacritics(intToBook[i + 1]!).isCaseInsensitiveContains(removeDiacritics(split[0])) || removeDiacritics(intToAbreviatura[i + 1]!).isCaseInsensitiveContains(removeDiacritics(split[0]))){
               searchList.add([i + 1, valuesOfBooksChapterAdjuster(i + 1, int.parse(split[1])), 1]);
             }
           }
@@ -86,7 +86,7 @@ class ReferencesPageController extends GetxController {
         // LIBRO + CHAPTER + VERSE
         else if(split.length == 3 && split[0].isAlphabetOnly && split[1].isNum && split[2].isNum){
           for(int i = 0; i < 66; i++){
-            if(removeDiacritics(intToBook[i + 1]).isCaseInsensitiveContains(removeDiacritics(split[0])) || removeDiacritics(intToAbreviatura[i + 1]).isCaseInsensitiveContains(removeDiacritics(split[0]))){
+            if(removeDiacritics(intToBook[i + 1]!).isCaseInsensitiveContains(removeDiacritics(split[0])) || removeDiacritics(intToAbreviatura[i + 1]!).isCaseInsensitiveContains(removeDiacritics(split[0]))){
               searchList.add([i + 1, valuesOfBooksChapterAdjuster(i + 1, int.parse(split[1])), valuesOfBooksVerseAdjuster(i + 1, valuesOfBooksChapterAdjuster(i + 1, int.parse(split[1])), int.parse(split[2])) ]);
             }
           }
@@ -95,7 +95,7 @@ class ReferencesPageController extends GetxController {
         // LIBRO + CHAPTER + VERSE
         else if(split.length == 3 && split[0].isAlphabetOnly && split[1].isNum && split[2].isNum){
           for(int i = 0; i < 66; i++){
-            if(removeDiacritics(intToBook[i + 1]).isCaseInsensitiveContains(removeDiacritics(split[0])) || removeDiacritics(intToAbreviatura[i + 1]).isCaseInsensitiveContains(removeDiacritics(split[0]))){
+            if(removeDiacritics(intToBook[i + 1]!).isCaseInsensitiveContains(removeDiacritics(split[0])) || removeDiacritics(intToAbreviatura[i + 1]!).isCaseInsensitiveContains(removeDiacritics(split[0]))){
               searchList.add([i + 1, valuesOfBooksChapterAdjuster(i + 1, int.parse(split[1])), valuesOfBooksVerseAdjuster(i + 1, valuesOfBooksChapterAdjuster(i + 1, int.parse(split[1])), int.parse(split[2]))]);
             }
           }
@@ -104,7 +104,7 @@ class ReferencesPageController extends GetxController {
         // NUMBER + LIBRO
         else if(split.length == 2 && split[0].isNum && split[1].isAlphabetOnly){
           for(int i = 0; i < 66; i++){
-            if(removeDiacritics(intToBook[i + 1]).isCaseInsensitiveContains(removeDiacritics('${split[0]} ${split[1]}')) || removeDiacritics(intToAbreviatura[i + 1]).isCaseInsensitiveContains(removeDiacritics('${split[0]} ${split[1]}'))){
+            if(removeDiacritics(intToBook[i + 1]!).isCaseInsensitiveContains(removeDiacritics('${split[0]} ${split[1]}')) || removeDiacritics(intToAbreviatura[i + 1]!).isCaseInsensitiveContains(removeDiacritics('${split[0]} ${split[1]}'))){
               searchList.add([i + 1, 1, 1]);
             }
           }
@@ -113,7 +113,7 @@ class ReferencesPageController extends GetxController {
         // NUMBER + LIBRO + CHAPTER
         else if(split.length == 3 && split[0].isNum && split[1].isAlphabetOnly && split[2].isNum){
           for(int i = 0; i < 66; i++){
-            if(removeDiacritics(intToBook[i + 1]).isCaseInsensitiveContains(removeDiacritics('${split[0]} ${split[1]}')) || removeDiacritics(intToAbreviatura[i + 1]).isCaseInsensitiveContains(removeDiacritics('${split[0]} ${split[1]}'))){
+            if(removeDiacritics(intToBook[i + 1]!).isCaseInsensitiveContains(removeDiacritics('${split[0]} ${split[1]}')) || removeDiacritics(intToAbreviatura[i + 1]!).isCaseInsensitiveContains(removeDiacritics('${split[0]} ${split[1]}'))){
               searchList.add([i + 1, valuesOfBooksChapterAdjuster(i + 1, int.parse(split[2])), 1]);
             }
           }
@@ -122,7 +122,7 @@ class ReferencesPageController extends GetxController {
         // NUMBER + LIBRO + CHAPTER + VERSE
         else if(split.length == 4 && split[0].isNum && split[1].isAlphabetOnly && split[2].isNum && split[3].isNum){
           for(int i = 0; i < 66; i++){
-            if(removeDiacritics(intToBook[i + 1]).isCaseInsensitiveContains(removeDiacritics('${split[0]} ${split[1]}')) || removeDiacritics(intToAbreviatura[i + 1]).isCaseInsensitiveContains(removeDiacritics('${split[0]} ${split[1]}'))){
+            if(removeDiacritics(intToBook[i + 1]!).isCaseInsensitiveContains(removeDiacritics('${split[0]} ${split[1]}')) || removeDiacritics(intToAbreviatura[i + 1]!).isCaseInsensitiveContains(removeDiacritics('${split[0]} ${split[1]}'))){
               searchList.add([i + 1, valuesOfBooksChapterAdjuster(i + 1, int.parse(split[2])), valuesOfBooksVerseAdjuster(i + 1, valuesOfBooksChapterAdjuster(i + 1, int.parse(split[2])), int.parse(split[3]))]);
             }
           }
@@ -140,7 +140,7 @@ class ReferencesPageController extends GetxController {
           // LIBRO + NUM_1 : NULL
           if(localSplit[1] == '' && localSplit[0].isNumericOnly){
             for(int i = 0; i < 66; i++){
-              if(removeDiacritics(intToBook[i + 1]).isCaseInsensitiveContains(removeDiacritics(split[0])) || removeDiacritics(intToAbreviatura[i + 1]).isCaseInsensitiveContains(removeDiacritics(split[0]))){
+              if(removeDiacritics(intToBook[i + 1]!).isCaseInsensitiveContains(removeDiacritics(split[0])) || removeDiacritics(intToAbreviatura[i + 1]!).isCaseInsensitiveContains(removeDiacritics(split[0]))){
                 searchList.add([i + 1, valuesOfBooksChapterAdjuster(i + 1, int.parse(localSplit[0])), 1]);
               }
             }
@@ -149,7 +149,7 @@ class ReferencesPageController extends GetxController {
           // LIBRO + NUM_1 : NUM_2
           else if(localSplit[1] != '' && localSplit[1].isNumericOnly && localSplit[0].isNumericOnly){
             for(int i = 0; i < 66; i++){
-              if(removeDiacritics(intToBook[i + 1]).isCaseInsensitiveContains(removeDiacritics(split[0])) || removeDiacritics(intToAbreviatura[i + 1]).isCaseInsensitiveContains(removeDiacritics(split[0]))){
+              if(removeDiacritics(intToBook[i + 1]!).isCaseInsensitiveContains(removeDiacritics(split[0])) || removeDiacritics(intToAbreviatura[i + 1]!).isCaseInsensitiveContains(removeDiacritics(split[0]))){
                 searchList.add([i + 1, valuesOfBooksChapterAdjuster(i + 1, int.parse(localSplit[0])), valuesOfBooksVerseAdjuster(i + 1, valuesOfBooksChapterAdjuster(i + 1, int.parse(localSplit[0])), int.parse(localSplit[1])) ]);
               }
             }
@@ -163,7 +163,7 @@ class ReferencesPageController extends GetxController {
           // NUMBER + LIBRO + NUM_1 : NULL
           if(localSplit[1] == '' && localSplit[0].isNumericOnly){
             for(int i = 0; i < 66; i++){
-              if(removeDiacritics(intToBook[i + 1]).isCaseInsensitiveContains(removeDiacritics('${split[0]} ${split[1]}')) || removeDiacritics(intToAbreviatura[i + 1]).isCaseInsensitiveContains(removeDiacritics('${split[0]} ${split[1]}'))){
+              if(removeDiacritics(intToBook[i + 1]!).isCaseInsensitiveContains(removeDiacritics('${split[0]} ${split[1]}')) || removeDiacritics(intToAbreviatura[i + 1]!).isCaseInsensitiveContains(removeDiacritics('${split[0]} ${split[1]}'))){
                 searchList.add([i + 1, valuesOfBooksChapterAdjuster(i + 1, int.parse(localSplit[0])), 1]);
               }
             }
@@ -172,7 +172,7 @@ class ReferencesPageController extends GetxController {
           // NUMBER + LIBRO + NUM_1 : NUM_2
           else if(localSplit[1] != '' && localSplit[1].isNumericOnly && localSplit[0].isNumericOnly){
             for(int i = 0; i < 66; i++){
-              if(removeDiacritics(intToBook[i + 1]).isCaseInsensitiveContains(removeDiacritics('${split[0]} ${split[1]}')) || removeDiacritics(intToAbreviatura[i + 1]).isCaseInsensitiveContains(removeDiacritics('${split[0]} ${split[1]}'))){
+              if(removeDiacritics(intToBook[i + 1]!).isCaseInsensitiveContains(removeDiacritics('${split[0]} ${split[1]}')) || removeDiacritics(intToAbreviatura[i + 1]!).isCaseInsensitiveContains(removeDiacritics('${split[0]} ${split[1]}'))){
                 searchList.add([i + 1, valuesOfBooksChapterAdjuster(i + 1, int.parse(localSplit[0])), valuesOfBooksVerseAdjuster(i + 1, valuesOfBooksChapterAdjuster(i + 1, int.parse(localSplit[0])), int.parse(localSplit[1])) ]);
               }
             }
@@ -183,7 +183,7 @@ class ReferencesPageController extends GetxController {
       // NO CONTIENE ESPACIOS
       else{
         for(int i = 0; i < 66; i++){
-          if(removeDiacritics(intToBook[i + 1]).isCaseInsensitiveContains(removeDiacritics(clearText)) || removeDiacritics(intToAbreviatura[i + 1]).isCaseInsensitiveContains(removeDiacritics(clearText))){
+          if(removeDiacritics(intToBook[i + 1]!).isCaseInsensitiveContains(removeDiacritics(clearText)) || removeDiacritics(intToAbreviatura[i + 1]!).isCaseInsensitiveContains(removeDiacritics(clearText))){
             searchList.add([i + 1, 1, 1]);
           }
         }
@@ -193,13 +193,13 @@ class ReferencesPageController extends GetxController {
 
   void searchTextFieldOnChange(String text){
     getStorage.write('referencesPageSearchViewTextFieldControllerText', text.trim());
-    searchListScrollController.animateTo(0, duration: Duration(milliseconds: 300), curve: Curves.easeOut);
+    searchListScrollController!.animateTo(0, duration: Duration(milliseconds: 300), curve: Curves.easeOut);
     updateSearchListFromText(text);
     update();
   }
 
   void clearSearchTextField(){
-    textEditingController.text = '';
+    textEditingController!.text = '';
     searchList.clear();
     update();
 

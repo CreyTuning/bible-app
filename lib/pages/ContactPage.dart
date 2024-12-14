@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactPage extends StatefulWidget {
-  const ContactPage({ Key key }) : super(key: key);
+  const ContactPage({ Key? key }) : super(key: key);
 
   @override
   State<ContactPage> createState() => _ContactPageState();
@@ -14,13 +14,6 @@ class ContactPage extends StatefulWidget {
 class _ContactPageState extends State<ContactPage> {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark ,
-      systemNavigationBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark,
-      systemNavigationBarColor: Theme.of(context).canvasColor
-    ));
-    
     return animateDo.FadeIn(
       duration: Duration(milliseconds: 150),
       child: Scaffold(
@@ -57,7 +50,7 @@ class _ContactPageState extends State<ContactPage> {
                         Text(
                         'Instagram',
                         style: TextStyle(
-                          color: Theme.of(context).textTheme.bodyText1.color,
+                          color: Theme.of(context).textTheme.bodyLarge!.color,
                           fontSize: 18,
                           fontWeight: FontWeight.bold
                         ),
@@ -80,7 +73,7 @@ class _ContactPageState extends State<ContactPage> {
                         Text(
                         'Github',
                         style: TextStyle(
-                          color: Theme.of(context).textTheme.bodyText1.color,
+                          color: Theme.of(context).textTheme.bodyLarge!.color,
                           fontSize: 18,
                           fontWeight: FontWeight.bold
                         ),
@@ -103,7 +96,7 @@ class _ContactPageState extends State<ContactPage> {
                         Text(
                         'Email',
                         style: TextStyle(
-                          color: Theme.of(context).textTheme.bodyText1.color,
+                          color: Theme.of(context).textTheme.bodyLarge!.color,
                           fontSize: 18,
                           fontWeight: FontWeight.bold
                         ),
@@ -124,7 +117,7 @@ class _ContactPageState extends State<ContactPage> {
                             style: TextStyle(
                                 fontSize: 15,
                                 fontFamily: 'Baloo',
-                                color: Theme.of(context).textTheme.bodyText2.color,
+                                color: Theme.of(context).textTheme.bodyMedium!.color,
                                 height: 1.2
                             )
                           ),
@@ -138,7 +131,7 @@ class _ContactPageState extends State<ContactPage> {
                           fontSize: 14,
                           fontFamily: 'Baloo',
                           fontWeight: FontWeight.bold,
-                          color: Theme.of(context).textTheme.bodyText1.color
+                          color: Theme.of(context).textTheme.bodyLarge!.color
                         )
                       ),
                       onPressed: null,

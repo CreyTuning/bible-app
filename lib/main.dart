@@ -23,14 +23,17 @@ void main() async {
     debugShowCheckedModeBanner: false,
     home: MainPage(),
     themeMode: ThemeMode.light,
-    theme: AppTheme.light,
-    darkTheme: AppTheme.dark,
-    builder: (context, child) => ScrollConfiguration(behavior: _MyBehavior(), child: child), // remove the glow effect.
+    theme: AppTheme.black, // ACTUALIZAR ESTO
+    darkTheme: AppTheme.black,
+    builder: (context, child) => ScrollConfiguration(behavior: MyBehavior(), child: child!), // remove the glow effect.
   ));
 }
 
-// remove the glow effect.
-class _MyBehavior extends ScrollBehavior {
+class MyBehavior extends ScrollBehavior {
   @override
-  Widget buildViewportChrome(BuildContext context, Widget child, AxisDirection axisDirection) => child;
+  Widget buildOverscrollIndicator(
+      BuildContext context, Widget child, ScrollableDetails details) {
+    return child;
+  }
 }
+

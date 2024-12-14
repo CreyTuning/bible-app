@@ -18,16 +18,16 @@ class BibleManager{
     return output;
   }
 
-  Future<List<String>> getChapter({int book, int chapter}) async {
+  Future<List<String>> getChapter({required int book, required int chapter}) async {
     List<String> output = [];
 
     for(int i = 0; i < valuesOfBooks[book - 1][chapter - 1]; i++)
-      output.add(rvr60_verses['$book:$chapter:${i + 1}']);
+      output.add(rvr60_verses['$book:$chapter:${i + 1}']!);
 
     return output;
   }
 
-  Future<String> getVerse({int book, int chapter, int verse}) async {
-    return rvr60_verses['$book:$chapter:$verse'];
+  Future<String> getVerse({required int book, required int chapter, required int verse}) async {
+    return rvr60_verses['$book:$chapter:$verse']!;
   }
 }

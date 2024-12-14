@@ -7,9 +7,9 @@ import 'package:yhwh/models/highlighterItem.dart';
 
 class CardVerseHightlight extends StatefulWidget {
   CardVerseHightlight({
-    Key key,
-    @required this.highlighterItem,
-    @required this.onTap
+    Key? key,
+    required this.highlighterItem,
+    required this.onTap
   }) : super(key: key);
 
   final HighlighterItem highlighterItem;
@@ -27,7 +27,7 @@ class _CardVerseHightlightState extends State<CardVerseHightlight> {
       init: BiblePageController(),
       builder: (biblePageController) => Container(
         child: InkWell(
-          onTap: widget.onTap,
+          onTap: (){widget.onTap();},
           
           child: ListTile(
             trailing: IntrinsicWidth(
@@ -38,7 +38,7 @@ class _CardVerseHightlightState extends State<CardVerseHightlight> {
                   RichText(
                     textAlign: TextAlign.left,
                     text: TextSpan(
-                      style: Theme.of(context).textTheme.bodyText2.copyWith(
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontSize: 15,
                       ),
                       children: [
@@ -75,7 +75,7 @@ class _CardVerseHightlightState extends State<CardVerseHightlight> {
                       RichText(
                         textAlign: TextAlign.left,
                         text: TextSpan(
-                          style: Theme.of(context).textTheme.bodyText2.copyWith(
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             fontSize: 15,
                           ),
                           children: [
@@ -119,7 +119,7 @@ class _CardVerseHightlightState extends State<CardVerseHightlight> {
                     overflow: TextOverflow.fade,
                     softWrap: false,
                     text: TextSpan(
-                      style: Theme.of(context).textTheme.bodyText2.copyWith(
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontSize: 15,
                       ),
 
@@ -134,7 +134,7 @@ class _CardVerseHightlightState extends State<CardVerseHightlight> {
                 } else {
                   return Text(
                     '...', 
-                    style: Theme.of(context).textTheme.bodyText2.copyWith(
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontSize: 15,
                     )
                   );
@@ -146,7 +146,7 @@ class _CardVerseHightlightState extends State<CardVerseHightlight> {
               overflow: TextOverflow.fade,
               softWrap: false,
               text: TextSpan(
-                style: Theme.of(context).textTheme.bodyText2.copyWith(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontSize: 15,
                 ),
 
@@ -163,7 +163,7 @@ class _CardVerseHightlightState extends State<CardVerseHightlight> {
               softWrap: false,
 
               text: TextSpan(
-                style: Theme.of(context).textTheme.bodyText1.copyWith(
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
                 children: [
