@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:yhwh/classes/AppTheme.dart';
@@ -18,13 +19,29 @@ void main() async {
       .. registerAdapter(HighlighterItemAdapter())
       .. registerAdapter(HighlighterOrderItemAdapter());
 
+  // envitar el cambio de orientacion de la aplicacion
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitUp,
+  // ]);
+
   // Run Application
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
-    home: MainPage(),
+    home: Builder(
+      builder: (context) {
+        return AnnotatedRegion(child: MainPage(), value: SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark ,
+          systemStatusBarContrastEnforced: false,
+          systemNavigationBarColor: Colors.transparent,
+          systemNavigationBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark ,
+          systemNavigationBarContrastEnforced: false
+        ));
+      }
+    ),
     themeMode: ThemeMode.light,
-    theme: AppTheme.black, // ACTUALIZAR ESTO
-    darkTheme: AppTheme.black,
+    theme: ThemeData.light(),
+    darkTheme: ThemeData.dark(),
     builder: (context, child) => ScrollConfiguration(behavior: MyBehavior(), child: child!), // remove the glow effect.
   ));
 }

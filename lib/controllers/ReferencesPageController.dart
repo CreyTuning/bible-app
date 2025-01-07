@@ -35,9 +35,9 @@ class ReferencesPageController extends GetxController {
   @override
   void onReady() {
     BiblePageController biblePageController = Get.find();
-    bookAutoScrollController!.scrollToIndex(biblePageController.bookNumber - 1, preferPosition: AutoScrollPosition.middle);
-    chapterAutoScrollController!.scrollToIndex(biblePageController.chapterNumber - 1, preferPosition: AutoScrollPosition.middle);
-    verseAutoScrollController!.scrollToIndex(biblePageController.verseNumber - 1, preferPosition: AutoScrollPosition.middle);
+    bookAutoScrollController!.scrollToIndex(biblePageController.bookNumber - 1, preferPosition: AutoScrollPosition.middle, duration: Duration(milliseconds: 500));
+    chapterAutoScrollController!.scrollToIndex(biblePageController.chapterNumber - 1, preferPosition: AutoScrollPosition.middle, duration: Duration(milliseconds: 500));
+    verseAutoScrollController!.scrollToIndex(biblePageController.verseNumber - 1, preferPosition: AutoScrollPosition.middle, duration: Duration(milliseconds: 500));
     
     // get text from box and update search list
     textEditingController!.text = getStorage.read("referencesPageSearchViewTextFieldControllerText") ?? '';
@@ -47,15 +47,15 @@ class ReferencesPageController extends GetxController {
   }
 
   void bookListOnSelect(int index){
-    bookAutoScrollController!.scrollToIndex(index, preferPosition: AutoScrollPosition.middle);
+    bookAutoScrollController!.scrollToIndex(index, preferPosition: AutoScrollPosition.middle, duration: Duration(milliseconds: 500));
   }
 
   void chapterListOnSelect(int index){
-    chapterAutoScrollController!.scrollToIndex(index, preferPosition: AutoScrollPosition.middle);
+    chapterAutoScrollController!.scrollToIndex(index, preferPosition: AutoScrollPosition.middle, duration: Duration(milliseconds: 500));
   }
 
   void verseListOnSelect(int index){
-    verseAutoScrollController!.scrollToIndex(index, preferPosition: AutoScrollPosition.middle);
+    verseAutoScrollController!.scrollToIndex(index, preferPosition: AutoScrollPosition.middle, duration: Duration(milliseconds: 500));
   }
 
   void updateSearchListFromText(String text){

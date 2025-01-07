@@ -107,54 +107,54 @@ class AppTheme
 
   // );
 
-  static ThemeData black = ThemeData(
-    primaryColor: Colors.black,
-    fontFamily: 'Roboto',
-    canvasColor: Colors.black,
-    brightness: Brightness.dark,
+  // static ThemeData black = ThemeData(
+  //   primaryColor: Colors.black,
+  //   fontFamily: 'Roboto',
+  //   canvasColor: Colors.black,
+  //   brightness: Brightness.dark,
 
-    secondaryHeaderColor: Color(0xff121212),
-    dividerColor: Color(0xff323232),
+  //   secondaryHeaderColor: Color(0xff121212),
+  //   dividerColor: Color(0xff323232),
 
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      elevation: 0,
-      type: BottomNavigationBarType.fixed,
-      backgroundColor: Colors.black,
-      selectedItemColor: Color(0xffe8eaed),
-      unselectedItemColor: Color(0xff9aa0a6),
-    ),
+  //   bottomNavigationBarTheme: BottomNavigationBarThemeData(
+  //     elevation: 0,
+  //     type: BottomNavigationBarType.fixed,
+  //     backgroundColor: Colors.black,
+  //     selectedItemColor: Color(0xffe8eaed),
+  //     unselectedItemColor: Color(0xff9aa0a6),
+  //   ),
 
-    tabBarTheme: TabBarTheme(
-      labelColor: Color(0xfff0f2f3),
-      labelStyle: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium'),
-      unselectedLabelStyle: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium'),
+  //   tabBarTheme: TabBarTheme(
+  //     labelColor: Color(0xfff0f2f3),
+  //     labelStyle: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium'),
+  //     unselectedLabelStyle: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium'),
       
-    ),
+  //   ),
 
-    textTheme: TextTheme(
-        labelLarge: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xfff0f2f3)),
-        bodyLarge: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Colors.white),
-        bodyMedium: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff777777))
+  //   textTheme: TextTheme(
+  //       labelLarge: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xfff0f2f3)),
+  //       bodyLarge: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Colors.white),
+  //       bodyMedium: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xff777777))
 
-    ),
+  //   ),
 
-    appBarTheme: AppBarTheme(
-      color: Colors.black,
-      iconTheme: IconThemeData(color: Color(0xfff0f2f3)), systemOverlayStyle: SystemUiOverlayStyle.light, toolbarTextStyle: TextTheme(
-          titleLarge: TextStyle(fontSize: 20,fontFamily: 'Roboto', color: Color(0xfff0f2f3), fontWeight: FontWeight.bold),
-          labelLarge: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xfff0f2f3))
-      ).bodyMedium, titleTextStyle: TextTheme(
-          titleLarge: TextStyle(fontSize: 20,fontFamily: 'Roboto', color: Color(0xfff0f2f3), fontWeight: FontWeight.bold),
-          labelLarge: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xfff0f2f3))
-      ).titleLarge
-    ),
+  //   appBarTheme: AppBarTheme(
+  //     color: Colors.black,
+  //     iconTheme: IconThemeData(color: Color(0xfff0f2f3)), systemOverlayStyle: SystemUiOverlayStyle.light, toolbarTextStyle: TextTheme(
+  //         titleLarge: TextStyle(fontSize: 20,fontFamily: 'Roboto', color: Color(0xfff0f2f3), fontWeight: FontWeight.bold),
+  //         labelLarge: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xfff0f2f3))
+  //     ).bodyMedium, titleTextStyle: TextTheme(
+  //         titleLarge: TextStyle(fontSize: 20,fontFamily: 'Roboto', color: Color(0xfff0f2f3), fontWeight: FontWeight.bold),
+  //         labelLarge: TextStyle(fontSize: 18,fontFamily: 'Roboto', color: Color(0xfff0f2f3))
+  //     ).titleLarge
+  //   ),
 
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: Color(0xff1f1f1f)
-    ),
+  //   floatingActionButtonTheme: FloatingActionButtonThemeData(
+  //     backgroundColor: Color(0xff1f1f1f)
+  //   ),
 
-    // cardColor: Color(0xff202020), colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.white), bottomAppBarTheme: BottomAppBarTheme(color: Color(0xff121212))
-  );
+  //   // cardColor: Color(0xff202020), colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.white), bottomAppBarTheme: BottomAppBarTheme(color: Color(0xff121212))
+  // );
 
   // static ThemeData spaceCadet = ThemeData(
   //   primaryColor: Color(0xff2B2D42),
@@ -325,7 +325,7 @@ class AppTheme
       if(themes[themeName]?.brightness == Brightness.light){
         theme = ThemeData.light().copyWith(
           canvasColor: themes[themeName]!.background,
-          indicatorColor: themes[themeName]!.forenground,
+          indicatorColor: themes[themeName]!.foreground,
         );
       }
       
@@ -333,7 +333,7 @@ class AppTheme
       else {
         theme = ThemeData.dark().copyWith(
           canvasColor: themes[themeName]!.background,
-          indicatorColor: themes[themeName]!.forenground,
+          indicatorColor: themes[themeName]!.foreground,
         );
       }
     }

@@ -80,13 +80,13 @@ class BiblePage extends StatelessWidget {
                             
                                 child: Icon(
                                   Icons.keyboard_arrow_left,
-                                  color: Theme.of(context).iconTheme.color,
+                                  color: Theme.of(context).indicatorColor,
                                   size: 24,
                                 ),
                                 padding: EdgeInsets.all(0),
                                 shape: CircleBorder(
                                   side: BorderSide(
-                                    color: Theme.of(context).dividerColor.withValues(alpha: 0.7),
+                                    color: Theme.of(context).indicatorColor.withValues(alpha: 0.5),
                                     width: 1.5
                                   )
                                 ),
@@ -119,13 +119,13 @@ class BiblePage extends StatelessWidget {
                                                           
                                 child: Icon(
                                   Icons.keyboard_arrow_right,
-                                  color: Theme.of(context).iconTheme.color,
+                                  color: Theme.of(context).indicatorColor,
                                   size: 24,
                                 ),
                                 padding: EdgeInsets.all(0),
                                 shape: CircleBorder(
                                   side: BorderSide(
-                                    color: Theme.of(context).dividerColor.withValues(alpha: 0.7),
+                                    color: Theme.of(context).indicatorColor.withValues(alpha: 0.5),
                                     width: 1.5
                                   )
                                 ),
@@ -171,7 +171,7 @@ class BiblePage extends StatelessWidget {
                           titleSpacing: 0,
                           bottom: PreferredSize(
                             child: Container(
-                              color: Theme.of(context).dividerColor.withValues(alpha: 0.7),
+                              color: Theme.of(context).indicatorColor.withValues(alpha: 0.5),
                               height: 1.5
                             ),
                             
@@ -239,6 +239,7 @@ class BiblePage extends StatelessWidget {
                                                 fontFamily: 'Roboto-Medium',
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 18,
+                                                color: Theme.of(context).indicatorColor
                                               ),
                                             )
                                           ),
@@ -255,27 +256,17 @@ class BiblePage extends StatelessWidget {
                                   IconButton(
                                     tooltip: 'Ajustes visuales',
                                     onPressed: (){
-                    
-                                      // ReadPreferencesController _readPreferencesController = Get.put(ReadPreferencesController());
-                    
                                       showModalBottomSheet(
                                         context: context,
                                         isScrollControlled: true,
-                                        constraints: BoxConstraints(
-                                          maxHeight: 243,
-                                          minHeight: Get.size.height / 4,
-                                        ),
                                         backgroundColor: Colors.transparent,
                                         barrierColor: Colors.transparent,
                                         builder: (context) => StatefulBuilder(
-                                          builder: (context, setState) => Padding(
-                                            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                            child: BottomSheet(
-                                              backgroundColor: Colors.transparent,
-                                              enableDrag: false,
-                                              onClosing: (){},
-                                              builder: (context) => ReadPreferences(),
-                                            ),
+                                          builder: (context, setState) => BottomSheet(
+                                            backgroundColor: Colors.transparent,
+                                            enableDrag: false,
+                                            onClosing: (){},
+                                            builder: (context) => ReadPreferences(),
                                           )
                                         ),
                                       );
@@ -353,7 +344,7 @@ class BiblePage extends StatelessWidget {
                                     text: biblePageController.versesRawList[index].text!,
                                     colorHighlight: biblePageController.versesRawList[index].colorHighlight!,
                                     colorNumber: Theme.of(context).indicatorColor.withAlpha(120),
-                                    colorText: Theme.of(context).textTheme.bodyLarge!.color!,
+                                    colorText: Theme.of(context).indicatorColor,
                                     fontSize: biblePageController.fontSize,
                                     fontHeight: biblePageController.fontHeight,
                                     fontLetterSeparation: biblePageController.fontLetterSeparation,

@@ -12,19 +12,11 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark ,
-      systemNavigationBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark,
-      systemNavigationBarColor: Colors.transparent,
-      systemNavigationBarContrastEnforced: false
-    ));
-
 
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
+      backgroundColor: Theme.of(context).canvasColor,
 
       body: GetBuilder<MainPageController>(
         init: MainPageController(),
@@ -48,7 +40,7 @@ class MainPage extends StatelessWidget {
             foregroundDecoration: BoxDecoration(
               border: Border(
                 top: BorderSide(
-                  color: Theme.of(context).dividerColor.withValues(alpha: 0.7),
+                  color: Theme.of(context).indicatorColor.withValues(alpha: 0.5),
                   width: 1.5
                 )
               )

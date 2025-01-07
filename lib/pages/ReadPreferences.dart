@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:yhwh/classes/AppTheme.dart';
@@ -14,57 +16,23 @@ class ReadPreferences extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.of(context).size.height - 200
+      ),
       decoration: BoxDecoration(
-        // borderRadius: BorderRadius.circular(15),
         border: Border(
           top: BorderSide(
-            color: Theme.of(context).dividerColor,
+            color: Theme.of(context).indicatorColor.withAlpha(120),
             width: 1.5
           ),
         )
       ),
       child: ClipRRect(
-        // borderRadius: BorderRadius.circular(13.2),
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24, tileMode: TileMode.mirror),
-          child: Scaffold(
-            backgroundColor: Theme.of(context).canvasColor.withValues(alpha: 0.4),
-            // appBar: AppBar(
-            //   elevation: 0,
-            //   backgroundColor: Colors.transparent,
-            //   title: Text('Ajustes visuales', 
-            //     style: Theme.of(context).textTheme.bodyText1.copyWith(
-            //       fontSize: 21,
-            //       fontWeight: FontWeight.bold
-            //     )
-            //   ),
-        
-            //   leading: IconButton(
-            //     tooltip: 'Volver',
-            //     icon: Icon(Icons.arrow_back, color: Theme.of(context).textTheme.bodyText1.color),
-            //     onPressed: Get.back,
-            //   ),
-        
-            //   actions: [
-            //     GetBuilder<ReadPreferencesController>(
-            //           init: ReadPreferencesController(),
-            //           builder: (readPreferencesController) => Tooltip(
-            //         message: 'Restaurar configuraciones',
-            //         child: InkWell(
-            //           child: Container(
-            //             child: Icon(FontAwesomeIcons.undo, color: Theme.of(context).iconTheme.color, size: 18,),
-            //             width: 55,
-            //             height: 55,
-            //           ),
-            //           borderRadius: BorderRadius.circular(30),
-            //           onTap: readPreferencesController.restoreSettingOnTap
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
-        
-            body: GetBuilder<BiblePageController>(
+          child: Container(
+            color: Theme.of(context).canvasColor.withValues(alpha: 0.4),
+            child: GetBuilder<BiblePageController>(
               init: BiblePageController(),
               builder: (biblePageController) => GetBuilder<ReadPreferencesController>(
                 init: ReadPreferencesController(),
@@ -78,18 +46,18 @@ class ReadPreferences extends StatelessWidget {
                           width: 60,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
-                            color: Theme.of(context).textTheme.bodyLarge!.color!.withValues(alpha: 0.5)
+                            color: Theme.of(context).indicatorColor.withValues(alpha: 0.5)
                           ),
                         ),
                       ),
                     ),
-
+    
                     Row(
                       children: <Widget>[
                         Padding(
                           padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
                           child: Center(
-                            child: Icon(FontAwesomeIcons.textHeight),
+                            child: Icon(FontAwesomeIcons.textHeight, color: Theme.of(context).indicatorColor),
                           ),
                         ),
                         
@@ -98,13 +66,13 @@ class ReadPreferences extends StatelessWidget {
                             onChangeEnd: (value){
                               readPreferencesController.onFontSizeChangeEnd(value);
                             },
-
-                            activeColor: Theme.of(context).textTheme.bodyLarge!.color,
-                            inactiveColor: Theme.of(context).textTheme.bodyLarge!.color!.withValues(alpha: 0.2), //Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
+    
+                            activeColor: Theme.of(context).indicatorColor,
+                            inactiveColor: Theme.of(context).indicatorColor.withValues(alpha: 0.2),
                             value: biblePageController.fontSize, // AQUI
                             min: 18,
                             max: 30,
-                            divisions: 12,
+                            divisions: 5,
                             // label: 'Tamaño de letra: ${fontSize.round().toString()}',
                             onChanged: (double value) {
                               readPreferencesController.onFontSizeUpdate(value);
@@ -113,13 +81,13 @@ class ReadPreferences extends StatelessWidget {
                         ),
                       ],
                     ),
-
+    
                     Row(
                       children: <Widget>[
                         Padding(
                           padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
                           child: Center(
-                            child: Icon(FontAwesomeIcons.rulerVertical),
+                            child: Icon(FontAwesomeIcons.rulerVertical, color: Theme.of(context).indicatorColor),
                           ),
                         ),
                         
@@ -128,13 +96,13 @@ class ReadPreferences extends StatelessWidget {
                             onChangeEnd: (value){
                               readPreferencesController.onFontHeightChangeEnd(value);
                             },
-
-                            activeColor: Theme.of(context).textTheme.bodyLarge!.color,
-                            inactiveColor: Theme.of(context).textTheme.bodyLarge!.color!.withValues(alpha: 0.2), //Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
+    
+                            activeColor: Theme.of(context).indicatorColor,
+                            inactiveColor: Theme.of(context).indicatorColor.withValues(alpha: 0.2),
                             value: biblePageController.fontHeight,
                             min: 1.05,
                             max: 3.05,
-                            divisions: 8,
+                            divisions: 5,
                             // label: 'Altura de linea: ${(height * 10).round()}',
                             onChanged: (double value) {
                               readPreferencesController.onFontHeightUpdate(value);
@@ -143,14 +111,14 @@ class ReadPreferences extends StatelessWidget {
                         ),
                       ],
                     ),
-
-
+    
+    
                     Row(
                       children: <Widget>[
                         Padding(
                           padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
                           child: Center(
-                            child: Icon(FontAwesomeIcons.rulerHorizontal),
+                            child: Icon(FontAwesomeIcons.rulerHorizontal, color: Theme.of(context).indicatorColor),
                           ),
                         ),
                         
@@ -159,13 +127,13 @@ class ReadPreferences extends StatelessWidget {
                             onChangeEnd: (value){
                               readPreferencesController.onFontLetterSeparationChangeEnd(value);
                             },
-
-                            activeColor: Theme.of(context).textTheme.bodyLarge!.color,
-                            inactiveColor: Theme.of(context).textTheme.bodyLarge!.color!.withValues(alpha: 0.2), //Theme.of(context).textTheme.bodyText1.color.withBlue((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withGreen((Theme.of(context).brightness == Brightness.light) ? 215 : 40).withRed((Theme.of(context).brightness == Brightness.light) ? 215 : 40),
+    
+                            activeColor: Theme.of(context).indicatorColor,
+                            inactiveColor: Theme.of(context).indicatorColor.withValues(alpha: 0.2),
                             value: biblePageController.fontLetterSeparation,
                             min: -1.5,
                             max: 5,
-                            divisions: 13,
+                            divisions: 5,
                             // label: 'Separación de letras: ${(letterSeparation * 10).round()}',
                             onChanged: (double value) {
                               readPreferencesController.onFontLetterSeparationUpdate(value);
@@ -174,113 +142,47 @@ class ReadPreferences extends StatelessWidget {
                         ),
                       ],
                     ),
-
-                    ListTile(
-                      title: Row(
-                        children: [
-                          Icon(FontAwesomeIcons.palette, color: Theme.of(context).textTheme.bodyLarge!.color),
-                          
-                          SizedBox(width: 25),
-
-                          Text('Temas de colores',
-                            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                              // fontWeight: FontWeight.bold,
-                              fontFamily: 'Roboto-Medium',
-                            ),
-                          ),
-                        ]
-                      ),
-
-                      onTap: (){
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return Padding(
-                              padding: const EdgeInsets.all(0),
-                              child: Container(
-                                clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(topLeft: Radius.circular(6), topRight: Radius.circular(6)),
-                                  color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
-                                ),
-                                
-                                child: Scaffold(
-                                  backgroundColor: Theme.of(context).canvasColor,
-                                  
-                                  appBar: AppBar(
-                                    backgroundColor: Theme.of(context).canvasColor,
-                                    elevation: 0,
-                                    title: Text('Temas de colores'),
-
-                                    leading: IconButton(
-                                      tooltip: 'Volver',
-                                      icon: Icon(Icons.arrow_back, color: Theme.of(context).textTheme.bodyLarge!.color),
-                                      onPressed: Get.back,
-                                    ),
-
-                                    bottom: PreferredSize(
-                                      child: Container(
-                                        color: Theme.of(context).dividerColor,
-                                        height: 1.5
-                                      ),
-                                      
-                                      preferredSize: Size.fromHeight(0)
-                                    ),
-                                  ),
-
-                                  body: GetBuilder<ReadPreferencesController>(
-                                    init: ReadPreferencesController(),
-                                    builder: (readPreferencesController) => Column(
-                                      children: [
-                                        Expanded(
-                                          child: ListView.builder(
-                                            itemCount: themes.length,
-                                            itemBuilder: (BuildContext context, int index) {
-                                              return ListTile(
-                                                title: Text('${themes.keys.elementAt(index)}'),
-                                                leading: Stack(
-                                                  alignment: Alignment.center,
-                                                  children: [
-                                                    Container(
-                                                      height: 38,
-                                                      width: 38,
-                                                      decoration: BoxDecoration(
-                                                        shape: BoxShape.circle,
-                                                        color: Theme.of(context).textTheme.bodyLarge!.color!.withValues(alpha: 0.9),
-                                                      ),
-                                                    ),
-                                          
-                                                    IconButton(
-                                                      icon: Icon(Icons.circle),
-                                                      iconSize: 40,
-                                                      color: AppTheme.getTheme(themes.keys.elementAt(index)).canvasColor,
-                                                      onPressed: (){
-                                                        // biblePageController.addToHighlighter(Color(colors[index]));
-                                                        // Get.back();
-                                                      },
-                                                    ),
-                                                  ],
-                                                ),
-
-                                                onTap: (){
-                                                  readPreferencesController.setTheme(themes.keys.elementAt(index));
-                                                },
-                                              );
-                                            },
-                                          ),
-                                        ),
-
-                                        // Container(color: Colors.red,)
-                                        // ThemeSelectorFooter()
-                                      ],
-                                    ),
-                                  ),
-                                ),
+    
+                    Container(
+                      height: 150,
+                      child: GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 0,
+                          crossAxisSpacing: 0
+                        ),
+                        itemCount: themes.length,
+                        primary: true,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        
+                        itemBuilder: (context, index) => Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Container(
+                              height: 48,
+                              width: 48,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Theme.of(context).indicatorColor.withValues(alpha: 0.8),
                               ),
-                            );
-                          },
-                        );
-                      },
+                            ),
+                                      
+                            IconButton(
+                              icon: Icon(Icons.circle),
+                              iconSize: 53,
+                              color: AppTheme.getTheme(themes.keys.elementAt(index)).canvasColor,
+                              onPressed: (){
+                                readPreferencesController.setTheme(themes.keys.elementAt(index));
+                              },
+                            ),
+                          ],
+                        )
+                      ),
+                    ),
+
+                    Container(
+                      height: MediaQuery.of(context).viewPadding.bottom,
                     )
                   ],
                 )

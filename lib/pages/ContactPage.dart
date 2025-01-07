@@ -19,127 +19,124 @@ class _ContactPageState extends State<ContactPage> {
       child: Scaffold(
         backgroundColor: Theme.of(context).canvasColor,
         body: Center(
-          child: Container(
-            height: 550,
-            child: ListView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                backgroundColor: Colors.white,
+                radius: 100,
+                child: Container(
+                  child: Image(
+                    isAntiAlias: true,
+                    image: AssetImage('assets/portrait_logo.png')
+                  ),
+                ),
+              ),
               
-              children: [
-                CircleAvatar(
-                  backgroundColor: Colors.white,
-                  radius: 100,
-                  child: Container(
-                    child: Image(
-                      isAntiAlias: true,
-                      image: AssetImage('assets/portrait_logo.png')
+              Container(height: 20),
+              
+              InkWell(
+                onTap: () => launch('https://instagram.com/iglesiayhwh'),
+                child: Container(
+                  height: 50,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(FontAwesomeIcons.instagram),
+                      Container(width: 5),
+                      Text(
+                      'Instagram',
+                      style: TextStyle(
+                        color: Theme.of(context).textTheme.bodyLarge!.color,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold
+                      ),
                     ),
+                    ],
                   ),
                 ),
-    
-                Container(height: 20),
-    
-                InkWell(
-                  onTap: () => launch('https://instagram.com/iglesiayhwh'),
-                  child: Container(
-                    height: 50,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(FontAwesomeIcons.instagram),
-                        Container(width: 5),
-                        Text(
-                        'Instagram',
-                        style: TextStyle(
-                          color: Theme.of(context).textTheme.bodyLarge!.color,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold
+              ),
+              
+              InkWell(
+                onTap: () => launch('https://github.com/llromerorr/yhwh/releases'),
+                child: Container(
+                  height: 50,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(FontAwesomeIcons.github),
+                      Container(width: 5),
+                      Text(
+                      'Github',
+                      style: TextStyle(
+                        color: Theme.of(context).textTheme.bodyLarge!.color,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    ],
+                  ),
+                ),
+              ),
+              
+              InkWell(
+                onTap: () => launch('mailto:yhwh.principal@gmail.com'),
+                child: Container(
+                  height: 50,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(FontAwesomeIcons.message),
+                      Container(width: 5),
+                      Text(
+                      'Email',
+                      style: TextStyle(
+                        color: Theme.of(context).textTheme.bodyLarge!.color,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    ],
+                  ),
+                ),
+              ),
+          
+              Column(
+                children: <Widget>[
+                  Divider(height: 25, color: Color(0x00)),
+                  Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      child: RichText(
+                        text: TextSpan(
+                          text: 'Desarrollado por Luis Romero',
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: 'Baloo',
+                              color: Theme.of(context).textTheme.bodyMedium!.color,
+                              height: 1.2
+                          )
                         ),
-                      ),
-                      ],
-                    ),
+                        textAlign: TextAlign.center,
+                      )
                   ),
-                ),
-    
-                InkWell(
-                  onTap: () => launch('https://github.com/llromerorr/yhwh/releases'),
-                  child: Container(
-                    height: 50,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(FontAwesomeIcons.github),
-                        Container(width: 5),
-                        Text(
-                        'Github',
-                        style: TextStyle(
-                          color: Theme.of(context).textTheme.bodyLarge!.color,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold
-                        ),
-                      ),
-                      ],
+          
+                  TextButton(
+                    child: Text('Version: 0.1.2 beta',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'Baloo',
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).textTheme.bodyLarge!.color
+                      )
                     ),
+                    onPressed: null,
                   ),
-                ),
-    
-                InkWell(
-                  onTap: () => launch('mailto:yhwh.principal@gmail.com'),
-                  child: Container(
-                    height: 50,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(FontAwesomeIcons.message),
-                        Container(width: 5),
-                        Text(
-                        'Email',
-                        style: TextStyle(
-                          color: Theme.of(context).textTheme.bodyLarge!.color,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold
-                        ),
-                      ),
-                      ],
-                    ),
-                  ),
-                ),
-
-                Column(
-                  children: <Widget>[
-                    Divider(height: 25, color: Color(0x00)),
-                    Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.0),
-                        child: RichText(
-                          text: TextSpan(
-                            text: 'Desarrollado por Luis Romero',
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontFamily: 'Baloo',
-                                color: Theme.of(context).textTheme.bodyMedium!.color,
-                                height: 1.2
-                            )
-                          ),
-                          textAlign: TextAlign.center,
-                        )
-                    ),
-
-                    TextButton(
-                      child: Text('Version: 0.1.2 beta',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontFamily: 'Baloo',
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).textTheme.bodyLarge!.color
-                        )
-                      ),
-                      onPressed: null,
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                ],
+              ),
+            ],
           ),
         )
       ),

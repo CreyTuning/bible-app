@@ -126,9 +126,9 @@ class Verse extends StatelessWidget {
                                 : Colors.transparent,
                               color: (this.highlight)
                                 ? Theme.of(context).brightness == Brightness.light
-                                  ? Theme.of(context).textTheme.bodyLarge!.color
+                                  ? this.colorText
                                   : Theme.of(context).canvasColor
-                                : Theme.of(context).textTheme.bodyLarge!.color,
+                                : this.colorText
                             ),
 
                             'i' : TextStyle(
@@ -179,7 +179,8 @@ class Verse extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   height: height,
                   fontSize: fontSize! + 10,
-                  letterSpacing: letterSeparation
+                  letterSpacing: letterSeparation,
+                  color: this.colorText
                 ),
               ),
             ),
@@ -202,6 +203,7 @@ class Verse extends StatelessWidget {
                   height: height,
                   fontSize: fontSize,
                   letterSpacing: letterSeparation,
+                  color: this.colorText
                 ),
               ),
             ),
@@ -256,6 +258,7 @@ class Verse extends StatelessWidget {
                   fontSize: fontSize! - 3,
                   fontStyle: FontStyle.italic,
                   letterSpacing: letterSeparation,
+                  color: this.colorText
                 ),
 
                 overrideStyle: {
@@ -266,6 +269,7 @@ class Verse extends StatelessWidget {
                     fontSize: fontSize - 3,
                     fontStyle: FontStyle.italic,
                     letterSpacing: letterSeparation,
+                    color: this.colorText
                   ),
                 },
 
@@ -308,7 +312,8 @@ class Verse extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   height: height,
                   fontSize: fontSize,
-                  letterSpacing: letterSeparation
+                  letterSpacing: letterSeparation,
+                  color: this.colorText
                 ),
               ),
             ),
@@ -330,7 +335,8 @@ class Verse extends StatelessWidget {
                   fontStyle: FontStyle.italic,
                   height: height,
                   fontSize: fontSize,
-                  letterSpacing: letterSeparation
+                  letterSpacing: letterSeparation,
+                  color: this.colorText
                 ),
               ),
             ),
