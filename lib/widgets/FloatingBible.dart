@@ -33,28 +33,31 @@ class FloatingBible extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20.0),
                     border: Border.all(
                       width: 2,
-                      color: Theme.of(context).dividerColor
+                      color: Theme.of(context).indicatorColor.withValues(alpha: 0.7)
                     )
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(19),
                     child: Scaffold( 
+                      backgroundColor: Theme.of(context).canvasColor,
                       body: GetBuilder<FloatingBibleController>(
                         init: FloatingBibleController(),
                         builder: (floatingBibleController) => NotificationListener<ScrollNotification>(
                           onNotification: floatingBibleController.scrollNotification,
                           child: RawScrollbar(
                             controller: floatingBibleController.autoScrollController,
-                            thumbColor: Theme.of(context).textTheme.bodyLarge!.color!.withValues(alpha: 0.4),
+                            radius: Radius.circular(30),
+                            thumbColor: Theme.of(context).indicatorColor.withValues(alpha: 0.4),
                             child: CustomScrollView(
                               controller: floatingBibleController.autoScrollController,
                               slivers: [
                                 // AppBar
                                 SliverAppBar(
-                                  backgroundColor: Theme.of(context).appBarTheme.backgroundColor!.withValues(alpha: 0.2),
+                                  backgroundColor: Theme.of(context).canvasColor.withValues(alpha: 0.2),
                                   primary: true,
                                   floating: false,
                                   automaticallyImplyLeading: false,
+                                  scrolledUnderElevation: 0,
                                   // snap: false,
                                   // primary: true,
                                   pinned: true,
@@ -62,7 +65,7 @@ class FloatingBible extends StatelessWidget {
                                   titleSpacing: 0,
                                   bottom: PreferredSize(
                                     child: Container(
-                                      color: Theme.of(context).dividerColor,
+                                      color: Theme.of(context).indicatorColor.withValues(alpha: 0.7),
                                       height: 1.5
                                     ),
                                     
@@ -110,6 +113,7 @@ class FloatingBible extends StatelessWidget {
                                                           fontFamily: 'Roboto-Medium',
                                                           fontWeight: FontWeight.bold,
                                                           fontSize: 18,
+                                                          color: Theme.of(context).indicatorColor
                                                         ),
                                                       )
                                                     ),
@@ -124,6 +128,7 @@ class FloatingBible extends StatelessWidget {
                                     
                                           IconButton(
                                             tooltip: 'Abrir en la biblia',
+                                            color: Theme.of(context).indicatorColor,
                                             onPressed: (){
                                               floatingBibleController.cancelSelectionModeOnTap();
                                               floatingBibleController.ShowInBiblePage();
@@ -137,6 +142,7 @@ class FloatingBible extends StatelessWidget {
       
                                           IconButton(
                                             tooltip: 'Cerrar',
+                                            color: Theme.of(context).indicatorColor,
                                             onPressed: (){
                                               floatingBibleController.cancelSelectionModeOnTap();
                                               Get.back();
@@ -196,8 +202,8 @@ class FloatingBible extends StatelessWidget {
                                             title: floatingBibleController.versesRawList[index].title!,
                                             text: floatingBibleController.versesRawList[index].text!,
                                             colorHighlight: floatingBibleController.versesRawList[index].colorHighlight!,
-                                            colorNumber: Theme.of(context).textTheme.bodyMedium!.color!,
-                                            colorText: Theme.of(context).textTheme.bodyLarge!.color!,
+                                            colorNumber: Theme.of(context).indicatorColor.withAlpha(145),
+                                            colorText: Theme.of(context).indicatorColor,
                                             fontSize: floatingBibleController.fontSize,
                                             fontHeight: floatingBibleController.fontHeight,
                                             fontLetterSeparation: floatingBibleController.fontLetterSeparation,

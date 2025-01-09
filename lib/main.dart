@@ -20,9 +20,9 @@ void main() async {
       .. registerAdapter(HighlighterOrderItemAdapter());
 
   // envitar el cambio de orientacion de la aplicacion
-  // SystemChrome.setPreferredOrientations([
-  //   DeviceOrientation.portraitUp,
-  // ]);
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
 
   // Run Application
   runApp(GetMaterialApp(

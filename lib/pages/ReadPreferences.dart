@@ -156,27 +156,50 @@ class ReadPreferences extends StatelessWidget {
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
                         
-                        itemBuilder: (context, index) => Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Container(
-                              height: 48,
-                              width: 48,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Theme.of(context).indicatorColor.withValues(alpha: 0.8),
+                        itemBuilder: (context, index) => InkWell(
+                          onTap: (){readPreferencesController.setTheme(themes.keys.elementAt(index));},
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Container(
+                                height: 48,
+                                width: 48,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Theme.of(context).indicatorColor.withValues(alpha: 0.8),
+                                ),
                               ),
-                            ),
-                                      
-                            IconButton(
-                              icon: Icon(Icons.circle),
-                              iconSize: 53,
-                              color: AppTheme.getTheme(themes.keys.elementAt(index)).canvasColor,
-                              onPressed: (){
-                                readPreferencesController.setTheme(themes.keys.elementAt(index));
-                              },
-                            ),
-                          ],
+                          
+                              // Background         
+                              // IconButton(
+                              //   icon: Icon(Icons.circle),
+                              //   iconSize: 53,
+                              //   color: AppTheme.getTheme(themes.keys.elementAt(index)).canvasColor,
+                              //   onPressed: (){
+                              //     readPreferencesController.setTheme(themes.keys.elementAt(index));
+                              //   },
+                              // ),
+                          
+                              Container(
+                                height: 45,
+                                width: 45,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppTheme.getTheme(themes.keys.elementAt(index)).canvasColor,
+                                ),
+                              ),
+                          
+                              // Foreground
+                              Container(
+                                height: 23,
+                                width: 23,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppTheme.getTheme(themes.keys.elementAt(index)).indicatorColor
+                                ),
+                              ),
+                            ],
+                          ),
                         )
                       ),
                     ),

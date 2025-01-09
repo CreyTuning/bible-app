@@ -14,10 +14,10 @@ class ColorPalette {
     required this.brightness,
     required this.background,
     required this.foreground,
-    required this.color_1,
-    required this.color_2,
-    required this.color_3,
-    required this.color_4,
-    required this.color_5,
+    this.color_1 = const Color(0xff000000),
+    this.color_2 = const Color(0xff000000),
+    this.color_3 = const Color(0xff000000),
+    this.color_4 = const Color(0xff000000),
+    this.color_5 = const Color(0xff000000),
   });
 }

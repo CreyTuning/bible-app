@@ -2,105 +2,88 @@ import 'package:flutter/material.dart';
 import 'package:yhwh/classes/ColorPalette.dart';
 
 Map<String, ColorPalette> themes = {
-  // OSCUROS 222831
-  "Menta Fresca Brillante (Claro)": ColorPalette(
-    brightness: Brightness.light,
-    background: const Color(0xffFFFFFF),
-    foreground: const Color(0xff00796B),
-    color_1: const Color(0xffB2DFDB),
-    color_2: const Color(0xff80CBC4),
-    color_3: const Color(0xff4DB6AC),
-    color_4: const Color(0xff26A69A),
-    color_5: const Color(0xff009688),
-  ),
-  "Violeta Eléctrico (Oscuro)": ColorPalette(
+  "OLED": ColorPalette(
     brightness: Brightness.dark,
-    background: const Color(0xff212121),
-    foreground: const Color(0xffE0E0E0),
-    color_1: const Color(0xff673AB7),
-    color_2: const Color(0xff9C27B0),
-    color_3: const Color(0xffBBDEFB),
-    color_4: const Color(0xffCE93D8),
-    color_5: const Color(0xffD1C4E9),
+    background: const Color(0xff000000),
+    foreground: const Color(0xffbbbbbb),
   ),
-  "Coral Vivo Oceánico (Claro)": ColorPalette(
-    brightness: Brightness.light,
-    background: const Color(0xffE0F7FA),
-    foreground: const Color(0xffFF5722),
-    color_1: const Color(0xffFFAB91),
-    color_2: const Color(0xffFF8A65),
-    color_3: const Color(0xffFF7043),
-    color_4: const Color(0xffFF5722),
-    color_5: const Color(0xffF4511E),
-  ),
-  "Amarillo Neón Urbano (Oscuro)": ColorPalette(
+
+  "Natural": ColorPalette(
     brightness: Brightness.dark,
-    background: const Color(0xff121212),
-    foreground: const Color(0xffFFFF00),
-    color_1: const Color(0xffFFEB3B),
-    color_2: const Color(0xffFFC107),
-    color_3: const Color(0xffFF9800),
-    color_4: const Color(0xffFF6F00),
-    color_5: const Color(0xffFF5722),
+    background: const Color(0xff1b1924),
+    foreground: const Color(0xffdcd9c6),
   ),
-    "Fucsia Pasión Intensa (Claro)": ColorPalette(
-    brightness: Brightness.light,
-    background: const Color(0xffFFF3E0),
-    foreground: const Color(0xffC51162),
-    color_1: const Color(0xffF06292),
-    color_2: const Color(0xffEC407A),
-    color_3: const Color(0xffE91E63),
-    color_4: const Color(0xffD81B60),
-    color_5: const Color(0xffAD1457),
-  ),
-    "Verde Esmeralda Profundo (Oscuro)": ColorPalette(
+
+  "Verde Esmeralda Profundo": ColorPalette(
     brightness: Brightness.dark,
     background: const Color(0xff004D40),
     foreground: const Color(0xffA7FFEB),
-    color_1: const Color(0xff4DB6AC),
-    color_2: const Color(0xff26A69A),
-    color_3: const Color(0xff009688),
-    color_4: const Color(0xff00897B),
-    color_5: const Color(0xff00796B),
   ),
-    "Azul Eléctrico Futurista (Oscuro)": ColorPalette(
+
+  "Miel silvestre": ColorPalette(
     brightness: Brightness.dark,
-    background: const Color(0xff0D47A1),
-    foreground: const Color(0xffE3F2FD),
-    color_1: const Color(0xff2962FF),
-    color_2: const Color(0xff2979FF),
-    color_3: const Color(0xff448AFF),
-    color_4: const Color(0xff64B5F6),
-    color_5: const Color(0xff90CAF9),
+    background: const Color.fromARGB(255, 20, 32, 44),
+    foreground: const Color(0xffF8D673),
   ),
-    "Naranja Intenso Cálido (Claro)": ColorPalette(
-    brightness: Brightness.light,
-    background: const Color(0xffFFF8E1),
-    foreground: const Color(0xffE65100),
-    color_1: const Color(0xffFFB74D),
-    color_2: const Color(0xffFF9800),
-    color_3: const Color(0xffFB8C00),
-    color_4: const Color(0xffF57C00),
-    color_5: const Color(0xffEF6C00),
-  ),
-    "Rosa Neón Brillante (Oscuro)": ColorPalette(
+
+  "Azul dobre azul": ColorPalette( // MAS O MENOS
     brightness: Brightness.dark,
-    background: const Color(0xff121212),
-    foreground: const Color(0xffFF69B4),
-    color_1: const Color(0xffFF4081),
-    color_2: const Color(0xffF06292),
-    color_3: const Color(0xffF48FB1),
-    color_4: const Color(0xffF8BBD0),
-    color_5: const Color(0xffFCE4EC),
+    background: const Color(0xff233b6b),
+    foreground: const Color(0xffeef0f2),
   ),
-    "Gris Neutro Elegante (Claro)": ColorPalette(
+
+  "Granate y crema de mantequilla": ColorPalette(
+    brightness: Brightness.dark,
+    background: const Color(0xff331922),
+    foreground: const Color(0xffeddec9),
+  ),
+
+  "Verde oscuro y verde neón": ColorPalette(
+    brightness: Brightness.dark,
+    background: const Color(0xff23481c),
+    foreground: const Color(0xffe9feb5),
+  ),
+
+  "Umber, nogal y hierro": ColorPalette(
+    brightness: Brightness.dark,
+    background: const Color(0xff101628),
+    foreground: const Color(0xfff6f6f6),
+  ),
+
+  "ornamentales ": ColorPalette(
+    brightness: Brightness.dark,
+    background: const Color(0xff270001),
+    foreground: const Color(0xffd8d584),
+  ),
+
+  "Estilo clásico de los setenta": ColorPalette(
+    brightness: Brightness.dark,
+    background: const Color(0xff1F1641),
+    foreground: const Color(0xffBBBF95),
+  ),
+
+  "Muelle": ColorPalette(
     brightness: Brightness.light,
-    background: const Color(0xffFFFFFF),
-    foreground: const Color(0xff424242),
-    color_1: const Color(0xffEEEEEE),
-    color_2: const Color(0xffE0E0E0),
-    color_3: const Color(0xffBDBDBD),
-    color_4: const Color(0xff757575),
-    color_5: const Color(0xff616161),
+    background: const Color(0xfff1f3f2),
+    foreground: const Color(0xff272424),
   ),
+
+  "Jeans": ColorPalette(
+    brightness: Brightness.light,
+    background: const Color(0xfff3efca),
+    foreground: const Color(0xff1c2c58),
+  ),
+
+  "Verde": ColorPalette(
+    brightness: Brightness.light,
+    background: const Color(0xffc7f6ec),
+    foreground: const Color(0xff02231c),
+  ),
+
+  "azul": ColorPalette(
+    brightness: Brightness.light,
+    background: const Color(0xffE0E8F0),
+    foreground: const Color(0xff8A140E),
+  ),
+
 };

@@ -17,7 +17,8 @@ class HighlighterPage extends StatelessWidget {
         title: Text('Resaltados',
           style: Theme.of(context).textTheme.bodyLarge!.copyWith(
             fontSize: 21,
-            fontWeight: FontWeight.bold
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).indicatorColor
           )
         ),
         backgroundColor: Theme.of(context).canvasColor,
@@ -25,13 +26,13 @@ class HighlighterPage extends StatelessWidget {
         
         leading: IconButton(
           tooltip: 'Volver',
-          icon: Icon(Icons.arrow_back, color: Theme.of(context).textTheme.bodyLarge!.color),
+          icon: Icon(Icons.arrow_back, color: Theme.of(context).indicatorColor),
           onPressed: Get.back,
         ),
 
         bottom: PreferredSize(
           child: Container(
-            color: Theme.of(context).dividerColor.withValues(alpha: 0.8),
+            color: Theme.of(context).indicatorColor.withValues(alpha: 0.8),
             height: 1.5
           ),
           
@@ -62,13 +63,15 @@ class HighlighterPage extends StatelessWidget {
           onEndOfPage: highlighterPageController.lazyAddMoreData,
           child: Padding(
             padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewPadding.bottom),
-            child: Scrollbar(
+            child: RawScrollbar(
+              radius: Radius.circular(30),
+              thumbColor: Theme.of(context).indicatorColor.withValues(alpha: 0.4),
               child: ListView.separated(
                 itemCount: highlighterPageController.data.length,
                 padding: EdgeInsets.only(bottom: 75),
                 
                 separatorBuilder: (context, index) => Divider(
-                  color: Theme.of(context).dividerColor,
+                  color: Theme.of(context).indicatorColor,
                   height: 0,
                   thickness: 0,
                   indent: 12,

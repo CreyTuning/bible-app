@@ -20,7 +20,7 @@ class BiblePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<BiblePageController>(
       init: BiblePageController(),
-      builder: (mainController) => !mainController.isScreenReady ? Center(child: CircularProgressIndicator(),) : WillPopScope(
+      builder: (mainController) => !mainController.isScreenReady ? Center(child: CircularProgressIndicator(color: Theme.of(context).indicatorColor)) : WillPopScope(
         onWillPop: () {
           BiblePageController onWillPopBiblePageController = Get.put(BiblePageController());
           MainPageController onWillPopMainPageController = Get.put(MainPageController());
@@ -154,9 +154,8 @@ class BiblePage extends StatelessWidget {
                   child: RawScrollbar(
                     interactive: true,
                     radius: Radius.circular(30),
-                    timeToFade: Duration(milliseconds: 300),
+                    thumbColor: Theme.of(context).indicatorColor.withValues(alpha: 0.4),
                     controller: biblePageController.autoScrollController,
-                    thumbColor: Theme.of(context).textTheme.bodyLarge!.color!.withValues(alpha: 0.4),
                     child: CustomScrollView(
                       controller: biblePageController.autoScrollController,
                       slivers: [
@@ -343,7 +342,7 @@ class BiblePage extends StatelessWidget {
                                     title: biblePageController.versesRawList[index].title!,
                                     text: biblePageController.versesRawList[index].text!,
                                     colorHighlight: biblePageController.versesRawList[index].colorHighlight!,
-                                    colorNumber: Theme.of(context).indicatorColor.withAlpha(120),
+                                    colorNumber: Theme.of(context).indicatorColor.withAlpha(145),
                                     colorText: Theme.of(context).indicatorColor,
                                     fontSize: biblePageController.fontSize,
                                     fontHeight: biblePageController.fontHeight,

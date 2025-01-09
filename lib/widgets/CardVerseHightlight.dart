@@ -40,6 +40,7 @@ class _CardVerseHightlightState extends State<CardVerseHightlight> {
                     text: TextSpan(
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontSize: 15,
+                        color: Theme.of(context).indicatorColor
                       ),
                       children: [
                         DateTime.now().day == widget.highlighterItem.dateTime.day ? TextSpan(text: 'Hoy, '): TextSpan(
@@ -77,6 +78,7 @@ class _CardVerseHightlightState extends State<CardVerseHightlight> {
                         text: TextSpan(
                           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             fontSize: 15,
+                            color: Theme.of(context).indicatorColor
                           ),
                           children: [
                             TextSpan(
@@ -121,6 +123,7 @@ class _CardVerseHightlightState extends State<CardVerseHightlight> {
                     text: TextSpan(
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontSize: 15,
+                        color: Theme.of(context).indicatorColor
                       ),
 
                       children: [
@@ -136,6 +139,7 @@ class _CardVerseHightlightState extends State<CardVerseHightlight> {
                     '...', 
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontSize: 15,
+                      color: Theme.of(context).indicatorColor
                     )
                   );
                 }
@@ -148,6 +152,7 @@ class _CardVerseHightlightState extends State<CardVerseHightlight> {
               text: TextSpan(
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontSize: 15,
+                  color: Theme.of(context).indicatorColor
                 ),
 
                 children: [
@@ -165,6 +170,7 @@ class _CardVerseHightlightState extends State<CardVerseHightlight> {
               text: TextSpan(
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                   fontWeight: FontWeight.bold,
+                  color: Theme.of(context).indicatorColor
                 ),
                 children: [
                   TextSpan(

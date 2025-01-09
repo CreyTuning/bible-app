@@ -43,12 +43,12 @@ class _ContactPageState extends State<ContactPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(FontAwesomeIcons.instagram),
+                      Icon(FontAwesomeIcons.instagram, color: Theme.of(context).indicatorColor),
                       Container(width: 5),
                       Text(
                       'Instagram',
                       style: TextStyle(
-                        color: Theme.of(context).textTheme.bodyLarge!.color,
+                        color: Theme.of(context).indicatorColor,
                         fontSize: 18,
                         fontWeight: FontWeight.bold
                       ),
@@ -66,12 +66,12 @@ class _ContactPageState extends State<ContactPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(FontAwesomeIcons.github),
+                      Icon(FontAwesomeIcons.github, color: Theme.of(context).indicatorColor,),
                       Container(width: 5),
                       Text(
                       'Github',
                       style: TextStyle(
-                        color: Theme.of(context).textTheme.bodyLarge!.color,
+                        color: Theme.of(context).indicatorColor,
                         fontSize: 18,
                         fontWeight: FontWeight.bold
                       ),
@@ -89,12 +89,12 @@ class _ContactPageState extends State<ContactPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(FontAwesomeIcons.message),
+                      Icon(FontAwesomeIcons.message, color: Theme.of(context).indicatorColor,),
                       Container(width: 5),
                       Text(
                       'Email',
                       style: TextStyle(
-                        color: Theme.of(context).textTheme.bodyLarge!.color,
+                        color: Theme.of(context).indicatorColor,
                         fontSize: 18,
                         fontWeight: FontWeight.bold
                       ),
@@ -115,7 +115,7 @@ class _ContactPageState extends State<ContactPage> {
                           style: TextStyle(
                               fontSize: 15,
                               fontFamily: 'Baloo',
-                              color: Theme.of(context).textTheme.bodyMedium!.color,
+                              color: Theme.of(context).indicatorColor.withValues(alpha: 0.7),
                               height: 1.2
                           )
                         ),
@@ -129,7 +129,7 @@ class _ContactPageState extends State<ContactPage> {
                         fontSize: 14,
                         fontFamily: 'Baloo',
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).textTheme.bodyLarge!.color
+                        color: Theme.of(context).indicatorColor.withValues(alpha: 0.9),
                       )
                     ),
                     onPressed: null,

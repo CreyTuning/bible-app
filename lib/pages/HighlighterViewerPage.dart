@@ -26,7 +26,8 @@ class HighlighterViewerPage extends StatelessWidget {
             text: TextSpan(
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                 fontSize: 21,
-                fontWeight: FontWeight.bold
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).indicatorColor
               ),
 
               children: [
@@ -43,8 +44,9 @@ class HighlighterViewerPage extends StatelessWidget {
 
           leading: IconButton(
             tooltip: 'Volver',
-            icon: Icon(Icons.arrow_back, color: Theme.of(context).textTheme.bodyLarge!.color),
+            icon: Icon(Icons.arrow_back),
             onPressed: Get.back,
+            color: Theme.of(context).indicatorColor,
           ),
 
           actions: [
@@ -52,13 +54,14 @@ class HighlighterViewerPage extends StatelessWidget {
               tooltip: 'Abrir en la biblia',
               onPressed: highlighterViewerController.showInBible,
               icon: Icon(Icons.open_in_new_rounded),
+              color: Theme.of(context).indicatorColor,
               // iconSize: 25,
             ),
           ],
 
           bottom: PreferredSize(
             child: Container(
-              color: Theme.of(context).dividerColor,
+              color: Theme.of(context).indicatorColor.withValues(alpha: 0.8),
               height: 1.5
             ),
             
@@ -80,8 +83,8 @@ class HighlighterViewerPage extends StatelessWidget {
                     verseNumber: highlighterViewerController.verses[index][0],
                     text: highlighterViewerController.verses[index][1],
                     title: titles[highlighterViewerController.highlighterItem!.book][highlighterViewerController.highlighterItem!.chapter].containsKey(highlighterViewerController.verses[index][0]) == true ? titles[highlighterViewerController.highlighterItem!.book][highlighterViewerController.highlighterItem!.chapter][highlighterViewerController.verses[index][0]] : "",
-                    colorNumber: Theme.of(context).textTheme.bodyMedium!.color!,
-                    colorText: Theme.of(context).textTheme.bodyLarge!.color!,
+                    colorNumber: Theme.of(context).indicatorColor.withAlpha(145),
+                    colorText: Theme.of(context).indicatorColor,
                     fontSize: biblePageController.fontSize,
                     fontHeight: biblePageController.fontHeight,
                     fontLetterSeparation: biblePageController.fontLetterSeparation,

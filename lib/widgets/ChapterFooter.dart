@@ -30,7 +30,7 @@ class _ChapterFooterState extends State<ChapterFooter> {
                   style: TextStyle(
                       fontSize: 15,
                       fontFamily: 'Baloo',
-                      color: Theme.of(context).textTheme.bodyMedium!.color,
+                      color: Theme.of(context).indicatorColor.withValues(alpha: 0.7),
                       height: 1.2
                   )
                 ),
@@ -44,7 +44,7 @@ class _ChapterFooterState extends State<ChapterFooter> {
                 fontSize: 14,
                 fontFamily: 'Baloo',
                 fontWeight: FontWeight.bold,
-                color: Theme.of(context).textTheme.bodyLarge!.color
+                color: Theme.of(context).indicatorColor.withValues(alpha: 0.9),
               )
             ),
             onPressed: null,

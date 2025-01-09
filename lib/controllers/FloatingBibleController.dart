@@ -145,7 +145,7 @@ class FloatingBibleController extends GetxController {
             fontFamily: "",
             selected: false,
             // se debe cambiar la forma en la que se obotiene el titulo para solo usar un mapa con el formato '[book]:[chapter]:[verse]' como un id de tipo string
-            title: rvr60_titles.containsKey('$bookNumber:$chapterNumber:${index + 1}') == true ? rvr60_titles['$bookNumber:$chapterNumber:${index + 1}'] : null,
+            title: rvr60_titles.containsKey('$bookNumber:$chapterNumber:${index + 1}') == true ? rvr60_titles['$bookNumber:$chapterNumber:${index + 1}'] : "",
             fontSize: fontSize,
             fontHeight: fontHeight,
             fontLetterSeparation: fontLetterSeparation,
