@@ -73,7 +73,7 @@ class Verse extends StatelessWidget {
             child: Row(
               children: [
                 AnimatedContainer(
-                  color: Theme.of(context).textTheme.bodyMedium!.color,
+                  color: Theme.of(context).indicatorColor,
                   height: double.infinity,
                   width: this.selected ? 5 : 0,
                   duration: Duration(milliseconds: 150),

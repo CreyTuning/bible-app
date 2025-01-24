@@ -27,11 +27,11 @@ class ReadPreferences extends StatelessWidget {
           ),
         )
       ),
-      child: ClipRRect(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24, tileMode: TileMode.mirror),
+      child: Container( //ClipRRect(
+        child: Container( //BackdropFilter(
+          //filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24, tileMode: TileMode.mirror),
           child: Container(
-            color: Theme.of(context).canvasColor.withValues(alpha: 0.4),
+            color: Theme.of(context).canvasColor, //.withValues(alpha: 0.4),
             child: GetBuilder<BiblePageController>(
               init: BiblePageController(),
               builder: (biblePageController) => GetBuilder<ReadPreferencesController>(

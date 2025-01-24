@@ -41,7 +41,7 @@ class HihglighterCreate extends StatelessWidget {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: Theme.of(context).textTheme.bodyLarge!.color!.withValues(alpha: 0.9),
+                          color: Theme.of(context).indicatorColor,
                           width: 2.0,
                         ),
                       ),
@@ -51,7 +51,7 @@ class HihglighterCreate extends StatelessWidget {
                       icon: Icon(Icons.delete_outlined),
                       iconSize: 25,
                       tooltip: 'Eliminar relsaltado',
-                      color: Theme.of(context).textTheme.bodyLarge!.color,
+                      color: Theme.of(context).indicatorColor,
                       disabledColor: Theme.of(context).textTheme.bodyLarge!.color,
                       onPressed: (){
                         biblePageController.removeFromHighlighter();
@@ -105,7 +105,7 @@ class HihglighterCreate extends StatelessWidget {
                     width: 38,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Theme.of(context).textTheme.bodyLarge!.color!.withValues(alpha: 0.9),
+                      color: Theme.of(context).indicatorColor.withValues(alpha: 0.9),
                     ),
                   ),
         

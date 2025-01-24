@@ -33,9 +33,9 @@ class MainPage extends StatelessWidget {
       ),
 
 
-      bottomNavigationBar: ClipRect(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24, tileMode: TileMode.mirror),
+      bottomNavigationBar: Container( //ClipRect(
+        child: Container( //BackdropFilter(
+          // filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24, tileMode: TileMode.mirror),
           child: Container(
             foregroundDecoration: BoxDecoration(
               border: Border(
@@ -53,7 +53,7 @@ class MainPage extends StatelessWidget {
                   currentIndex: _.mainPagetabIndex,
                   elevation: 0,
                   type: BottomNavigationBarType.fixed,
-                  backgroundColor: Theme.of(context).canvasColor.withValues(alpha: 0.8),
+                  backgroundColor: Theme.of(context).canvasColor, //.withValues(alpha: 0.8),
                   selectedItemColor: Theme.of(context).indicatorColor.withValues(alpha: 0.9),
                   unselectedItemColor: Theme.of(context).indicatorColor.withValues(alpha: 0.6),
               

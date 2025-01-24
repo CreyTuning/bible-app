@@ -57,6 +57,29 @@ class _ContactPageState extends State<ContactPage> {
                   ),
                 ),
               ),
+
+              InkWell(
+                onTap: () => launch('https://www.tiktok.com/@iglesia.yhwh'),
+                child: Container(
+                  height: 50,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(FontAwesomeIcons.tiktok, color: Theme.of(context).indicatorColor),
+                      Container(width: 5),
+                      Text(
+                      'Tiktok',
+                      style: TextStyle(
+                        color: Theme.of(context).indicatorColor,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    ],
+                  ),
+                ),
+              ),
               
               InkWell(
                 onTap: () => launch('https://github.com/llromerorr/yhwh/releases'),
@@ -124,7 +147,7 @@ class _ContactPageState extends State<ContactPage> {
                   ),
           
                   TextButton(
-                    child: Text('Version: 0.1.2 beta',
+                    child: Text('Version: 0.1.4 beta',
                       style: TextStyle(
                         fontSize: 14,
                         fontFamily: 'Baloo',

@@ -69,14 +69,14 @@ class BiblePage extends StatelessWidget {
                         height: 45.0,
                         child: Tooltip(
                           message: 'Capitulo anterior',
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(300.0),
-                            child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8, tileMode: TileMode.mirror),
+                          child: Container( //ClipRRect(
+                            // borderRadius: BorderRadius.circular(300.0),
+                            child: Container( //BackdropFilter(
+                              //filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8, tileMode: TileMode.mirror),
                               child: MaterialButton(
                                 elevation: 0,
                                 onPressed: biblePageController.previusChapter,
-                                color: Theme.of(context).canvasColor.withValues(alpha: 0.5),
+                                color: Theme.of(context).canvasColor, //.withValues(alpha: 0.5),
                             
                                 child: Icon(
                                   Icons.keyboard_arrow_left,
@@ -108,14 +108,14 @@ class BiblePage extends StatelessWidget {
                         height: 45.0,
                         child: Tooltip(
                           message: 'Capitulo siguiente',
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(300.0),
-                            child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8, tileMode: TileMode.mirror),
+                          child: Container( //ClipRRect(
+                            // borderRadius: BorderRadius.circular(300.0),
+                            child: Container( //BackdropFilter(
+                              //filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8, tileMode: TileMode.mirror),
                               child: MaterialButton(
                                 elevation: 0,
                                 onPressed: biblePageController.nextChapter,
-                                color: Theme.of(context).canvasColor.withValues(alpha: 0.5),
+                                color: Theme.of(context).canvasColor, //.withValues(alpha: 0.5),
                                                           
                                 child: Icon(
                                   Icons.keyboard_arrow_right,
@@ -161,7 +161,7 @@ class BiblePage extends StatelessWidget {
                       slivers: [
                         // AppBar
                         SliverAppBar(
-                          backgroundColor: Theme.of(context).canvasColor.withValues(alpha: 0.8),
+                          backgroundColor: Theme.of(context).canvasColor, //.withValues(alpha: 0.8),
                           primary: true,
                           floating: false,
                           pinned: true,
@@ -177,16 +177,16 @@ class BiblePage extends StatelessWidget {
                             preferredSize: Size.fromHeight(0)
                           ),
                     
-                          flexibleSpace: ClipRRect(
-                            child: BackdropFilter(
-                              filter: ImageFilter.blur(
-                                sigmaX: 24,
-                                sigmaY: 24,
-                                tileMode: TileMode.mirror
-                              ),
-                              child: Container(
-                                color: Colors.transparent,
-                              ),
+                          flexibleSpace: Container( //ClipRRect(
+                            child: Container( //BackdropFilter(
+                              // filter: ImageFilter.blur(
+                              //   sigmaX: 24,
+                              //   sigmaY: 24,
+                              //   tileMode: TileMode.mirror
+                              // ),
+                              // child: Container(
+                              //   color: Colors.transparent,
+                              // ),
                             ),
                           ),
                           
@@ -308,7 +308,7 @@ class BiblePage extends StatelessWidget {
                                 children: [
                                   IconButton(
                                     tooltip: 'Cancelar',
-                                    icon: Icon(Icons.arrow_back),
+                                    icon: Icon(Icons.arrow_back, color: Theme.of(context).indicatorColor),
                                     iconSize: 30,
                                     onPressed: biblePageController.cancelSelectionModeOnTap,
                                   ),

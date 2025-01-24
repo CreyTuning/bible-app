@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:yhwh/classes/AppTheme.dart';
+import 'package:yhwh/data/Themes.dart';
 import 'package:yhwh/models/highlighterItem.dart';
 import 'package:yhwh/models/highlighterOrderItem.dart';
 import 'package:yhwh/pages/MainPage.dart';
@@ -40,8 +41,7 @@ void main() async {
       }
     ),
     themeMode: ThemeMode.light,
-    theme: ThemeData.light(),
-    darkTheme: ThemeData.dark(),
+    theme: AppTheme.getTheme(themes.keys.elementAt(0)),
     builder: (context, child) => ScrollConfiguration(behavior: MyBehavior(), child: child!), // remove the glow effect.
   ));
 }
