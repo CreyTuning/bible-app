@@ -41,7 +41,8 @@ void main() async {
       }
     ),
     themeMode: ThemeMode.light,
-    theme: AppTheme.getTheme(themes.keys.elementAt(0)),
+    theme: AppTheme.light,
+    darkTheme: AppTheme.dark,
     builder: (context, child) => ScrollConfiguration(behavior: MyBehavior(), child: child!), // remove the glow effect.
   ));
 }
