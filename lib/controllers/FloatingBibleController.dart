@@ -70,7 +70,7 @@ class FloatingBibleController extends GetxController {
     padding_width_landscape = Get.width * 0.15;
     padding_height_landscape = Get.height * 0.05;
     padding_width_portrait = Get.width * 0.05;
-    padding_height_portrait = Get.height * 0.1;
+    padding_height_portrait = Get.height * 0.05;
 
     await updateVerseList();
     isScreenReady = true;

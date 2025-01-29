@@ -12,13 +12,16 @@ class FloatingBible extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    bool showGoToBotton = Get.arguments['showGoToBotton'];
+
     return GetBuilder<FloatingBibleController>(
       init: FloatingBibleController(),
       builder: (floatingBibleController) =>  OrientationBuilder(
         builder: (context, orientation) => Container(
-          color: Theme.of(context).canvasColor.withOpacity(0.5),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8, tileMode: TileMode.clamp),
+          color: Theme.of(context).canvasColor,
+          child: Container( //BackdropFilter(
+            // filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8, tileMode: TileMode.clamp),
             child: AnimatedPadding(
               duration: Duration(milliseconds: 200),
               curve: Curves.easeInOut,
@@ -36,8 +39,8 @@ class FloatingBible extends StatelessWidget {
                       color: Theme.of(context).indicatorColor.withValues(alpha: 0.7)
                     )
                   ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(19),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.2),
                     child: Scaffold( 
                       backgroundColor: Theme.of(context).canvasColor,
                       body: GetBuilder<FloatingBibleController>(
@@ -53,7 +56,7 @@ class FloatingBible extends StatelessWidget {
                               slivers: [
                                 // AppBar
                                 SliverAppBar(
-                                  backgroundColor: Theme.of(context).canvasColor.withValues(alpha: 0.2),
+                                  backgroundColor: Theme.of(context).canvasColor,
                                   primary: true,
                                   floating: false,
                                   automaticallyImplyLeading: false,
@@ -72,18 +75,18 @@ class FloatingBible extends StatelessWidget {
                                     preferredSize: Size.fromHeight(0)
                                   ),
                             
-                                  flexibleSpace: ClipRRect(
-                                    child: BackdropFilter(
-                                      filter: ImageFilter.blur(
-                                        sigmaX: 24,
-                                        sigmaY: 24,
-                                        tileMode: TileMode.mirror
-                                      ),
-                                      child: Container(
-                                        color: Colors.transparent,
-                                      ),
-                                    ),
-                                  ),
+                                  // flexibleSpace: ClipRRect(
+                                  //   child: BackdropFilter(
+                                  //     filter: ImageFilter.blur(
+                                  //       sigmaX: 24,
+                                  //       sigmaY: 24,
+                                  //       tileMode: TileMode.mirror
+                                  //     ),
+                                  //     child: Container(
+                                  //       color: Colors.transparent,
+                                  //     ),
+                                  //   ),
+                                  // ),
                                   
                                   title: AnimatedCrossFade(
                                     sizeCurve: Curves.easeInOut,
@@ -126,7 +129,7 @@ class FloatingBible extends StatelessWidget {
                                             ),
                                           ),
                                     
-                                          IconButton(
+                                          (showGoToBotton == false) ? Container() : IconButton(
                                             tooltip: 'Abrir en la biblia',
                                             color: Theme.of(context).indicatorColor,
                                             onPressed: (){
@@ -139,7 +142,7 @@ class FloatingBible extends StatelessWidget {
                                           ),
                                     
                                           Container(width: 5),
-      
+                          
                                           IconButton(
                                             tooltip: 'Cerrar',
                                             color: Theme.of(context).indicatorColor,
@@ -220,7 +223,7 @@ class FloatingBible extends StatelessWidget {
                                     childCount: floatingBibleController.versesRawList.length,
                                   ),
                                 ),
-    
+                        
                                 SliverToBoxAdapter(
                                   child: Container(height: Get.size.height * 0.05),
                                 )

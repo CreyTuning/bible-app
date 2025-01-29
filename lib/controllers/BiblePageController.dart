@@ -277,7 +277,7 @@ class BiblePageController extends GetxController {
   //   );
   // }
 
-  void onReferenceTap({int? book, int? chapter, int? verse_from, int? verse_to}){
+  void onReferenceTap({int? book, int? chapter, int? verse_from, int? verse_to, showGoToBotton = true}){
     Get.dialog(
       FloatingBible(),
       barrierColor: Colors.transparent,
@@ -287,7 +287,8 @@ class BiblePageController extends GetxController {
         'book': book,
         'chapter': chapter,
         'verse_from': verse_from,
-        'verse_to': verse_to
+        'verse_to': verse_to,
+        'showGoToBotton': showGoToBotton
       },
       transitionDuration: Duration(milliseconds: 300),
       transitionCurve: Curves.easeInOut

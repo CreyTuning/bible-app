@@ -2,63 +2,100 @@ import 'package:flutter/material.dart';
 import 'package:yhwh/classes/ColorPalette.dart';
 
 Map<String, ColorPalette> themes = {
-  "Muelle": ColorPalette(
+  "Negro Claro": ColorPalette(
     brightness: Brightness.light,
-    background: const Color(0xfff1f3f2),
-    foreground: const Color(0xff272424),
+    background: const Color(0xffffffff),
+    foreground: const Color(0xff242424),
   ),
   
-  "OLED": ColorPalette( // 1
+  "Negro Oscuro": ColorPalette( // 1
     brightness: Brightness.dark,
     background: const Color(0xff000000),
     foreground: const Color(0xffbbbbbb),
   ),
 
-  "Jeans": ColorPalette(
+  "Jean Claro": ColorPalette(
     brightness: Brightness.light,
     background: const Color(0xfff3efca),
     foreground: const Color(0xff1c2c58),
   ),
 
-  "Umber, nogal y hierro": ColorPalette(
+  "Jean Oscuro": ColorPalette(
     brightness: Brightness.dark,
     background: const Color(0xff101628),
     foreground: const Color(0xfff6f6f6),
   ),
 
-  "Verde": ColorPalette(
+  "Azul Claro": ColorPalette(
     brightness: Brightness.light,
-    background: const Color(0xffc7f6ec),
-    foreground: const Color(0xff02231c),
+    background: const Color.fromARGB(255, 200, 220, 255),
+    foreground: const Color.fromARGB(255, 25, 34, 51),
   ),
 
-  "Verde Esmeralda Profundo": ColorPalette( // 2
+  "Azul Oscuro": ColorPalette( // 2
     brightness: Brightness.dark,
-    background: const Color(0xff004D40),
-    foreground: const Color(0xffA7FFEB),
+    background: const Color.fromARGB(255, 25, 34, 51),
+    foreground: const Color.fromARGB(255, 218, 232, 255),
   ),
 
-  "azul": ColorPalette(
+  "Rojo Claro": ColorPalette(
     brightness: Brightness.light,
-    background: const Color(0xffE0E8F0),
-    foreground: const Color(0xff8A140E),
+    background: const Color(0xffeddec9),
+    foreground: const Color(0xff331922)
   ),
-
-  "Azul dobre azul": ColorPalette( // 3
-    brightness: Brightness.dark,
-    background: const Color(0xff233b6b),
-    foreground: const Color(0xffeef0f2),
-  ),
-
-  "Granate y crema de mantequilla": ColorPalette( // 4
+  
+  "Rojo Oscuro": ColorPalette( // 4
     brightness: Brightness.dark,
     background: const Color(0xff331922),
     foreground: const Color(0xffeddec9),
   ),
-
-  "Verde oscuro y verde neón": ColorPalette( // 5
-    brightness: Brightness.dark,
-    background: const Color(0xff23481c),
-    foreground: const Color(0xffe9feb5),
+  
+  "Verde Claro": ColorPalette( // 3
+    brightness: Brightness.light,
+    background: const Color(0xffe9feb5),
+    foreground: const Color.fromARGB(255, 25, 51, 31)
   ),
+
+  "Verde Oscuro": ColorPalette( // 5
+    brightness: Brightness.dark,
+    background: const Color.fromARGB(255, 25, 51, 31),
+    foreground: const Color.fromARGB(255, 237, 255, 192),
+  ),
+
+  "Rosa claro": ColorPalette( // 3
+    brightness: Brightness.light,
+    background: const Color.fromARGB(255, 253, 201, 230),
+    foreground: const Color.fromARGB(255, 51, 25, 41),
+  ),
+
+  "Rosa oscuro": ColorPalette( // 5
+    brightness: Brightness.dark,
+    background: const Color.fromARGB(255, 51, 25, 41),
+    foreground: const Color.fromARGB(255, 255, 227, 242),
+  ),
+
+  "Amarillo claro": ColorPalette( // 3
+    brightness: Brightness.light,
+    background: const Color.fromARGB(255, 253, 252, 201),
+    foreground: const Color.fromARGB(255, 51, 48, 25),
+  ),
+
+  "Amarillo oscuro": ColorPalette( // 5
+    brightness: Brightness.dark,
+    background: const Color.fromARGB(255, 51, 48, 25),
+    foreground: const Color.fromARGB(255, 255, 254, 209),
+  ),
+
+  "Morado claro": ColorPalette( // 3
+    brightness: Brightness.light,
+    background: const Color.fromARGB(255, 221, 201, 253),
+    foreground: const Color.fromARGB(255, 33, 25, 51),
+  ),
+
+  "Morado oscuro": ColorPalette( // 5
+    brightness: Brightness.dark,
+    background: const Color.fromARGB(255, 33, 25, 51),
+    foreground: const Color.fromARGB(255, 232, 217, 255),
+  )
+  
 };

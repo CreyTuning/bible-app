@@ -54,7 +54,7 @@ class ReferencesPage extends StatelessWidget {
                                       init: ReferencesPageController(),
                                       builder: (ReferencesPageController referencesPageController) {
                                         return Container(
-                                          clipBehavior: Clip.antiAlias,
+                                          // clipBehavior: Clip.antiAlias,
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.only(topLeft: Radius.circular(6), topRight: Radius.circular(6)),
                                             color: Theme.of(context).indicatorColor,
@@ -277,6 +277,13 @@ class ReferencesPage extends StatelessWidget {
                                                   referencesPageController.chapterListOnSelect(index);
                                                   referencesPageController.verseListOnSelect(0);
                                                 },
+
+                                                onLongPress: (){
+                                                  // Get.back();
+                                                  biblePageController.onReferenceTap(showGoToBotton: false, book: biblePageController.bookNumber, chapter: index + 1, verse_from: 1, verse_to: valuesOfBooks[biblePageController.bookNumber - 1][index]);
+                                                  // referencesPageController.verseListOnSelect(index);
+                                                },
+
                                                 child: Container(
                                                   decoration: BoxDecoration(
                                                     color: index == biblePageController.chapterNumber - 1 ? Theme.of(context).indicatorColor : Colors.transparent,
@@ -327,6 +334,13 @@ class ReferencesPage extends StatelessWidget {
                                                   referencesPageController.verseListOnSelect(index);
                                                   Get.back();
                                                 },
+
+                                                onLongPress: (){
+                                                  // Get.back();
+                                                  biblePageController.onReferenceTap(showGoToBotton: false, book: biblePageController.bookNumber, chapter: biblePageController.chapterNumber, verse_from: index + 1, verse_to: valuesOfBooks[biblePageController.bookNumber - 1][biblePageController.chapterNumber - 1]);
+                                                  // referencesPageController.verseListOnSelect(index);
+                                                },
+
                                                 child: Container(
                                                   decoration: BoxDecoration(
                                                     color: index == biblePageController.verseNumber - 1 ? Theme.of(context).indicatorColor: Colors.transparent,
