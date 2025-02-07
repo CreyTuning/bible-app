@@ -12,8 +12,10 @@ import 'package:yhwh/controllers/BiblePageController.dart';
 import 'package:yhwh/data/Define.dart';
 import 'package:yhwh/data/valuesOfBooks.dart';
 import 'package:yhwh/models/highlighterItem.dart';
+import 'package:yhwh/pages/FloatingReferencesPage.dart';
 import 'package:yhwh/pages/ReferencesPage.dart';
 import 'package:yhwh/widgets/FloatingBible.dart';
+import 'package:yhwh/widgets/FloatingWidget.dart';
 
 
 class FloatingBibleController extends GetxController {
@@ -39,11 +41,6 @@ class FloatingBibleController extends GetxController {
   double fontLetterSeparation = 0.0;
   String fontFamily = "Nunito";
 
-  double padding_width_landscape =  (Get.width * 0.15);
-  double padding_height_landscape = Get.height * 0.05 + (Get.width * 0.1);
-  double padding_width_portrait =  (Get.width * 0.05);
-  double padding_height_portrait = (Get.height * 0.1) + (Get.width * 0.1);
-
   @override
   void onInit() {
     super.onInit();
@@ -51,26 +48,22 @@ class FloatingBibleController extends GetxController {
 
   @override
   void onReady() async {
-    // scrollOffset = await getStorage.read('scrollOffset') ?? 0;
     autoScrollController = AutoScrollController(initialScrollOffset: scrollOffset);
 
-    bookNumber = Get.arguments['book'];
-    chapterNumber = Get.arguments['chapter'];
-    verseNumber = Get.arguments['verse_from'];
-    verseNumber_to = Get.arguments['verse_to'];
+    scrollOffset = await getStorage.read('floatingScrollOffset') ?? 0;
+    autoScrollController = AutoScrollController(initialScrollOffset: scrollOffset);
 
-    if(chapterNumber == 0) chapterNumber = 1;
-    if(verseNumber == 0) verseNumber = 1;
-    if(verseNumber_to == 0) verseNumber_to = valuesOfBooks[bookNumber - 1][chapterNumber - 1];
+    bookNumber = getStorage.read("FloatingBibleBookNumber") ?? 1;
+    chapterNumber = getStorage.read("FloatingBibleChapterNumber") ?? 1;
+    verseNumber = getStorage.read("FloatingBibleVerseNumber") ?? 1;
     
     fontSize = getStorage.read("fontSize") ?? 20.0;
     fontHeight = getStorage.read("fontHeight") ?? 1.8;
     fontLetterSeparation = getStorage.read("fontLetterSeparation") ?? 0;
 
-    padding_width_landscape = Get.width * 0.15;
-    padding_height_landscape = Get.height * 0.05;
-    padding_width_portrait = Get.width * 0.05;
-    padding_height_portrait = Get.height * 0.05;
+    if(chapterNumber == 0) chapterNumber = 1;
+    if(verseNumber == 0) verseNumber = 1;
+    if(verseNumber_to == 0) verseNumber_to = valuesOfBooks[bookNumber - 1][chapterNumber - 1];
 
     await updateVerseList();
     isScreenReady = true;
@@ -82,7 +75,7 @@ class FloatingBibleController extends GetxController {
     if(notification is ScrollEndNotification){
       // Save scroll offset
       scrollOffset = autoScrollController!.offset;
-      getStorage.write('scrollOffset', scrollOffset);
+      getStorage.write('floatingScrollOffset', scrollOffset);
     }
 
     return true;
@@ -135,7 +128,7 @@ class FloatingBibleController extends GetxController {
 
     // Crear versiculos
     for (int index = 0; index < valuesOfBooks[bookNumber -1][chapterNumber - 1]; index++) {
-      if(index + 1 >= verseNumber && index + 1 <= verseNumber_to){
+      // if(index + 1 >= verseNumber && index + 1 <= verseNumber_to){ // se supone que si quito esto muestra todo el capitulo
         versesRawList.add(
           VerseRaw(
             text: verses[index],
@@ -153,7 +146,7 @@ class FloatingBibleController extends GetxController {
             colorHighlight: highlightVerses.containsKey(index + 1) ? Color(highlightVerses[index + 1]!.color) : Colors.transparent
           )
         );
-      }
+      // }
     }
 
     return;
@@ -166,8 +159,10 @@ class FloatingBibleController extends GetxController {
     if (chapterNumber < namesAndChapters[bookNumber - 1][1]) {
       chapterNumber++;
       verseNumber = 1;
-      getStorage.write("chapterNumber", chapterNumber);
-      getStorage.write("verseNumber", verseNumber);
+      verseNumber_to = valuesOfBooks[bookNumber - 1][chapterNumber - 1];
+      getStorage.write("FloatingBibleChapterNumber", chapterNumber);
+      getStorage.write("FloatingBibleVerseNumber", verseNumber);
+      getStorage.write("FloatingBibleVerseNumberTo", verseNumber_to);
     }
 
     else if (chapterNumber == namesAndChapters[bookNumber - 1][1]) {
@@ -175,9 +170,11 @@ class FloatingBibleController extends GetxController {
         bookNumber += 1;
         chapterNumber = 1;
         verseNumber = 1;
-        getStorage.write("bookNumber", bookNumber);
-        getStorage.write("chapterNumber", chapterNumber);
-        getStorage.write("verseNumber", verseNumber);
+        verseNumber_to = valuesOfBooks[bookNumber - 1][chapterNumber - 1];
+        getStorage.write("FloatingBibleBookNumber", bookNumber);
+        getStorage.write("FloatingBibleChapterNumber", chapterNumber);
+        getStorage.write("FloatingBibleVerseNumber", verseNumber);
+        getStorage.write("FloatingBibleVerseNumberTo", verseNumber_to);
       }
     }
 
@@ -192,7 +189,11 @@ class FloatingBibleController extends GetxController {
     
     if (chapterNumber > 1) {
       chapterNumber--;
-      getStorage.write("chapterNumber", chapterNumber);
+      verseNumber = 1;
+      verseNumber_to = valuesOfBooks[bookNumber - 1][chapterNumber - 1];
+      getStorage.write("FloatingBibleChapterNumber", chapterNumber);
+      getStorage.write("FloatingBibleVerseNumber", verseNumber);
+      getStorage.write("FloatingBibleVerseNumberTo", verseNumber_to);
     }
 
     else if (chapterNumber == 1)
@@ -201,8 +202,12 @@ class FloatingBibleController extends GetxController {
       {
         bookNumber -= 1;
         chapterNumber = namesAndChapters[bookNumber - 1][1];
-        getStorage.write("bookNumber", bookNumber);
-        getStorage.write("chapterNumber", chapterNumber);
+        verseNumber = 1;
+        verseNumber_to = valuesOfBooks[bookNumber - 1][chapterNumber - 1];
+        getStorage.write("FloatingBibleBookNumber", bookNumber);
+        getStorage.write("FloatingBibleChapterNumber", chapterNumber);
+        getStorage.write("FloatingBibleVerseNumber", verseNumber);
+        getStorage.write("FloatingBibleVerseNumberTo", verseNumber_to);
       }
     }
 
@@ -223,10 +228,10 @@ class FloatingBibleController extends GetxController {
     this.verseNumber = verseNumber;
     this.verseNumber_to = verseNumber_to;
 
-    getStorage.write("bookNumber", bookNumber);
-    getStorage.write("chapterNumber", chapterNumber);
-    getStorage.write("verseNumber", verseNumber);
-    getStorage.write("verseNumber_to", verseNumber_to);
+    getStorage.write("FloatingBibleBookNumber", bookNumber);
+    getStorage.write("FloatingBibleChapterNumber", chapterNumber);
+    getStorage.write("FloatingBibleVerseNumber", verseNumber);
+    getStorage.write("FloatingBibleVerseNumberTo", verseNumber_to);
 
     versesSelected = [];
     await updateVerseList();
@@ -239,9 +244,9 @@ class FloatingBibleController extends GetxController {
     this.bookNumber = bookNumber;
     this.chapterNumber = chapterNumber;
     this.verseNumber = verseNumber;
-    getStorage.write("bookNumber", bookNumber);
-    getStorage.write("chapterNumber", chapterNumber);
-    getStorage.write("verseNumber", verseNumber);
+    getStorage.write("FloatingBibleBookNumber", bookNumber);
+    getStorage.write("FloatingBibleChapterNumber", chapterNumber);
+    getStorage.write("FloatingBibleVerseNumber", verseNumber);
 
     versesSelected = [];
     await updateVerseList();
@@ -288,21 +293,14 @@ class FloatingBibleController extends GetxController {
     cancelSelectionModeOnTap();
   }
 
-  // void showVerseExplorer({int? book, int? chapter, int? verse}){
-  //   Get.to(()=> 
-  //     VerseExplorer(),
-  //     arguments: [book, chapter, verse]
-  //   );
-  // }
-
-  void onReferenceTap({int? book, int? chapter, int? verse_from, int? verse_to}){
-    print(Get.arguments['book']);
-    Get.dialog(FloatingBible());
-  }
-
   void ShowInBiblePage(){
     BiblePageController _biblePageController = Get.find();
     _biblePageController.setReferenceSafeScroll(this.bookNumber, this.chapterNumber, this.verseNumber);
+  }
+
+  void onReferenceButtonTap(){
+    Get.to(() => FloatingReferencesPage());
+    print('Referencia');
   }
 
 }

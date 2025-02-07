@@ -213,6 +213,7 @@ class BiblePage extends StatelessWidget {
                                         seleccion y presionar alguna otra funccion en pantalla.
                                       */
                                     },
+
                                     icon: Icon(Icons.bookmark_outline_rounded, color: Theme.of(context).indicatorColor),
                                     iconSize: 26,
                                   ),
@@ -246,6 +247,7 @@ class BiblePage extends StatelessWidget {
                                       ),
                             
                                       onTap: biblePageController.referenceButtonOnTap,
+                                      onLongPress: biblePageController.onReferenceButtonLongPress,
                                       
                                     ),
                                   ),
@@ -269,31 +271,8 @@ class BiblePage extends StatelessWidget {
                                           )
                                         ),
                                       );
-                    
-                    
-                    
-                                      // Get.bottomSheet(
-                                      //   StatefulBuilder(builder: (context, setState) => BottomSheet(
-                                      //     backgroundColor: Colors.transparent,
-                                      //     enableDrag: false,
-                                      //     onClosing: (){},
-                                      //     builder: (context) => ReadPreferences(),
-                    
-                    
-                                      //   )),
-                                        
-                                      //   barrierColor: Colors.transparent,
-                                      //   backgroundColor: Colors.transparent,
-                                      //   elevation: 0,
-                                      //   enterBottomSheetDuration: Duration(milliseconds: 300),
-                                      //   persistent: true,
-                                      //   enableDrag: true,
-                                      // );
-                    
-                                      // biblePageController.cancelSelectionModeOnTap();
-                                      // Get.to(()=> ReadPreferences());
                                     },
-                                    icon: Icon(Icons.format_size, color: Theme.of(context).indicatorColor),
+                                    icon: Icon(Icons.text_fields_rounded, color: Theme.of(context).indicatorColor),
                                     iconSize: 26,
                                   ),
                             

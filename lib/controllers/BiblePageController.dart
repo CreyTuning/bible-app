@@ -10,11 +10,14 @@ import 'package:yhwh/bibles/RVR60/rvr60_titles.dart';
 import 'package:yhwh/classes/BibleManager.dart';
 import 'package:yhwh/classes/VerseRaw.dart';
 import 'package:yhwh/classes/hiveManagers/HighlighterManager.dart';
+import 'package:yhwh/controllers/FloatingBibleController.dart';
 import 'package:yhwh/data/Define.dart';
 import 'package:yhwh/data/valuesOfBooks.dart';
 import 'package:yhwh/models/highlighterItem.dart';
+import 'package:yhwh/pages/FloatingReferencesPage.dart';
 import 'package:yhwh/pages/ReferencesPage.dart';
 import 'package:yhwh/widgets/FloatingBible.dart';
+import 'package:yhwh/widgets/FloatingWidget.dart';
 
 
 class BiblePageController extends GetxController {
@@ -177,7 +180,9 @@ class BiblePageController extends GetxController {
     
     if (chapterNumber > 1) {
       chapterNumber--;
+      verseNumber = 1;
       getStorage.write("chapterNumber", chapterNumber);
+      getStorage.write("verseNumber", verseNumber);
     }
 
     else if (chapterNumber == 1)
@@ -186,8 +191,10 @@ class BiblePageController extends GetxController {
       {
         bookNumber -= 1;
         chapterNumber = namesAndChapters[bookNumber - 1][1];
+        verseNumber = 1;
         getStorage.write("bookNumber", bookNumber);
         getStorage.write("chapterNumber", chapterNumber);
+        getStorage.write("verseNumber", verseNumber);
       }
     }
 
@@ -270,29 +277,15 @@ class BiblePageController extends GetxController {
     cancelSelectionModeOnTap();
   }
 
-  // void showVerseExplorer({int? book, int? chapter, int? verse}){
-  //   Get.to(()=> 
-  //     VerseExplorer(),
-  //     arguments: [book, chapter, verse]
-  //   );
-  // }
+  void onReferenceTap({int? book, int? chapter, int? verse_from, int? verse_to}){
+    // FloatingBibleController _floatingBibleController = Get.put(FloatingBibleController());
+    // _floatingBibleController.setReferenceSafeScroll(book!, chapter!, verse_from!);
+    // Get.to(() => FloatingBible());
+    print('///////// hay que implementarlo //////////');
+  }
 
-  void onReferenceTap({int? book, int? chapter, int? verse_from, int? verse_to, showGoToBotton = true}){
-    Get.dialog(
-      FloatingBible(),
-      barrierColor: Colors.transparent,
-      useSafeArea: true,
-      barrierDismissible: true,
-      arguments: {
-        'book': book,
-        'chapter': chapter,
-        'verse_from': verse_from,
-        'verse_to': verse_to,
-        'showGoToBotton': showGoToBotton
-      },
-      transitionDuration: Duration(milliseconds: 300),
-      transitionCurve: Curves.easeInOut
-    );
+  void onReferenceButtonLongPress(){
+    Get.to(() => FloatingBible());
   }
 
   void TESTER(){

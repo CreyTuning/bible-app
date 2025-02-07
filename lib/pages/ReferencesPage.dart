@@ -13,6 +13,8 @@ class ReferencesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    bool floating = Get.arguments?['floating'] ?? false;
+
     return GetBuilder<ReferencesPageController>(
         init: ReferencesPageController(),
         builder: (ReferencesPageController referencesPageController) { 
@@ -32,7 +34,15 @@ class ReferencesPage extends StatelessWidget {
                           backgroundColor: Theme.of(context).canvasColor,
                           scrolledUnderElevation: 0,
                           elevation: 0,
-                          title: Text("Referencias", style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          title: floating
+                          // es flotante
+                          ? Text("Referencias en biblia flotante", style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            fontSize: 21,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).indicatorColor
+                          ))
+                          //no es flotante
+                          : Text("Referencias", style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                             fontSize: 21,
                             fontWeight: FontWeight.bold,
                             color: Theme.of(context).indicatorColor
@@ -278,11 +288,11 @@ class ReferencesPage extends StatelessWidget {
                                                   referencesPageController.verseListOnSelect(0);
                                                 },
 
-                                                onLongPress: (){
-                                                  // Get.back();
-                                                  biblePageController.onReferenceTap(showGoToBotton: false, book: biblePageController.bookNumber, chapter: index + 1, verse_from: 1, verse_to: valuesOfBooks[biblePageController.bookNumber - 1][index]);
-                                                  // referencesPageController.verseListOnSelect(index);
-                                                },
+                                                // onLongPress: (){
+                                                //   // Get.back();
+                                                //   biblePageController.onReferenceTap(showGoToBotton: false, book: biblePageController.bookNumber, chapter: index + 1, verse_from: 1, verse_to: valuesOfBooks[biblePageController.bookNumber - 1][index]);
+                                                //   // referencesPageController.verseListOnSelect(index);
+                                                // },
 
                                                 child: Container(
                                                   decoration: BoxDecoration(
@@ -335,11 +345,11 @@ class ReferencesPage extends StatelessWidget {
                                                   Get.back();
                                                 },
 
-                                                onLongPress: (){
-                                                  // Get.back();
-                                                  biblePageController.onReferenceTap(showGoToBotton: false, book: biblePageController.bookNumber, chapter: biblePageController.chapterNumber, verse_from: index + 1, verse_to: valuesOfBooks[biblePageController.bookNumber - 1][biblePageController.chapterNumber - 1]);
-                                                  // referencesPageController.verseListOnSelect(index);
-                                                },
+                                                // onLongPress: (){
+                                                //   // Get.back();
+                                                //   biblePageController.onReferenceTap(showGoToBotton: false, book: biblePageController.bookNumber, chapter: biblePageController.chapterNumber, verse_from: index + 1, verse_to: valuesOfBooks[biblePageController.bookNumber - 1][biblePageController.chapterNumber - 1]);
+                                                //   // referencesPageController.verseListOnSelect(index);
+                                                // },
 
                                                 child: Container(
                                                   decoration: BoxDecoration(
