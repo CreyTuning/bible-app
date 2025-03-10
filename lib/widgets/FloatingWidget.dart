@@ -22,14 +22,14 @@ class FloatingWidget extends StatelessWidget {
               border: Border.all(color: Theme.of(context).indicatorColor.withValues(alpha: 0.7), width: 1.0),
               color: Theme.of(context).canvasColor,
               borderRadius: BorderRadius.circular(18.0),
-              boxShadow: [
-                BoxShadow(
-                  color: Theme.of(context).shadowColor.withValues(alpha: 0.5),
-                  blurRadius: 12.0,
-                  spreadRadius: 2.0,
-                  offset: Offset(0, 0)
-                )
-              ]
+              // boxShadow: [
+              //   BoxShadow(
+              //     color: Theme.of(context).shadowColor.withValues(alpha: 0.5),
+              //     blurRadius: 12.0,
+              //     spreadRadius: 2.0,
+              //     offset: Offset(0, 0)
+              //   )
+              // ]
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(18.0),

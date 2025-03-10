@@ -14,17 +14,17 @@ Map<String, ColorPalette> themes = {
     foreground: const Color(0xffbbbbbb),
   ),
 
-  "Jean Claro": ColorPalette(
-    brightness: Brightness.light,
-    background: const Color(0xfff3efca),
-    foreground: const Color(0xff1c2c58),
-  ),
+  // "Jean Claro": ColorPalette(
+  //   brightness: Brightness.light,
+  //   background: const Color(0xfff3efca),
+  //   foreground: const Color(0xff1c2c58),
+  // ),
 
-  "Jean Oscuro": ColorPalette(
-    brightness: Brightness.dark,
-    background: const Color(0xff101628),
-    foreground: const Color(0xfff6f6f6),
-  ),
+  // "Jean Oscuro": ColorPalette(
+  //   brightness: Brightness.dark,
+  //   background: const Color(0xff101628),
+  //   foreground: const Color(0xfff6f6f6),
+  // ),
 
   "Azul Claro": ColorPalette(
     brightness: Brightness.light,
@@ -64,14 +64,14 @@ Map<String, ColorPalette> themes = {
 
   "Rosa claro": ColorPalette( // 3
     brightness: Brightness.light,
-    background: const Color.fromARGB(255, 253, 201, 230),
-    foreground: const Color.fromARGB(255, 51, 25, 41),
+    background: const Color.fromARGB(255, 255, 182, 221),
+    foreground: const Color.fromARGB(255, 56, 0, 28),
   ),
 
   "Rosa oscuro": ColorPalette( // 5
     brightness: Brightness.dark,
-    background: const Color.fromARGB(255, 51, 25, 41),
-    foreground: const Color.fromARGB(255, 255, 227, 242),
+    background: const Color.fromARGB(255, 66, 7, 36),
+    foreground: const Color.fromARGB(255, 247, 228, 238),
   ),
 
   "Amarillo claro": ColorPalette( // 3

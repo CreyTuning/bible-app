@@ -8,6 +8,7 @@ import 'package:yhwh/data/Define.dart';
 import 'package:yhwh/pages/HighlighterCreate.dart';
 import 'package:yhwh/widgets/FloatingWidget.dart';
 import 'package:yhwh/widgets/Verse.dart';
+import 'package:animate_do/animate_do.dart' as animateDo;
 
 class FloatingBible extends StatelessWidget {
 
@@ -34,100 +35,103 @@ class FloatingBible extends StatelessWidget {
                   init: FloatingBibleController(),
                   builder: (FloatingBibleController) => Padding(
                   padding: EdgeInsets.fromLTRB(12, 0, 12, MediaQuery.of(context).viewPadding.bottom + MediaQuery.of(context).padding.bottom),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    
-                    children: <Widget>[
-                      //Genera efecto de movimiento en el Floating Button                        
-                      AnimatedPadding(
-                        padding: EdgeInsets.symmetric(horizontal: (FloatingBibleController.bookNumber == 1 && FloatingBibleController.chapterNumber == 1) ? 2 : 0),
-                        duration: Duration(milliseconds: 300),
-                        curve: Curves.easeInOut,
-                      ),
-      
-                      AnimatedSwitcher(
-                        duration: Duration(milliseconds: 300),
-                        switchInCurve: Curves.easeInOut,
-                        switchOutCurve: Curves.easeInOut,
-                        child: (FloatingBibleController.bookNumber == 1 && FloatingBibleController.chapterNumber == 1) ? SizedBox() : Container(
-                          width: 45.0,
-                          height: 45.0,
-                          child: Tooltip(
-                            message: 'Capitulo anterior',
-                            child: Container( //ClipRRect(
-                              // borderRadius: BorderRadius.circular(300.0),
-                              child: Container( //BackdropFilter(
-                                //filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8, tileMode: TileMode.mirror),
-                                child: MaterialButton(
-                                  elevation: 0,
-                                  onPressed: FloatingBibleController.previusChapter,
-                                  color: Theme.of(context).canvasColor, //.withValues(alpha: 0.5),
-                              
-                                  child: Icon(
-                                    Icons.keyboard_arrow_left,
-                                    color: Theme.of(context).indicatorColor,
-                                    size: 24,
-                                  ),
-                                  padding: EdgeInsets.all(0),
-                                  shape: CircleBorder(
-                                    side: BorderSide(
-                                      color: Theme.of(context).indicatorColor.withValues(alpha: 0.5),
-                                      width: 1.5
-                                    )
+                  child: animateDo.ZoomIn(
+                    duration: Duration(milliseconds: 150),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      
+                      children: <Widget>[
+                        //Genera efecto de movimiento en el Floating Button                        
+                        AnimatedPadding(
+                          padding: EdgeInsets.symmetric(horizontal: (FloatingBibleController.bookNumber == 1 && FloatingBibleController.chapterNumber == 1) ? 2 : 0),
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        ),
+                          
+                        AnimatedSwitcher(
+                          duration: Duration(milliseconds: 300),
+                          switchInCurve: Curves.easeInOut,
+                          switchOutCurve: Curves.easeInOut,
+                          child: (FloatingBibleController.bookNumber == 1 && FloatingBibleController.chapterNumber == 1) ? SizedBox() : Container(
+                            width: 45.0,
+                            height: 45.0,
+                            child: Tooltip(
+                              message: 'Capitulo anterior',
+                              child: Container( //ClipRRect(
+                                // borderRadius: BorderRadius.circular(300.0),
+                                child: Container( //BackdropFilter(
+                                  //filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8, tileMode: TileMode.mirror),
+                                  child: MaterialButton(
+                                    elevation: 0,
+                                    onPressed: FloatingBibleController.previusChapter,
+                                    color: Theme.of(context).canvasColor, //.withValues(alpha: 0.5),
+                                
+                                    child: Icon(
+                                      Icons.keyboard_arrow_left,
+                                      color: Theme.of(context).indicatorColor,
+                                      size: 24,
+                                    ),
+                                    padding: EdgeInsets.all(0),
+                                    shape: CircleBorder(
+                                      side: BorderSide(
+                                        color: Theme.of(context).indicatorColor.withValues(alpha: 0.5),
+                                        width: 1.5
+                                      )
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        )
-                      ),
-      
-                      Expanded(child: SizedBox.fromSize()),
-      
-                      AnimatedSwitcher(
-                        duration: Duration(milliseconds: 300),
-                        switchInCurve: Curves.easeInOut,
-                        switchOutCurve: Curves.easeInOut,
-                        child: (FloatingBibleController.bookNumber == 66 && FloatingBibleController.chapterNumber == 22) ? SizedBox() : Container(
-                          width: 45.0,
-                          height: 45.0,
-                          child: Tooltip(
-                            message: 'Capitulo siguiente',
-                            child: Container( //ClipRRect(
-                              // borderRadius: BorderRadius.circular(300.0),
-                              child: Container( //BackdropFilter(
-                                //filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8, tileMode: TileMode.mirror),
-                                child: MaterialButton(
-                                  elevation: 0,
-                                  onPressed: FloatingBibleController.nextChapter,
-                                  color: Theme.of(context).canvasColor, //.withValues(alpha: 0.5),
-                                                            
-                                  child: Icon(
-                                    Icons.keyboard_arrow_right,
-                                    color: Theme.of(context).indicatorColor,
-                                    size: 24,
-                                  ),
-                                  padding: EdgeInsets.all(0),
-                                  shape: CircleBorder(
-                                    side: BorderSide(
-                                      color: Theme.of(context).indicatorColor.withValues(alpha: 0.5),
-                                      width: 1.5
-                                    )
+                          )
+                        ),
+                          
+                        Expanded(child: SizedBox.fromSize()),
+                          
+                        AnimatedSwitcher(
+                          duration: Duration(milliseconds: 300),
+                          switchInCurve: Curves.easeInOut,
+                          switchOutCurve: Curves.easeInOut,
+                          child: (FloatingBibleController.bookNumber == 66 && FloatingBibleController.chapterNumber == 22) ? SizedBox() : Container(
+                            width: 45.0,
+                            height: 45.0,
+                            child: Tooltip(
+                              message: 'Capitulo siguiente',
+                              child: Container( //ClipRRect(
+                                // borderRadius: BorderRadius.circular(300.0),
+                                child: Container( //BackdropFilter(
+                                  //filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8, tileMode: TileMode.mirror),
+                                  child: MaterialButton(
+                                    elevation: 0,
+                                    onPressed: FloatingBibleController.nextChapter,
+                                    color: Theme.of(context).canvasColor, //.withValues(alpha: 0.5),
+                                                              
+                                    child: Icon(
+                                      Icons.keyboard_arrow_right,
+                                      color: Theme.of(context).indicatorColor,
+                                      size: 24,
+                                    ),
+                                    padding: EdgeInsets.all(0),
+                                    shape: CircleBorder(
+                                      side: BorderSide(
+                                        color: Theme.of(context).indicatorColor.withValues(alpha: 0.5),
+                                        width: 1.5
+                                      )
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-      
-                      //Genera efecto de movimiento en el Floating Button
-                      AnimatedPadding(
-                        padding: EdgeInsets.symmetric(horizontal: (FloatingBibleController.bookNumber == 66 && FloatingBibleController.chapterNumber == 22) ? 2 : 0),
-                        duration: Duration(milliseconds: 300),
-                        curve: Curves.easeInOut,
-                      ),
-                    ],
+                          
+                        //Genera efecto de movimiento en el Floating Button
+                        AnimatedPadding(
+                          padding: EdgeInsets.symmetric(horizontal: (FloatingBibleController.bookNumber == 66 && FloatingBibleController.chapterNumber == 22) ? 2 : 0),
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
